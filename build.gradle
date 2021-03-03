@@ -21,6 +21,7 @@ allprojects {
 
         // kakao 로그인
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+
     }
 }
 

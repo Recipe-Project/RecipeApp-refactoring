@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
 import com.kakao.sdk.common.KakaoSdk
+import com.recipe.android.recipeapp.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,10 +14,10 @@ import java.util.concurrent.TimeUnit
 class ApplicationClass: Application() {
 
     // 실 서버
-     var BASE_URL = "https://juna052.shop:9000/"
+    // var BASE_URL = ""
 
     // 테스트 서버
-    // var BASE_URL = ""
+     var BASE_URL = "https://juna052.shop:9000"
 
 
     companion object{
@@ -49,7 +50,7 @@ class ApplicationClass: Application() {
         initRetrofitInstance()
 
         // 카카오 SDK 초기화
-        KakaoSdk.init(this, "{NATIVE_APP_KEY}")
+        KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
     }
 
 
@@ -67,8 +68,6 @@ class ApplicationClass: Application() {
             .addNetworkInterceptor(XAccessTokenInterceptor())
             .build()
 
-        // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드
-        // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
         sRetrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
