@@ -3,6 +3,7 @@ package com.recipe.android.recipeapp.config
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
+import com.kakao.sdk.common.KakaoSdk
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit
 class ApplicationClass: Application() {
 
     // 실 서버
-     var BASE_URL = ""
+     var BASE_URL = "https://juna052.shop:9000/"
 
     // 테스트 서버
     // var BASE_URL = ""
@@ -46,6 +47,9 @@ class ApplicationClass: Application() {
 
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()
+
+        // 카카오 SDK 초기화
+        KakaoSdk.init(this, "{NATIVE_APP_KEY}")
     }
 
 

@@ -33,6 +33,7 @@ android {
     viewBinding {
         enabled = true
     }
+
 }
 
 dependencies {
@@ -59,4 +60,7 @@ dependencies {
 
     // https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
+    // 카카오 로그인
+    implementation "com.kakao.sdk:v2-user:2.4.0"
 }
