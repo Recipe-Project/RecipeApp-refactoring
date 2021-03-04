@@ -64,4 +64,30 @@ class SignInService(val view: SignInActivityView) {
 
             })
     }
+
+    // 구글 로그인 API
+    fun postGoogleLogin(accessToken: String) {
+        val signnInRetrofitInterface =
+            ApplicationClass.sRetrofit.create(SignnInRetrofitInterface::class.java)
+        signnInRetrofitInterface.postGoogleLogin(accessToken)
+            .enqueue(object : Callback<SignInResponse> {
+                override fun onResponse(
+                    call: Call<SignInResponse>,
+                    response: Response<SignInResponse>
+                ) {
+                    Log.d(TAG, "SignInService - onResponse() : 구글 로그인 API 호출 성공")
+                    if (response.body() == null) {
+                        view.onPostSignInFailure("response is null")
+                    } else {
+                        view.onPostSignInSuccess(response.body() as SignInResponse)
+                    }
+                }
+
+                override fun onFailure(call: Call<SignInResponse>, t: Throwable) {
+                    Log.d(TAG, "SignInService - onFailure() : 구글 로그인 API 호출 실패")
+                    view.onPostSignInFailure(t.message ?: "통신오류")
+                }
+
+            })
+    }
 }

@@ -15,4 +15,9 @@ interface SignnInRetrofitInterface {
     fun postNaverLogin(
         @Header("NAVER-ACCESS-TOKEN") token: String
     ): Call<SignInResponse>
+
+    @POST("/users/google-login")
+    fun postGoogleLogin(
+        @Header("GOOGLE-ACCESS-TOKEN") token: String
+    ): Call<SignInResponse>
 }
