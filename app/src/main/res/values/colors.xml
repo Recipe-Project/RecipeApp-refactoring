@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- 제플린 color name 참고 -->
+    <color name="sky_blue">#d4eef4</color>
+    <color name="red">#e82840</color>
+    <color name="gray_500">#212121</color>
 </resources>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RecipeApp</string>
+
+    <!-- bottom navigation -->
+    <string name="fridge">냉장고</string>
+    <string name="recipeSearch">레시피검색</string>
+    <string name="myPage">마이페이지</string>
+
 </resources>
