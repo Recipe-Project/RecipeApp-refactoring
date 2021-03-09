@@ -5,5 +5,13 @@
     <string name="fridge">냉장고</string>
     <string name="recipeSearch">레시피검색</string>
     <string name="myPage">마이페이지</string>
+    
+    <string name="scrapRecipe">스크랩 레시피</string>
+    <string name="view_all">전체보기</string>
+
+    <string name="youtube">유튜브</string>
+    <string name="blog">블로그</string>
+    <string name="recipe">레시피</string>
+    <string name="myRecipe">나만의 레시피</string>
 
 </resources>
