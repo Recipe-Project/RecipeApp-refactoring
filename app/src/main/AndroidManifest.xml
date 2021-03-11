@@ -12,17 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp">
-        <activity android:name=".src.MainActivity">
 
-        </activity>
-
-        <!-- 로그인 액티비티 -->
-        <activity android:name=".src.signIn.SignInActivity">
+        <!-- 스플래시 -->
+        <activity android:name=".src.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- 메인 -->
+        <activity android:name=".src.MainActivity"/>
+
+        <!-- 로그인 -->
+        <activity android:name=".src.signIn.SignInActivity">
+
         </activity>
 
         <!-- 카카오 로그인 -->

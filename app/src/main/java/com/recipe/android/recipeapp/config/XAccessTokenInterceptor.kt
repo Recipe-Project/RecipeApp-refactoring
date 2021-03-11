@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.config
 
 import android.util.Log
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -14,7 +15,7 @@ class XAccessTokenInterceptor: Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
-        val jwtToken: String? = sSharedPreferences.getString("X_ACCESS_TOKEN", null)
+        val jwtToken: String? = sSharedPreferences.getString(X_ACCESS_TOKEN, null)
         if (jwtToken != null) {
             builder.addHeader("X-ACCESS-TOKEN", jwtToken)
             Log.d(TAG, "TOKEN : $jwtToken")
