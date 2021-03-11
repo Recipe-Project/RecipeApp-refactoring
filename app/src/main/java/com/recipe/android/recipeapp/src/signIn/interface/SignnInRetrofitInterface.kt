@@ -18,6 +18,6 @@ interface SignnInRetrofitInterface {
 
     @POST("/users/google-login")
     fun postGoogleLogin(
-        @Header("GOOGLE-ACCESS-TOKEN") token: String
+        @Header("GOOGLE-ID-TOKEN") token: String
     ): Call<SignInResponse>
 }

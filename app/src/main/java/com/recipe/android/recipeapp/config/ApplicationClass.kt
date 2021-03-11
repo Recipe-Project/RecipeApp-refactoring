@@ -30,8 +30,9 @@ class ApplicationClass: Application() {
 
         lateinit var sSharedPreferences: SharedPreferences
 
-        // JWT Token 값
-        var X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        // SharedPreferences 키 값
+        const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        val USER_IDX = "USER_IDX"
 
     }
 

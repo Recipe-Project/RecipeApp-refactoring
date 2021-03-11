@@ -20,6 +20,9 @@ import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.recipe.android.recipeapp.BuildConfig
 import com.recipe.android.recipeapp.R
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.USER_IDX
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.X_ACCESS_TOKEN
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivitySignInBinding
 import com.recipe.android.recipeapp.src.signIn.`interface`.SignInActivityView
@@ -132,11 +135,23 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
     }
 
     override fun onPostSignInSuccess(response: SignInResponse) {
-        // 로그인 동작 추후 수정 필요
+        if (response.isSuccess) {
+            // jwt  키 값 저장
+            sSharedPreferences.edit().putString(X_ACCESS_TOKEN, response.result.jwt).apply()
+            Log.d(TAG, "SignInActivity - onPostSignInSuccess() : 전달받은 jwt 키 : ${response.result.jwt}")
+            // user idx 값 저장
+            sSharedPreferences.edit().putInt(USER_IDX, response.result.userIdx).apply()
+            Log.d(TAG, "SignInActivity - onPostSignInSuccess() : 전달받은 user_idx 값 : ${response.result.userIdx}")
+        } else {
+            // isSuccess == false
+            Log.d(TAG, "SignInActivity - onPostSignInSuccess() : code : ${response.code}, message : ${response.message}")
+            showCustomToast(getString(R.string.networkError))
+        }
     }
 
     override fun onPostSignInFailure(message: String) {
-
+        Log.d(TAG, "SignInActivity - onPostSignInFailure() : $message")
+        showCustomToast(getString(R.string.networkError))
     }
 
     // onStart. 유저가 앱에 이미 구글 로그인을 했는지 확인
@@ -169,8 +184,14 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
 
     // firebaseAuthWithGoogle
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
+
+        // 구글 액세스 토큰
         Log.d(TAG, acct.idToken.toString())
+
+        // 레저 서버 -> 구글 로그인 API 호출
+        SignInService(this).postGoogleLogin(acct.idToken.toString())
 
         //Google SignInAccount 객체에서 ID 토큰을 가져와서 Firebase Auth로 교환하고 Firebase에 인증
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
