@@ -23,7 +23,7 @@
         </activity>
 
         <!-- 메인 -->
-        <activity android:name=".src.MainActivity"/>
+        <activity android:name=".src.MainActivity" />
 
         <!-- 로그인 -->
         <activity android:name=".src.signIn.SignInActivity">
@@ -32,18 +32,21 @@
 
         <!-- 카카오 로그인 -->
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-            <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
-            <data
-                android:host="oauth"
-                android:scheme="kakao${KAKAO_API_KEY}" />
-        </intent-filter>
-    </activity>
-</application>
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao${KAKAO_API_KEY}" />
+            </intent-filter>
+        </activity>
 
-    </manifest>
+        <!-- 마이페이지 -->
+        <activity android:name=".src.myPage.myRecipe.MyRecipeActivity"/>
+    </application>
+
+</manifest>

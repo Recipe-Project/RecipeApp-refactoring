@@ -69,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="@+id/tv_user_name"
             app:layout_constraintStart_toStartOf="@+id/tv_user_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
-            tools:text="프로필수정" />
+            android:text="프로필수정" />
 
         <View
             android:id="@+id/line_top"
@@ -90,7 +90,7 @@
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line_top"
-            tools:text="@string/scrapRecipe" />
+            android:text="@string/scrapRecipe" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_view_all_scrap"
@@ -128,7 +128,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
-            tools:text="@string/youtube" />
+            android:text="@string/youtube" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView6"
@@ -167,7 +167,7 @@
             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView7"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7"
-            tools:text="5" />
+            android:text="5" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_cnt_blog"
@@ -180,7 +180,7 @@
             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView6"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView6"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
-            tools:text="5" />
+            android:text="5" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_cnt_recipe"
@@ -193,7 +193,7 @@
             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView8"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView8"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8"
-            tools:text="5" />
+            android:text="5" />
 
         <View
             android:id="@+id/line_middle"
@@ -218,7 +218,7 @@
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line_middle"
-            tools:text="@string/myRecipe" />
+            android:text="@string/myRecipe" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_view_all_my_recipe"
