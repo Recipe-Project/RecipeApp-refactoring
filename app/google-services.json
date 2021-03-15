@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "763399346922-1d6nj1nb4dkf2p4a7e1l266qsmjh72q3.apps.googleusercontent.com",
+          "client_id": "763399346922-7kerv072o5at4f81hon8d9f5o6jtqig4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.recipe.android.recipeapp",
             "certificate_hash": "5b7bc8c782488cf72cadfff40eb824ac0cb7d3bb"
+          }
+        },
+        {
+          "client_id": "763399346922-nnp5kfr7pqunvn5nkrgt9h2q4ilc2kdp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.recipe.android.recipeapp",
+            "certificate_hash": "2016bc3ae1f987a6220d852327f68030accecb97"
           }
         },
         {

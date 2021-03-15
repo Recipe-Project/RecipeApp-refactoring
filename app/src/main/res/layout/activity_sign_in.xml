@@ -5,22 +5,40 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView2"
+        android:layout_width="220dp"
+        android:layout_height="209dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_sign_in"
+        app:layout_constraintBottom_toTopOf="@+id/btn_kakao_sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_kakao_sign_in"
         android:layout_width="320dp"
         android:layout_height="48dp"
-        android:layout_marginTop="300dp"
-        android:background="@color/purple_200"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/img_kakao"
+        app:layout_constraintBottom_toTopOf="@+id/btn_naver_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_naver_sign_in"
         android:layout_width="320dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:background="#6F6380"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/img_naver"
+        app:layout_constraintBottom_toTopOf="@+id/btn_google_sign_in"
         app:layout_constraintEnd_toEndOf="@+id/btn_kakao_sign_in"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/btn_kakao_sign_in"
         app:layout_constraintTop_toBottomOf="@+id/btn_kakao_sign_in" />
 
@@ -28,9 +46,11 @@
         android:id="@+id/btn_google_sign_in"
         android:layout_width="320dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:background="#C7B6EF"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/img_google"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_naver_sign_in"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/btn_naver_sign_in"
         app:layout_constraintTop_toBottomOf="@+id/btn_naver_sign_in" />
 </androidx.constraintlayout.widget.ConstraintLayout>
