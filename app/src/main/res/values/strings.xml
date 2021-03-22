@@ -23,4 +23,7 @@
     <string name="title">제목</string>
     <string name="ingredientPick">재료선택</string>
 
+    <!-- 나의 냉장고 / 홈 화면 -->
+    <string name="my_fridge">나의 냉장고</string>
+
 </resources>
