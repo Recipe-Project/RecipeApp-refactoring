@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.recipe.android.recipeapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Image Picker -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".config.ApplicationClass"
@@ -47,6 +53,8 @@
 
         <!-- 마이페이지 -->
         <activity android:name=".src.myPage.myRecipe.MyRecipeActivity"/>
+        <activity android:name=".src.myPage.myRecipe.myRecipeCreate.MyRecipeCreateActivity" />
+        <activity android:name=".src.setting.SettingActivity"/>
     </application>
 
 </manifest>
