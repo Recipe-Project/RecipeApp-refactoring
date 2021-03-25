@@ -15,6 +15,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowLightStatusBar">true</item>
 
+
         <!--custom font-family 적용-->
 
 

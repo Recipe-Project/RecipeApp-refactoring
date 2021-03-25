@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.myPage.myRecipe
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,7 @@ import com.recipe.android.recipeapp.src.myPage.myRecipe.`interface`.MyRecipeActi
 import com.recipe.android.recipeapp.src.myPage.myRecipe.adpater.MyRecipeRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.myPage.myRecipe.models.MyRecipeResponse
 import com.recipe.android.recipeapp.src.myPage.myRecipe.models.MyRecipeResult
+import com.recipe.android.recipeapp.src.myPage.myRecipe.myRecipeCreate.MyRecipeCreateActivity
 
 class MyRecipeActivity: BaseActivity<ActivityMyRecipeBinding>(ActivityMyRecipeBinding::inflate), MyRecipeActivityView {
 
@@ -27,7 +29,8 @@ class MyRecipeActivity: BaseActivity<ActivityMyRecipeBinding>(ActivityMyRecipeBi
         MyRecipeService(this).getMyRecipe(2,0)
 
         binding.btnRecipeCreate.setOnClickListener { view ->
-
+            val intent = Intent(this, MyRecipeCreateActivity::class.java)
+            startActivity(intent)
         }
     }
 
