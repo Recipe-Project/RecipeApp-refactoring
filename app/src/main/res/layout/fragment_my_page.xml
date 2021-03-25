@@ -63,13 +63,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="프로필수정"
             android:textColor="@color/gray_200"
             android:textSize="12sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="@+id/tv_user_name"
             app:layout_constraintStart_toStartOf="@+id/tv_user_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
-            android:text="프로필수정" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
         <View
             android:id="@+id/line_top"
@@ -85,50 +85,57 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
+            android:text="@string/scrapRecipe"
             android:textColor="@color/gray_500"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line_top"
-            android:text="@string/scrapRecipe" />
+            app:layout_constraintTop_toBottomOf="@+id/line_top" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/btn_view_all_scrap"
+        <LinearLayout
+            android:id="@+id/btn_all_scrap_recipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/view_all"
-            android:textColor="@color/gray_500"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
-            app:layout_constraintEnd_toStartOf="@+id/btn_view_all_scrap_arrow"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btn_view_all_scrap_arrow"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_keyboard_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_view_all_scrap"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_view_all_scrap"
-            app:tint="@color/gray_500" />
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView3">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_view_all_scrap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/view_all"
+                android:textColor="@color/gray_500"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_view_all_scrap_arrow"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_keyboard_arrow_right"
+                app:tint="@color/gray_500" />
+
+        </LinearLayout>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:text="@string/youtube"
             android:textColor="@color/gray_500"
             android:textSize="16sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@+id/appCompatTextView6"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
-            android:text="@string/youtube" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView6"
@@ -161,39 +168,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:text="5"
             android:textColor="@color/red"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView7"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7"
-            android:text="5" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_cnt_blog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:text="5"
             android:textColor="@color/red"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView6"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView6"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
-            android:text="5" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_cnt_recipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:text="5"
             android:textColor="@color/red"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView8"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView8"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8"
-            android:text="5" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8" />
 
         <View
             android:id="@+id/line_middle"
@@ -213,36 +220,42 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
+            android:text="@string/myRecipe"
             android:textColor="@color/gray_500"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line_middle"
-            android:text="@string/myRecipe" />
+            app:layout_constraintTop_toBottomOf="@+id/line_middle" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/btn_view_all_my_recipe"
+
+        <LinearLayout
+            android:id="@+id/btn_all_my_recipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/view_all"
-            android:textColor="@color/gray_500"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="@+id/my_recipe"
-            app:layout_constraintEnd_toStartOf="@+id/btn_view_all_my_recipe_arrow"
-            app:layout_constraintTop_toTopOf="@+id/my_recipe" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btn_view_all_my_recipe_arrow"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_keyboard_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_view_all_my_recipe"
+            app:layout_constraintBottom_toBottomOf="@+id/my_recipe"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_view_all_my_recipe"
-            app:tint="@color/gray_500" />
+            app:layout_constraintTop_toTopOf="@+id/my_recipe">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_view_all_my_recipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/view_all"
+                android:textColor="@color/gray_500"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_view_all_my_recipe_arrow"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_keyboard_arrow_right"
+                app:tint="@color/gray_500" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_my_recipe"

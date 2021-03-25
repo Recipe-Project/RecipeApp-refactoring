@@ -7,6 +7,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_cancel"
+        style="@style/ButtonStyle2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
@@ -21,12 +22,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView4"
+        style="@style/Head3Style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="18dp"
         android:text="@string/myRecipeModify"
         android:textColor="@color/gray_500"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +36,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_save"
+        style="@style/ButtonStyle2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="20dp"

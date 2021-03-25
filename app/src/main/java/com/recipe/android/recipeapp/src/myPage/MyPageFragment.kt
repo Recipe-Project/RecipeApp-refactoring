@@ -28,11 +28,6 @@ class MyPageFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnViewAllMyRecipe.setOnClickListener {
-            val intent = Intent(context, MyRecipeActivity::class.java)
-            startActivity(intent)
-        }
-
         val userIdx = sSharedPreferences.getInt(USER_IDX, 0)
 
         // 마이페이지 조회 api
@@ -48,6 +43,17 @@ class MyPageFragment :
         // 설정 버튼 클릭
         binding.btnSetting.setOnClickListener {
             val intent = Intent(context, SettingActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 스크랩 레시피 전체보기 버튼 클릭
+        binding.btnAllScrapRecipe.setOnClickListener {
+
+        }
+
+        // 나만의 레시피 전체보기 버튼 클릭
+        binding.btnAllMyRecipe.setOnClickListener {
+            val intent = Intent(context, MyRecipeActivity::class.java)
             startActivity(intent)
         }
     }
