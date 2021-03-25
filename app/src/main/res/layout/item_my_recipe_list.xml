@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textColor="@color/gray_500"
+        android:background="@drawable/bg_radius_my_recipe"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,16 +32,20 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="18dp"
-        tools:text="1. 요리방법요리방법요리방법요리방버요리요리요리
-요리방법요리방법요리방법요리방법요리방법요리…"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="@+id/img_recipe"
         app:layout_constraintEnd_toStartOf="@+id/img_recipe"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recipe_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_recipe_title"
+        tools:text="1. 요리방법요리방법요리방법요리방버요리요리요리
+요리방법요리방법요리방법요리방법요리방법요리…" />
 
     <View
+        android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="12dp"
         android:background="@color/gray_000"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_recipe" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,5 +18,13 @@
 
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/sky_blue</item>
+
     </style>
+
+    <!--    Dialog Theme-->
+    <style name="dialogTheme" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

@@ -1,8 +1,12 @@
 package com.recipe.android.recipeapp.src.myPage.myRecipe.`interface`
 
 import com.recipe.android.recipeapp.src.myPage.myRecipe.models.MyRecipeResponse
+import com.recipe.android.recipeapp.src.myPage.myRecipe.myRecipeCreate.models.MyRecipeCreate
+import com.recipe.android.recipeapp.src.myPage.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface MyRecipeRetrofitInterface {
@@ -12,4 +16,6 @@ interface MyRecipeRetrofitInterface {
         @Query("size") size: Int,
         @Query("page") page: Int
     ): Call<MyRecipeResponse>
+
+
 }

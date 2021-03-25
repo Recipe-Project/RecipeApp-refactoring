@@ -25,16 +25,26 @@ class MyRecipeActivity: BaseActivity<ActivityMyRecipeBinding>(ActivityMyRecipeBi
             adapter = myRecipeRecyclerViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
-        // 나만의 레시피 조회 api 호출
-        MyRecipeService(this).getMyRecipe(2,0)
 
         binding.btnRecipeCreate.setOnClickListener { view ->
             val intent = Intent(this, MyRecipeCreateActivity::class.java)
             startActivity(intent)
         }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // 나만의 레시피 조회 api 호출
+        MyRecipeService(this).getMyRecipe(2,0)
+
     }
 
     override fun onGetMyRecipeSuccess(response: MyRecipeResponse) {
+
+        myRecipeList.clear()
+
         response.result.forEach {
             myRecipeList.add(it)
         }

@@ -5,6 +5,8 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.myPage.myRecipe.`interface`.MyRecipeActivityView
 import com.recipe.android.recipeapp.src.myPage.myRecipe.`interface`.MyRecipeRetrofitInterface
 import com.recipe.android.recipeapp.src.myPage.myRecipe.models.MyRecipeResponse
+import com.recipe.android.recipeapp.src.myPage.myRecipe.myRecipeCreate.models.MyRecipeCreate
+import com.recipe.android.recipeapp.src.myPage.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,4 +39,6 @@ class MyRecipeService(val view: MyRecipeActivityView) {
 
         })
     }
+
+
 }

@@ -1,10 +1,17 @@
 package com.recipe.android.recipeapp.src.myPage.myRecipe.adpater
 
+import android.content.Intent
+import android.graphics.Outline
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getDrawable
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.recipe.android.recipeapp.R
+import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemMyRecipeListBinding
 import com.recipe.android.recipeapp.src.myPage.myRecipe.models.MyRecipeResult
+import com.recipe.android.recipeapp.src.myPage.myRecipe.myRecipeDetail.MyRecipeDetailActivity
 import com.recipe.android.recipeapp.src.myPage.myRecipe.viewHolder.MyRecipeViewHolder
 
 class MyRecipeRecyclerViewAdapter: RecyclerView.Adapter<MyRecipeViewHolder>() {
@@ -19,6 +26,13 @@ class MyRecipeRecyclerViewAdapter: RecyclerView.Adapter<MyRecipeViewHolder>() {
 
     override fun onBindViewHolder(holder: MyRecipeViewHolder, position: Int) {
         holder.bindWithView(myRecipeList[position])
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(ApplicationClass.instance, MyRecipeDetailActivity::class.java)
+            intent.putExtra("myRecipeIdx", myRecipeList[position].userRecipeIdx)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(ApplicationClass.instance, intent, null)
+        }
     }
 
     override fun getItemCount(): Int {
