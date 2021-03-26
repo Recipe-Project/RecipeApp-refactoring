@@ -6,4 +6,6 @@ import com.recipe.android.recipeapp.databinding.FragmentSearchBinding
 
 class SearchFragment :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search) {
+
+
 }

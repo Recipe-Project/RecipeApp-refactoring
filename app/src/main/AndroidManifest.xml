@@ -57,15 +57,19 @@
         <activity
             android:name=".src.setting.dialog.DeleteIdDialog"
             android:theme="@style/dialogTheme" />
+
         <!-- 나만의 레시피 -->
-        <activity android:name=".src.myPage.myRecipe.MyRecipeActivity" />
-        <activity android:name=".src.myPage.myRecipe.myRecipeCreate.MyRecipeCreateActivity" />
-        <activity android:name=".src.myPage.myRecipe.myRecipeDetail.MyRecipeDetailActivity" />
-        <activity android:name=".src.myPage.myRecipe.myRecipeModify.MyRecipeModifyActivity"
+        <activity android:name=".src.myRecipe.MyRecipeActivity" />
+        <activity android:name=".src.myRecipe.myRecipeCreate.MyRecipeCreateActivity" />
+        <activity android:name=".src.myRecipe.myRecipeDetail.MyRecipeDetailActivity" />
+        <activity android:name=".src.myRecipe.myRecipeModify.MyRecipeModifyActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".src.myPage.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
+            android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
             android:theme="@style/dialogTheme" />
+
+        <!-- 스크랩 레시피 -->
+        <activity android:name=".src.scrapRecipe.ScrapRecipeActivity"/>
     </application>
 
 </manifest>

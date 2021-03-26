@@ -15,7 +15,8 @@ import com.recipe.android.recipeapp.src.myPage.`interface`.MyPageFragmentView
 import com.recipe.android.recipeapp.src.myPage.adapter.MyPageRecipeRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.myPage.models.MyRecipe
 import com.recipe.android.recipeapp.src.myPage.models.UserInfoResponse
-import com.recipe.android.recipeapp.src.myPage.myRecipe.MyRecipeActivity
+import com.recipe.android.recipeapp.src.myRecipe.MyRecipeActivity
+import com.recipe.android.recipeapp.src.scrapRecipe.ScrapRecipeActivity
 import com.recipe.android.recipeapp.src.setting.SettingActivity
 
 class MyPageFragment :
@@ -48,7 +49,8 @@ class MyPageFragment :
 
         // 스크랩 레시피 전체보기 버튼 클릭
         binding.btnAllScrapRecipe.setOnClickListener {
-
+            val intent = Intent(context, ScrapRecipeActivity::class.java)
+            startActivity(intent)
         }
 
         // 나만의 레시피 전체보기 버튼 클릭
