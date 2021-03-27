@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.recipe.android.recipeapp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Image Picker -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Image Picker -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -18,7 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp">
-
+        <activity
+            android:name=".src.search.RecipeDetailActivity"
+            android:label="@string/title_activity_recipe_detail"
+            android:theme="@style/Theme.RecipeApp.NoActionBar"/>
         <!-- 스플래시 -->
         <activity android:name=".src.splash.SplashActivity">
             <intent-filter>
@@ -27,15 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!-- 메인 -->
         <activity android:name=".src.MainActivity" />
-
         <!-- 로그인 -->
-        <activity android:name=".src.signIn.SignInActivity">
-
-        </activity>
-
+        <activity android:name=".src.signIn.SignInActivity"/>
         <!-- 카카오 로그인 -->
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
@@ -50,11 +47,10 @@
                     android:scheme="kakao${KAKAO_API_KEY}" />
             </intent-filter>
         </activity>
-
         <!-- 마이페이지 -->
-        <activity android:name=".src.myPage.myRecipe.MyRecipeActivity"/>
+        <activity android:name=".src.myPage.myRecipe.MyRecipeActivity" />
         <activity android:name=".src.myPage.myRecipe.myRecipeCreate.MyRecipeCreateActivity" />
-        <activity android:name=".src.setting.SettingActivity"/>
+        <activity android:name=".src.setting.SettingActivity" />
     </application>
 
 </manifest>

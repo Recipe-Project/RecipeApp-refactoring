@@ -1,13 +1,13 @@
 package com.recipe.android.recipeapp.src.search
 
 import android.os.Bundle
-import android.view.View
 import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchResultBinding
 import com.recipe.android.recipeapp.src.search.adapter.SearchResultViewPagerAdapter
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResult
+import com.recipe.android.recipeapp.src.search.publicRecipe.PublicResultFragment
 
 class SearchResultFragment(private val publicResultList : ArrayList<PublicRecipeResult>) : BaseFragment<FragmentSearchResultBinding>(FragmentSearchResultBinding::bind, R.layout.fragment_search_result) {
 

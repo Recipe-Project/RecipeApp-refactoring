@@ -3,40 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/public_result_frag_recyclerview_layout">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_recipe_title"
+        android:id="@+id/recipe_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/gray_500"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        style="@style/Subtitle2Style"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="김치볶음밥" />
+        tools:text="요리제목" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_recipe"
-        android:layout_width="63dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/recipe_img"
+        android:layout_width="125dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_recipe_explain"
+        android:id="@+id/recipe_explain_tv"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="18dp"
-        tools:text="1. 요리방법요리방법요리방법요리방버요리요리요리
-요리방법요리방법요리방법요리방법요리방법요리…"
-        app:layout_constraintBottom_toBottomOf="@+id/img_recipe"
-        app:layout_constraintEnd_toStartOf="@+id/img_recipe"
+        android:layout_marginEnd="12dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:ems="31"
+        app:layout_constraintEnd_toStartOf="@+id/recipe_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recipe_title" />
+        app:layout_constraintTop_toBottomOf="@+id/recipe_title_tv"
+        tools:text="1. 요리방법요리방법요리방법요리방버요리요리요리
+요리방법요리방법요리방법요리방법요리방법요요" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favorite_recipe_cnt_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_favorite_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recipe_explain_tv"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/favorite_recipe_cnt_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="12"
+        style="@style/Caption2Style"
+        android:textColor="@color/gray_200"
+        app:layout_constraintTop_toBottomOf="@id/recipe_explain_tv"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="1dp"
+        app:layout_constraintStart_toEndOf="@id/favorite_recipe_cnt_iv"
+        />
 
     <View
         android:layout_width="match_parent"

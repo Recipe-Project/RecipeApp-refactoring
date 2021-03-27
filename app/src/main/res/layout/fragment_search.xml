@@ -1,36 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/searchFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.recipe.android.recipeapp.src.search.SearchFragment"
-    android:orientation="vertical">
+    tools:context="com.recipe.android.recipeapp.src.search.SearchFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/search_frag_search_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:src="@drawable/ic_search_black"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"/>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/search_frag_et"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:hint="@string/search_et_hint"
-            android:inputType="text"
-            android:imeOptions="actionSearch"
-            android:background="@color/gray_200"
-            android:textColorHint="@color/gray_500" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/search_frag_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_et_hint"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        style="@style/Body1Style"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        app:layout_constraintStart_toEndOf="@id/search_frag_search_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/search_frag_cancel_btn"
+        android:layout_marginTop="11dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="6dp"
+        android:padding="8dp" />
 
-    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/search_frag_cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Body1Style"
+        android:text="@string/cancel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="11dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"/>
 
     <FrameLayout
         android:id="@+id/search_frag_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_frag_et"/>
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
