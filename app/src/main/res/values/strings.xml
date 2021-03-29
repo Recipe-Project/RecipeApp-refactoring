@@ -38,6 +38,9 @@
     <string name="deleteMyRecipeDialogMessage1">삭제한 내용은 복구가 불가능합니다.</string>
     <string name="deleteMyRecipeDialogMessage2">나만의 레시피를 삭제하시겠습니까?</string>
 
+    <!-- 마이페이지 / 프로필 수정 -->
+    <string name="editProfile">프로필 수정</string>
+
     <!-- 설정 -->
     <string name="help">고객지원</string>
     <string name="versionInfo">버전정보</string>

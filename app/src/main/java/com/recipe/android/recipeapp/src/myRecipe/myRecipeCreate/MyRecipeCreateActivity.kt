@@ -1,12 +1,11 @@
 package com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate
 
-import android.content.ContentResolver
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import androidx.core.content.ContextCompat
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -45,14 +44,21 @@ class MyRecipeCreateActivity :
     var content: String? = null
     val ingredientList = ArrayList<Int>()
 
+    // 사진 유무
+    private var isPhoto = false
+
+    lateinit var bitmap: Bitmap
+
+    lateinit var uri: Uri
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 수정 필요
         binding.imgPick.setOnClickListener {
             TedImagePicker.with(this)
-                .startMultiImage { uriList ->
-                    // showMultiImage(uriList)
+                .start { uri ->
+                    this.uri = uri
+                    showSingleImage(uri)
                 }
         }
 
@@ -90,12 +96,25 @@ class MyRecipeCreateActivity :
         }
     }
 
-    private fun imageUpload() {
+    private fun showSingleImage(uri: Uri) {
+        bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+        binding.imgPick.setImageBitmap(bitmap)
+        isPhoto = true
+    }
 
-        val bitmap = (ContextCompat.getDrawable(
-            this,
-            R.drawable.img_default_my_recipe
-        ) as BitmapDrawable).bitmap
+    private fun imageUpload() {
+        if (isPhoto) {
+            // 사진선택
+            bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+
+        } else {
+            // 기본 이미지
+            bitmap = (ContextCompat.getDrawable(
+                this,
+                R.drawable.img_default_my_recipe
+            ) as BitmapDrawable).bitmap
+        }
+
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
@@ -105,18 +124,6 @@ class MyRecipeCreateActivity :
         var imgFileName = "${userIdx}_${timeStamp}_.png"
         val storage = Firebase.storage("gs://recipeapp-a79ed.appspot.com")
         val storageRef = storage.reference
-        val thumbnailRef = storageRef.child(imgFileName)
-
-//        thumbnailRef.putFile(uriPhoto!!)?.addOnSuccessListener {
-//            Log.d(TAG, "MyRecipeCreateActivity - imageUpload() : 파이어베이스에 사진 업로드 완료")
-//        }
-
-//        var uploadTask = thumbnailRef.putBytes(data)
-//        uploadTask.addOnFailureListener {
-//            // Handle unsuccessful uploads
-//        }.addOnSuccessListener { taskSnapshot ->
-//            Log.d(TAG, "MyRecipeCreateActivity - imageUpload() : 업로드 성공")
-//        }
 
         val ref = storageRef.child(imgFileName)
         var uploadTask = ref.putBytes(data)

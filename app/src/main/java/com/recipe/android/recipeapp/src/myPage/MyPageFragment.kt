@@ -59,6 +59,11 @@ class MyPageFragment :
             val intent = Intent(context, MyRecipeActivity::class.java)
             startActivity(intent)
         }
+
+        // 프로필 수정 버튼 클릭
+        binding.btnEditProfile.setOnClickListener {
+
+        }
     }
 
     override fun onStart() {

@@ -7,6 +7,7 @@ plugins {
 
     // navigation
     id 'androidx.navigation.safeargs.kotlin'
+
 }
 
 def propertiesFile = rootProject.file("local.properties")
@@ -52,7 +53,9 @@ android {
     viewBinding {
         enabled = true
     }
-
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
