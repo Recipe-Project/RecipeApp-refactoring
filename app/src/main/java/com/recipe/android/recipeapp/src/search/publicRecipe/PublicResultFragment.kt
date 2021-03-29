@@ -6,12 +6,8 @@ import android.view.View
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentPublicResultBinding
-import com.recipe.android.recipeapp.src.search.RecipeDetailActivity
 import com.recipe.android.recipeapp.src.search.publicRecipe.adapter.PublicResultRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResult
-import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeDetailView
-import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeDetailResponse
-import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeDetailSerializable
 
 class PublicResultFragment(private val publicResultList : ArrayList<PublicRecipeResult>) : BaseFragment<FragmentPublicResultBinding>(FragmentPublicResultBinding::bind, R.layout.fragment_public_result) {
 
@@ -29,5 +25,4 @@ class PublicResultFragment(private val publicResultList : ArrayList<PublicRecipe
             }
         }
     }
-
 }

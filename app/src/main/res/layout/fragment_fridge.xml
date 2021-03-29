@@ -31,7 +31,7 @@
             android:textSize="14sp"
             android:text="21/02/28"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@id/fridge_frag_guideline_left"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
             android:layout_marginTop="65dp"/>
 
         <View
@@ -39,8 +39,8 @@
             android:layout_width="0dp"
             android:layout_height="3dp"
             android:background="@color/gray_300"
-            app:layout_constraintStart_toStartOf="@id/fridge_frag_guideline_left"
-            app:layout_constraintEnd_toEndOf="@id/fridge_frag_guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintTop_toBottomOf="@id/fridge_frag_app_logo_iv"
             android:layout_marginTop="53dp"/>
 
@@ -59,22 +59,22 @@
             android:id="@+id/fridge_frag_dotted_line"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            app:layout_constraintStart_toStartOf="@id/fridge_frag_guideline_left"
-            app:layout_constraintEnd_toEndOf="@id/fridge_frag_guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintTop_toBottomOf="@id/fridge_frag_title"
             android:layout_marginTop="16dp"
             android:background="@drawable/dotted_lines_horizontal"
             android:layerType="software"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/fridge_frag_guideline_left"
+            android:id="@+id/guideline_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="20dp"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/fridge_frag_guideline_right"
+            android:id="@+id/guideline_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

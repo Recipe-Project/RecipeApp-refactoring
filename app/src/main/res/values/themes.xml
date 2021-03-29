@@ -29,6 +29,17 @@
     </style>
 
     <!-- About RecipeDetailActivity -->
-    <style name="Theme.RecipeApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.RecipeApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.RecipeApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:textColorPrimary">@color/black</item>
+
+    </style>
+    <style name="Theme.RecipeApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+    
+
 </resources>

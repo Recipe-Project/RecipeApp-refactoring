@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".src.search.RecipeDetailActivity">
+    tools:context=".src.search.publicRecipe.RecipeDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -21,7 +22,9 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
+            app:toolbarId="@+id/toolbar"
+            app:collapsedTitleTextAppearance="@style/Head2Style"
+            app:expandedTitleTextAppearance="@style/Head2Style">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -33,6 +36,124 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_scrolling" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/recipe_detail_activity_thumbnail"
+                android:layout_width="0dp"
+                android:layout_height="233dp"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="fitXY"
+                tools:src="@drawable/ic_launcher_background"/>
+            
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/recipe_detail_activity_favorite_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_favorite_for_public_scrap"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recipe_detail_activity_thumbnail"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="76dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/recipe_detail_activity_time_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_schedule"
+                app:layout_constraintTop_toTopOf="@id/recipe_detail_activity_favorite_iv"
+                app:layout_constraintStart_toEndOf="@id/recipe_detail_activity_favorite_iv"
+                app:layout_constraintEnd_toStartOf="@id/recipe_detail_activity_dining_iv"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/recipe_detail_activity_dining_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dining"
+                app:layout_constraintTop_toTopOf="@id/recipe_detail_activity_time_iv"
+                app:layout_constraintStart_toEndOf="@id/recipe_detail_activity_time_iv"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/recipe_detail_activity_favorite_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_btn"
+                style="@style/CaptionStyle"
+                app:layout_constraintStart_toStartOf="@id/recipe_detail_activity_favorite_iv"
+                app:layout_constraintEnd_toEndOf="@id/recipe_detail_activity_favorite_iv"
+                app:layout_constraintTop_toBottomOf="@id/recipe_detail_activity_favorite_iv"
+                android:layout_marginTop="8dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/recipe_detail_activity_cooking_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="10분"
+                style="@style/CaptionStyle"
+                app:layout_constraintTop_toBottomOf="@id/recipe_detail_activity_time_iv"
+                app:layout_constraintStart_toStartOf="@id/recipe_detail_activity_time_iv"
+                app:layout_constraintEnd_toEndOf="@id/recipe_detail_activity_time_iv"
+                android:layout_marginTop="8dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/recipe_detail_activity_level_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="초보환영"
+                style="@style/CaptionStyle"
+                app:layout_constraintTop_toBottomOf="@id/recipe_detail_activity_dining_iv"
+                app:layout_constraintStart_toStartOf="@id/recipe_detail_activity_dining_iv"
+                app:layout_constraintEnd_toEndOf="@id/recipe_detail_activity_dining_iv"
+                android:layout_marginTop="8dp"/>
+
+            <View
+                android:id="@+id/top_line"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/gray_100"
+                app:layout_constraintTop_toBottomOf="@id/recipe_detail_activity_cooking_time_tv"
+                android:layout_marginTop="15.5dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/recipe_detail_activity_summary_tv"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintTop_toBottomOf="@id/top_line"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/Body1Style"
+                tools:text="냉장고에 있는 김치로 얼큰한 김치찌개를 끓여보세요. 요리설명요리설명요리설명요리설명. 요리설명요리설"
+                android:layout_marginTop="31.5dp"/>
+
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="20dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

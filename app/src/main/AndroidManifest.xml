@@ -18,9 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp">
         <activity
-            android:name=".src.search.RecipeDetailActivity"
-            android:label="@string/title_activity_recipe_detail"
+            android:name=".src.search.publicRecipe.RecipeDetailActivity"
             android:theme="@style/Theme.RecipeApp.NoActionBar"/>
+
         <!-- 스플래시 -->
         <activity android:name=".src.splash.SplashActivity">
             <intent-filter>
