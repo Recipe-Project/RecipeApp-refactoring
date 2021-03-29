@@ -164,7 +164,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_ingredient" />
 
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <EditText
                 android:id="@+id/et_content"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

@@ -56,6 +56,11 @@ class MyRecipeCreateActivity :
                 }
         }
 
+        binding.etTitle.setOnClickListener {
+            binding.etTitle.requestFocus()
+            showKeyboard(binding.etTitle)
+        }
+
         // 취소 버튼 클릭
         binding.btnCancel.setOnClickListener {
             finish()

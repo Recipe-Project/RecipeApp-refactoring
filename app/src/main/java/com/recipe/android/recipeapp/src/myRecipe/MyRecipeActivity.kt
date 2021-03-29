@@ -31,6 +31,11 @@ class MyRecipeActivity: BaseActivity<ActivityMyRecipeBinding>(ActivityMyRecipeBi
             startActivity(intent)
         }
 
+        // 뒤로가기 버튼
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     override fun onStart() {

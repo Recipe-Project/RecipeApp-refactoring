@@ -8,8 +8,8 @@ data class UserInfoResult(
     val blogScrapCnt: Int,
     @SerializedName("myRecipeList")
     val myRecipeList: List<MyRecipe>,
-    @SerializedName("myRecipeListSize")
-    val myRecipeListSize: Int,
+    @SerializedName("myRecipeTotalSize")
+    val myRecipeTotalSize: Int,
     @SerializedName("profilePhoto")
     val profilePhoto: String,
     @SerializedName("recipeScrapCnt")

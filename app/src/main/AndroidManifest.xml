@@ -60,7 +60,8 @@
 
         <!-- 나만의 레시피 -->
         <activity android:name=".src.myRecipe.MyRecipeActivity" />
-        <activity android:name=".src.myRecipe.myRecipeCreate.MyRecipeCreateActivity" />
+        <activity android:name=".src.myRecipe.myRecipeCreate.MyRecipeCreateActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".src.myRecipe.myRecipeDetail.MyRecipeDetailActivity" />
         <activity android:name=".src.myRecipe.myRecipeModify.MyRecipeModifyActivity"
             android:windowSoftInputMode="adjustResize" />

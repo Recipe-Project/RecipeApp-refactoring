@@ -1,10 +1,14 @@
 package com.recipe.android.recipeapp.src.myRecipe.myRecipeModify
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
@@ -40,6 +44,7 @@ class MyRecipeModifyActivity: BaseActivity<ActivityMyRecipeModifyBinding>(Activi
     var content: String? = null
     var ingredientList = ArrayList<Int>()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -54,7 +59,9 @@ class MyRecipeModifyActivity: BaseActivity<ActivityMyRecipeModifyBinding>(Activi
         thumbnail = intent.getStringExtra("thumbnail")
 
 
+        // 기존 정보 표시
         binding.tvTitle.text = title
+        binding.etContent.setText(content, TextView.BufferType.EDITABLE)
 
         binding.tvTitle.setOnClickListener {
             binding.tvTitle.visibility = View.GONE
