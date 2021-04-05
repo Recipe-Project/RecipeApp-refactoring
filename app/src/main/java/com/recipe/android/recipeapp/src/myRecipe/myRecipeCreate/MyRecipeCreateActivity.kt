@@ -164,26 +164,3 @@ class MyRecipeCreateActivity :
         TODO("Not yet implemented")
     }
 }
-
-//    private fun showMultiImage(uriList: List<Uri>) {
-//        this.selectedUriList = uriList
-//        Log.d("ted", "uriList: $uriList")
-//        binding.ivImage.visibility = View.GONE
-//        binding.containerSelectedPhotos.visibility = View.VISIBLE
-//
-//        binding.containerSelectedPhotos.removeAllViews()
-//
-//        val viewSize =
-//            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, resources.displayMetrics)
-//                .toInt()
-//        uriList.forEach {
-//            val itemImageBinding = ItemImageBinding.inflate(LayoutInflater.from(this))
-//            Glide.with(this)
-//                .load(it)
-//                .apply(RequestOptions().fitCenter())
-//                .into(itemImageBinding.ivMedia)
-//            itemImageBinding.root.layoutParams = FrameLayout.LayoutParams(viewSize, viewSize)
-//            binding.containerSelectedPhotos.addView(itemImageBinding.root)
-//        }
-//
-//    }

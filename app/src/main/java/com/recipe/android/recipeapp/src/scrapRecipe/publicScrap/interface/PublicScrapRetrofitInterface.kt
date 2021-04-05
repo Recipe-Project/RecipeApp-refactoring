@@ -1,6 +1,5 @@
 package com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.`interface`
 
-import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrapResponse
 import retrofit2.Call
 import retrofit2.http.GET
