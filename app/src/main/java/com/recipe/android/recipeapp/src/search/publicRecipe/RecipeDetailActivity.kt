@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.search.publicRecipe
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,6 +22,7 @@ import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeS
 class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityRecipeDetailBinding::inflate), PublicRecipeDetailView, PublicRecipeScrapView {
 
     private var recipeId : Int = 0
+    val TAG = "RecipeDetailActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +48,12 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
 
     override fun onGetPublicRecipeDetailSuccess(response: PublicRecipeDetailResponse) {
         val result = response.result
-        recipeId = result.recipeId
         binding.toolbarLayout.title = result.recipeName
         binding.recipeDetailActivityCookingTimeTv.text = result.cookingTime
         binding.recipeDetailActivityLevelTv.text = result.level
         binding.recipeDetailActivitySummaryTv.text = result.summary
+
+        recipeId = result.recipeId // for test
 
 
     }
@@ -83,6 +86,7 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
 
 
     override fun onPostPublicRecipeScrapSuccess(response: PublicRecipeScrapResponse) {
+        Log.d(TAG, response.result.userIdx.toString()) // For test
 
     }
 

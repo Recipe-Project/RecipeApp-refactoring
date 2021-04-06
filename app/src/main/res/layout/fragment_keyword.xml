@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="16dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginTop="16dp"
+            android:id="@+id/keyword_frag_recent_keyword_tv"
             style="@style/Subtitle2Style"
             android:textStyle="bold"
-            android:id="@+id/keyword_frag_recent_keyword_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/recent_keyword"
@@ -21,21 +21,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
+
+            android:id="@+id/keyword_frag_erase_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel_everything"
+            android:textColor="@color/gray_200"
             style="@style/Subtitle2Style"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"/>
 
         <androidx.recyclerview.widget.RecyclerView
+
             app:layout_constraintTop_toBottomOf="@id/keyword_frag_recent_keyword_tv"
             android:id="@+id/keyword_frag_recent_keyword_recylerview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            tools:listitem="@layout/item_recent_keyword_recyclerview"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Subtitle2Style"
@@ -46,7 +51,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/keyword_frag_recent_keyword_recylerview"
-            android:layout_marginTop="43dp"/>
+            android:layout_marginTop="16dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             app:layout_constraintTop_toBottomOf="@id/keyword_frag_popular_keyword_tv"
@@ -55,7 +60,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_popular_keyword_recyclerview"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"

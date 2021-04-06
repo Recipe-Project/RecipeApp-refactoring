@@ -16,6 +16,7 @@ class PublicResultFragment(private val publicResultList : ArrayList<PublicRecipe
 
         val adapter = PublicResultRecyclerviewAdapter(publicResultList)
         binding.publicResultFragRecylerview.adapter = adapter
+        binding.publicFragItemCnt.text = publicResultList.size.toString()
         adapter.publicRecipeItemClick = object : PublicResultRecyclerviewAdapter.PublicRecipeItemClick{
             override fun onClick(view: View, position: Int) {
                 val index = publicResultList[position].recipeId

@@ -7,16 +7,21 @@
     android:id="@+id/public_result_frag_recyclerview_layout">
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:ellipsize="end"
+        android:maxLines="2"
         android:id="@+id/recipe_title_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         style="@style/Subtitle2Style"
+        app:layout_constraintEnd_toStartOf="@id/recipe_img"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="요리제목" />
+        tools:text="요리제목"
+        android:layout_marginEnd="12dp"/>
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:scaleType="fitXY"
         android:id="@+id/recipe_img"
         android:layout_width="125dp"
         android:layout_height="91dp"
@@ -28,6 +33,8 @@
         />
 
     <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Body3Style"
+        android:textColor="@color/gray_300"
         android:id="@+id/recipe_explain_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -35,12 +42,11 @@
         android:layout_marginEnd="12dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:ems="31"
         app:layout_constraintEnd_toStartOf="@+id/recipe_img"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipe_title_tv"
         tools:text="1. 요리방법요리방법요리방법요리방버요리요리요리
-요리방법요리방법요리방법요리방법요리방법요요" />
+요리방법요리방법요리방법요리방법요리방법요요요요요요요요요용" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/favorite_recipe_cnt_iv"
@@ -60,7 +66,7 @@
         android:textColor="@color/gray_200"
         app:layout_constraintTop_toBottomOf="@id/recipe_explain_tv"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="3dp"
         app:layout_constraintStart_toEndOf="@id/favorite_recipe_cnt_iv"
         />
 

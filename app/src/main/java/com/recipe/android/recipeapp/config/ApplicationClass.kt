@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.config
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
@@ -9,6 +10,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
 class ApplicationClass: Application() {
@@ -27,6 +29,8 @@ class ApplicationClass: Application() {
             private set
 
         lateinit var sRetrofit: Retrofit
+
+        lateinit var yRetrofit: Retrofit
 
         lateinit var sSharedPreferences: SharedPreferences
 
@@ -74,6 +78,12 @@ class ApplicationClass: Application() {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+        yRetrofit = Retrofit.Builder()
+            .baseUrl("https://www.googleapis.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
+
 
 }

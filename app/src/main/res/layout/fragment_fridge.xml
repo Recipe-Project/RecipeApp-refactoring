@@ -29,7 +29,7 @@
             android:fontFamily="@font/applesdgothicneoregular"
             android:textColor="@color/gray_400"
             android:textSize="14sp"
-            android:text="21/02/28"
+            tools:text="21/02/28"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             android:layout_marginTop="65dp"/>

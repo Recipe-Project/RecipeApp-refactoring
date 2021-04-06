@@ -48,6 +48,16 @@
         android:paddingTop="7dp"
         android:paddingBottom="7dp"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/search_frag_et_cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edittext_cancel"
+        app:layout_constraintEnd_toEndOf="@id/search_frag_et"
+        app:layout_constraintTop_toTopOf="@id/search_frag_et"
+        app:layout_constraintBottom_toBottomOf="@id/search_frag_et"
+        android:layout_margin="6dp"/>
+
     <FrameLayout
         android:id="@+id/search_frag_frame_layout"
         android:layout_width="match_parent"
