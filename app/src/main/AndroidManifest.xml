@@ -4,6 +4,7 @@
     package="com.recipe.android.recipeapp">
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Image Picker -->
+    <!-- Image Picker -->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -48,9 +49,26 @@
             </intent-filter>
         </activity>
         <!-- 마이페이지 -->
-        <activity android:name=".src.myPage.myRecipe.MyRecipeActivity" />
-        <activity android:name=".src.myPage.myRecipe.myRecipeCreate.MyRecipeCreateActivity" />
+
         <activity android:name=".src.setting.SettingActivity" />
+        <activity
+            android:name=".src.setting.dialog.DeleteIdDialog"
+            android:theme="@style/dialogTheme" />
+
+        <!-- 나만의 레시피 -->
+        <activity android:name=".src.myRecipe.MyRecipeActivity" />
+        <activity android:name=".src.myRecipe.myRecipeCreate.MyRecipeCreateActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".src.myRecipe.myRecipeDetail.MyRecipeDetailActivity" />
+        <activity android:name=".src.myRecipe.myRecipeModify.MyRecipeModifyActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
+            android:theme="@style/dialogTheme" />
+
+        <!-- 스크랩 레시피 -->
+        <activity android:name=".src.scrapRecipe.ScrapRecipeActivity"/>
+
     </application>
 
 </manifest>

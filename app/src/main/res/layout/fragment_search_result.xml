@@ -5,10 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/search_result_frag_tablayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/red"
+        app:tabIndicatorHeight="3dp"
+        app:tabTextAppearance="@style/TabTextStyle"
+        android:theme="@style/TabTheme"
+        app:tabIndicatorFullWidth="false" />
 
     <View
         android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordView
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 
+
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search), SearchKeywordView {
 
     val TAG = "SearchFragment"
@@ -67,4 +68,5 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     override fun onGetPublicRecipeFailure(message: String) {
     }
+
 }

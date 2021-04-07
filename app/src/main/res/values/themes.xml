@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.RecipeApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/sky_blue</item>
+        <item name="colorPrimaryVariant">@color/sky_blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/sky_blue</item>
@@ -21,7 +21,15 @@
 
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/sky_blue</item>
+
     </style>
+
+    <!--    Dialog Theme-->
+    <style name="dialogTheme" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 
     <style name="Theme.RecipeApp.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -41,5 +49,13 @@
         <item name="android:textColorPrimary">@color/black</item>
     </style>
     
+
+
+    <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/gray_500</item>
+        <item name="android:textColorPrimary">@color/gray_500</item>
+        <item name="android:textColorSecondary">@color/gray_200</item>
+    </style>
+
 
 </resources>

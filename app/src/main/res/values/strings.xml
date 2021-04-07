@@ -22,6 +22,24 @@
     <string name="save">저장</string>
     <string name="title">제목</string>
     <string name="ingredientPick">재료선택</string>
+    <string name="pleaseEnterTitle">제목을 입력해주세요.</string>
+    <string name="pleaseEnterContent">내용을 입력해주세요.</string>
+    <string name="myRecipeSaveComplete">나만의 레시피 저장이 완료되었습니다.</string>
+
+    <!-- 마이페이지 / 나만의레시피 / 수정 -->
+    <string name="Modify">수정</string>
+    <string name="myRecipeModify">나만의 레시피 수정</string>
+    <string name="myRecipeModifyComplete">나만의 레시피 수정이 완료되었습니다.</string>
+
+    <!-- 마이페이지 / 나만의레시피 / 삭제 -->
+    <string name="delete">삭제</string>
+    <string name="deleteMyRecipeMessage">해당 레시피가 삭제되었습니다.</string>
+    <string name="deleteMyRecipeDialog">나만의 레시피 삭제</string>
+    <string name="deleteMyRecipeDialogMessage1">삭제한 내용은 복구가 불가능합니다.</string>
+    <string name="deleteMyRecipeDialogMessage2">나만의 레시피를 삭제하시겠습니까?</string>
+
+    <!-- 마이페이지 / 프로필 수정 -->
+    <string name="editProfile">프로필 이미지 변경</string>
 
 
     <!-- 나의 냉장고 / 홈 화면 -->
@@ -49,6 +67,13 @@
     <string name="developer">개발자 소개</string>
     <string name="logOut">로그아웃</string>
     <string name="deleteId">탈퇴</string>
+    <string name="deleteIdDialog">탈퇴 시, 레시피 저장소에서 저장한 내용은 모두 삭제되며, 이후 복구가 불가능합니다.</string>
+    <string name="deleteIdConfirmDialog">레시피저장소를 탈퇴하시겠습니까?</string>
+    <string name="yes">네</string>
+    <string name="no">아니오</string>
+
+    <!-- 스크랩 레시피 -->
+
 
 
 </resources>
