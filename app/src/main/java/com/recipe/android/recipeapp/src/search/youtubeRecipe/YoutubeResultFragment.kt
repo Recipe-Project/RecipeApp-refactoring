@@ -32,7 +32,6 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
 
         // 최초로 데이터 load
         YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, "AIzaSyBFZkXxJXrTs-eGruMKCGsA8cn7iJDkwuI", keyword)
-
     }
 
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
@@ -57,8 +56,10 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
         adapter.youtubeRecipeScrapItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeScrapItemClick {
             override fun onClick(view: View, position: Int) {
                 YoutubeRecipeService(this@YoutubeResultFragment).postAddingScrap(
-                    YoutubeRecipeScrapRequest(result[position].id.videoId, result[position].snippet.title, result[position].snippet.thumbnails.default.url, youtubeUrl,
-                    formatPostDate(result[position].snippet.publishTime), result[position].snippet.channelTitle, "00:00")
+                    YoutubeRecipeScrapRequest(result[position].id.videoId, result[position].snippet.title,
+                        result[position].snippet.thumbnails.default.url, youtubeUrl,
+                    formatPostDate(result[position].snippet.publishTime),
+                        result[position].snippet.channelTitle, "00:00")
                 )
             }
         }
