@@ -45,6 +45,20 @@
     <!-- 나의 냉장고 / 홈 화면 -->
     <string name="my_fridge">나의 냉장고</string>
 
+    <!-- 나의 냉장고 / 재료 선택 -->
+    <string name="selectIngredient">재료선택</string>
+    <string name="addDirect">직접입력</string>
+    <string name="all">전체</string>
+    <string name="beef">육류</string>
+    <string name="vegetable">채소</string>
+    <string name="fruit">과일</string>
+    <string name="aquaticProducts">수산물</string>
+    <string name="seasoning">조미료</string>
+    <string name="product">가공/유제품</string>
+    <string name="searchIngredient">재료를 검색하세요.</string>
+    <string name="next">다음</string>
+    
+
     <!-- 레시피 검색 -->
     <string name="search_et_hint">레시피를 검색해보세요!</string>
     <string name="recent_keyword">최근 검색어</string>

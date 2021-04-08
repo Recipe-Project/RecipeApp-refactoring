@@ -32,6 +32,10 @@
         </activity>
         <!-- 메인 -->
         <activity android:name=".src.MainActivity" />
+
+        <!-- 냉장고 - 재료 직접 추가 -->
+        <activity android:name=".src.fridge.AddDirect.AddDirectActivity"/>
+
         <!-- 로그인 -->
         <activity android:name=".src.signIn.SignInActivity"/>
         <!-- 카카오 로그인 -->

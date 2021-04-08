@@ -1,85 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fridgeFragment"
-    tools:context="com.recipe.android.recipeapp.src.fridge.FridgeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context="com.recipe.android.recipeapp.src.fridge.FridgeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/fridge_frag_app_logo_iv"
-            android:layout_width="120dp"
-            android:layout_height="27dp"
-            android:layout_marginTop="18dp"
-            android:src="@drawable/ic_recipe_storge"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fridge_frag_date_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/applesdgothicneoregular"
-            android:textColor="@color/gray_400"
-            android:textSize="14sp"
-            tools:text="21/02/28"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            android:layout_marginTop="65dp"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fridge_frag_app_logo_iv"
+                android:layout_width="120dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/ic_recipe_storge"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/fridge_frag_line_top"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:background="@color/gray_300"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layout_constraintTop_toBottomOf="@id/fridge_frag_app_logo_iv"
-            android:layout_marginTop="53dp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fridge_frag_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:fontFamily="@font/applesdgothicneoregular"
+                android:textColor="@color/gray_400"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="21/02/28" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fridge_frag_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Subtitle1Style"
-            android:text="@string/my_fridge"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fridge_frag_line_top"
-            android:layout_marginTop="18dp"/>
+            <View
+                android:id="@+id/fridge_frag_line_top"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="53dp"
+                android:background="@color/gray_300"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/fridge_frag_app_logo_iv" />
 
-        <View
-            android:id="@+id/fridge_frag_dotted_line"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layout_constraintTop_toBottomOf="@id/fridge_frag_title"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/dotted_lines_horizontal"
-            android:layerType="software"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fridge_frag_title"
+                style="@style/Subtitle1Style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/my_fridge"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fridge_frag_line_top" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="20dp"/>
+            <View
+                android:id="@+id/fridge_frag_dotted_line"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dotted_lines_horizontal"
+                android:layerType="software"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/fridge_frag_title" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="20dp"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="20dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_direct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_create"
+        app:fabCustomSize="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_add"
+        app:layout_constraintEnd_toEndOf="@+id/fab_add"
+        app:layout_constraintStart_toStartOf="@+id/fab_add" >
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="8dp"
+        app:fabCustomSize="48dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/fab_add_direct"
+        app:layout_constraintEnd_toEndOf="@+id/fab_add_direct"
+        app:layout_constraintStart_toStartOf="@+id/fab_add_direct" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
