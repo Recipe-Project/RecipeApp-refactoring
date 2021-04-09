@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.fridge.AddDirect.models
+package com.recipe.android.recipeapp.src.fridge.pickIngredient.models
 
 
 import com.google.gson.annotations.SerializedName

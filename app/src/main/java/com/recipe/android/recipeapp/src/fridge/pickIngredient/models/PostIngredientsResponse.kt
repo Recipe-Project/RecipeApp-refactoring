@@ -1,9 +1,9 @@
-package com.recipe.android.recipeapp.src.fridge.AddDirect.models
+package com.recipe.android.recipeapp.src.fridge.pickIngredient.models
 
 
 import com.google.gson.annotations.SerializedName
 
-data class IngredientResponse(
+data class PostIngredientsResponse(
     @SerializedName("code")
     val code: Int,
     @SerializedName("isSuccess")
@@ -11,5 +11,5 @@ data class IngredientResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("result")
-    val result: List<IngredientResult>
+    val result: List<PostIngredientsResult>
 )

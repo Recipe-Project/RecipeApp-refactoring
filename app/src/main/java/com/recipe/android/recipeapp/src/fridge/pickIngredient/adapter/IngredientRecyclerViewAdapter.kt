@@ -1,13 +1,15 @@
-package com.recipe.android.recipeapp.src.fridge.AddDirect.adapter
+package com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.ItemIngredientBinding
-import com.recipe.android.recipeapp.src.fridge.AddDirect.models.Ingredient
-import com.recipe.android.recipeapp.src.fridge.AddDirect.viewHolder.IngredientViewHolder
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.viewHolder.IngredientViewHolder
 
-class IngredientRecyclerViewAdapter : RecyclerView.Adapter<IngredientViewHolder>() {
+class IngredientRecyclerViewAdapter(val view: PickIngredientActivityView) :
+    RecyclerView.Adapter<IngredientViewHolder>() {
 
     var ingredientList = ArrayList<Ingredient>()
 
@@ -23,6 +25,9 @@ class IngredientRecyclerViewAdapter : RecyclerView.Adapter<IngredientViewHolder>
 
     override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
         holder.bindWithView(ingredientList[position])
+        holder.itemView.setOnClickListener {
+            view.pickItem(ingredientList[position])
+        }
     }
 
     override fun getItemCount(): Int {

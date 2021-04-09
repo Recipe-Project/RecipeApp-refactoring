@@ -2,8 +2,6 @@ package com.recipe.android.recipeapp.src.fridge
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -11,8 +9,7 @@ import android.view.animation.AnimationUtils
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentFridgeBinding
-import com.recipe.android.recipeapp.src.MainActivity
-import com.recipe.android.recipeapp.src.fridge.AddDirect.AddDirectActivity
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,12 +30,13 @@ class FridgeFragment : BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding
         fab_open = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close)
 
+        // 수정 필요 - 애니메이션
         binding.fabAdd.setOnClickListener {
             fabAnim()
         }
 
         binding.fabAddDirect.setOnClickListener {
-            val intent = Intent(requireContext(), AddDirectActivity::class.java)
+            val intent = Intent(requireContext(), PickIngredientActivity::class.java)
             startActivity(intent)
         }
 

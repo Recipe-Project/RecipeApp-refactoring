@@ -1,19 +1,22 @@
-package com.recipe.android.recipeapp.src.fridge.AddDirect.adapter
+package com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.FragmentCategoryBinding
-import com.recipe.android.recipeapp.src.fridge.AddDirect.models.IngredientResult
-import com.recipe.android.recipeapp.src.fridge.AddDirect.viewHolder.IngredientAllViewHolder
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.viewHolder.IngredientAllViewHolder
 
-class IngredientAllRecyclerViewAdapter: RecyclerView.Adapter<IngredientAllViewHolder>() {
+class IngredientAllRecyclerViewAdapter(val view: PickIngredientActivityView) :
+    RecyclerView.Adapter<IngredientAllViewHolder>() {
 
     var ingredientsList = ArrayList<IngredientResult>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientAllViewHolder {
         return IngredientAllViewHolder(
-            FragmentCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            FragmentCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            view
         )
     }
 

@@ -34,7 +34,7 @@
         <activity android:name=".src.MainActivity" />
 
         <!-- 냉장고 - 재료 직접 추가 -->
-        <activity android:name=".src.fridge.AddDirect.AddDirectActivity"/>
+        <activity android:name=".src.fridge.pickIngredient.PickIngredientActivity"/>
 
         <!-- 로그인 -->
         <activity android:name=".src.signIn.SignInActivity"/>

@@ -1,17 +1,18 @@
-package com.recipe.android.recipeapp.src.fridge.AddDirect.adapter
+package com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter
 
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.recipe.android.recipeapp.src.fridge.AddDirect.fragment.AllCategoryFragment
-import com.recipe.android.recipeapp.src.fridge.AddDirect.fragment.CategoryFragment
-import com.recipe.android.recipeapp.src.fridge.AddDirect.models.Ingredient
-import com.recipe.android.recipeapp.src.fridge.AddDirect.models.IngredientResult
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment.AllCategoryFragment
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment.CategoryFragment
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 
 private const val NUM_PAGES = 8
 
-class IngredientCategoryAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
+class IngredientCategoryAdapter(fa: FragmentActivity, val view: PickIngredientActivityView) :
+    FragmentStateAdapter(fa) {
 
     val TAG = "IngredientCategoryAdapter"
 
@@ -23,9 +24,9 @@ class IngredientCategoryAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) 
         Log.d(TAG, "IngredientCategoryAdapter - createFragment() : $position")
         // 탭 설정
         return if (position != 0) {
-            CategoryFragment(ingredients[position-1])
+            CategoryFragment(ingredients[position - 1], view)
         } else {
-            AllCategoryFragment(ingredients)
+            AllCategoryFragment(ingredients, view)
         }
     }
 
