@@ -60,6 +60,7 @@
             android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
             android:theme="@style/dialogTheme" /> <!-- 스크랩 레시피 -->
         <activity android:name=".src.scrapRecipe.ScrapRecipeActivity" />
+
     </application>
 
 </manifest>

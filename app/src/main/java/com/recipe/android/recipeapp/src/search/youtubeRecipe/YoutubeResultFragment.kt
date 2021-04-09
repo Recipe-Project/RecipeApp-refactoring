@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.recipe.android.recipeapp.BuildConfig
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentYoutubeResultBinding
@@ -31,7 +32,7 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
         binding.youtubeResultFragRecylerview.adapter = adapter
 
         // 최초로 데이터 load
-        YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, "AIzaSyDaOCHzG0d6QKRb32SeVQ15cpaDmPNGfmc", keyword)
+        YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, BuildConfig.GOOGLE_API_KEY, keyword)
     }
 
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
