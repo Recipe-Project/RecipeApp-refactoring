@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.receipt
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -15,12 +16,20 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.*
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityReceiptBinding
+import com.recipe.android.recipeapp.src.receipt.`interface`.ReceiptView
+import com.recipe.android.recipeapp.src.receipt.adapter.ReceiptRecyclerviewAdapter
+import com.recipe.android.recipeapp.src.receipt.models.BuyItem
+import com.recipe.android.recipeapp.src.receipt.models.GetAllReceiptResponse
+import com.recipe.android.recipeapp.src.receipt.models.PostNewReceiptRequest
+import com.recipe.android.recipeapp.src.receipt.models.PostNewReceiptResponse
 import gun0912.tedimagepicker.builder.TedImagePicker
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBinding::inflate) {
+class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBinding::inflate), ReceiptView {
 
     val TAG = "ReceiptActivity"
     lateinit var bitmap : Bitmap
@@ -29,6 +38,8 @@ class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // 영수증 전체 조회 api 호출
+        ReceiptService(this).tryGetAllReceipt()
 
         // 영수증 입력을 위해 카메라 및 앫범 실행
         binding.inputReceiptBtn.setOnClickListener {
@@ -98,8 +109,27 @@ class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBind
                     val annotation = task.result!!.asJsonArray[0].asJsonObject["fullTextAnnotation"].asJsonObject
                     val result = annotation["text"].asString
                     Log.d(TAG, result)
+
+                    // 영수증 입력 api 호출
+                    addReceipt()
+
+                    // 영수증 전체 조회 api 호출
+                    ReceiptService(this).tryGetAllReceipt()
                 }
             }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun addReceipt() {
+        val calendar = Calendar.getInstance().time
+        val today = SimpleDateFormat("yy.MM.dd").format(calendar)
+
+        val list = arrayListOf<BuyItem>()
+        list.add(BuyItem("오이"))
+        list.add(BuyItem("당근"))
+
+        val request = PostNewReceiptRequest(title = "Emart", receiptDate = today, buyList = list)
+        ReceiptService(this).tryPostNewReceipt(request)
     }
 
     private fun scaleBitmapDown(bitmap: Bitmap, maxDimension: Int): Bitmap {
@@ -135,8 +165,23 @@ class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBind
             }
     }
 
-    override fun onStart() {
-        super.onStart()
+
+    override fun onPostNewReceiptSuccess(response: PostNewReceiptResponse) {
+
+    }
+
+    override fun onPostNewReceiptFailure(message: String) {
+
+    }
+
+    override fun onGetAllReceiptSuccess(response: GetAllReceiptResponse) {
+        val receiptList = response.result
+
+        val adapter = ReceiptRecyclerviewAdapter(receiptList)
+        binding.receiptActivityRecyclerview.adapter = adapter
+    }
+
+    override fun onGetAllReceiptFailure(message: String) {
 
     }
 }
