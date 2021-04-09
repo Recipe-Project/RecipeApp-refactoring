@@ -18,23 +18,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp">
+        <activity android:name=".src.receipt.ReceiptActivity"/>
         <activity
             android:name=".src.search.publicRecipe.RecipeDetailActivity"
-            android:theme="@style/Theme.RecipeApp.NoActionBar"/>
-
-        <!-- 스플래시 -->
+            android:theme="@style/Theme.RecipeApp.NoActionBar" /> <!-- 스플래시 -->
         <activity android:name=".src.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- 메인 -->
-        <activity android:name=".src.MainActivity" />
-        <!-- 로그인 -->
-        <activity android:name=".src.signIn.SignInActivity"/>
-        <!-- 카카오 로그인 -->
+        </activity> <!-- 메인 -->
+        <activity android:name=".src.MainActivity" /> <!-- 로그인 -->
+        <activity android:name=".src.signIn.SignInActivity" /> <!-- 카카오 로그인 -->
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -47,28 +43,23 @@
                     android:host="oauth"
                     android:scheme="kakao${KAKAO_API_KEY}" />
             </intent-filter>
-        </activity>
-        <!-- 마이페이지 -->
-
+        </activity> <!-- 마이페이지 -->
         <activity android:name=".src.setting.SettingActivity" />
         <activity
             android:name=".src.setting.dialog.DeleteIdDialog"
-            android:theme="@style/dialogTheme" />
-
-        <!-- 나만의 레시피 -->
+            android:theme="@style/dialogTheme" /> <!-- 나만의 레시피 -->
         <activity android:name=".src.myRecipe.MyRecipeActivity" />
-        <activity android:name=".src.myRecipe.myRecipeCreate.MyRecipeCreateActivity"
-            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".src.myRecipe.myRecipeCreate.MyRecipeCreateActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".src.myRecipe.myRecipeDetail.MyRecipeDetailActivity" />
-        <activity android:name=".src.myRecipe.myRecipeModify.MyRecipeModifyActivity"
+        <activity
+            android:name=".src.myRecipe.myRecipeModify.MyRecipeModifyActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
-            android:theme="@style/dialogTheme" />
-
-        <!-- 스크랩 레시피 -->
-        <activity android:name=".src.scrapRecipe.ScrapRecipeActivity"/>
-
+            android:theme="@style/dialogTheme" /> <!-- 스크랩 레시피 -->
+        <activity android:name=".src.scrapRecipe.ScrapRecipeActivity" />
     </application>
 
 </manifest>

@@ -31,7 +31,7 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
         binding.youtubeResultFragRecylerview.adapter = adapter
 
         // 최초로 데이터 load
-        YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, "AIzaSyBFZkXxJXrTs-eGruMKCGsA8cn7iJDkwuI", keyword)
+        YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, "AIzaSyDaOCHzG0d6QKRb32SeVQ15cpaDmPNGfmc", keyword)
     }
 
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {

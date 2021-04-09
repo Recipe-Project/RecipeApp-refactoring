@@ -14,6 +14,10 @@
     <string name="recipe">레시피</string>
     <string name="myRecipe">나만의 레시피</string>
 
+    <!-- 영수증 -->
+    <string name="input_receipt">영수증 입력</string>
+    <string name="receipt_activity_default_tv">오늘 장본 그 물건\n영수증으로 편하게 등록해보세요!</string>
+
     <!-- 에러 메시지 -->
     <string name="networkError">네트워크 연결 상태가 원활하지 않습니다.</string>
 
@@ -56,7 +60,6 @@
     <string name="over_hundred">100+</string>
 
 
-
     <!-- 설정 -->
     <string name="help">고객지원</string>
     <string name="versionInfo">버전정보</string>
@@ -73,7 +76,6 @@
     <string name="no">아니오</string>
 
     <!-- 스크랩 레시피 -->
-
 
 
 </resources>
