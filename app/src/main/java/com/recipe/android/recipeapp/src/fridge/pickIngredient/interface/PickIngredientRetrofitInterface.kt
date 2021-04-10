@@ -17,8 +17,8 @@ interface PickIngredientRetrofitInterface {
     ): Call<IngredientResponse>
 
     // 재료선택으로 냉장고 바구니 담기
-    @POST("/ingredients")
+    @POST("/fridges/basket")
     fun postIngredients(
-        @Body ingredientList : List<Int>
+        @Body param: HashMap<String, Any>
     ): Call<PostIngredientsResponse>
 }

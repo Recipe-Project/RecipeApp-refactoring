@@ -39,11 +39,13 @@ class PickIngredientService(val view: PickIngredientActivityView) {
         })
     }
 
-    // 냉장고 바구니 담기
+    // 재료 선택으로 냉장고 바구니 담기
     fun postIngredients(ingredientList: ArrayList<Int>) {
+        val param = HashMap<String, Any>()
+        param["ingredientList"] = ingredientList as List<Int>
         val addDirectRetrofitInterface =
             ApplicationClass.sRetrofit.create(PickIngredientRetrofitInterface::class.java)
-        addDirectRetrofitInterface.postIngredients(ingredientList).enqueue(object :
+        addDirectRetrofitInterface.postIngredients(param).enqueue(object :
             Callback<PostIngredientsResponse> {
             override fun onResponse(
                 call: Call<PostIngredientsResponse>,

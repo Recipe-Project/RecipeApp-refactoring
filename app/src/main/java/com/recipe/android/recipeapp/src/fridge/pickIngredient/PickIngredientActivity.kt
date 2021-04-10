@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.fridge.pickIngredient
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityAddDirectBinding
+import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientCategoryAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.PickIngredientRecyclerViewAdapter
@@ -65,6 +67,8 @@ class PickIngredientActivity :
                 pickIdxList.add(it.ingredientIdx)
             }
             PickIngredientService(this).postIngredients(pickIdxList)
+            val intent = Intent(this, BasketActivity::class.java)
+            startActivity(intent)
         }
 
     }

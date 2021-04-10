@@ -57,6 +57,13 @@
     <string name="product">가공/유제품</string>
     <string name="searchIngredient">재료를 검색하세요.</string>
     <string name="next">다음</string>
+
+    <!-- 나의 냉장고 / 냉장고 바구니 -->
+    <string name="basket">냉장고 바구니</string>
+    <string name="basketExplain">유통기한과 보관방법을 선택해주세요!</string>
+    <string name="refrigeration">냉장</string>
+    <string name="frozen">냉동</string>
+    <string name="roomTemperature">실온</string>
     
 
     <!-- 레시피 검색 -->
