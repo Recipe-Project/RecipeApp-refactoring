@@ -10,6 +10,8 @@ import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchBinding
 import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordView
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter
+import com.recipe.android.recipeapp.src.search.models.PopularKeywordResponse
+import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 
 
@@ -57,6 +59,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         SearchService(this).getPublicRecipe(keyword)
 
         RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색어 리스트에 검색어 추가
+        SearchService(this).postKeyword(keyword) // 검색어 서버로 전송
     }
 
     override fun onGetPublicRecipeSuccess(response: PublicRecipeResponse) {
@@ -69,4 +72,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     override fun onGetPublicRecipeFailure(message: String) {
     }
 
+    override fun onGetPopularKeywordSuccess(response: PopularKeywordResponse) {
+        // Nothing
+    }
+
+    override fun onGetPopularKeywordFailure(message: String) {
+        // Nothing
+    }
+
+    override fun onPostKeywordSuccess(response: PostKeywordResponse) {
+
+    }
+
+    override fun onPostKeywordFailure(message: String) {
+
+    }
 }

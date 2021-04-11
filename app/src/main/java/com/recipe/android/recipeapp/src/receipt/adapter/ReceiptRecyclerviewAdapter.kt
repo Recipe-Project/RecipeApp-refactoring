@@ -25,6 +25,12 @@ class ReceiptRecyclerviewAdapter(private val receiptList : ArrayList<GetAllRecei
         holder.title.text = receiptList[position].title
         holder.date.text = receiptList[position].receiptDate
 
+        if(receiptMoreBtnItemClick != null) {
+            holder.moreBtn.setOnClickListener {
+                receiptMoreBtnItemClick?.onClick(it, position)
+            }
+        }
+
     }
 
     override fun getItemCount(): Int = receiptList.size

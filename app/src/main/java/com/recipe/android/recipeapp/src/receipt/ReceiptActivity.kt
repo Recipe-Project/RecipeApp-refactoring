@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.ktx.Firebase
@@ -18,6 +19,7 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityReceiptBinding
 import com.recipe.android.recipeapp.src.receipt.`interface`.ReceiptView
 import com.recipe.android.recipeapp.src.receipt.adapter.ReceiptRecyclerviewAdapter
+import com.recipe.android.recipeapp.src.receipt.dialog.ReceiptDialog
 import com.recipe.android.recipeapp.src.receipt.models.BuyItem
 import com.recipe.android.recipeapp.src.receipt.models.GetAllReceiptResponse
 import com.recipe.android.recipeapp.src.receipt.models.PostNewReceiptRequest
@@ -107,7 +109,7 @@ class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBind
                     Log.d(TAG, "ReceiptActivity - Text Recognition Success")
 
                     val annotation = task.result!!.asJsonArray[0].asJsonObject["fullTextAnnotation"].asJsonObject
-                    val result = annotation["text"].asString
+                    val result = annotation["text"].toString()
                     Log.d(TAG, result)
 
                     // 영수증 입력 api 호출
@@ -179,6 +181,11 @@ class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBind
 
         val adapter = ReceiptRecyclerviewAdapter(receiptList)
         binding.receiptActivityRecyclerview.adapter = adapter
+        adapter.receiptMoreBtnItemClick = object : ReceiptRecyclerviewAdapter.ReceiptMoreBtnItemClick{
+            override fun onClick(view: View, position: Int) {
+                ReceiptDialog(this@ReceiptActivity).show()
+            }
+        }
     }
 
     override fun onGetAllReceiptFailure(message: String) {

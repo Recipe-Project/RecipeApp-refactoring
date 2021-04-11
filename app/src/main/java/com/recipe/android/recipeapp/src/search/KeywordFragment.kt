@@ -3,12 +3,14 @@ package com.recipe.android.recipeapp.src.search
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.google.api.services.youtube.YouTube
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentKeywordBinding
 import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordView
+import com.recipe.android.recipeapp.src.search.adapter.PopularKeywordRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter
+import com.recipe.android.recipeapp.src.search.models.PopularKeywordResponse
+import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 
 class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBinding::bind, R.layout.fragment_keyword), SearchKeywordView {
@@ -33,6 +35,7 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
                     keyword = RecentKeywordRecyclerviewAdapter.list[position]
                     SearchService(this@KeywordFragment).getPublicRecipe(keyword)
                     RecentKeywordRecyclerviewAdapter.list.add(keyword)
+                    SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
                 }
             }
 
@@ -49,8 +52,8 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
             binding.keywordFragRecentKeywordRecylerview.visibility = View.GONE
         }
 
-        // TODO
-        // 인기검색어 데이터 조회 후, adapter 연결
+        // 인기검색어 조회
+        SearchService(this).getPopularKeyword()
     }
 
     override fun onGetPublicRecipeSuccess(response: PublicRecipeResponse) {
@@ -61,6 +64,33 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
     }
 
     override fun onGetPublicRecipeFailure(message: String) {
+
+    }
+
+    override fun onGetPopularKeywordSuccess(response: PopularKeywordResponse) {
+        val result = response.result
+        val adapter = PopularKeywordRecyclerviewAdapter(result)
+        binding.keywordFragPopularKeywordRecylerview.adapter = adapter
+        adapter.popularKeywordItemClick = object : PopularKeywordRecyclerviewAdapter.PopularKeywordItemClick {
+            override fun onClick(view: View, position: Int) {
+                keyword = result[position].bestKeyword
+                SearchService(this@KeywordFragment).getPublicRecipe(keyword)
+                RecentKeywordRecyclerviewAdapter.list.add(keyword)
+                SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
+            }
+        }
+
+    }
+
+    override fun onGetPopularKeywordFailure(message: String) {
+
+    }
+
+    override fun onPostKeywordSuccess(response: PostKeywordResponse) {
+
+    }
+
+    override fun onPostKeywordFailure(message: String) {
 
     }
 }

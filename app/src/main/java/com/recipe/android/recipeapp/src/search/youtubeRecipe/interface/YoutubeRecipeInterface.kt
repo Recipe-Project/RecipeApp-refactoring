@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.youtubeRecipe.`interface`
+ package com.recipe.android.recipeapp.src.search.youtubeRecipe.`interface`
 
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeResponse
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeScrapRequest

@@ -50,7 +50,6 @@ class YoutubeRecipeService(val view : YoutubeRecipeView) {
             override fun onFailure(call: Call<YoutubeRecipeScrapResponse>, t: Throwable) {
                 Log.d(TAG, "YoutubeRecipeService - onFailure() : 유투브레시피 스크랩 실패")
                 view.onPostYoutubeRecipeScrapFailure(t.message ?: "통신오류")
-
             }
         })
     }
