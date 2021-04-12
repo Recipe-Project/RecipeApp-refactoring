@@ -5,6 +5,7 @@
     <string name="fridge">냉장고</string>
     <string name="recipeSearch">레시피검색</string>
     <string name="myPage">마이페이지</string>
+    <string name="emptyFridge">냉장고파먹기</string>
 
     <string name="scrapRecipe">스크랩 레시피</string>
     <string name="view_all">전체보기</string>

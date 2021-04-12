@@ -23,6 +23,7 @@
         app:itemIconTint="@drawable/menu_selector_color_icon"
         app:itemTextColor="@drawable/menu_selector_color_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
