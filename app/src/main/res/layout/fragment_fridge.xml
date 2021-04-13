@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fridgeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -79,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="20dp" />
+                app:layout_constraintGuide_end="391dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_right"
@@ -92,42 +91,80 @@
 
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bg_floating"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_direct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_create"
-        app:fabCustomSize="48dp"
+        android:tint="@color/white"
+        android:visibility="invisible"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="56dp"
         app:layout_constraintBottom_toTopOf="@+id/fab_add"
         app:layout_constraintEnd_toEndOf="@+id/fab_add"
-        app:layout_constraintStart_toStartOf="@+id/fab_add" >
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        app:layout_constraintStart_toStartOf="@+id/fab_add" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_add_direct"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/addDirect"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_add_direct"
+        app:layout_constraintEnd_toStartOf="@+id/fab_add_direct"
+        app:layout_constraintTop_toTopOf="@+id/fab_add_direct" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_recipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="end|bottom"
         android:layout_marginBottom="8dp"
-        app:fabCustomSize="48dp"
-        android:src="@drawable/ic_add"
         android:backgroundTint="@color/white"
+        android:focusable="true"
+        android:src="@drawable/ic_recipe_phone"
+        android:tint="@color/white"
+        android:visibility="invisible"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="56dp"
         app:layout_constraintBottom_toTopOf="@+id/fab_add_direct"
         app:layout_constraintEnd_toEndOf="@+id/fab_add_direct"
         app:layout_constraintStart_toStartOf="@+id/fab_add_direct" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_add_recipe"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/inputRecipe"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_add_recipe"
+        app:layout_constraintEnd_toStartOf="@+id/fab_add_recipe"
+        app:layout_constraintTop_toTopOf="@+id/fab_add_recipe" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="77dp"
+        android:focusable="true"
+        android:src="@drawable/ic_add"
+        android:tint="@color/sky_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

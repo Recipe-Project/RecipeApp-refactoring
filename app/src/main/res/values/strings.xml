@@ -55,8 +55,16 @@
     <string name="aquaticProducts">수산물</string>
     <string name="seasoning">조미료</string>
     <string name="product">가공/유제품</string>
+    <string name="etc">기타</string>
     <string name="searchIngredient">재료를 검색하세요.</string>
     <string name="next">다음</string>
+
+    <!-- 나의 냉장고 / 직접입력 -->
+    <string name="direct">직접입력</string>
+    <string name="inputIngredient">재료를 입력하세요</string>
+    <string name="category">카테고리</string>
+    <string name="addIngredient">재료 추가하기</string>
+    <string name="pickIcon">재료 아이콘 선택</string>
 
     <!-- 나의 냉장고 / 냉장고 바구니 -->
     <string name="basket">냉장고 바구니</string>
@@ -94,6 +102,9 @@
     <string name="no">아니오</string>
 
     <!-- 스크랩 레시피 -->
+
+    <!-- 영수증 입력 -->
+    <string name="inputRecipe">영수증 입력</string>
 
 
 

@@ -12,7 +12,8 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
-import com.recipe.android.recipeapp.databinding.ActivityAddDirectBinding
+import com.recipe.android.recipeapp.databinding.ActivityPickIngredientBinding
+import com.recipe.android.recipeapp.src.fridge.addDirect.AddDirectActivity
 import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientCategoryAdapter
@@ -23,7 +24,7 @@ import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientR
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
 
 class PickIngredientActivity :
-    BaseActivity<ActivityAddDirectBinding>(ActivityAddDirectBinding::inflate),
+    BaseActivity<ActivityPickIngredientBinding>(ActivityPickIngredientBinding::inflate),
     PickIngredientActivityView {
 
     val TAG = "AddDirectActivity"
@@ -68,6 +69,13 @@ class PickIngredientActivity :
             }
             PickIngredientService(this).postIngredients(pickIdxList)
             val intent = Intent(this, BasketActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 직접 입력 액티비티 이동
+        binding.btnDirectAdd.setOnClickListener{
+            val intent = Intent(this, AddDirectActivity::class.java)
+            intent.putExtra("ingredientList", ingredients)
             startActivity(intent)
         }
 

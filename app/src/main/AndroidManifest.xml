@@ -36,6 +36,7 @@
         <!-- 냉장고 - 재료 선택 -->
         <activity android:name=".src.fridge.pickIngredient.PickIngredientActivity"/>
         <activity android:name=".src.fridge.basket.BasketActivity"/>
+        <activity android:name=".src.fridge.addDirect.AddDirectActivity"/>
 
         <!-- 로그인 -->
         <activity android:name=".src.signIn.SignInActivity"/>

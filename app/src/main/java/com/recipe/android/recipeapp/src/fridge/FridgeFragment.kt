@@ -2,6 +2,8 @@ package com.recipe.android.recipeapp.src.fridge
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -13,51 +15,55 @@ import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActi
 import java.text.SimpleDateFormat
 import java.util.*
 
-class FridgeFragment : BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding::bind, R.layout.fragment_fridge) {
+class FridgeFragment :
+    BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding::bind, R.layout.fragment_fridge) {
 
     // fab
-    lateinit var fab_open: Animation
-    lateinit var fab_close: Animation
-    var isFabOpen: Boolean = false
+    var isClicked: Boolean = false
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_open)
+    }
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_close)
+    }
+    private val fromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim)
+    }
+    private val toBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setCurrentDay()
 
-
-        // floating action button
-        fab_open = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
-        fab_close = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close)
-
-        // 수정 필요 - 애니메이션
+        // + 버튼 클릭
         binding.fabAdd.setOnClickListener {
-            fabAnim()
+            setVisibility(isClicked)
+            setFabAnim(isClicked)
+            isClicked = !isClicked
         }
 
+        binding.bgFloating.setOnClickListener {
+            setVisibility(isClicked)
+            setFabAnim(isClicked)
+            isClicked = !isClicked
+        }
+
+        // 직접입력 버튼 클릭
         binding.fabAddDirect.setOnClickListener {
             val intent = Intent(requireContext(), PickIngredientActivity::class.java)
             startActivity(intent)
         }
 
-    }
+        // 영수증 입력 버튼 클릭
+        binding.fabAddRecipe.setOnClickListener {
 
-    private fun fabAnim(){
-        if (isFabOpen) {
-            binding.fabAddDirect.startAnimation(fab_close)
-            binding.fabAddRecipe.startAnimation(fab_close)
-            binding.fabAddDirect.isClickable = false
-            binding.fabAddRecipe.isClickable = false
-            isFabOpen = false
-        } else {
-            binding.fabAddDirect.startAnimation(fab_open)
-            binding.fabAddRecipe.startAnimation(fab_open)
-            binding.fabAddDirect.isClickable = true
-            binding.fabAddRecipe.isClickable = true
-            isFabOpen = true
         }
-    }
 
+    }
 
     @SuppressLint("SimpleDateFormat")
     private fun setCurrentDay() {
@@ -65,5 +71,35 @@ class FridgeFragment : BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding
 
         val today = SimpleDateFormat("yy/MM/dd").format(calendar)
         binding.fridgeFragDateTv.text = today
+    }
+
+    private fun setFabAnim(isClicked: Boolean) {
+        if (!isClicked) {
+            binding.fabAddDirect.startAnimation(fromBottom)
+            binding.fabAddRecipe.startAnimation(fromBottom)
+            binding.fabAdd.startAnimation(rotateOpen)
+            binding.bgFloating.setBackgroundResource(R.drawable.blur_dark)
+            binding.bgFloating.visibility = View.VISIBLE
+        } else {
+            binding.fabAddDirect.startAnimation(toBottom)
+            binding.fabAddRecipe.startAnimation(toBottom)
+            binding.fabAdd.startAnimation(rotateClose)
+            binding.bgFloating.setBackgroundColor(Color.TRANSPARENT)
+            binding.bgFloating.visibility = View.GONE
+        }
+    }
+
+    private fun setVisibility(isClicked: Boolean) {
+        if (!isClicked) {
+            binding.fabAddDirect.visibility = View.VISIBLE
+            binding.fabAddRecipe.visibility = View.VISIBLE
+            binding.tvAddDirect.visibility = View.VISIBLE
+            binding.tvAddRecipe.visibility = View.VISIBLE
+        } else {
+            binding.fabAddDirect.visibility = View.INVISIBLE
+            binding.fabAddRecipe.visibility = View.INVISIBLE
+            binding.tvAddDirect.visibility = View.INVISIBLE
+            binding.tvAddRecipe.visibility = View.INVISIBLE
+        }
     }
 }
