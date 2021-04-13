@@ -19,7 +19,8 @@ interface YoutubeRecipeInterface {
         @Query("type") type : String,
         @Query("maxResults") maxResults : Int,
         @Query("key") key : String,
-        @Query("q") q : String
+        @Query("q") q : String,
+        @Query("pageToken") pageToken : String
     ):Call<YoutubeRecipeResponse>
 
     @POST("/scraps/youtube")

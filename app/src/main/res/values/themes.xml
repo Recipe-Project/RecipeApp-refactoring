@@ -30,6 +30,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/translate_up</item>
+        <item name="android:windowExitAnimation">@anim/translate_down</item>
+    </style>
+
 
     <style name="Theme.RecipeApp.NoActionBar">
         <item name="windowActionBar">false</item>

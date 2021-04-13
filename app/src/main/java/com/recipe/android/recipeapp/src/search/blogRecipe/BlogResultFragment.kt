@@ -45,7 +45,6 @@ class BlogResultFragment(private val keyword : String)
                     if (!binding.blogResultFragRecylerview.canScrollVertically(1)) {
                         if(layoutManager.itemCount == lastVisibleItem) { // +1 해줘야 작동 시작...근데 지금 좀 이상함
                             loadMoreData()
-                            adapter.setLoadingView(false)
                         }
                     }
                 }

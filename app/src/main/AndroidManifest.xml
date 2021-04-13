@@ -29,8 +29,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- 메인 -->
-        <activity android:name=".src.MainActivity" /> <!-- 로그인 -->
-        <activity android:name=".src.signIn.SignInActivity" /> <!-- 카카오 로그인 -->
+        <activity android:name=".src.MainActivity" />
+        <activity android:name=".src.signIn.SignInActivity" />
+
+        <!-- 냉장고 - 재료 선택 -->
+        <activity android:name=".src.fridge.pickIngredient.PickIngredientActivity"/>
+        <activity android:name=".src.fridge.basket.BasketActivity"/>
+        <activity android:name=".src.fridge.addDirect.AddDirectActivity"/>
+
+
+        <!-- 카카오 로그인 -->
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

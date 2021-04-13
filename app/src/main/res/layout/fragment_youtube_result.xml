@@ -41,5 +41,4 @@
             app:layout_constraintTop_toBottomOf="@id/youtube_frag_item_cnt"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.core.widget.NestedScrollView>
