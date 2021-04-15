@@ -40,18 +40,6 @@ class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 영수증 전체 조회 api 호출
-        ReceiptService(this).tryGetAllReceipt()
-
-        // 영수증 입력을 위해 카메라 및 앫범 실행
-        binding.inputReceiptBtn.setOnClickListener {
-            TedImagePicker.with(this).start { uri ->  
-                Log.d(TAG, uri.toString())
-
-                recognizeReceipt(uri)
-            }
-        }
-
         // 뒤로 가기 버튼 클릭
         binding.btnBack.setOnClickListener {
             finish()

@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemPublicResultFragRecyclerviewBinding
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResult
@@ -27,7 +29,7 @@ class PublicResultRecyclerviewAdapter(private val publicResultList : ArrayList<P
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
         holder.title.text = publicResultList[position].title
         holder.content.text = publicResultList[position].description
-        Glide.with(ApplicationClass.instance).load(publicResultList[position].thumbnail).into(holder.img)
+        Glide.with(ApplicationClass.instance).load(publicResultList[position].thumbnail).transform(CenterCrop(), RoundedCorners(5)).into(holder.img)
         holder.cnt.text = publicResultList[position].userScrapCnt.toString()
 
         // Click Event

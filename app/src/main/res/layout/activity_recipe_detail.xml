@@ -6,19 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".src.search.publicRecipe.RecipeDetailActivity">
+    tools:context=".src.search.publicRecipe.recipeDetail.RecipeDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="161dp"
         android:fitsSystemWindows="true"
         android:theme="@style/Theme.RecipeApp.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -34,11 +34,13 @@
                 app:popupTheme="@style/Theme.RecipeApp.PopupOverlay" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -137,7 +139,36 @@
                 tools:text="냉장고에 있는 김치로 얼큰한 김치찌개를 끓여보세요. 요리설명요리설명요리설명요리설명. 요리설명요리설"
                 android:layout_marginTop="31.5dp"/>
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/recipe_detail_activity_tablayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="@color/red"
+                app:tabIndicatorHeight="3dp"
+                app:tabTextAppearance="@style/Body1Style"
+                android:theme="@style/TabTheme"
+                app:tabIndicatorFullWidth="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recipe_detail_activity_summary_tv"
+                android:layout_marginTop="48dp"
+                android:layout_marginStart="8dp"
+                app:tabGravity="start"
+                app:tabMode="fixed" />
 
+            <View
+                android:id="@+id/middle_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_000"
+                app:layout_constraintTop_toBottomOf="@id/recipe_detail_activity_tablayout"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/recipe_detail_activity_viewpager"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintTop_toBottomOf="@id/middle_line" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_left"

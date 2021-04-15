@@ -51,6 +51,10 @@
 
     <!-- 나의 냉장고 / 홈 화면 -->
     <string name="my_fridge">나의 냉장고</string>
+    <string name="product_name">상품명</string>
+    <string name="product_cnt">수량</string>
+    <string name="freshness">신선도</string>
+    <string name="my_fridge_default_tv">나의 냉장고에 음식을 채워보세요!</string>
 
     <!-- 나의 냉장고 / 재료 선택 -->
     <string name="selectIngredient">재료선택</string>
@@ -90,6 +94,8 @@
     <string name="save_btn">저장하기</string>
     <string name="middle_dot">·</string>
     <string name="over_hundred">100+</string>
+    <string name="ingredients_exist">있는재료</string>
+    <string name="ingredients_no">없는재료</string>
 
 
     <!-- 설정 -->

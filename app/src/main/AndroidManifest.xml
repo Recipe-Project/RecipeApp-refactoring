@@ -20,7 +20,7 @@
         android:theme="@style/Theme.RecipeApp">
         <activity android:name=".src.receipt.ReceiptActivity"/>
         <activity
-            android:name=".src.search.publicRecipe.RecipeDetailActivity"
+            android:name=".src.search.publicRecipe.recipeDetail.RecipeDetailActivity"
             android:theme="@style/Theme.RecipeApp.NoActionBar" /> <!-- 스플래시 -->
         <activity android:name=".src.splash.SplashActivity">
             <intent-filter>

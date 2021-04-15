@@ -42,8 +42,12 @@ data class PublicRecipeIngredient(
     val recipeIngredientIdx: Int,
     @SerializedName("recipeIngredientName")
     val recipeIngredientName: String,
+    @SerializedName("recipeIngredientIcon")
+    val recipeIngredientIcon : String,
     @SerializedName("recipeIngredientCpcty")
-    val recipeIngredientCpcty: String
+    val recipeIngredientCpcty: String,
+    @SerializedName("inFridgeYN")
+    val inFridgeYN : String
 )
 
 data class PublicRecipeProcess(

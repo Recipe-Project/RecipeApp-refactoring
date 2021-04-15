@@ -8,6 +8,7 @@ import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentPublicResultBinding
 import com.recipe.android.recipeapp.src.search.publicRecipe.adapter.PublicResultRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResult
+import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
 
 class PublicResultFragment(private val publicResultList : ArrayList<PublicRecipeResult>) : BaseFragment<FragmentPublicResultBinding>(FragmentPublicResultBinding::bind, R.layout.fragment_public_result) {
 

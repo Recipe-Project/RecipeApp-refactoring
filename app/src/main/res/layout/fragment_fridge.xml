@@ -73,6 +73,111 @@
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/fridge_frag_title" />
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TabTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fridge_frag_dotted_line"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/red"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="scrollable"
+                app:tabTextAppearance="@style/TabTextStyle"
+                android:visibility="gone"/>
+            
+            <View
+                android:id="@+id/tab_layout_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_000"
+                app:layout_constraintTop_toBottomOf="@id/tab_layout"
+                android:visibility="gone"/>
+            
+            <LinearLayout
+                android:id="@+id/item_title_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tab_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_name"
+                    style="@style/Body1Style"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/freshness"
+                    style="@style/Body1Style"
+                    android:layout_marginEnd="16dp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_cnt"
+                    style="@style/Body1Style" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/gray_100"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/item_title_bar"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fridge_frag_default_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_fridge_default_tv"
+                style="@style/Body2Style"
+                android:textColor="@color/gray_200"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_title_bar"
+                android:layout_marginTop="65dp"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/item_title_bar"
+                android:visibility="gone"/>
+
+            <View
+                android:id="@+id/fridge_frag_dotted_line_bottom"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="64dp"
+                android:background="@drawable/dotted_lines_horizontal"
+                android:layerType="software"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/view_pager"
+                app:layout_goneMarginTop="145dp"/>
+
+            <View
+                android:id="@+id/fridge_frag_line_bottom"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="48dp"
+                android:background="@color/gray_300"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/fridge_frag_dotted_line_bottom" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_left"
                 android:layout_width="wrap_content"
@@ -152,6 +257,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/fab_add_recipe"
         app:layout_constraintEnd_toStartOf="@+id/fab_add_recipe"
         app:layout_constraintTop_toTopOf="@+id/fab_add_recipe" />
+
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
