@@ -28,6 +28,7 @@
     <style name="dialogTheme" parent="Theme.AppCompat.DayNight.Dialog">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/sky_blue</item>
     </style>
 
     <style name="DialogAnimation">

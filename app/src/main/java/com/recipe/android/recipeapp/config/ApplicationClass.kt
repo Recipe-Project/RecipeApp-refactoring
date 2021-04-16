@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.kakao.sdk.common.KakaoSdk
 import com.recipe.android.recipeapp.BuildConfig
 import okhttp3.OkHttpClient
@@ -37,6 +39,7 @@ class ApplicationClass: Application() {
         // SharedPreferences 키 값
         const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
         val USER_IDX = "USER_IDX"
+        val IC_DEFAULT = "IC_DEFAULT"
 
     }
 
@@ -56,6 +59,15 @@ class ApplicationClass: Application() {
 
         // 카카오 SDK 초기화
         KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
+
+        // 디폴트 아이콘 url
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+        storageRef.child("ic_ingredient_default.png").downloadUrl.addOnSuccessListener {
+            sSharedPreferences.edit().putString(IC_DEFAULT, it.toString()).apply()
+            Log.d(TAG, "ApplicationClass - onCreate() : ${sSharedPreferences.getString(IC_DEFAULT, "")}")
+        }
+
     }
 
 

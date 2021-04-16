@@ -44,13 +44,15 @@ class FridgeFragment :
             setVisibility(isClicked)
             setFabAnim(isClicked)
             isClicked = !isClicked
+
+            binding.bgFloating.setOnClickListener {
+                setVisibility(isClicked)
+                setFabAnim(isClicked)
+                isClicked = !isClicked
+            }
         }
 
-        binding.bgFloating.setOnClickListener {
-            setVisibility(isClicked)
-            setFabAnim(isClicked)
-            isClicked = !isClicked
-        }
+
 
         // 직접입력 버튼 클릭
         binding.fabAddDirect.setOnClickListener {

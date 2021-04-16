@@ -15,9 +15,22 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_pick_remove"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="8dp"
+            android:paddingStart="6dp"
+            android:paddingBottom="6dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_cancel_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_ingredient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
             android:layout_marginStart="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +63,12 @@
                 android:src="@drawable/ic_date" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_expired"
                 style="@style/Body2Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                tools:text="00.00.00 까지" />
+                android:text="00.00.00 까지" />
         </LinearLayout>
 
         <LinearLayout

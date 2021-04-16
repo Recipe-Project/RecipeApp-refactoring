@@ -9,8 +9,6 @@ import com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment.AllCatego
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment.CategoryFragment
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 
-private const val NUM_PAGES = 8
-
 class IngredientCategoryAdapter(fa: FragmentActivity, val view: PickIngredientActivityView) :
     FragmentStateAdapter(fa) {
 
@@ -18,7 +16,7 @@ class IngredientCategoryAdapter(fa: FragmentActivity, val view: PickIngredientAc
 
     private var ingredients = ArrayList<IngredientResult>()
 
-    override fun getItemCount(): Int = NUM_PAGES
+    override fun getItemCount(): Int = 7
 
     override fun createFragment(position: Int): Fragment {
         Log.d(TAG, "IngredientCategoryAdapter - createFragment() : $position")
