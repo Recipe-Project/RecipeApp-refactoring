@@ -9,10 +9,11 @@ import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentCategoryAllBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 
 class AllCategoryFragment(
-    val ingredients: ArrayList<IngredientResult>,
+    val ingredients: ArrayList<CategoryIngrediets>,
     val addview: PickIngredientActivityView
 ) : BaseFragment<FragmentCategoryAllBinding>(
     FragmentCategoryAllBinding::bind,

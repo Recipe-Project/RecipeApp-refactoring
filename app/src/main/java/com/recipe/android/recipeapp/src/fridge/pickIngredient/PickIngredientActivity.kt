@@ -24,10 +24,7 @@ import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientCategoryAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.PickIngredientRecyclerViewAdapter
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 
 class PickIngredientActivity :
     BaseActivity<ActivityPickIngredientBinding>(ActivityPickIngredientBinding::inflate),
@@ -43,7 +40,7 @@ class PickIngredientActivity :
     var seasoningCategoryItem = ArrayList<Ingredient>()
     var productCategoryItem = ArrayList<Ingredient>()
 
-    var ingredients = ArrayList<IngredientResult>()
+    var ingredients = ArrayList<CategoryIngrediets>()
 
     lateinit var pickIngredientRecyclerViewAdapter: PickIngredientRecyclerViewAdapter
     var pickIngredientRecyclerViewItemList = ArrayList<Ingredient>()
@@ -114,6 +111,12 @@ class PickIngredientActivity :
             true
         }
 
+        // 바구니 액티비티
+        binding.btnBasket.setOnClickListener {
+            val intent = Intent(this, BasketActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     // 재료조회 성공
@@ -129,7 +132,10 @@ class PickIngredientActivity :
         lateinit var ingredientCategoryAdapter: IngredientCategoryAdapter
 
         if (response.isSuccess) {
-            val ingredientResult = response.result
+
+            binding.tvBasketCnt.text = response.result.fridgeBasketCount.toString()
+
+            val ingredientResult = response.result.ingredients
 
             ingredients.clear()
             ingredientResult.forEach {

@@ -7,6 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment.AllCategoryFragment
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment.CategoryFragment
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 
 class IngredientCategoryAdapter(fa: FragmentActivity, val view: PickIngredientActivityView) :
@@ -14,7 +15,7 @@ class IngredientCategoryAdapter(fa: FragmentActivity, val view: PickIngredientAc
 
     val TAG = "IngredientCategoryAdapter"
 
-    private var ingredients = ArrayList<IngredientResult>()
+    private var ingredients = ArrayList<CategoryIngrediets>()
 
     override fun getItemCount(): Int = 7
 
@@ -28,7 +29,7 @@ class IngredientCategoryAdapter(fa: FragmentActivity, val view: PickIngredientAc
         }
     }
 
-    fun submitList(ingredients: ArrayList<IngredientResult>) {
+    fun submitList(ingredients: ArrayList<CategoryIngrediets>) {
         this.ingredients = ingredients
         notifyDataSetChanged()
     }

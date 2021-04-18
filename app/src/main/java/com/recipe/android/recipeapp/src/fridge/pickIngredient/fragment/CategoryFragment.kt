@@ -8,10 +8,11 @@ import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentCategoryBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientRecyclerViewAdapter
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 
-class CategoryFragment(val ingredientResult: IngredientResult, val addview: PickIngredientActivityView) :
+class CategoryFragment(val ingredientResult: CategoryIngrediets, val addview: PickIngredientActivityView) :
     BaseFragment<FragmentCategoryBinding>(
         FragmentCategoryBinding::bind,
         R.layout.fragment_category

@@ -7,10 +7,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class IngredientResult(
-    @SerializedName("ingredientCategoryIdx")
-    val ingredientCategoryIdx: Int,
-    @SerializedName("ingredientCategoryName")
-    val ingredientCategoryName: String,
-    @SerializedName("ingredientList")
-    val ingredientList: List<Ingredient>?
+    @SerializedName("fridgeBasketCount")
+    val fridgeBasketCount: Long,
+    @SerializedName("ingredients")
+    val ingredients: List<CategoryIngrediets>
 ): Parcelable

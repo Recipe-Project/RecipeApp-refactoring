@@ -11,5 +11,5 @@ data class IngredientResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("result")
-    val result: List<IngredientResult>
+    val result: IngredientResult
 )
