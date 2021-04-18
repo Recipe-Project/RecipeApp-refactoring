@@ -34,8 +34,10 @@ class IngredientRecyclerViewAdapter(val view: PickIngredientActivityView) :
         return ingredientList.size
     }
 
-    fun submitList(ingredientList: ArrayList<Ingredient>) {
-        this.ingredientList = ingredientList
+    fun submitList(ingredientList: ArrayList<Ingredient>?) {
+        if (ingredientList != null) {
+            this.ingredientList = ingredientList
+        }
         notifyDataSetChanged()
     }
 

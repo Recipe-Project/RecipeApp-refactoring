@@ -8,5 +8,5 @@ data class BasketResult(
     @SerializedName("ingredientCount")
     val ingredientCount: Int,
     @SerializedName("ingredientList")
-    val ingredientList: List<Ingredient>
+    val ingredientList: List<BasketIngredient>
 )

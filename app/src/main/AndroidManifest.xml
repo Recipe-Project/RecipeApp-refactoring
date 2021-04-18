@@ -18,24 +18,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp">
+
         <activity android:name=".src.receipt.ReceiptActivity"/>
         <activity
             android:name=".src.search.publicRecipe.recipeDetail.RecipeDetailActivity"
             android:theme="@style/Theme.RecipeApp.NoActionBar" /> <!-- 스플래시 -->
+
+        <!-- 스플래시 -->
         <activity android:name=".src.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 메인 -->
+        </activity>
+        <!-- 메인 -->
         <activity android:name=".src.MainActivity" />
+
+        <!-- 로그인 -->
         <activity android:name=".src.signIn.SignInActivity" />
 
         <!-- 냉장고 - 재료 선택 -->
-        <activity android:name=".src.fridge.pickIngredient.PickIngredientActivity"/>
-        <activity android:name=".src.fridge.basket.BasketActivity"/>
-        <activity android:name=".src.fridge.addDirect.AddDirectActivity"/>
+        <activity android:name=".src.fridge.pickIngredient.PickIngredientActivity" />
+        <activity android:name=".src.fridge.basket.BasketActivity" />
+        <activity android:name=".src.fridge.addDirect.AddDirectActivity" />
+        <activity
+            android:name=".src.fridge.dialog.DateDialog"
+            android:theme="@style/dialogTheme" />
+
 
 
         <!-- 카카오 로그인 -->
@@ -66,7 +76,11 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
+
             android:theme="@style/dialogTheme" /> <!-- 스크랩 레시피 -->
+
+
+        <!-- 스크랩 레시피 -->
         <activity android:name=".src.scrapRecipe.ScrapRecipeActivity" />
 
     </application>

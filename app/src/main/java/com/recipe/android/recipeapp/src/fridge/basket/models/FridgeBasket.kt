@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class FridgeBasket(
     @SerializedName("count")
-    val count: Int,
+    var count: Int,
     @SerializedName("expiredAt")
-    val expiredAt: String?,
+    var expiredAt: String?,
     @SerializedName("ingredientCategoryIdx")
     val ingredientCategoryIdx: Int,
     @SerializedName("ingredientIcon")
@@ -15,5 +15,5 @@ data class FridgeBasket(
     @SerializedName("ingredientName")
     val ingredientName: String,
     @SerializedName("storageMethod")
-    val storageMethod: String
+    var storageMethod: String
 )

@@ -76,6 +76,7 @@
     <string name="category">카테고리</string>
     <string name="addIngredient">재료 추가하기</string>
     <string name="pickIcon">재료 아이콘 선택</string>
+    <string name="directAddSuccess">냉장고에 재료가 입력되었습니다!</string>
 
     <!-- 나의 냉장고 / 냉장고 바구니 -->
     <string name="basket">냉장고 바구니</string>
@@ -83,6 +84,7 @@
     <string name="refrigeration">냉장</string>
     <string name="frozen">냉동</string>
     <string name="roomTemperature">실온</string>
+    <string name="fridgeSuccessMessage">냉장고에 재료를 담았습니다.</string>
     
 
     <!-- 레시피 검색 -->

@@ -66,6 +66,7 @@ class PickIngredientIconDialog(
             when (v?.id) {
                 binding.btnSave.id -> {
                     pickView.btnSaveClick(pickIconUrl)
+                    dismiss()
                 }
                 binding.btnCancel.id -> dismiss()
             }
