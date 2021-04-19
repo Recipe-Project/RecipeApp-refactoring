@@ -9,10 +9,7 @@ import com.recipe.android.recipeapp.databinding.FragmentEmptyFridgeBinding
 import com.recipe.android.recipeapp.src.emptyFridge.`interface`.EmptyFridgeView
 import com.recipe.android.recipeapp.src.emptyFridge.adapter.EmptyFridgeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResponse
-import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeResponse
-import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeDetailResponse
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
-import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapResponse
 
 class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmptyFridgeBinding::bind, R.layout.fragment_empty_fridge), EmptyFridgeView {
 
@@ -35,9 +32,9 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
 
     }
 
-    override fun getPublicRecipeDetail(recipeId : Int) {
+    override fun getPublicRecipeDetail(id : Int) {
         val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
-        intent.putExtra("index", recipeId)
+        intent.putExtra("index", id)
         requireActivity().startActivity(intent)
     }
 

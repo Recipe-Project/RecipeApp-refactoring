@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.fridge.receipt
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.ImageDecoder
@@ -16,6 +17,14 @@ import com.google.gson.*
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.DialogReceiptIngredientBinding
+import com.recipe.android.recipeapp.src.fridge.addDirect.AddDirectActivity
+import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.PostReceiptIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientDialogView
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientView
@@ -25,13 +34,16 @@ import com.recipe.android.recipeapp.src.fridge.receipt.models.PostReceiptIngredi
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
-class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(DialogReceiptIngredientBinding::inflate), ReceiptIngredientView, ReceiptIngredientDialogView {
+class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(DialogReceiptIngredientBinding::inflate), ReceiptIngredientView, ReceiptIngredientDialogView,
+    PickIngredientActivityView, PickIngredientIconDialog.PickIcon {
 
     val TAG = "ReceiptIngredientDialog"
     lateinit var bitmap : Bitmap
     private lateinit var functions: FirebaseFunctions
     var receiptIngredientList = ArrayList<PostReceiptIngredientResult>()
     lateinit var receiptIngredientRecyclerviewAdapter : ReceiptIngredientRecyclerviewAdapter
+    lateinit var pickIngredientIconDialog : PickIngredientIconDialog
+    var ingredientResult = ArrayList<CategoryIngrediets>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +56,14 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
         }
         recognizeReceipt(Uri.parse(uri))
 
+        // 전체 재료 조회
+        PickIngredientService(this).getIngredients("")
+
         binding.btnSave.setOnClickListener {
             // 냉장고 바구니로 이동
         }
+
+
     }
 
     private fun recognizeReceipt(uri: Uri) {
@@ -165,6 +182,42 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
     }
 
     override fun pickIngredient() {
+        pickIngredientIconDialog.show()
+    }
 
+    override fun onGetIngredientSuccess(response: IngredientResponse) {
+        if (response.isSuccess) {
+
+            // 전체 재료 리스트 for PickingIngredientIconDialog
+            response.result.ingredients.forEach{
+                ingredientResult.add(it)
+            }
+            pickIngredientIconDialog = PickIngredientIconDialog(
+                this,
+                this,
+                ingredientResult,
+                this
+            )
+        }
+    }
+
+    override fun onPostIngredientSuccess(response: PostIngredientsResponse) {
+
+    }
+
+    override fun pickItem(ingredient: Ingredient) {
+
+    }
+
+    override fun removePickItem(ingredient: Int) {
+
+    }
+
+    override fun addDirectFailure(message: String) {
+
+    }
+
+    override fun btnSaveClick(pickIconUrl: String?) {
+        TODO("Not yet implemented")
     }
 }
