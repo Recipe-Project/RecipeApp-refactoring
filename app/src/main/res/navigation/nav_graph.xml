@@ -11,6 +11,11 @@
         android:label="fragment_fridge"
         tools:layout="@layout/fragment_fridge" />
     <fragment
+        android:id="@+id/emptyFridgeFragment2"
+        android:name="com.recipe.android.recipeapp.src.emptyFridge.EmptyFridgeFragment"
+        android:label="EmptyFridgeFragment"
+        tools:layout="@layout/fragment_empty_fridge"/>
+    <fragment
         android:id="@+id/searchFragment"
         android:name="com.recipe.android.recipeapp.src.search.SearchFragment"
         android:label="fragment_search"
@@ -20,4 +25,5 @@
         android:name="com.recipe.android.recipeapp.src.myPage.MyPageFragment"
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" />
+
 </navigation>

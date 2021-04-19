@@ -1,32 +1,41 @@
-package com.recipe.android.recipeapp.src.search.publicRecipe
+package com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail
 
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
+import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityRecipeDetailBinding
+import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeScrapService
 import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeService
 import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeDetailView
 import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeScrapView
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeDetailResponse
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapResponse
+import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.adapter.RecipeDetailViewPagerAdapter
+import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.adapter.RecipeProcessRecyclerviewAdapter
 
 class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityRecipeDetailBinding::inflate), PublicRecipeDetailView, PublicRecipeScrapView {
 
     private var recipeId : Int = 0
+    private val tapTypeList = arrayListOf("재료", "레시피")
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
     val TAG = "RecipeDetailActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // 해당 레시피 인덱스 가져오기
         if(intent.hasExtra("index")) {
             val index = intent.getIntExtra("index", 0)
             PublicRecipeService(this).getPublicRecipeDetail(index)
@@ -35,6 +44,7 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        // 공공레시피 스크랩하기
         binding.recipeDetailActivityFavoriteTv.setOnClickListener {
             PublicRecipeScrapService(this).tryPostAddingScrap(PublicRecipeScrapRequest(recipeId = recipeId))
         }
@@ -43,19 +53,27 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
         }
 
 
-
     }
 
     override fun onGetPublicRecipeDetailSuccess(response: PublicRecipeDetailResponse) {
-        val result = response.result
-        binding.toolbarLayout.title = result.recipeName
-        binding.recipeDetailActivityCookingTimeTv.text = result.cookingTime
-        binding.recipeDetailActivityLevelTv.text = result.level
-        binding.recipeDetailActivitySummaryTv.text = result.summary
+        if(response.isSuccess) {
+            val result = response.result
+            binding.toolbarLayout.title = result.recipeName
+            binding.recipeDetailActivityCookingTimeTv.text = result.cookingTime
+            binding.recipeDetailActivityLevelTv.text = result.level
+            binding.recipeDetailActivitySummaryTv.text = result.summary
+            Glide.with(ApplicationClass.instance).load(result.thumbnail).transform(CenterCrop(), RoundedCorners(5)).into(binding.recipeDetailActivityThumbnail)
 
-        recipeId = result.recipeId // for test
+            recipeId = result.recipeId
 
-
+            // 재료, 레시피 뷰페이저 & 탭
+            viewPager = binding.recipeDetailActivityViewpager
+            tabLayout = binding.recipeDetailActivityTablayout
+            viewPager.adapter = RecipeDetailViewPagerAdapter(this, result.recipeIngredientList, result.recipeProcessList)
+            TabLayoutMediator(tabLayout, viewPager){tab, position ->
+                tab.text = tapTypeList[position]
+            }.attach()
+        }
     }
 
     override fun onGetPublicRecipeDetailFailure(message: String) {

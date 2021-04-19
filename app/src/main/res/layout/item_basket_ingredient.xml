@@ -132,7 +132,7 @@
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_add_icon"
             android:tint="@color/gray_200"
             app:layout_constraintBottom_toTopOf="@+id/tv_ingredient_cnt"
             app:layout_constraintEnd_toEndOf="parent"

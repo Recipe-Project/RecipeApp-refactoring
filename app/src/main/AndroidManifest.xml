@@ -10,7 +10,6 @@
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
         android:name=".config.ApplicationClass"
         android:allowBackup="true"
@@ -19,9 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp">
+
+        <activity android:name=".src.receipt.ReceiptActivity"/>
         <activity
-            android:name=".src.search.publicRecipe.RecipeDetailActivity"
-            android:theme="@style/Theme.RecipeApp.NoActionBar" />
+            android:name=".src.search.publicRecipe.recipeDetail.RecipeDetailActivity"
+            android:theme="@style/Theme.RecipeApp.NoActionBar" /> <!-- 스플래시 -->
 
         <!-- 스플래시 -->
         <activity android:name=".src.splash.SplashActivity">
@@ -34,6 +35,9 @@
         <!-- 메인 -->
         <activity android:name=".src.MainActivity" />
 
+        <!-- 로그인 -->
+        <activity android:name=".src.signIn.SignInActivity" />
+
         <!-- 냉장고 - 재료 선택 -->
         <activity android:name=".src.fridge.pickIngredient.PickIngredientActivity" />
         <activity android:name=".src.fridge.basket.BasketActivity" />
@@ -42,8 +46,8 @@
             android:name=".src.fridge.dialog.DateDialog"
             android:theme="@style/dialogTheme" />
 
-        <!-- 로그인 -->
-        <activity android:name=".src.signIn.SignInActivity" />
+
+
         <!-- 카카오 로그인 -->
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
@@ -57,15 +61,11 @@
                     android:host="oauth"
                     android:scheme="kakao${KAKAO_API_KEY}" />
             </intent-filter>
-        </activity>
-        <!-- 마이페이지 -->
-
+        </activity> <!-- 마이페이지 -->
         <activity android:name=".src.setting.SettingActivity" />
         <activity
             android:name=".src.setting.dialog.DeleteIdDialog"
-            android:theme="@style/dialogTheme" />
-
-        <!-- 나만의 레시피 -->
+            android:theme="@style/dialogTheme" /> <!-- 나만의 레시피 -->
         <activity android:name=".src.myRecipe.MyRecipeActivity" />
         <activity
             android:name=".src.myRecipe.myRecipeCreate.MyRecipeCreateActivity"
@@ -76,10 +76,15 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
-            android:theme="@style/dialogTheme" />
+            android:theme="@style/dialogTheme" /> <!-- 스크랩 레시피 -->
+
 
         <!-- 스크랩 레시피 -->
         <activity android:name=".src.scrapRecipe.ScrapRecipeActivity" />
+
+        <!-- 영수증 식재료 리스트 다이얼로그-->
+        <activity android:name=".src.fridge.receipt.ReceiptIngredientDialog"
+             />
 
 
         <service

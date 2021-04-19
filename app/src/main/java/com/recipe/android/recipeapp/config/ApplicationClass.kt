@@ -98,6 +98,4 @@ class ApplicationClass: Application() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
-
 }

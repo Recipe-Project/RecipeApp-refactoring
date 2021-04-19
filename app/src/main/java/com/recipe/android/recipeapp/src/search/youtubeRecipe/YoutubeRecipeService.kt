@@ -19,9 +19,9 @@ class YoutubeRecipeService(val view : YoutubeRecipeView) {
 
     val TAG = "YoutubeRecipeService"
 
-    fun getYoutubeRecipe(part : String, type : String, maxResults : Int, key : String, q : String) {
+    fun getYoutubeRecipe(part : String, type : String, maxResults : Int, key : String, q : String, pageToken : String) {
         val youtubeRecipeInterface = ApplicationClass.yRetrofit.create(YoutubeRecipeInterface::class.java)
-        youtubeRecipeInterface.getYoutubeRecipe(part, type, maxResults, key, q).enqueue(object : Callback<YoutubeRecipeResponse> {
+        youtubeRecipeInterface.getYoutubeRecipe(part, type, maxResults, key, q, pageToken).enqueue(object : Callback<YoutubeRecipeResponse> {
             override fun onResponse(call: Call<YoutubeRecipeResponse>, response: Response<YoutubeRecipeResponse>) {
                 if(response.isSuccessful) {
                     Log.d(TAG, "YoutubeRecipeService - onResponse() : 유투브레시피 조회 성공")
@@ -31,6 +31,22 @@ class YoutubeRecipeService(val view : YoutubeRecipeView) {
 
             override fun onFailure(call: Call<YoutubeRecipeResponse>, t: Throwable) {
                 view.onGetYoutubeRecipeFailure(t.message ?: "통신오류")
+            }
+        })
+    }
+
+    fun getYoutubeRecipeMore(part : String, type : String, maxResults : Int, key : String, q : String, pageToken : String) {
+        val youtubeRecipeInterface = ApplicationClass.yRetrofit.create(YoutubeRecipeInterface::class.java)
+        youtubeRecipeInterface.getYoutubeRecipe(part, type, maxResults, key, q, pageToken).enqueue(object : Callback<YoutubeRecipeResponse> {
+            override fun onResponse(call: Call<YoutubeRecipeResponse>, response: Response<YoutubeRecipeResponse>) {
+                if(response.isSuccessful) {
+                    Log.d(TAG, "YoutubeRecipeService - onResponse() : 유투브레시피 조회 성공")
+                    view.onGetYoutubeRecipeMoreSuccess(response.body() as YoutubeRecipeResponse)
+                }
+            }
+
+            override fun onFailure(call: Call<YoutubeRecipeResponse>, t: Throwable) {
+                view.onGetYoutubeRecipeMoreFailure(t.message ?: "통신오류")
             }
         })
     }
@@ -50,7 +66,6 @@ class YoutubeRecipeService(val view : YoutubeRecipeView) {
             override fun onFailure(call: Call<YoutubeRecipeScrapResponse>, t: Throwable) {
                 Log.d(TAG, "YoutubeRecipeService - onFailure() : 유투브레시피 스크랩 실패")
                 view.onPostYoutubeRecipeScrapFailure(t.message ?: "통신오류")
-
             }
         })
     }
