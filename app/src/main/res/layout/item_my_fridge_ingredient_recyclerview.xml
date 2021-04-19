@@ -45,7 +45,7 @@
         android:id="@+id/expire_date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="00.00.00까지"
+        android:text="00.00.00까지"
         style="@style/Body2Style"
         android:textColor="@color/gray_200"
         app:layout_constraintStart_toEndOf="@id/ingredient_iv"

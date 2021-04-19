@@ -76,12 +76,15 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
-
             android:theme="@style/dialogTheme" /> <!-- 스크랩 레시피 -->
 
 
         <!-- 스크랩 레시피 -->
         <activity android:name=".src.scrapRecipe.ScrapRecipeActivity" />
+
+        <!-- 영수증 식재료 리스트 다이얼로그-->
+        <activity android:name=".src.fridge.receipt.ReceiptIngredientDialog"
+             />
 
     </application>
 

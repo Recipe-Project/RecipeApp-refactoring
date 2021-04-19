@@ -28,6 +28,7 @@ import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 import com.recipe.android.recipeapp.src.fridge.home.service.FridgeView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
+import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientService
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.PostReceiptIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientView
@@ -39,7 +40,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class FridgeFragment :
-    BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding::bind, R.layout.fragment_fridge), ReceiptIngredientView,
+    BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding::bind, R.layout.fragment_fridge),
     FridgeView {
 
     val TAG = "FridgeFragment"
@@ -95,8 +96,9 @@ class FridgeFragment :
         binding.fabAddRecipe.setOnClickListener {
             TedImagePicker.with(requireContext()).start { uri ->
                 Log.d(TAG, uri.toString())
-
-                recognizeReceipt(uri)
+                val intent = Intent(requireActivity(), ReceiptIngredientDialog::class.java)
+                intent.putExtra("uri", uri.toString())
+                startActivity(intent)
             }
         }
 
@@ -140,109 +142,6 @@ class FridgeFragment :
         }
     }
 
-    private fun recognizeReceipt(uri: Uri) {
-        if (Build.VERSION.SDK_INT >= 29) {
-            val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
-            try {
-                bitmap = ImageDecoder.decodeBitmap(source)
-            } catch (e : IOException) {
-                e.printStackTrace()
-            }
-        } else {
-            bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
-        }
-        bitmap = scaleBitmapDown(bitmap, 640)
-
-        // Convert bitmap to base64 encoded string
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-        val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
-        val base64encoded = Base64.encodeToString(imageBytes, Base64.NO_WRAP)
-
-        // Cloud Function의 인스턴스 초기화
-        functions = FirebaseFunctions.getInstance()
-
-        // Create json request to cloud vision
-        val request = JsonObject()
-        // Add image to request
-        val image = JsonObject()
-        image.add("content", JsonPrimitive(base64encoded))
-        request.add("image", image)
-        //Add features to the request
-        val feature = JsonObject()
-        feature.add("type", JsonPrimitive("DOCUMENT_TEXT_DETECTION"))
-        val features = JsonArray()
-        features.add(feature)
-        request.add("features", features)
-
-        val imageContext = JsonObject()
-        val languageHints = JsonArray()
-        languageHints.add("ko")
-        imageContext.add("languageHints", languageHints)
-        request.add("imageContext", imageContext)
-
-        annotateImage(request.toString())
-            .addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    // Task failed with an exception
-                    Log.d(TAG, "ReceiptActivity - Text Recognition Failed")
-                } else {
-                    // Task completed successfully
-                    Log.d(TAG, "ReceiptActivity - Text Recognition Success")
-
-                    val annotation = task.result!!.asJsonArray[0].asJsonObject["fullTextAnnotation"].asJsonObject
-                    val result = annotation["text"].toString()
-                    Log.d(TAG, result)
-
-                    // 영수증으로 재료 입력 api 호출
-                    ReceiptIngredientService(this).postReceiptIngredient(
-                        PostReceiptIngredientRequest(result)
-                    )
-                }
-            }
-    }
-
-    private fun scaleBitmapDown(bitmap: Bitmap, maxDimension: Int): Bitmap {
-        val originalWidth = bitmap.width
-        val originalHeight = bitmap.height
-        var resizedWidth = maxDimension
-        var resizedHeight = maxDimension
-        if (originalHeight > originalWidth) {
-            resizedHeight = maxDimension
-            resizedWidth =
-                (resizedHeight * originalWidth.toFloat() / originalHeight.toFloat()).toInt()
-        } else if (originalWidth > originalHeight) {
-            resizedWidth = maxDimension
-            resizedHeight =
-                (resizedWidth * originalHeight.toFloat() / originalWidth.toFloat()).toInt()
-        } else if (originalHeight == originalWidth) {
-            resizedHeight = maxDimension
-            resizedWidth = maxDimension
-        }
-        return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false)
-    }
-
-    private fun annotateImage(requestJson: String): Task<JsonElement> {
-        return functions
-            .getHttpsCallable("annotateImage")
-            .call(requestJson)
-            .continueWith { task ->
-                // This continuation runs on either success or failure, but if the task
-                // has failed then result will throw an Exception which will be
-                // propagated down.
-                val result = task.result?.data
-                JsonParser.parseString(Gson().toJson(result))
-            }
-    }
-
-    override fun onPostReceiptIngredientSuccess(response: PostReceiptIngredientResponse) {
-
-    }
-
-    override fun onPostReceiptIngredientFailure(message: String) {
-
-    }
-
     override fun onGetFridgeSuccess(response: GetFridgeResponse) {
         var tabLayoutTextArray = ArrayList<String>()
         tabLayoutTextArray.add(getString(R.string.all))
@@ -252,28 +151,26 @@ class FridgeFragment :
         lateinit var myFridgeCategoryAdapter : MyFridgeCategoryAdapter
         var myFridgeFlag = false
 
-        for(i in response.result) {
-            if(i.fridgeList.size != 0) {
-                myFridgeFlag = true
-            }
-        }
-
+        myFridgeFlag = response.result.fridges.size != 0
         if (myFridgeFlag) {
-            val ingredientResult = response.result
+            Log.d(TAG, "FridgeFragment : Flag is true")
+            val ingredientResult = response.result.fridges
 
+            ingredients.clear()
             ingredientResult.forEach {
                 ingredients.add(it)
                 tabLayoutTextArray.add(it.ingredientCategoryName)
             }
             // visibility 변경
+            binding.viewPager.visibility = View.VISIBLE
             binding.tabLayout.visibility = View.VISIBLE
             binding.tabLayoutLine.visibility = View.VISIBLE
-            binding.fridgeFragDefaultTv.visibility = View.VISIBLE
+            binding.fridgeFragDefaultTv.visibility = View.INVISIBLE
 
             // 카테고리 탭 설정
             tabLayout = binding.tabLayout
             viewPager = binding.viewPager
-            myFridgeCategoryAdapter = MyFridgeCategoryAdapter(this)
+            myFridgeCategoryAdapter = MyFridgeCategoryAdapter(requireActivity())
             viewPager.adapter = myFridgeCategoryAdapter
 
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->

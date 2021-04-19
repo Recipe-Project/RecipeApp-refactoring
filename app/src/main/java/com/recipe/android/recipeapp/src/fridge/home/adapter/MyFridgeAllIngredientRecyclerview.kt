@@ -32,7 +32,7 @@ class MyFridgeAllIngredientRecyclerview(val context : Context) : RecyclerView.Ad
 
             val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(context)
             binding.rvIngredient.adapter = myFridgeIngredientRecyclerviewAdapter
-            myFridgeIngredientRecyclerviewAdapter.submitList(fridgeResult.fridgeList as ArrayList<FridgeItem>)
+            myFridgeIngredientRecyclerviewAdapter.submitList(fridgeResult.ingredientList as ArrayList<FridgeItem>)
         }
 
     }

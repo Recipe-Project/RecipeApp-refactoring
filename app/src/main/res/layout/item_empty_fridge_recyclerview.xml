@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             tools:text="10분"
             app:layout_constraintStart_toEndOf="@id/clock_iv"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail_iv"
             style="@style/Body2Style"
             android:textColor="@color/white"
             android:layout_marginBottom="12dp"
@@ -147,15 +147,36 @@
         app:layout_constraintTop_toBottomOf="@id/middle_line"
         app:layout_constraintStart_toEndOf="@id/blog_recipe_layout">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/youtube_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_youtube_empty_fridge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/youtube_tv"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginEnd="8dp"/>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/youtube_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blog"
+            style="@style/Body3Style"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/youtube_iv"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-
-
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toBottomOf="@id/blog_recipe_layout"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"

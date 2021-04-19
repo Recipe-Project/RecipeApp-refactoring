@@ -2,14 +2,15 @@ package com.recipe.android.recipeapp.src.fridge.home.adapter
 
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.recipe.android.recipeapp.src.fridge.home.fragment.MyFridgeAllCategoryFragment
 import com.recipe.android.recipeapp.src.fridge.home.fragment.MyFridgeCategoryFragment
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 
-private const val NUM_PAGES = 8
+private const val NUM_PAGES = 7
 
-class MyFridgeCategoryAdapter(fragment : Fragment) : FragmentStateAdapter(fragment) {
+class MyFridgeCategoryAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
 
     val TAG = "MyFridgeCategoryAdapter"
 
@@ -18,7 +19,7 @@ class MyFridgeCategoryAdapter(fragment : Fragment) : FragmentStateAdapter(fragme
     override fun getItemCount(): Int = NUM_PAGES
 
     override fun createFragment(position: Int): Fragment {
-        Log.d(TAG, "IngredientCategoryAdapter - createFragment() : $position")
+        Log.d(TAG, "MyFridgeCategoryAdapter - createFragment() : $position")
 
         return if (position != 0) {
             MyFridgeCategoryFragment(ingredients[position - 1])

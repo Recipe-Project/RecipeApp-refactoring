@@ -10,16 +10,24 @@ data class GetFridgeResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("result")
-    val result : ArrayList<GetFridgeResult>
+    val result : FridgeObject
 )
+
+data class FridgeObject (
+    @SerializedName("fridgeBasketCount")
+    val fridgeBasketCount : Int,
+    @SerializedName("fridges")
+    val fridges : ArrayList<GetFridgeResult>
+)
+
 
 data class GetFridgeResult(
     @SerializedName("ingredientCategoryIdx")
     val ingredientCategoryIdx : Int,
     @SerializedName("ingredientCategoryName")
     val ingredientCategoryName : String,
-    @SerializedName("fridgeList")
-    val fridgeList : ArrayList<FridgeItem>
+    @SerializedName("ingredientList")
+    val ingredientList : ArrayList<FridgeItem>
 )
 
 data class FridgeItem(
