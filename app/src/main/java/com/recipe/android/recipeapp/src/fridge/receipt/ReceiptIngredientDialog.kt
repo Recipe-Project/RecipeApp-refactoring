@@ -14,10 +14,12 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.gson.*
+import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.DialogReceiptIngredientBinding
 import com.recipe.android.recipeapp.src.fridge.addDirect.AddDirectActivity
+import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
@@ -61,9 +63,13 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
 
         binding.btnSave.setOnClickListener {
             // 냉장고 바구니로 이동
+            showLoadingDialog()
+            val pickIdxList = ArrayList<Int>()
+            receiptIngredientList.forEach {
+                pickIdxList.add(it.ingredientIdx)
+            }
+            PickIngredientService(this).postIngredients(pickIdxList)
         }
-
-
     }
 
     private fun recognizeReceipt(uri: Uri) {
@@ -202,6 +208,20 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
     }
 
     override fun onPostIngredientSuccess(response: PostIngredientsResponse) {
+        dismissLoadingDialog()
+
+        if (response.isSuccess) {
+            val intent = Intent(this, BasketActivity::class.java)
+            startActivity(intent)
+        } else {
+            when (response.code) {
+                3069 -> showCustomToast(response.message)
+                else -> {
+                    Log.d(TAG, "PickIngredientActivity - onPostIngredientSuccess() : ${response.message}")
+                    showCustomToast(getString(R.string.networkError))
+                }
+            }
+        }
 
     }
 
@@ -218,6 +238,6 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
     }
 
     override fun btnSaveClick(pickIconUrl: String?) {
-        TODO("Not yet implemented")
+
     }
 }
