@@ -40,6 +40,8 @@ class ApplicationClass: Application() {
         const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
         val USER_IDX = "USER_IDX"
         val IC_DEFAULT = "IC_DEFAULT"
+        val FCM_TOKEN = "FCM_TOKEN"
+        val FCM_PUSH_OK = "FCM_PUSH_OK"
 
     }
 
