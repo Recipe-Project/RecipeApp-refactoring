@@ -16,15 +16,12 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.DialogPickIngredientIconBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 
 class PickIngredientIconDialog(
     context: Context,
     private var activity: Activity,
-    private val ingredientsList: ArrayList<IngredientResult>,
+    private val ingredientsList: ArrayList<CategoryIngrediets>,
     val pickView: PickIcon
 ) : Dialog(context), PickIngredientActivityView {
 

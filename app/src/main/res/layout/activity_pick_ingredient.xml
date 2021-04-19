@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,15 +47,51 @@
             style="@style/ButtonStyle2"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="8dp"
             android:gravity="center"
             android:paddingStart="5dp"
             android:text="@string/addDirect"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_basket"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_basket"
+            style="@style/ButtonStyle2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:paddingEnd="5dp"
+            android:src="@drawable/ic_basket"
+            android:textColor="@color/gray_500"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_basket_cnt"
+            style="@style/Caption2Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/bg_basket_cnt"
+            android:gravity="center"
+            android:paddingStart="6dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_basket"
+            app:layout_constraintTop_toTopOf="@+id/btn_basket"
+            tools:text="1" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

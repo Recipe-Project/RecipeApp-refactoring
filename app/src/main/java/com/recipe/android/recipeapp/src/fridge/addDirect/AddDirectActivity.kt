@@ -17,6 +17,7 @@ import com.recipe.android.recipeapp.config.ApplicationClass.Companion.IC_DEFAULT
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityAddDirectBinding
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
 import java.util.ArrayList
@@ -39,12 +40,12 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectBinding>(ActivityAddDire
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val ingredientsList = intent.extras?.getParcelableArrayList<Parcelable>("ingredientList") as ArrayList<IngredientResult>
+        val ingredientsList = intent.extras?.getParcelableArrayList<Parcelable>("ingredientList") as ArrayList<CategoryIngrediets>
         Log.d(TAG, "AddDirectActivity - onCreate() : $ingredientsList")
 
         // 서버에서 보낸 카테고리
         val categoryList = ArrayList<String>()
-        ingredientsList.forEach {
+        ingredientsList.forEach { it ->
             categoryList.add(it.ingredientCategoryName)
         }
 

@@ -57,7 +57,7 @@
     <string name="my_fridge_default_tv">나의 냉장고에 음식을 채워보세요!</string>
 
     <!-- 나의 냉장고 / 재료 선택 -->
-    <string name="selectIngredient">재료선택</string>
+    <string name="selectIngredient">재료</string>
     <string name="addDirect">직접입력</string>
     <string name="all">전체</string>
     <string name="beef">육류</string>
