@@ -21,10 +21,12 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showLoadingDialog()
         EmptyFridgeService(this).tryGetEmptyFridge()
     }
 
     override fun onGetEmptyFridgeSuccess(response: EmptyFridgeResponse) {
+        dismissLoadingDialog()
         if(response.result.size != 0) {
             val adapter = EmptyFridgeRecyclerviewAdapter(this)
             binding.emptyFridgeFragRecyclerview.adapter = adapter
