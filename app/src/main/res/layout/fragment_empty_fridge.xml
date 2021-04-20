@@ -33,17 +33,50 @@
             android:layout_marginTop="19dp"
             tools:listitem="@layout/item_empty_fridge_recyclerview"/>
 
+        <View
+            android:id="@+id/center_line1"
+            android:layout_width="1dp"
+            android:layout_height="65dp"
+            android:background="#979797"
+            app:layout_constraintTop_toBottomOf="@id/appCompatTextView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintHorizontal_bias="0.465"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/empty_fridge_frag_default_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_empty_fridge_default"
+            app:layout_constraintTop_toBottomOf="@id/center_line1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/center_line2"
+            android:layout_width="1dp"
+            android:layout_height="32dp"
+            android:background="#979797"
+            app:layout_constraintTop_toBottomOf="@id/empty_fridge_frag_default_iv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.465"
+            android:visibility="gone"/>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/empty_fridge_frag_default_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="냉장고에 식재료가 없습니다.\n식재료를 추가해주세요."
-            style="@style/Subtitle2Style"
+            android:text="@string/empty_fridge_default"
+            style="@style/Body2Style"
+            android:textColor="@color/gray_400"
             android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/appCompatTextView4"
+            app:layout_constraintTop_toBottomOf="@id/center_line2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="200dp"
             android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

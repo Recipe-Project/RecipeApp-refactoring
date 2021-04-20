@@ -3,13 +3,14 @@ package com.recipe.android.recipeapp.src.fridge.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.FragmentMyFridgeCategoryBinding
+import com.recipe.android.recipeapp.src.fridge.home.SwipeToDeleteCallback
 import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 
-class MyFridgeAllIngredientRecyclerview(val context : Context) : RecyclerView.Adapter<MyFridgeAllIngredientRecyclerview.CustomViewholder>() {
+class MyFridgeAllCategoryAdapter(val context : Context) : RecyclerView.Adapter<MyFridgeAllCategoryAdapter.CustomViewholder>() {
 
     var resultList = ArrayList<GetFridgeResult>()
 
@@ -33,8 +34,15 @@ class MyFridgeAllIngredientRecyclerview(val context : Context) : RecyclerView.Ad
             val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(context)
             binding.rvIngredient.adapter = myFridgeIngredientRecyclerviewAdapter
             myFridgeIngredientRecyclerviewAdapter.submitList(fridgeResult.ingredientList as ArrayList<FridgeItem>)
+            val swipeDelete = object : SwipeToDeleteCallback(context) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    myFridgeIngredientRecyclerviewAdapter.deleteItem(viewHolder.adapterPosition)
+                    // 냉장고 삭제 API 호출
+                }
+            }
+            val touchHelper = ItemTouchHelper(swipeDelete)
+            touchHelper.attachToRecyclerView(binding.rvIngredient)
         }
-
     }
 
     fun submitList(resultList: ArrayList<GetFridgeResult>) {

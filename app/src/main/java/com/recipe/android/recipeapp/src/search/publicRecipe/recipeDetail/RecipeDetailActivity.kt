@@ -1,13 +1,17 @@
 package com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
@@ -22,6 +26,7 @@ import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeD
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapResponse
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.adapter.RecipeDetailViewPagerAdapter
+import java.lang.Math.abs
 
 class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityRecipeDetailBinding::inflate), PublicRecipeDetailView, PublicRecipeScrapView {
 
@@ -40,9 +45,6 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
             PublicRecipeDetailService(this).getPublicRecipeDetail(index)
         }
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
         // 공공레시피 스크랩하기
         binding.recipeDetailActivityFavoriteTv.setOnClickListener {
             PublicRecipeScrapService(this).tryPostAddingScrap(PublicRecipeScrapRequest(recipeId = recipeId))
@@ -50,12 +52,30 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
         binding.recipeDetailActivityFavoriteIv.setOnClickListener {
             PublicRecipeScrapService(this).tryPostAddingScrap(PublicRecipeScrapRequest(recipeId = recipeId))
         }
+
+
+        // 툴바 세팅
+        setSupportActionBar(binding.toolbar)
+        // appBarLayout
+        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if(kotlin.math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
+                binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
+                binding.afterScrollLayout.visibility = View.VISIBLE
+            } else {
+                binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent))
+                binding.afterScrollLayout.visibility = View.GONE
+            }
+        })
     }
 
     override fun onGetPublicRecipeDetailSuccess(response: PublicRecipeDetailResponse) {
         if(response.isSuccess) {
             val result = response.result
-            binding.toolbarLayout.title = result.recipeName
+            binding.beforeScrollTitleTv.text = result.recipeName
+            binding.afterScrollTitleTv.text = result.recipeName
+            binding.beforeScrollScrapCntTv.text = result.userScrapCnt.toString()
+            binding.afterScrollScrapCntTv.text = result.userScrapCnt.toString()
+
             binding.recipeDetailActivityCookingTimeTv.text = result.cookingTime
             binding.recipeDetailActivityLevelTv.text = result.level
             binding.recipeDetailActivitySummaryTv.text = result.summary
@@ -76,29 +96,6 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
     override fun onGetPublicRecipeDetailFailure(message: String) {
 
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_recipe_detail, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        return when (item.itemId) {
-            R.id.menu_favorite -> true
-            android.R.id.home -> {
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-
 
     override fun onPostPublicRecipeScrapSuccess(response: PublicRecipeScrapResponse) {
         Log.d(TAG, response.result.userIdx.toString()) // For test

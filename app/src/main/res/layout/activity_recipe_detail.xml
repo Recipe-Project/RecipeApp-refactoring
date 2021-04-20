@@ -5,33 +5,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".src.search.publicRecipe.recipeDetail.RecipeDetailActivity">
+    <!-- android:fitsSystemWindows="true" -->
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="161dp"
-        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="false"
         android:theme="@style/Theme.RecipeApp.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:fitsSystemWindows="true"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="false"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title=" "
             app:toolbarId="@+id/toolbar"
             app:collapsedTitleTextAppearance="@style/Head2Style"
             app:expandedTitleTextAppearance="@style/Head2Style">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/before_scroll_back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="20dp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/before_scroll_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="스팸김치볶음밥"
+                    style="@style/Head2Style"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/before_scroll_back_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/before_scroll_scrap_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_after_scroll_scrap"
+                    app:layout_constraintTop_toBottomOf="@id/before_scroll_title_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="17dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/before_scroll_scrap_cnt_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="222"
+                    style="@style/Body2Style"
+                    app:layout_constraintTop_toBottomOf="@id/before_scroll_title_tv"
+                    app:layout_constraintStart_toEndOf="@id/before_scroll_scrap_iv"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    app:layout_constraintTop_toBottomOf="@id/before_scroll_scrap_iv"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/Theme.RecipeApp.PopupOverlay" />
+                app:popupTheme="@style/Theme.RecipeApp.PopupOverlay">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/after_scroll_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/after_scroll_back_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_back"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/after_scroll_title_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="스팸김치볶음밥"
+                        style="@style/Head2Style"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/after_scroll_back_btn"
+                        android:layout_marginStart="8dp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/after_scroll_scrap_cnt_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="222"
+                        style="@style/Body2Style"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="20dp"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_after_scroll_scrap"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/after_scroll_scrap_cnt_tv"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="1dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

@@ -20,6 +20,7 @@ class PublicResultFragment(private val keyword : String)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showLoadingDialog()
         publicRecipeRecyclerviewAdapter = PublicResultRecyclerviewAdapter()
         binding.publicResultFragRecylerview.adapter = publicRecipeRecyclerviewAdapter
         PublicRecipeService(this).getPublicRecipe(keyword)
@@ -27,9 +28,12 @@ class PublicResultFragment(private val keyword : String)
 
     override fun onGetPublicRecipeSuccess(response: PublicRecipeResponse) {
         if(response.isSuccess) {
+            dismissLoadingDialog()
+
             val result = response.result
 
             binding.publicFragItemCnt.text = result.size.toString()
+            binding.publicFragItemCntUnit.visibility = View.VISIBLE
 
             publicRecipeRecyclerviewAdapter.submitList(result)
             publicRecipeRecyclerviewAdapter.publicRecipeItemClick = object : PublicResultRecyclerviewAdapter.PublicRecipeItemClick{

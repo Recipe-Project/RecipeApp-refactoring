@@ -87,6 +87,9 @@
     <string name="frozen">냉동</string>
     <string name="roomTemperature">실온</string>
     <string name="fridgeSuccessMessage">냉장고에 재료를 담았습니다.</string>
+
+    <!-- 냉장고 파먹기 -->
+    <string name="empty_fridge_default">나의 냉장고가 비었습니다.\n냉장고에 음식을 담아보세요!</string>
     
 
     <!-- 레시피 검색 -->

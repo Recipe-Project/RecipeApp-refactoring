@@ -80,4 +80,9 @@ class MyFridgeIngredientRecyclerviewAdapter(val context : Context) : RecyclerVie
         this.fridgeItemList = fridgeItemList
         notifyDataSetChanged()
     }
+
+    fun deleteItem(index : Int) {
+        fridgeItemList.removeAt(index)
+        notifyDataSetChanged()
+    }
 }

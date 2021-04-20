@@ -29,7 +29,8 @@
             android:text="@string/count"
             style="@style/Subtitle2Style"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/public_frag_item_cnt"/>
+            app:layout_constraintStart_toEndOf="@id/public_frag_item_cnt"
+            android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/public_result_frag_recylerview"

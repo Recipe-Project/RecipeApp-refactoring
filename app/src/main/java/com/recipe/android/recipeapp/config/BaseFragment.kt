@@ -29,6 +29,8 @@ abstract class BaseFragment<B : ViewBinding>(
         savedInstanceState: Bundle?
     ): View? {
 
+        loadingDialog = LoadingDialog(requireContext())
+
         _binding = bind(super.onCreateView(inflater, container, savedInstanceState)!!)
         return binding.root
     }
