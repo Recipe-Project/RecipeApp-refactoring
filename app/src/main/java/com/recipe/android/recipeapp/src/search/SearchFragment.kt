@@ -33,7 +33,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.searchFragEt.setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-                    searchKeyword() // 해당 키워드로 공공 레시피 검색
+
+                    keyword = binding.searchFragEt.text.toString()
+                    RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색어 리스트에 검색어 추가
+                    SearchService(this).postKeyword(keyword) // 검색어 서버로 전송
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
                     inputMethodManager.hideSoftInputFromWindow(binding.searchFragEt.windowToken, 0) // 검색 버튼 클릭 후 키보드 내리기 ( 점검 필요 )
                     true
                 }
@@ -53,24 +57,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         }
     }
 
-    // 해당 키워드로 공공레시피 검색하기
-    private fun searchKeyword() {
-        keyword = binding.searchFragEt.text.toString()
-        SearchService(this).getPublicRecipe(keyword)
-
-        RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색어 리스트에 검색어 추가
-        SearchService(this).postKeyword(keyword) // 검색어 서버로 전송
-    }
-
-    override fun onGetPublicRecipeSuccess(response: PublicRecipeResponse) {
-        if(response.isSuccess) {
-            val publicResultList = response.result
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(publicResultList, keyword)).commitAllowingStateLoss()
-        }
-    }
-
-    override fun onGetPublicRecipeFailure(message: String) {
-    }
+//    // 해당 키워드로 공공레시피 검색하기
+//    private fun searchKeyword() {
+//
+//        SearchService(this).getPublicRecipe(keyword)
+//
+//
+//
+//    }
 
     override fun onGetPopularKeywordSuccess(response: PopularKeywordResponse) {
         // Nothing

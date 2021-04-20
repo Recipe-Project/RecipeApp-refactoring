@@ -11,7 +11,7 @@ import com.recipe.android.recipeapp.src.search.models.PublicRecipeResult
 import com.recipe.android.recipeapp.src.search.publicRecipe.PublicResultFragment
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeResultFragment
 
-class SearchResultFragment(private val publicResultList : ArrayList<PublicRecipeResult>, private val keyword : String)
+class SearchResultFragment(private val keyword : String)
     : BaseFragment<FragmentSearchResultBinding>(FragmentSearchResultBinding::bind, R.layout.fragment_search_result) {
 
     private val recipeTypeList = arrayListOf("동영상", "블로그", "공공")
@@ -22,7 +22,7 @@ class SearchResultFragment(private val publicResultList : ArrayList<PublicRecipe
         val pagerAdapter = SearchResultViewPagerAdapter(this)
         pagerAdapter.addFragment(YoutubeResultFragment(keyword))
         pagerAdapter.addFragment(BlogResultFragment(keyword))
-        pagerAdapter.addFragment(PublicResultFragment(publicResultList))
+        pagerAdapter.addFragment(PublicResultFragment(keyword))
         binding.searchResultFragViewpager.adapter = pagerAdapter
 
         TabLayoutMediator(binding.searchResultFragTablayout, binding.searchResultFragViewpager) { tab, position ->

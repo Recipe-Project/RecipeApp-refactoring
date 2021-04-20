@@ -41,6 +41,40 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="21/02/28" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/update_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update"
+                style="@style/Body1Style"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="65dp"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/save_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                style="@style/Body1Style"
+                android:textColor="@color/red"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="65dp"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cancel_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                style="@style/Body1Style"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="65dp"
+                android:visibility="gone"/>
+
             <View
                 android:id="@+id/fridge_frag_line_top"
                 android:layout_width="0dp"

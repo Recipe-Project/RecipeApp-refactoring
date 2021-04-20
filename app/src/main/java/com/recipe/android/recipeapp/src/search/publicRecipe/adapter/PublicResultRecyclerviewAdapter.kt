@@ -14,12 +14,14 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemPublicResultFragRecyclerviewBinding
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResult
 
-class PublicResultRecyclerviewAdapter(private val publicResultList : ArrayList<PublicRecipeResult>) : RecyclerView.Adapter<PublicResultRecyclerviewAdapter.CustomViewholder>() {
+class PublicResultRecyclerviewAdapter : RecyclerView.Adapter<PublicResultRecyclerviewAdapter.CustomViewholder>() {
 
     interface PublicRecipeItemClick {
         fun onClick(view: View, position: Int)
     }
     var publicRecipeItemClick : PublicRecipeItemClick? = null
+
+    var publicResultList = ArrayList<PublicRecipeResult>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         val binding = ItemPublicResultFragRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -49,5 +51,10 @@ class PublicResultRecyclerviewAdapter(private val publicResultList : ArrayList<P
         val img : ImageView = binding.recipeImg
         val cnt : TextView = binding.favoriteRecipeCntTv
         val layout : ConstraintLayout = binding.publicResultFragRecyclerviewLayout
+    }
+
+    fun submitList(publicResultList : ArrayList<PublicRecipeResult>) {
+        this.publicResultList = publicResultList
+        notifyDataSetChanged()
     }
 }

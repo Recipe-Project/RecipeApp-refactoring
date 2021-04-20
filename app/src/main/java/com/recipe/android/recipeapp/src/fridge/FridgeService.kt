@@ -3,8 +3,8 @@ package com.recipe.android.recipeapp.src.fridge
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse
-import com.recipe.android.recipeapp.src.fridge.home.service.FridgeInterface
-import com.recipe.android.recipeapp.src.fridge.home.service.FridgeView
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeInterface
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

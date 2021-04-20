@@ -15,14 +15,13 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityRecipeDetailBinding
 import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeScrapService
-import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeService
+import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeDetailService
 import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeDetailView
 import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeScrapView
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeDetailResponse
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapResponse
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.adapter.RecipeDetailViewPagerAdapter
-import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.adapter.RecipeProcessRecyclerviewAdapter
 
 class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityRecipeDetailBinding::inflate), PublicRecipeDetailView, PublicRecipeScrapView {
 
@@ -38,7 +37,7 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
         // 해당 레시피 인덱스 가져오기
         if(intent.hasExtra("index")) {
             val index = intent.getIntExtra("index", 0)
-            PublicRecipeService(this).getPublicRecipeDetail(index)
+            PublicRecipeDetailService(this).getPublicRecipeDetail(index)
         }
 
         setSupportActionBar(binding.toolbar)
@@ -51,8 +50,6 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
         binding.recipeDetailActivityFavoriteIv.setOnClickListener {
             PublicRecipeScrapService(this).tryPostAddingScrap(PublicRecipeScrapRequest(recipeId = recipeId))
         }
-
-
     }
 
     override fun onGetPublicRecipeDetailSuccess(response: PublicRecipeDetailResponse) {

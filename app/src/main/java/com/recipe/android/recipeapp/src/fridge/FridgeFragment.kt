@@ -3,39 +3,26 @@ package com.recipe.android.recipeapp.src.fridge
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
-import android.os.Build
 import android.graphics.Color
-import android.graphics.ImageDecoder
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.gms.tasks.Task
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.functions.FirebaseFunctions
-import com.google.gson.*
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentFridgeBinding
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdapter
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
-import com.recipe.android.recipeapp.src.fridge.home.service.FridgeView
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
-import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientService
-import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.PostReceiptIngredientRequest
-import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientView
-import com.recipe.android.recipeapp.src.fridge.receipt.models.PostReceiptIngredientResponse
 import gun0912.tedimagepicker.builder.TedImagePicker
-import java.io.ByteArrayOutputStream
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -102,6 +89,36 @@ class FridgeFragment :
             }
         }
 
+        binding.updateTv.setOnClickListener {
+            // 냉장고 수정
+
+            // 레이아웃 변경
+            binding.saveTv.visibility = View.VISIBLE
+            binding.cancelTv.visibility = View.VISIBLE
+            binding.updateTv.visibility = View.INVISIBLE
+            binding.fridgeFragDateTv.visibility = View.INVISIBLE
+        }
+
+        binding.cancelTv.setOnClickListener {
+            // 냉장고 수정 화면에서 취소 버튼
+
+            // 레이아웃 변경
+            binding.saveTv.visibility = View.INVISIBLE
+            binding.cancelTv.visibility = View.INVISIBLE
+            binding.updateTv.visibility = View.VISIBLE
+            binding.fridgeFragDateTv.visibility = View.VISIBLE
+        }
+
+        binding.saveTv.setOnClickListener {
+            // 냉장고 수정 저장하기(냉장고 수정 API 호출)
+
+            // 레이아웃 변경
+            binding.saveTv.visibility = View.INVISIBLE
+            binding.cancelTv.visibility = View.INVISIBLE
+            binding.updateTv.visibility = View.VISIBLE
+            binding.fridgeFragDateTv.visibility = View.VISIBLE
+        }
+
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -165,6 +182,7 @@ class FridgeFragment :
             binding.viewPager.visibility = View.VISIBLE
             binding.tabLayout.visibility = View.VISIBLE
             binding.tabLayoutLine.visibility = View.VISIBLE
+            binding.updateTv.visibility = View.VISIBLE
             binding.fridgeFragDefaultTv.visibility = View.INVISIBLE
 
             // 카테고리 탭 설정

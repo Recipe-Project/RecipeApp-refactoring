@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.fridge.home.service
+package com.recipe.android.recipeapp.src.fridge.home.`interface`
 
 
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse

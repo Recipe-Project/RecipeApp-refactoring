@@ -3,12 +3,17 @@ package com.recipe.android.recipeapp.src.emptyFridge
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.NavHostFragment
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentEmptyFridgeBinding
+import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.emptyFridge.`interface`.EmptyFridgeView
 import com.recipe.android.recipeapp.src.emptyFridge.adapter.EmptyFridgeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResponse
+import com.recipe.android.recipeapp.src.search.KeywordFragment
+import com.recipe.android.recipeapp.src.search.SearchFragment
+import com.recipe.android.recipeapp.src.search.SearchResultFragment
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
 
 class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmptyFridgeBinding::bind, R.layout.fragment_empty_fridge), EmptyFridgeView {
@@ -17,7 +22,6 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
         super.onViewCreated(view, savedInstanceState)
 
         EmptyFridgeService(this).tryGetEmptyFridge()
-
     }
 
     override fun onGetEmptyFridgeSuccess(response: EmptyFridgeResponse) {
@@ -25,6 +29,10 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
             val adapter = EmptyFridgeRecyclerviewAdapter(this)
             binding.emptyFridgeFragRecyclerview.adapter = adapter
             adapter.submitList(response.result)
+        } else {
+            // 냉장고가 텅 비었을 경우, Default 메세지 제공
+            binding.emptyFridgeFragRecyclerview.visibility = View.INVISIBLE
+            binding.emptyFridgeFragDefaultTv.visibility = View.VISIBLE
         }
     }
 
@@ -39,10 +47,20 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
     }
 
     override fun getBlogRecipe(keyword : String) {
-
+        // 네비게이션 호스트
+        val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        // 네비게이션 컨트롤러
+        val navController = navHostFragment.navController
+        navController.navigate(R.id.searchFragment)
+//        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
     }
 
     override fun getYoutubeRecipe(keyword : String) {
-
+        // 네비게이션 호스트
+        val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        // 네비게이션 컨트롤러
+        val navController = navHostFragment.navController
+        navController.navigate(R.id.searchFragment)
+//        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
     }
 }

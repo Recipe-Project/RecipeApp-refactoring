@@ -33,9 +33,9 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
             adapter.recentKeywordItemClick = object : RecentKeywordRecyclerviewAdapter.RecentKeywordItemClick{
                 override fun onClick(view: View, position: Int) {
                     keyword = RecentKeywordRecyclerviewAdapter.list[position]
-                    SearchService(this@KeywordFragment).getPublicRecipe(keyword)
-                    RecentKeywordRecyclerviewAdapter.list.add(keyword)
+                    RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색에 목록에 추가
                     SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
                 }
             }
 
@@ -56,17 +56,6 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
         SearchService(this).getPopularKeyword()
     }
 
-    override fun onGetPublicRecipeSuccess(response: PublicRecipeResponse) {
-        if(response.isSuccess) {
-            val publicResultList = response.result
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(publicResultList, keyword)).commitAllowingStateLoss()
-        }
-    }
-
-    override fun onGetPublicRecipeFailure(message: String) {
-
-    }
-
     override fun onGetPopularKeywordSuccess(response: PopularKeywordResponse) {
         val result = response.result
         val adapter = PopularKeywordRecyclerviewAdapter(result)
@@ -74,9 +63,9 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
         adapter.popularKeywordItemClick = object : PopularKeywordRecyclerviewAdapter.PopularKeywordItemClick {
             override fun onClick(view: View, position: Int) {
                 keyword = result[position].bestKeyword
-                SearchService(this@KeywordFragment).getPublicRecipe(keyword)
                 RecentKeywordRecyclerviewAdapter.list.add(keyword)
                 SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
             }
         }
 

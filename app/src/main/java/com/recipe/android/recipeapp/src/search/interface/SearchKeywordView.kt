@@ -5,8 +5,7 @@ import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 
 interface SearchKeywordView {
-    fun onGetPublicRecipeSuccess(response: PublicRecipeResponse)
-    fun onGetPublicRecipeFailure(message: String)
+
 
     fun onGetPopularKeywordSuccess(response: PopularKeywordResponse)
     fun onGetPopularKeywordFailure(message: String)
