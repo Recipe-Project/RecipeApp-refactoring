@@ -2,12 +2,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Unchecked -->
     <item android:state_checked="false">
-        <shape
-            android:shape="oval">
-            <stroke android:color="@color/gray_100" android:width="2dp" />
-            <solid android:color="@color/white" />
-
-        </shape>
+        <layer-list>
+            <!-- 배경 -->
+            <!-- 이미지 영역 -->
+            <item
+                android:drawable="@drawable/ic_checkbox_empty" >
+            </item>
+        </layer-list>
     </item>
 
 
@@ -15,7 +16,6 @@
     <item android:state_checked="true">
         <layer-list>
             <!-- 배경 -->
-
             <!-- 이미지 영역 -->
             <item
                 android:drawable="@drawable/ic_checkbox" >
