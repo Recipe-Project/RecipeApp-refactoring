@@ -23,6 +23,7 @@ import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeIngredientRecyclerviewAdapter
+import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -32,13 +33,6 @@ import java.util.*
 class FridgeFragment :
     BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding::bind, R.layout.fragment_fridge),
     FridgeView {
-
-    interface FridgeButtonClick {
-        fun fixClick()
-        fun cancelClick()
-        fun saveClick()
-    }
-    var fridgeButtonClick : FridgeButtonClick? = null
 
     val TAG = "FridgeFragment"
 
@@ -248,6 +242,14 @@ class FridgeFragment :
     }
 
     override fun onGetFridgeFailure(message: String) {
+
+    }
+
+    override fun onPatchFridgeSuccess(response: PatchFridgeResponse) {
+
+    }
+
+    override fun onPatchFridgeFailure(message: String) {
 
     }
 

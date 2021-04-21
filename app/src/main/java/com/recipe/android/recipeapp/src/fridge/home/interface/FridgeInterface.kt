@@ -1,14 +1,9 @@
 package com.recipe.android.recipeapp.src.fridge.home.`interface`
 
 
-import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientRequest
-import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
-import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse
+import com.recipe.android.recipeapp.src.fridge.home.models.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.HTTP
+import retrofit2.http.*
 
 interface FridgeInterface {
 
@@ -17,5 +12,8 @@ interface FridgeInterface {
 
     @HTTP(method = "DELETE", path = "/fridges/ingredient", hasBody = true)
     fun deleteIngredient(@Body params : DeleteIngredientRequest) : Call<DeleteIngredientResponse>
+
+    @PATCH("/fridges/ingredient")
+    fun patchFridge(@Body params: PatchFridgeRequest) : Call<PatchFridgeResponse>
 
 }
