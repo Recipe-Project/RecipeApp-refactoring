@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.config
 
 import android.util.Log
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.FCM_TOKEN
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
 import okhttp3.Interceptor
@@ -18,6 +19,7 @@ class XAccessTokenInterceptor: Interceptor {
         val jwtToken: String? = sSharedPreferences.getString(X_ACCESS_TOKEN, null)
         if (jwtToken != null) {
             builder.addHeader("X-ACCESS-TOKEN", jwtToken)
+            // builder.addHeader("X-ACCESS-TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjcsImlhdCI6MTYxNzA5MDM5N30.3AV-6o4LaKvkVt1xbu64OfJpwO8DDzzkMVLPH16YDMY")
             Log.d(TAG, "TOKEN : $jwtToken")
         }
         return chain.proceed(builder.build())

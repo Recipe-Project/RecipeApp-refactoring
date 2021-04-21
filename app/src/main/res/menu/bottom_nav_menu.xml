@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/fridgeFragment"
         android:icon="@drawable/ic_fridge"
-        android:title="@string/fridge" />
+        android:title="@string/fridge"
+        />
+    <item
+        android:id="@+id/emptyFridgeFragment2"
+        android:icon="@drawable/ic_empty_fridge"
+        android:title="@string/emptyFridge"
+        />
+
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_recipe_search"
-        android:title="@string/recipeSearch" />
+        android:title="@string/recipeSearch"
+        />
     <item
         android:id="@+id/myPageFragment"
         android:icon="@drawable/ic_my_page"
-        android:title="@string/myPage" />
+        android:title="@string/myPage"
+        />
 </menu>

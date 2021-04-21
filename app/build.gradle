@@ -1,12 +1,15 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
 
     // google 로그인
     id 'com.google.gms.google-services'
 
     // navigation
     id 'androidx.navigation.safeargs.kotlin'
+
+
 }
 
 def propertiesFile = rootProject.file("local.properties")
@@ -15,6 +18,7 @@ properties.load(new FileInputStream(propertiesFile))
 def KAKAO_API_KEY = properties.getProperty('KAKAO_API_KEY')
 def NAVER_CLIENT_ID = properties.getProperty('NAVER_CLIENT_ID')
 def NAVER_CLIENT_SECRET = properties.getProperty('NAVER_CLIENT_SECRET')
+def GOOGLE_API_KEY = properties.getProperty('GOOGLE_API_KEY')
 
 android {
     compileSdkVersion 30
@@ -33,7 +37,7 @@ android {
         buildConfigField "String", "KAKAO_API_KEY", properties['KAKAO_API_KEY']
         buildConfigField "String", "NAVER_CLIENT_ID", properties['NAVER_CLIENT_ID']
         buildConfigField "String", "NAVER_CLIENT_SECRET", properties['NAVER_CLIENT_SECRET']
-
+        buildConfigField "String", "GOOGLE_API_KEY", properties['GOOGLE_API_KEY']
     }
 
     buildTypes {
@@ -52,7 +56,9 @@ android {
     viewBinding {
         enabled = true
     }
-
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -109,4 +115,31 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    // image picker
+    implementation 'gun0912.ted:tedimagepicker:1.1.10'
+
+
+    // Youtube Data Api
+    implementation('com.google.api-client:google-api-client-android:1.23.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    implementation('com.google.apis:google-api-services-youtube:v3-rev183-1.22.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+
+    // Declare the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+    // fcm
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Text Detection
+    implementation 'com.google.firebase:firebase-functions:19.2.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Recyclerview Swipe Decorator
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 }

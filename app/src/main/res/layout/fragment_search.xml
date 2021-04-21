@@ -7,13 +7,77 @@
     android:layout_height="match_parent"
     tools:context="com.recipe.android.recipeapp.src.search.SearchFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/search_frag_search_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="검색"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/ic_search_black"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/search_frag_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_et_hint"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        style="@style/Body1Style"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        app:layout_constraintStart_toEndOf="@id/search_frag_search_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/search_frag_cancel_btn"
+        android:layout_marginTop="11dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="6dp"
+        android:padding="8dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/search_frag_cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Body1Style"
+        android:text="@string/cancel"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="11dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/search_frag_et_cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edittext_cancel"
+        app:layout_constraintEnd_toEndOf="@id/search_frag_et"
+        app:layout_constraintTop_toTopOf="@id/search_frag_et"
+        app:layout_constraintBottom_toBottomOf="@id/search_frag_et"
+        android:layout_margin="6dp"/>
+
+    <FrameLayout
+        android:id="@+id/search_frag_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_frag_et"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

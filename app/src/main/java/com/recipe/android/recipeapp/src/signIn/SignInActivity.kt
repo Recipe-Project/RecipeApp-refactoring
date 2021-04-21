@@ -10,9 +10,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
@@ -20,6 +21,7 @@ import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.recipe.android.recipeapp.BuildConfig
 import com.recipe.android.recipeapp.R
+import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.USER_IDX
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
@@ -60,7 +62,21 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
                 val kakaoAccessToken = token.accessToken
                 // 레저 서버 -> 카카오 로그인 API 호출
-                SignInService(this).postKaKaoLogin(kakaoAccessToken)
+                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.w(ApplicationClass.TAG, "Fetching FCM registration token failed", task.exception)
+                        return@OnCompleteListener
+                    }
+
+                    // Get new FCM registration token
+                    val fcmToken = task.result
+                    Log.d(ApplicationClass.TAG, "ApplicationClass - onCreate() : fcm 토큰 : $fcmToken")
+
+                    sSharedPreferences.edit().putString(ApplicationClass.FCM_TOKEN, fcmToken.toString()).apply()
+
+                    SignInService(this).postKaKaoLogin(kakaoAccessToken, fcmToken.toString())
+                })
+
             }
         }
 
@@ -102,7 +118,20 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
                         val expiresAt: Long = mOAuthLoginModule.getExpiresAt(applicationContext)
                         val tokenType: String = mOAuthLoginModule.getTokenType(applicationContext)
                         Log.d(TAG, "SignInDialog - run() : 네이버 로그인 성공 / $accessToken")
-                        SignInService(this@SignInActivity).postNaverLogin(accessToken)
+
+                        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                            if (!task.isSuccessful) {
+                                Log.w(ApplicationClass.TAG, "Fetching FCM registration token failed", task.exception)
+                                return@OnCompleteListener
+                            }
+
+                            // Get new FCM registration token
+                            val fcmToken = task.result
+                            Log.d(ApplicationClass.TAG, "ApplicationClass - onCreate() : fcm 토큰 : $fcmToken")
+                            sSharedPreferences.edit().putString(ApplicationClass.FCM_TOKEN, fcmToken.toString()).apply()
+
+                            SignInService(this@SignInActivity).postNaverLogin(accessToken, fcmToken.toString())
+                        })
                     } else {
                         val errorCode: String =
                             mOAuthLoginModule.getLastErrorCode(applicationContext).code

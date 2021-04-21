@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/popular_keyword_layout">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/popular_keyword_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1"
+        style="@style/Subtitle2Style"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toStartOf="@id/guideline_middle"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/popular_keyword_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Body2Style"
+        app:layout_constraintTop_toTopOf="@id/popular_keyword_index"
+        app:layout_constraintBottom_toBottomOf="@id/popular_keyword_index"
+        app:layout_constraintStart_toEndOf="@id/guideline_middle"
+        android:layout_marginStart="8dp"
+        tools:text="김치찌개"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="27dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

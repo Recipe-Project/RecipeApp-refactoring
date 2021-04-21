@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity">
+
+    <item
+        android:id="@+id/menu_favorite"
+        android:title="스크랩 수"
+        android:icon="@drawable/ic_public_favorte"
+        app:showAsAction="ifRoom" />
+</menu>
