@@ -68,7 +68,7 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
                         1,
                         null,
                         it.ingredientCategoryIdx,
-                        it.ingredientIcon,
+                        it.ingredientIcon.toString(),
                         it.ingredientName,
                         getString(R.string.refrigeration)
                     )

@@ -6,14 +6,23 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMyRecipeCreateBinding
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.adapter.PickItemRecyclerViewAdapter
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.AddIngredientDialog
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.PickIconDialog
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreate
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -24,6 +33,7 @@ import kotlin.collections.ArrayList
 
 class MyRecipeCreateActivity :
     BaseActivity<ActivityMyRecipeCreateBinding>(ActivityMyRecipeCreateBinding::inflate),
+    PickIconDialog.PickIcon,
     MyRecipeCreateActivityView {
 
     val TAG = "MyRecipeCreateActivity"
@@ -50,6 +60,10 @@ class MyRecipeCreateActivity :
     lateinit var bitmap: Bitmap
 
     lateinit var uri: Uri
+
+    // 리사이클러뷰
+    val pickItem = ArrayList<DirectIngredientList>()
+    lateinit var pickItemRecyclerViewAdapter: PickItemRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,6 +107,19 @@ class MyRecipeCreateActivity :
                 imageUpload()
             }
 
+        }
+
+        // 재료 추가 버튼 클릭
+        binding.btnIngredient.setOnClickListener {
+            val addIngredientDialog = AddIngredientDialog(this, this, this)
+            addIngredientDialog.show()
+        }
+
+        // 재료 선택
+        pickItemRecyclerViewAdapter = PickItemRecyclerViewAdapter(this)
+        binding.rvIngredient.apply {
+            adapter = pickItemRecyclerViewAdapter
+            layoutManager = LinearLayoutManager(this@MyRecipeCreateActivity, RecyclerView.HORIZONTAL, false)
         }
     }
 
@@ -153,6 +180,51 @@ class MyRecipeCreateActivity :
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        pickItem.clear()
+        pickItemRecyclerViewAdapter.submitList(pickItem)
+
+        if (pickItem.size > 0) {
+            binding.rvIngredient.visibility = View.VISIBLE
+            binding.tvPleaseAddIngredient.visibility = View.INVISIBLE
+        } else {
+            binding.rvIngredient.visibility = View.GONE
+            binding.tvPleaseAddIngredient.visibility = View.VISIBLE
+        }
+
+    }
+
+    // 재료 직접 추가 버튼
+    override fun selectAddDirect() {
+
+    }
+
+    // 재료 선택 버튼
+    override fun selectPickDirect() {
+        val pickIconDialog = PickIconDialog(this, this, this)
+        pickIconDialog.show()
+    }
+
+    // 재료 선택
+    override fun pickItem(ingredient: Ingredient) {
+
+    }
+
+    // 삭제
+    override fun removePickItem(position: Int) {
+        pickItem.removeAt(position)
+        pickItemRecyclerViewAdapter.notifyDataSetChanged()
+        if (pickItem.size > 0) {
+            binding.rvIngredient.visibility = View.VISIBLE
+            binding.tvPleaseAddIngredient.visibility = View.INVISIBLE
+        } else {
+            binding.rvIngredient.visibility = View.GONE
+            binding.tvPleaseAddIngredient.visibility = View.VISIBLE
+        }
+    }
+
 
     override fun onPostMyRecipeCreateSuccess(response: MyRecipeCreateResponse) {
         dismissLoadingDialog()
@@ -160,7 +232,17 @@ class MyRecipeCreateActivity :
         showCustomToast(getString(R.string.myRecipeSaveComplete))
     }
 
-    override fun onPostMyRecipeCreateFailure(message: String) {
-        TODO("Not yet implemented")
+    override fun onMyRecipeCreateFailure(message: String) {
+
     }
+
+    override fun onGetIngredientMyRecipeSuccess(response: IngredientResponse) {
+
+    }
+
+    override fun btnSaveClick(pickIconUrl: String, name: String) {
+        pickItem.add(DirectIngredientList(name, pickIconUrl))
+    }
+
+
 }

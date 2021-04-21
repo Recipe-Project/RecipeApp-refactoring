@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.config
 
 import android.util.Log
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.FCM_TOKEN
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
 import okhttp3.Interceptor

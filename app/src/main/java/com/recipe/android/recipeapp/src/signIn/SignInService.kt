@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.signIn
 
 import android.util.Log
+import com.kakao.sdk.auth.model.OAuthToken
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.signIn.`interface`.SignInActivityView
 import com.recipe.android.recipeapp.src.signIn.`interface`.SignnInRetrofitInterface
@@ -14,10 +15,10 @@ class SignInService(val view: SignInActivityView) {
     val TAG = "SignInService"
 
     // 카카오 로그인 API
-    fun postKaKaoLogin(kakaoAccessToken: String) {
+    fun postKaKaoLogin(kakaoAccessToken: String, fcmToken: String) {
         val signnInRetrofitInterface =
             ApplicationClass.sRetrofit.create(SignnInRetrofitInterface::class.java)
-        signnInRetrofitInterface.postKaKaoLogin(kakaoAccessToken)
+        signnInRetrofitInterface.postKaKaoLogin(kakaoAccessToken, fcmToken.toString())
             .enqueue(object : Callback<SignInResponse> {
                 override fun onResponse(
                     call: Call<SignInResponse>,
@@ -40,10 +41,10 @@ class SignInService(val view: SignInActivityView) {
     }
 
     // 네이버 로그인 API
-    fun postNaverLogin(accessToken: String) {
+    fun postNaverLogin(accessToken: String, fcmToken: String) {
         val signnInRetrofitInterface =
             ApplicationClass.sRetrofit.create(SignnInRetrofitInterface::class.java)
-        signnInRetrofitInterface.postNaverLogin(accessToken)
+        signnInRetrofitInterface.postNaverLogin(accessToken, fcmToken)
             .enqueue(object : Callback<SignInResponse> {
                 override fun onResponse(
                     call: Call<SignInResponse>,

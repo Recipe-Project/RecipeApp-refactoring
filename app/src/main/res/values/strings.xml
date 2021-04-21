@@ -28,7 +28,10 @@
     <string name="cancel">취소</string>
     <string name="save">저장</string>
     <string name="title">제목</string>
-    <string name="ingredientPick">재료선택</string>
+    <string name="ingredientPick">재료</string>
+    <string name="ingredientAddDirect">재료 직접 추가</string>
+    <string name="ingredientPickDirect">재료 선택</string>
+    <string name="ingredientAdd">요리 재료를 추가해주세요.</string>
     <string name="pleaseEnterTitle">제목을 입력해주세요.</string>
     <string name="pleaseEnterContent">내용을 입력해주세요.</string>
     <string name="myRecipeSaveComplete">나만의 레시피 저장이 완료되었습니다.</string>
@@ -122,5 +125,7 @@
 
     <!-- 알림 -->
     <string name="fcmChannelName">레저: 레시피 저장소</string>
+
+    <string name="emptyFridge">냉장고파먹기</string>
 
 </resources>

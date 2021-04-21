@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="start"
+                style="@style/Subtitle1Style"
                 android:hint="@string/title"
                 android:paddingTop="18dp"
                 android:paddingBottom="16dp"
@@ -118,14 +119,38 @@
                 app:layout_constraintStart_toStartOf="@+id/view"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/btn_ingredient"
-                android:layout_width="111dp"
-                android:layout_height="38dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/btn_ingredient"
+                style="@style/ButtonStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="20dp"
+                android:gravity="center|end"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="11dp"
+                android:text="+ 재료추가"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_please_add_ingredient"
+                style="@style/ButtonStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
+                android:text="@string/ingredientAdd"
+                android:textColor="@color/gray_200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/view2"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
 
             <View
@@ -133,12 +158,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="41dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/gray_000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ingredient" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_please_add_ingredient" />
 
 
             <androidx.appcompat.widget.AppCompatEditText
