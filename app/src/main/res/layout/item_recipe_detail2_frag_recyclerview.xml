@@ -25,6 +25,7 @@
         app:layout_constraintTop_toBottomOf="@id/recipe_index_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recipe_detail_thumbnail_iv"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="24dp"
@@ -44,6 +45,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        tools:background="@color/black"/>
+        tools:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

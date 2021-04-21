@@ -26,6 +26,7 @@ class RecipeProcessRecyclerviewAdapter(private val list : ArrayList<PublicRecipe
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
         holder.index.text = "0${position+1}"
         holder.process.text = list[position].recipeProcessDc
+
         if(list[position].recipeProcessImg != " ") {
             Glide.with(ApplicationClass.instance).load(list[position].recipeProcessImg).transform(
                 CenterCrop(), RoundedCorners(5)

@@ -56,6 +56,7 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
         if(intent.hasExtra("uri")) {
             uri = intent.getStringExtra("uri")
         }
+        showLoadingDialog()
         recognizeReceipt(Uri.parse(uri))
 
         // 전체 재료 조회
@@ -168,7 +169,8 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
     }
 
     override fun onPostReceiptIngredientSuccess(response: PostReceiptIngredientResponse) {
-        if(response.result != null) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
             receiptIngredientList = response.result
             receiptIngredientRecyclerviewAdapter = ReceiptIngredientRecyclerviewAdapter(this)
             binding.recyclerview.adapter = receiptIngredientRecyclerviewAdapter
@@ -216,13 +218,13 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
         } else {
             when (response.code) {
                 3069 -> showCustomToast(response.message)
+                2068 -> showCustomToast(response.message)
                 else -> {
                     Log.d(TAG, "PickIngredientActivity - onPostIngredientSuccess() : ${response.message}")
                     showCustomToast(getString(R.string.networkError))
                 }
             }
         }
-
     }
 
     override fun pickItem(ingredient: Ingredient) {

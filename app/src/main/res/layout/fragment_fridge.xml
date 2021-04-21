@@ -175,8 +175,8 @@
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/all_check_checkbox"
-                    android:layout_width="21dp"
-                    android:layout_height="21dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"

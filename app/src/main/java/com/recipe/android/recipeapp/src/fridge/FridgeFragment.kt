@@ -261,7 +261,7 @@ class FridgeFragment :
 
     }
 
-    override fun onClickStorageMethod(string: String, position: Int) {
+    override fun onClickStorageMethod(method: String, position: Int) {
 
     }
 

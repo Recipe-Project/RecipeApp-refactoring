@@ -13,7 +13,7 @@ data class PatchFridgeObject(
     @SerializedName("expiredAt")
     val expiredAt : String,
     @SerializedName("storageMethod")
-    val storageMethod : String,
+    var storageMethod : String,
     @SerializedName("count")
     val count : Int
 )
