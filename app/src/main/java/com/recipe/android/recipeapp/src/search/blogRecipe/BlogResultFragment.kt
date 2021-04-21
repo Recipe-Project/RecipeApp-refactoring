@@ -1,5 +1,7 @@
 package com.recipe.android.recipeapp.src.search.blogRecipe
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +31,7 @@ class BlogResultFragment(private val keyword : String)
         binding.blogResultFragRecylerview.adapter = adapter
 
         // 최초로 데이터 load
+        showLoadingDialog()
         BlogRecipeService(this).getBlogRecipe(keyword = keyword, display = display, start = start)
         initScrollListener()
     }
@@ -58,6 +61,8 @@ class BlogResultFragment(private val keyword : String)
     }
 
     override fun onGetBlogRecipeSuccess(response: BlogRecipeResponse) {
+        dismissLoadingDialog()
+
         if (response.isSuccess) {
             // 검색된 게시물이 100개 초과시, 100+ 로 표기
             val totalCnt = response.result.total
@@ -70,6 +75,8 @@ class BlogResultFragment(private val keyword : String)
 
             val result = response.result.blogList
             adapter.setBlogRecipe(result)
+
+            // 블로그 스크랩
             adapter.blogRecipeScrapItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeScrapItemClick {
                 override fun onClick(view: View, position: Int) {
                     BlogRecipeService(this@BlogResultFragment).tryPostAddingScrap(
@@ -78,6 +85,18 @@ class BlogResultFragment(private val keyword : String)
                     )
                 }
             }
+
+            // 블로그 검색 결과 URL 연결
+            adapter.blogRecipeItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeItemClick {
+                override fun onClick(view: View, position: Int) {
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW)
+                            .setData(Uri.parse(result[position].blogUrl))
+                    )
+                }
+            }
+
+
             start += 10 // 불러온 데이터 수만큼 페이지 전환
             flag = true
         } else {

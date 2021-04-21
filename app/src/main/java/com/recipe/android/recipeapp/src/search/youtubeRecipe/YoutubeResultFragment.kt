@@ -35,6 +35,7 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
         binding.youtubeResultFragRecylerview.adapter = adapter
 
         // 최초로 데이터 load
+        showLoadingDialog()
         YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, BuildConfig.GOOGLE_API_KEY, keyword, pageToken)
         initScrollListener()
     }
@@ -58,6 +59,8 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
     }
 
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
+        dismissLoadingDialog()
+
         // 검색된 게시물이 100개 초과시, 100+ 로 표기
         val totalCnt = response.pageInfo.totalResults
         if(totalCnt > 100) {

@@ -30,6 +30,11 @@ class BlogRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHold
     }
     var blogRecipeScrapItemClick : BlogRecipeScrapItemClick? = null
 
+    interface BlogRecipeItemClick {
+        fun onClick(view: View, position: Int)
+    }
+    var blogRecipeItemClick : BlogRecipeItemClick? = null
+
     private val blogRecipeList = mutableListOf<BlogRecipeListItem?>()
 
     fun setBlogRecipe(list: ArrayList<BlogRecipeListItem>) {
@@ -83,6 +88,12 @@ class BlogRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHold
             if(blogRecipeScrapItemClick != null) {
                 holder.scrapBtn.setOnClickListener {
                     blogRecipeScrapItemClick?.onClick(it, position)
+                }
+            }
+
+            if(blogRecipeItemClick != null) {
+                holder.layout.setOnClickListener {
+                    blogRecipeItemClick?.onClick(it, position)
                 }
             }
         }
