@@ -43,7 +43,6 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
                 binding.btnRefrigeration.setTextColor(context.getColor(R.color.red))
                 binding.btnFrozen.setTextColor(context.getColor(R.color.gray_200))
                 binding.btnRoomTemperature.setTextColor(context.getColor(R.color.gray_200))
-
             }
             binding.btnFrozen.setOnClickListener {
                 view.onClickStorageMethod(context.getString(R.string.frozen), position)

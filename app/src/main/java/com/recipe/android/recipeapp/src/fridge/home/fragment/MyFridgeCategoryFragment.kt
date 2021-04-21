@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentMyFridgeCategoryBinding
-import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.home.FridgeUpdateService
 import com.recipe.android.recipeapp.src.fridge.home.SwipeToDeleteCallback
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeUpdateView
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeIngredientRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 
-class MyFridgeCategoryFragment(val result : GetFridgeResult)
+class MyFridgeCategoryFragment(val result : GetFridgeResult, val updateView : IngredientUpdateView)
     : BaseFragment<FragmentMyFridgeCategoryBinding>(FragmentMyFridgeCategoryBinding::bind, R.layout.fragment_my_fridge_category), FridgeUpdateView {
 
     val TAG = "MyFridgeCategoryFragment"
@@ -26,7 +26,7 @@ class MyFridgeCategoryFragment(val result : GetFridgeResult)
         super.onViewCreated(view, savedInstanceState)
 
         val fridgeItemList = result.ingredientList
-        val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(requireContext())
+        val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(requireContext(), updateView)
         binding.rvIngredient.adapter = myFridgeIngredientRecyclerviewAdapter
 
         if(fridgeItemList.size != 0) {
@@ -48,6 +48,7 @@ class MyFridgeCategoryFragment(val result : GetFridgeResult)
             // 카테고리 이름
             binding.tvCategory.text = result.ingredientCategoryName
             Log.d(TAG, "MyFridgeCategoryFragment : ${result.ingredientCategoryName}" )
+
         } else {
             binding.rvIngredient.visibility = View.GONE
             binding.tvCategory.visibility = View.GONE

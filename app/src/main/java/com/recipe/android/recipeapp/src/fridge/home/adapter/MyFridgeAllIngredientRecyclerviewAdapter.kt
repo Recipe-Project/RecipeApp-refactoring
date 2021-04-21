@@ -10,19 +10,19 @@ import com.recipe.android.recipeapp.databinding.FragmentMyFridgeCategoryBinding
 import com.recipe.android.recipeapp.src.fridge.home.FridgeUpdateService
 import com.recipe.android.recipeapp.src.fridge.home.SwipeToDeleteCallback
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeUpdateView
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 
-class MyFridgeAllIngredientRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<MyFridgeAllIngredientRecyclerviewAdapter.CustomViewholder>() {
+class MyFridgeAllIngredientRecyclerviewAdapter(val context : Context, val view: IngredientUpdateView) : RecyclerView.Adapter<MyFridgeAllIngredientRecyclerviewAdapter.CustomViewholder>() {
 
     var resultList = ArrayList<GetFridgeResult>()
     lateinit var customViewholder : CustomViewholder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         val binding = FragmentMyFridgeCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        customViewholder = CustomViewholder(binding, context)
-        return customViewholder
+        return CustomViewholder(binding, context, view)
     }
 
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
@@ -31,9 +31,9 @@ class MyFridgeAllIngredientRecyclerviewAdapter(val context : Context) : Recycler
 
     override fun getItemCount(): Int = resultList.size
 
-    class CustomViewholder(val binding: FragmentMyFridgeCategoryBinding, val context : Context) : RecyclerView.ViewHolder(binding.root), FridgeUpdateView {
+    class CustomViewholder(val binding: FragmentMyFridgeCategoryBinding, val context : Context, val view: IngredientUpdateView) : RecyclerView.ViewHolder(binding.root), FridgeUpdateView {
 
-        val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(context)
+        val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(context, view)
 
         fun bindWithView(fridgeResult : GetFridgeResult) {
             val ingredientList = fridgeResult.ingredientList

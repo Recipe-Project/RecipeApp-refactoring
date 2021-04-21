@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -17,22 +16,23 @@ import com.google.firebase.functions.FirebaseFunctions
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentFridgeBinding
-import com.recipe.android.recipeapp.databinding.ItemMyFridgeIngredientRecyclerviewBinding
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdapter
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
-import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
-import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeIngredientRecyclerviewAdapter
+import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
 import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
 import gun0912.tedimagepicker.builder.TedImagePicker
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class FridgeFragment :
     BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding::bind, R.layout.fragment_fridge),
-    FridgeView {
+    FridgeView, IngredientUpdateView {
 
     val TAG = "FridgeFragment"
 
@@ -53,10 +53,15 @@ class FridgeFragment :
     lateinit var bitmap : Bitmap
     private lateinit var functions: FirebaseFunctions
     var ingredients = ArrayList<GetFridgeResult>()
+    var fridgeUpdateList = ArrayList<PatchFridgeObject>()
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
     lateinit var myFridgeCategoryAdapter : MyFridgeCategoryAdapter
+
+    companion object {
+        var updateButtonFlag = false
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -101,6 +106,9 @@ class FridgeFragment :
 
         binding.updateTv.setOnClickListener {
             // 냉장고 수정
+            updateButtonFlag = true
+            showLoadingDialog()
+            FridgeService(this).tryGetFridge()
 
 
             // 레이아웃 변경
@@ -117,7 +125,9 @@ class FridgeFragment :
 
         binding.cancelTv.setOnClickListener {
             // 냉장고 수정 화면에서 취소 버튼
-
+            updateButtonFlag = false
+            showLoadingDialog()
+            FridgeService(this).tryGetFridge()
 
             // 레이아웃 변경
             binding.saveTv.visibility = View.INVISIBLE
@@ -146,7 +156,6 @@ class FridgeFragment :
             binding.allCheckTv.visibility = View.GONE
             binding.allCheckCheckbox.visibility = View.GONE
         }
-
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -188,8 +197,6 @@ class FridgeFragment :
     }
 
     override fun onGetFridgeSuccess(response: GetFridgeResponse) {
-        dismissLoadingDialog()
-
         var tabLayoutTextArray = ArrayList<String>()
         tabLayoutTextArray.add(getString(R.string.all))
 
@@ -201,6 +208,7 @@ class FridgeFragment :
                 return@forEach
             }
         }
+        dismissLoadingDialog()
 
         if (myFridgeFlag) {
             Log.d(TAG, "FridgeFragment : Flag is true")
@@ -215,13 +223,13 @@ class FridgeFragment :
             binding.viewPager.visibility = View.VISIBLE
             binding.tabLayout.visibility = View.VISIBLE
             binding.tabLayoutLine.visibility = View.VISIBLE
-            binding.updateTv.visibility = View.VISIBLE
             binding.fridgeFragDefaultTv.visibility = View.GONE
+            if(!updateButtonFlag) binding.updateTv.visibility = View.VISIBLE
 
             // 카테고리 탭 설정
             tabLayout = binding.tabLayout
             viewPager = binding.viewPager
-            myFridgeCategoryAdapter = MyFridgeCategoryAdapter(requireActivity())
+            myFridgeCategoryAdapter = MyFridgeCategoryAdapter(requireActivity(), this)
             viewPager.adapter = myFridgeCategoryAdapter
 
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -252,5 +260,18 @@ class FridgeFragment :
     override fun onPatchFridgeFailure(message: String) {
 
     }
+
+    override fun onClickStorageMethod(string: String, position: Int) {
+
+    }
+
+    override fun onClickCount(cnt: Int, position: Int) {
+
+    }
+
+    override fun onSetExpiredAt(date: String, position: Int) {
+
+    }
+
 
 }
