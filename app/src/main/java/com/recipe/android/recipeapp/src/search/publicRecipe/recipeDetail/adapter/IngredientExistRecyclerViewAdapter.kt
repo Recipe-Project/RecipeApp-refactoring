@@ -28,10 +28,10 @@ class IngredientExistRecyclerViewAdapter : RecyclerView.Adapter<IngredientExistR
     class CustomViewholder (val binding: ItemIngredientBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindWithView(ingredient: PublicRecipeIngredient) {
             binding.tvIngredientName.text = ingredient.recipeIngredientName
-//            if (ingredient.ingredientIcon != null) {
-//                Glide.with(ApplicationClass.instance).load(ingredient.ingredientIcon)
-//                    .into(binding.icIngredient)
-//            }
+            if (ingredient.recipeIngredientIcon != null) {
+                Glide.with(ApplicationClass.instance).load(ingredient.recipeIngredientIcon)
+                    .into(binding.icIngredient)
+            }
         }
     }
 

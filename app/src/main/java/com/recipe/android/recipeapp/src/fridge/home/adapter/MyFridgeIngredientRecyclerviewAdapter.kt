@@ -2,6 +2,7 @@ package com.recipe.android.recipeapp.src.fridge.home.adapter
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,17 @@ import com.bumptech.glide.Glide
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemMyFridgeIngredientRecyclerviewBinding
+import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
 
-class MyFridgeIngredientRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<MyFridgeIngredientRecyclerviewAdapter.CustomViewholder>() {
+class MyFridgeIngredientRecyclerviewAdapter(val context : Context)
+    : RecyclerView.Adapter<MyFridgeIngredientRecyclerviewAdapter.CustomViewholder>() {
 
     var fridgeItemList = ArrayList<FridgeItem>()
+    lateinit var binding : ItemMyFridgeIngredientRecyclerviewBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
-        val binding = ItemMyFridgeIngredientRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemMyFridgeIngredientRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CustomViewholder(binding, context)
     }
 
@@ -28,9 +32,9 @@ class MyFridgeIngredientRecyclerviewAdapter(val context : Context) : RecyclerVie
 
     override fun getItemCount(): Int = fridgeItemList.size
 
-    class CustomViewholder(val binding: ItemMyFridgeIngredientRecyclerviewBinding, val context: Context) : RecyclerView.ViewHolder(binding.root) {
+    class CustomViewholder(val binding: ItemMyFridgeIngredientRecyclerviewBinding, val context: Context)
+        : RecyclerView.ViewHolder(binding.root) {
         fun bindWithView(fridgeItem: FridgeItem) {
-
             binding.ingredientNameTv.text = fridgeItem.ingredientName
             if(fridgeItem.ingredientIcon != null) {
                 Glide.with(ApplicationClass.instance).load(fridgeItem.ingredientIcon).into(binding.ingredientIv)
@@ -74,6 +78,7 @@ class MyFridgeIngredientRecyclerviewAdapter(val context : Context) : RecyclerVie
                 }
             }
         }
+
     }
 
     fun submitList(fridgeItemList: ArrayList<FridgeItem>) {

@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -16,10 +17,12 @@ import com.google.firebase.functions.FirebaseFunctions
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentFridgeBinding
+import com.recipe.android.recipeapp.databinding.ItemMyFridgeIngredientRecyclerviewBinding
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdapter
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
+import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeIngredientRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -29,6 +32,13 @@ import java.util.*
 class FridgeFragment :
     BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding::bind, R.layout.fragment_fridge),
     FridgeView {
+
+    interface FridgeButtonClick {
+        fun fixClick()
+        fun cancelClick()
+        fun saveClick()
+    }
+    var fridgeButtonClick : FridgeButtonClick? = null
 
     val TAG = "FridgeFragment"
 
@@ -50,6 +60,10 @@ class FridgeFragment :
     private lateinit var functions: FirebaseFunctions
     var ingredients = ArrayList<GetFridgeResult>()
 
+    lateinit var tabLayout: TabLayout
+    lateinit var viewPager: ViewPager2
+    lateinit var myFridgeCategoryAdapter : MyFridgeCategoryAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,7 +72,9 @@ class FridgeFragment :
         setCurrentDay()
 
         // 냉장고 조회
+        showLoadingDialog()
         FridgeService(this).tryGetFridge()
+
 
         // + 버튼 클릭
         binding.fabAdd.setOnClickListener {
@@ -92,31 +108,49 @@ class FridgeFragment :
         binding.updateTv.setOnClickListener {
             // 냉장고 수정
 
+
             // 레이아웃 변경
             binding.saveTv.visibility = View.VISIBLE
             binding.cancelTv.visibility = View.VISIBLE
             binding.updateTv.visibility = View.INVISIBLE
             binding.fridgeFragDateTv.visibility = View.INVISIBLE
+
+            binding.productNameTv.visibility = View.GONE
+            binding.productFreshnessTv.visibility = View.GONE
+            binding.allCheckTv.visibility = View.VISIBLE
+            binding.allCheckCheckbox.visibility = View.VISIBLE
         }
 
         binding.cancelTv.setOnClickListener {
             // 냉장고 수정 화면에서 취소 버튼
 
+
             // 레이아웃 변경
             binding.saveTv.visibility = View.INVISIBLE
             binding.cancelTv.visibility = View.INVISIBLE
             binding.updateTv.visibility = View.VISIBLE
             binding.fridgeFragDateTv.visibility = View.VISIBLE
+
+            binding.productNameTv.visibility = View.VISIBLE
+            binding.productFreshnessTv.visibility = View.VISIBLE
+            binding.allCheckTv.visibility = View.GONE
+            binding.allCheckCheckbox.visibility = View.GONE
         }
 
         binding.saveTv.setOnClickListener {
             // 냉장고 수정 저장하기(냉장고 수정 API 호출)
 
+
             // 레이아웃 변경
             binding.saveTv.visibility = View.INVISIBLE
             binding.cancelTv.visibility = View.INVISIBLE
             binding.updateTv.visibility = View.VISIBLE
             binding.fridgeFragDateTv.visibility = View.VISIBLE
+
+            binding.productNameTv.visibility = View.VISIBLE
+            binding.productFreshnessTv.visibility = View.VISIBLE
+            binding.allCheckTv.visibility = View.GONE
+            binding.allCheckCheckbox.visibility = View.GONE
         }
 
     }
@@ -160,15 +194,20 @@ class FridgeFragment :
     }
 
     override fun onGetFridgeSuccess(response: GetFridgeResponse) {
+        dismissLoadingDialog()
+
         var tabLayoutTextArray = ArrayList<String>()
         tabLayoutTextArray.add(getString(R.string.all))
 
-        lateinit var tabLayout: TabLayout
-        lateinit var viewPager: ViewPager2
-        lateinit var myFridgeCategoryAdapter : MyFridgeCategoryAdapter
         var myFridgeFlag = false
 
-        myFridgeFlag = response.result.fridges.size != 0
+        response.result.fridges.forEach {
+            if(it.ingredientList.size != 0) {
+                myFridgeFlag = true
+                return@forEach
+            }
+        }
+
         if (myFridgeFlag) {
             Log.d(TAG, "FridgeFragment : Flag is true")
             val ingredientResult = response.result.fridges
@@ -183,7 +222,7 @@ class FridgeFragment :
             binding.tabLayout.visibility = View.VISIBLE
             binding.tabLayoutLine.visibility = View.VISIBLE
             binding.updateTv.visibility = View.VISIBLE
-            binding.fridgeFragDefaultTv.visibility = View.INVISIBLE
+            binding.fridgeFragDefaultTv.visibility = View.GONE
 
             // 카테고리 탭 설정
             tabLayout = binding.tabLayout
@@ -199,10 +238,17 @@ class FridgeFragment :
             myFridgeCategoryAdapter.submitList(ingredients)
         } else {
             Log.d(TAG, "Flag False : 냉장고에 재료 없음")
+            // visibility 변경
+            binding.viewPager.visibility = View.GONE
+            binding.tabLayout.visibility = View.GONE
+            binding.tabLayoutLine.visibility = View.GONE
+            binding.updateTv.visibility = View.GONE
+            binding.fridgeFragDefaultTv.visibility = View.VISIBLE
         }
     }
 
     override fun onGetFridgeFailure(message: String) {
 
     }
+
 }

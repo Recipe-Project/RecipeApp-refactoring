@@ -26,5 +26,5 @@ data class PublicRecipeResult(
     @SerializedName("userScrapCnt")
     val userScrapCnt : Int,
     @SerializedName("userScrapYN")
-    val userScrapYN : String
+    var userScrapYN : String
 )

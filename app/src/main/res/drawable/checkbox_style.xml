@@ -6,6 +6,7 @@
             android:shape="oval">
             <stroke android:color="@color/gray_100" android:width="2dp" />
             <solid android:color="@color/white" />
+
         </shape>
     </item>
 
@@ -17,7 +18,8 @@
 
             <!-- 이미지 영역 -->
             <item
-                android:drawable="@drawable/ic_checkbox" />
+                android:drawable="@drawable/ic_checkbox" >
+            </item>
         </layer-list>
     </item>
 </selector>

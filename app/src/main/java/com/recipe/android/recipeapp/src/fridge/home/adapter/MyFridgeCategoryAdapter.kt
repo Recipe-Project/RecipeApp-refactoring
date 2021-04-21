@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.recipe.android.recipeapp.src.fridge.FridgeFragment
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeUpdateView
+import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import com.recipe.android.recipeapp.src.fridge.home.fragment.MyFridgeAllCategoryFragment
 import com.recipe.android.recipeapp.src.fridge.home.fragment.MyFridgeCategoryFragment
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
@@ -32,4 +35,5 @@ class MyFridgeCategoryAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         this.ingredients = ingredients
         notifyDataSetChanged()
     }
+
 }

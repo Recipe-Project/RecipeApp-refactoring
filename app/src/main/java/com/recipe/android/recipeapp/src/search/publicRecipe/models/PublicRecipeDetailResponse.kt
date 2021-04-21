@@ -32,7 +32,7 @@ data class PublicRecipeDetailResult(
     @SerializedName("recipeProcessList")
     val recipeProcessList: ArrayList<PublicRecipeProcess>,
     @SerializedName("userScrapYN")
-    val userScrapYN: String,
+    var userScrapYN: String,
     @SerializedName("userScrapCnt")
     val userScrapCnt: Int
 )

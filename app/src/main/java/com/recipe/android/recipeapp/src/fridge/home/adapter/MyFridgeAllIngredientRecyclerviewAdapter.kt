@@ -2,6 +2,7 @@ package com.recipe.android.recipeapp.src.fridge.home.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -11,16 +12,17 @@ import com.recipe.android.recipeapp.src.fridge.home.SwipeToDeleteCallback
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
-import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 
-class MyFridgeAllCategoryAdapter(val context : Context) : RecyclerView.Adapter<MyFridgeAllCategoryAdapter.CustomViewholder>() {
+class MyFridgeAllIngredientRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<MyFridgeAllIngredientRecyclerviewAdapter.CustomViewholder>() {
 
     var resultList = ArrayList<GetFridgeResult>()
+    lateinit var customViewholder : CustomViewholder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         val binding = FragmentMyFridgeCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CustomViewholder(binding, context)
+        customViewholder = CustomViewholder(binding, context)
+        return customViewholder
     }
 
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
@@ -30,26 +32,36 @@ class MyFridgeAllCategoryAdapter(val context : Context) : RecyclerView.Adapter<M
     override fun getItemCount(): Int = resultList.size
 
     class CustomViewholder(val binding: FragmentMyFridgeCategoryBinding, val context : Context) : RecyclerView.ViewHolder(binding.root), FridgeUpdateView {
+
+        val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(context)
+
         fun bindWithView(fridgeResult : GetFridgeResult) {
             val ingredientList = fridgeResult.ingredientList
-            var deleteList = ArrayList<String>()
 
-            // 카테고리 이름
-            binding.tvCategory.text = fridgeResult.ingredientCategoryName
-            val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(context)
             binding.rvIngredient.adapter = myFridgeIngredientRecyclerviewAdapter
-            myFridgeIngredientRecyclerviewAdapter.submitList(ingredientList)
-            val swipeDelete = object : SwipeToDeleteCallback(context) {
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    deleteList.add(ingredientList[viewHolder.adapterPosition].ingredientName)
-                    myFridgeIngredientRecyclerviewAdapter.deleteItem(viewHolder.adapterPosition)
 
-                    // 냉장고 삭제 API 호출
-                    FridgeUpdateService(this@CustomViewholder).tryDeleteIngredient(DeleteIngredientRequest(deleteList))
+            if(ingredientList.size != 0){
+                // 카테고리 이름
+                binding.tvCategory.text = fridgeResult.ingredientCategoryName
+
+                myFridgeIngredientRecyclerviewAdapter.submitList(ingredientList)
+                val swipeDelete = object : SwipeToDeleteCallback(context) {
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        val ingredientName = ingredientList[viewHolder.adapterPosition].ingredientName
+                        myFridgeIngredientRecyclerviewAdapter.deleteItem(viewHolder.adapterPosition)
+
+                        // 냉장고 삭제 API 호출
+                        FridgeUpdateService(this@CustomViewholder).tryDeleteIngredient(DeleteIngredientRequest(ingredientName))
+                        binding.tvCategory.visibility = View.GONE
+                    }
                 }
+                val touchHelper = ItemTouchHelper(swipeDelete)
+                touchHelper.attachToRecyclerView(binding.rvIngredient)
+            } else {
+                binding.rvIngredient.visibility = View.GONE
+                binding.tvCategory.visibility = View.GONE
+                binding.bottomMargin.visibility = View.GONE
             }
-            val touchHelper = ItemTouchHelper(swipeDelete)
-            touchHelper.attachToRecyclerView(binding.rvIngredient)
         }
 
         override fun onDeleteIngredientSuccess(response: DeleteIngredientResponse) {
@@ -59,6 +71,7 @@ class MyFridgeAllCategoryAdapter(val context : Context) : RecyclerView.Adapter<M
         override fun onDeleteIngredientFailure(message: String) {
 
         }
+
     }
 
     fun submitList(resultList: ArrayList<GetFridgeResult>) {

@@ -156,7 +156,7 @@
         android:src="@drawable/ic_freshness_good"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ingredient_cnt_tv"
-        android:layout_marginEnd="35dp"/>
+        app:layout_constraintEnd_toEndOf="@id/plus_cnt_iv"
+        android:layout_marginEnd="73dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
