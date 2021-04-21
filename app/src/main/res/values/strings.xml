@@ -63,7 +63,7 @@
 
     <!-- 나의 냉장고 / 재료 선택 -->
     <string name="selectIngredient">재료</string>
-    <string name="addDirect">재료 입력</string>
+    <string name="addDirect">직접 입력</string>
     <string name="all">전체</string>
     <string name="beef">육류</string>
     <string name="vegetable">채소</string>
@@ -82,6 +82,7 @@
     <string name="addIngredient">재료 추가하기</string>
     <string name="pickIcon">재료 아이콘 선택</string>
     <string name="directAddSuccess">냉장고에 재료가 입력되었습니다!</string>
+    <string name="addIngredientInFloating">재료 입력</string>
 
     <!-- 나의 냉장고 / 냉장고 바구니 -->
     <string name="basket">냉장고 바구니</string>

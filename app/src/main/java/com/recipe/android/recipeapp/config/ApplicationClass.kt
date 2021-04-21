@@ -1,22 +1,16 @@
 package com.recipe.android.recipeapp.config
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
-import android.widget.Toast
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.ktx.storage
 import com.kakao.sdk.common.KakaoSdk
 import com.recipe.android.recipeapp.BuildConfig
-import com.recipe.android.recipeapp.R
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
 class ApplicationClass: Application() {

@@ -36,7 +36,7 @@
                 android:layout_marginTop="65dp"
                 android:fontFamily="@font/applesdgothicneoregular"
                 android:textColor="@color/gray_400"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="21/02/28" />
@@ -121,6 +121,7 @@
                 app:tabIndicatorHeight="3dp"
                 app:tabMode="scrollable"
                 app:tabTextAppearance="@style/TabTextStyle"
+                app:tabPaddingEnd="16dp"
                 android:visibility="gone"/>
             
             <View
@@ -293,7 +294,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="@string/addDirect"
+        android:text="@string/addIngredientInFloating"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/fab_add_direct"
         app:layout_constraintEnd_toStartOf="@+id/fab_add_direct"
@@ -334,7 +335,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="77dp"
+        android:layout_marginBottom="20dp"
         android:focusable="true"
         android:src="@drawable/ic_plus"
         android:tint="@color/sky_blue"

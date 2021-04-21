@@ -34,9 +34,7 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
         } else {
             // 냉장고가 텅 비었을 경우, Default 메세지 제공
             binding.emptyFridgeFragRecyclerview.visibility = View.INVISIBLE
-            binding.centerLine1.visibility = View.VISIBLE
             binding.emptyFridgeFragDefaultIv.visibility = View.VISIBLE
-            binding.centerLine2.visibility = View.VISIBLE
             binding.emptyFridgeFragDefaultTv.visibility = View.VISIBLE
         }
     }
