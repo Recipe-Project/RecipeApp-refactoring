@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.fridge.dialog
+package com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog
 
 import android.app.Activity
 import android.app.Dialog
@@ -17,18 +17,25 @@ import com.recipe.android.recipeapp.databinding.DialogPickIngredientIconBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateService
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
 
-class PickIngredientIconDialog(
+class PickIconDialog(
     context: Context,
     private var activity: Activity,
-    private val ingredientsList: ArrayList<CategoryIngrediets>,
     val pickView: PickIcon
-) : Dialog(context), PickIngredientActivityView {
+) : Dialog(context), PickIngredientActivityView, MyRecipeCreateActivityView {
 
     private lateinit var binding: DialogPickIngredientIconBinding
 
+    private val ingredientsList = ArrayList<CategoryIngrediets>()
+
     // pick icon url
-    var pickIconUrl: String? = null
+    var pickIconUrl: String = ""
+    var pickIconName: String = ""
+
+    lateinit var ingredientAllRecyclerViewAdapter: IngredientAllRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +53,15 @@ class PickIngredientIconDialog(
         window!!.attributes = params
         window!!.attributes.windowAnimations = R.style.DialogAnimation
 
-        val ingredientAllRecyclerViewAdapter = IngredientAllRecyclerViewAdapter(this)
+        // 재료조회
+        MyRecipeCreateService(this).getIngredients("")
+
+
+        ingredientAllRecyclerViewAdapter = IngredientAllRecyclerViewAdapter(this)
         binding.rvIngredient.apply {
             adapter = ingredientAllRecyclerViewAdapter
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         }
-        ingredientAllRecyclerViewAdapter.submitList(ingredientsList)
 
         binding.btnCancel.setOnClickListener(PickDialogListener())
         binding.btnSave.setOnClickListener(PickDialogListener())
@@ -62,7 +72,7 @@ class PickIngredientIconDialog(
         override fun onClick(v: View?) {
             when (v?.id) {
                 binding.btnSave.id -> {
-                    pickView.btnSaveClick(pickIconUrl)
+                    pickView.btnSaveClick(pickIconUrl, pickIconName)
                     dismiss()
                 }
                 binding.btnCancel.id -> dismiss()
@@ -72,10 +82,36 @@ class PickIngredientIconDialog(
     }
 
     interface PickIcon {
-        fun btnSaveClick(pickIconUrl: String?)
+        fun btnSaveClick(pickIconUrl: String, name: String)
+    }
+
+    override fun onPostMyRecipeCreateSuccess(response: MyRecipeCreateResponse) {
+    }
+
+    override fun onMyRecipeCreateFailure(message: String) {
+
+    }
+
+    override fun onGetIngredientMyRecipeSuccess(response: IngredientResponse) {
+        if (response.isSuccess) {
+            ingredientsList.clear()
+            response.result.ingredients.forEach {
+                ingredientsList.add(it)
+            }
+            ingredientAllRecyclerViewAdapter.submitList(ingredientsList)
+        }
+    }
+
+    override fun selectAddDirect() {
+
+    }
+
+    override fun selectPickDirect() {
+
     }
 
     override fun onGetIngredientSuccess(response: IngredientResponse) {
+
     }
 
     override fun onPostIngredientSuccess(response: PostIngredientsResponse) {
@@ -83,6 +119,7 @@ class PickIngredientIconDialog(
 
     override fun pickItem(ingredient: Ingredient) {
         pickIconUrl = ingredient.ingredientIcon
+        pickIconName = ingredient.ingredientName
     }
 
     override fun removePickItem(ingredient: Int) {
@@ -90,6 +127,8 @@ class PickIngredientIconDialog(
 
     override fun addDirectFailure(message: String) {
     }
+
+
 
 
 }

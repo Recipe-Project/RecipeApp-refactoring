@@ -2,7 +2,7 @@ package com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate
 
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.myRecipe.`interface`.MyRecipeRetrofitInterface
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateRetrofitInterface
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreate
@@ -26,7 +26,7 @@ class MyRecipeCreateService(val view: MyRecipeCreateActivityView) {
             ) {
                 Log.d(TAG, "MyRecipeService - onResponse() : 나만의 레시피 생성 api 호출 성공")
                 if (response.body() == null) {
-                    view.onPostMyRecipeCreateFailure("response is null")
+                    view.onMyRecipeCreateFailure("response is null")
                 } else {
                     view.onPostMyRecipeCreateSuccess(response.body() as MyRecipeCreateResponse)
                 }
@@ -34,7 +34,33 @@ class MyRecipeCreateService(val view: MyRecipeCreateActivityView) {
 
             override fun onFailure(call: Call<MyRecipeCreateResponse>, t: Throwable) {
                 Log.d(TAG, "MyRecipeService - onFailure() : 나만의 레시피 생성 api 호출 실패")
-                view.onPostMyRecipeCreateFailure(t.message ?: "통신오류")
+                view.onMyRecipeCreateFailure(t.message ?: "통신오류")
+            }
+
+        })
+    }
+
+    // 재료 조회
+    fun getIngredients(keyword: String) {
+        val myRecipeCreateRetrofitInterface =
+            ApplicationClass.sRetrofit.create(MyRecipeCreateRetrofitInterface::class.java)
+        myRecipeCreateRetrofitInterface.getIngredients(keyword).enqueue(object :
+            Callback<IngredientResponse> {
+            override fun onResponse(
+                call: Call<IngredientResponse>,
+                response: Response<IngredientResponse>
+            ) {
+                Log.d(TAG, "AddDirectService - onResponse() : 재료 조회 api 호출 성공")
+                if (response.body() == null) {
+                    view.onMyRecipeCreateFailure("response is null")
+                } else {
+                    view.onGetIngredientMyRecipeSuccess(response.body() as IngredientResponse)
+                }
+            }
+
+            override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
+                Log.d(TAG, "AddDirectService - onFailure() : 재료 조회 api 호출 실패")
+                view.onMyRecipeCreateFailure(t.message ?: "통신오류")
             }
 
         })

@@ -131,6 +131,10 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-storage-ktx'
 
+    // fcm
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     // Text Detection
     implementation 'com.google.firebase:firebase-functions:19.2.0'
     implementation 'com.google.code.gson:gson:2.8.6'

@@ -10,7 +10,7 @@ class IngredientViewHolder(val binding: ItemIngredientBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindWithView(ingredient: Ingredient) {
         binding.tvIngredientName.text = ingredient.ingredientName
-        if (ingredient.ingredientIcon != null) {
+        if (ingredient.ingredientIcon != "") {
             Glide.with(ApplicationClass.instance).load(ingredient.ingredientIcon)
                 .into(binding.icIngredient)
         }

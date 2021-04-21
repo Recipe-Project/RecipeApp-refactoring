@@ -1,7 +1,9 @@
 package com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.drawToBitmap
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.ItemIngredientBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView

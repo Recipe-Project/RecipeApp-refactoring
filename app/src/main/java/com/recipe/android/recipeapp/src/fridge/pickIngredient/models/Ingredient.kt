@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Ingredient(
     @SerializedName("ingredientIcon")
-    val ingredientIcon: String?,
+    val ingredientIcon: String,
     @SerializedName("ingredientIdx")
     val ingredientIdx: Int,
     @SerializedName("ingredientName")

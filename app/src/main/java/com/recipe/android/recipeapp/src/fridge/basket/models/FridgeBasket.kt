@@ -11,7 +11,7 @@ data class FridgeBasket(
     @SerializedName("ingredientCategoryIdx")
     val ingredientCategoryIdx: Int,
     @SerializedName("ingredientIcon")
-    val ingredientIcon: Any?,
+    val ingredientIcon: String,
     @SerializedName("ingredientName")
     val ingredientName: String,
     @SerializedName("storageMethod")

@@ -22,7 +22,7 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
     inner class BasketViewHolder(val binding: ItemBasketIngredientBinding): RecyclerView.ViewHolder(binding.root){
         fun bindWithView(ingredient: FridgeBasket, position: Int) {
             binding.tvIngredientName.text = ingredient.ingredientName
-            if (ingredient.ingredientIcon != null) {
+            if (ingredient.ingredientIcon != "") {
                 Glide.with(context).load(ingredient.ingredientIcon).into(binding.icIngredient)
             }
 
