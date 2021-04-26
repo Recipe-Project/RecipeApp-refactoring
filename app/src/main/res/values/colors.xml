@@ -10,7 +10,6 @@
 
     <!-- 제플린 color name 참고 -->
     <color name="green">#61b15a</color>
-    <color name="red">#e82840</color>
     <color name="gray_500">#212121</color>
     <color name="gray_400">#313131</color>
     <color name="gray_300">#545454</color>

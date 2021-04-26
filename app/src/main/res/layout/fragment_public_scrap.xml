@@ -20,7 +20,7 @@
             style="@style/Subtitle2Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red" />
+            android:textColor="@color/green" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Subtitle2Style"

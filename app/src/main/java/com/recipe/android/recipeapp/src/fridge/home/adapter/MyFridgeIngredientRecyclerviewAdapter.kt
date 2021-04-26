@@ -47,27 +47,27 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context, val view: Ingr
 
             // storageMethod 세팅
             when(fridgeItem.storageMethod) {
-                "냉장" -> binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.red))
-                "냉동" -> binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.red))
-                "실온" -> binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.red))
+                "냉장" -> binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.green))
+                "냉동" -> binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.green))
+                "실온" -> binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.green))
             }
             binding.freshnessRefrigerationTv.setOnClickListener {
                 view.onClickStorageMethod(context.getString(R.string.refrigeration), position)
-                binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.red))
+                binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.green))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
             }
             binding.freshnessFrozenTv.setOnClickListener {
                 view.onClickStorageMethod(context.getString(R.string.frozen), position)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
-                binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.red))
+                binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.green))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
             }
             binding.freshnessRoomTemperatureTv.setOnClickListener {
                 view.onClickStorageMethod(context.getString(R.string.roomTemperature), position)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
-                binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.red))
+                binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.green))
             }
 
             // count 세팅

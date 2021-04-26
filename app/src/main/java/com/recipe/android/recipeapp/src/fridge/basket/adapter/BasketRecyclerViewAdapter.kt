@@ -36,23 +36,23 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
                 binding.tvIngredientCnt.text = ingredientCnt.toString()
             }
 
-            binding.btnRefrigeration.setTextColor(context.getColor(R.color.red))
+            binding.btnRefrigeration.setTextColor(context.getColor(R.color.green))
 
             binding.btnRefrigeration.setOnClickListener {
                 view.onClickStorageMethod(context.getString(R.string.refrigeration), position)
-                binding.btnRefrigeration.setTextColor(context.getColor(R.color.red))
+                binding.btnRefrigeration.setTextColor(context.getColor(R.color.green))
                 binding.btnFrozen.setTextColor(context.getColor(R.color.gray_200))
                 binding.btnRoomTemperature.setTextColor(context.getColor(R.color.gray_200))
             }
             binding.btnFrozen.setOnClickListener {
                 view.onClickStorageMethod(context.getString(R.string.frozen), position)
-                binding.btnFrozen.setTextColor(context.getColor(R.color.red))
+                binding.btnFrozen.setTextColor(context.getColor(R.color.green))
                 binding.btnRefrigeration.setTextColor(context.getColor(R.color.gray_200))
                 binding.btnRoomTemperature.setTextColor(context.getColor(R.color.gray_200))
             }
             binding.btnRoomTemperature.setOnClickListener {
                 view.onClickStorageMethod(context.getString(R.string.roomTemperature), position)
-                binding.btnRoomTemperature.setTextColor(context.getColor(R.color.red))
+                binding.btnRoomTemperature.setTextColor(context.getColor(R.color.green))
                 binding.btnRefrigeration.setTextColor(context.getColor(R.color.gray_200))
                 binding.btnFrozen.setTextColor(context.getColor(R.color.gray_200))
             }

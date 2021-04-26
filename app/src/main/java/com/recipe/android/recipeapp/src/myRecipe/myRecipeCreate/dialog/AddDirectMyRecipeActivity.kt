@@ -60,11 +60,11 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectMyRecipeBinding>(Activit
 
         // 재료이름
         binding.etInputGredient.setOnClickListener {
-            it.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
+            it.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
         }
 
         binding.etInputGredient.setOnTouchListener { v, event ->
-            v.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
+            v.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     val imm =

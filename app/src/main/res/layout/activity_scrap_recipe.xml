@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:tabIndicatorColor="@color/red"
+        app:tabIndicatorColor="@color/green"
         app:tabIndicatorHeight="3dp"
         app:tabTextAppearance="@style/TabTextStyle"
         android:theme="@style/TabTheme"

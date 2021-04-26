@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         tools:text="1"
         style="@style/Subtitle2Style"
-        android:textColor="@color/red"
+        android:textColor="@color/green"
         app:layout_constraintEnd_toStartOf="@id/guideline_middle"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
