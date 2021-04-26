@@ -20,21 +20,16 @@
             android:gravity="center"
             android:paddingEnd="5dp"
             android:text="@string/cancel"
-            android:textColor="@color/gray_500"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView4"
-            style="@style/Head3Style"
+            style="@style/Body1Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/myRecipe"
-            android:textColor="@color/gray_500"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +44,7 @@
             android:gravity="center"
             android:paddingStart="5dp"
             android:text="@string/save"
-            android:textColor="@color/red"
-            android:textSize="14sp"
+            android:textColor="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -82,17 +76,15 @@
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_title"
+                style="@style/Subtitle1Style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="start"
-                style="@style/Subtitle1Style"
                 android:hint="@string/title"
                 android:paddingTop="18dp"
                 android:paddingBottom="16dp"
                 android:textColorHint="@color/gray_200"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/view"
                 app:layout_constraintStart_toStartOf="@+id/view"
                 app:layout_constraintTop_toBottomOf="@+id/img_pick" />
@@ -110,12 +102,11 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView5"
+                style="@style/ButtonStyle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/ingredientPick"
-                android:textColor="@color/gray_500"
-                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/view"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -124,10 +115,10 @@
                 style="@style/ButtonStyle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="20dp"
                 android:gravity="center|end"
                 android:paddingStart="24dp"
                 android:paddingTop="16dp"
+                android:paddingEnd="20dp"
                 android:paddingBottom="11dp"
                 android:text="+ 재료추가"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -168,6 +159,7 @@
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_content"
+                style="@style/Body2Style"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
@@ -175,7 +167,6 @@
                 android:gravity="top"
                 android:hint="내용을 입력하세요."
                 android:paddingBottom="32dp"
-                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/view2"
                 app:layout_constraintStart_toStartOf="@+id/view2"
                 app:layout_constraintTop_toBottomOf="@+id/view2" />

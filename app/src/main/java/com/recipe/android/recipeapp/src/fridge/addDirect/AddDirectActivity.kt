@@ -18,7 +18,6 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityAddDirectBinding
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
 import java.util.ArrayList
 
@@ -67,11 +66,11 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectBinding>(ActivityAddDire
 
         // 재료이름
         binding.etInputGredient.setOnClickListener {
-            it.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
+            it.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
         }
 
         binding.etInputGredient.setOnTouchListener { v, event ->
-            v.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
+            v.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     val imm =
@@ -117,88 +116,95 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectBinding>(ActivityAddDire
 
 
         binding.btnCategoryBeef.setOnClickListener {
-            grayToBlue(binding.btnCategoryBeef)
-            blueToGray(binding.btnCategoryVegetable)
-            blueToGray(binding.btnCategoryFruit)
-            blueToGray(binding.btnCategoryAquaticProducts)
-            blueToGray(binding.btnCategorySeasoning)
-            blueToGray(binding.btnCategoryProduct)
-            blueToGray(binding.btnCategoryEtc)
+            grayToGreen(binding.btnCategoryBeef)
+            greenToGray(binding.btnCategoryVegetable)
+            greenToGray(binding.btnCategoryFruit)
+            greenToGray(binding.btnCategoryAquaticProducts)
+            greenToGray(binding.btnCategorySeasoning)
+            greenToGray(binding.btnCategoryProduct)
+            greenToGray(binding.btnCategoryEtc)
             ingredientCategoryIdx = 3
-            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.btnAddGredient.setTextColor(getColor(R.color.white))
         }
 
         binding.btnCategoryVegetable.setOnClickListener {
-            grayToBlue(binding.btnCategoryVegetable)
-            blueToGray(binding.btnCategoryBeef)
-            blueToGray(binding.btnCategoryFruit)
-            blueToGray(binding.btnCategoryAquaticProducts)
-            blueToGray(binding.btnCategorySeasoning)
-            blueToGray(binding.btnCategoryProduct)
-            blueToGray(binding.btnCategoryEtc)
+            grayToGreen(binding.btnCategoryVegetable)
+            greenToGray(binding.btnCategoryBeef)
+            greenToGray(binding.btnCategoryFruit)
+            greenToGray(binding.btnCategoryAquaticProducts)
+            greenToGray(binding.btnCategorySeasoning)
+            greenToGray(binding.btnCategoryProduct)
+            greenToGray(binding.btnCategoryEtc)
             ingredientCategoryIdx = 1
-            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.btnAddGredient.setTextColor(getColor(R.color.white))
         }
 
         binding.btnCategoryFruit.setOnClickListener {
-            grayToBlue(binding.btnCategoryFruit)
-            blueToGray(binding.btnCategoryBeef)
-            blueToGray(binding.btnCategoryVegetable)
-            blueToGray(binding.btnCategoryAquaticProducts)
-            blueToGray(binding.btnCategorySeasoning)
-            blueToGray(binding.btnCategoryProduct)
-            blueToGray(binding.btnCategoryEtc)
+            grayToGreen(binding.btnCategoryFruit)
+            greenToGray(binding.btnCategoryBeef)
+            greenToGray(binding.btnCategoryVegetable)
+            greenToGray(binding.btnCategoryAquaticProducts)
+            greenToGray(binding.btnCategorySeasoning)
+            greenToGray(binding.btnCategoryProduct)
+            greenToGray(binding.btnCategoryEtc)
             ingredientCategoryIdx = 2
-            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.btnAddGredient.setTextColor(getColor(R.color.white))
         }
 
         binding.btnCategoryAquaticProducts.setOnClickListener {
-            grayToBlue(binding.btnCategoryAquaticProducts)
-            blueToGray(binding.btnCategoryBeef)
-            blueToGray(binding.btnCategoryFruit)
-            blueToGray(binding.btnCategoryVegetable)
-            blueToGray(binding.btnCategorySeasoning)
-            blueToGray(binding.btnCategoryProduct)
-            blueToGray(binding.btnCategoryEtc)
+            grayToGreen(binding.btnCategoryAquaticProducts)
+            greenToGray(binding.btnCategoryBeef)
+            greenToGray(binding.btnCategoryFruit)
+            greenToGray(binding.btnCategoryVegetable)
+            greenToGray(binding.btnCategorySeasoning)
+            greenToGray(binding.btnCategoryProduct)
+            greenToGray(binding.btnCategoryEtc)
 
             ingredientCategoryIdx = 4
-            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.btnAddGredient.setTextColor(getColor(R.color.white))
         }
 
         binding.btnCategorySeasoning.setOnClickListener {
-            grayToBlue(binding.btnCategorySeasoning)
-            blueToGray(binding.btnCategoryBeef)
-            blueToGray(binding.btnCategoryFruit)
-            blueToGray(binding.btnCategoryAquaticProducts)
-            blueToGray(binding.btnCategoryVegetable)
-            blueToGray(binding.btnCategoryProduct)
-            blueToGray(binding.btnCategoryEtc)
+            grayToGreen(binding.btnCategorySeasoning)
+            greenToGray(binding.btnCategoryBeef)
+            greenToGray(binding.btnCategoryFruit)
+            greenToGray(binding.btnCategoryAquaticProducts)
+            greenToGray(binding.btnCategoryVegetable)
+            greenToGray(binding.btnCategoryProduct)
+            greenToGray(binding.btnCategoryEtc)
             ingredientCategoryIdx = 5
-            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.btnAddGredient.setTextColor(getColor(R.color.white))
         }
 
         binding.btnCategoryProduct.setOnClickListener {
-            grayToBlue(binding.btnCategoryProduct)
-            blueToGray(binding.btnCategoryBeef)
-            blueToGray(binding.btnCategoryFruit)
-            blueToGray(binding.btnCategoryAquaticProducts)
-            blueToGray(binding.btnCategorySeasoning)
-            blueToGray(binding.btnCategoryVegetable)
-            blueToGray(binding.btnCategoryEtc)
+            grayToGreen(binding.btnCategoryProduct)
+            greenToGray(binding.btnCategoryBeef)
+            greenToGray(binding.btnCategoryFruit)
+            greenToGray(binding.btnCategoryAquaticProducts)
+            greenToGray(binding.btnCategorySeasoning)
+            greenToGray(binding.btnCategoryVegetable)
+            greenToGray(binding.btnCategoryEtc)
             ingredientCategoryIdx = 6
-            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.btnAddGredient.setTextColor(getColor(R.color.white))
         }
 
         binding.btnCategoryEtc.setOnClickListener {
-            grayToBlue(binding.btnCategoryEtc)
-            blueToGray(binding.btnCategoryBeef)
-            blueToGray(binding.btnCategoryFruit)
-            blueToGray(binding.btnCategoryAquaticProducts)
-            blueToGray(binding.btnCategorySeasoning)
-            blueToGray(binding.btnCategoryProduct)
-            blueToGray(binding.btnCategoryVegetable)
+            grayToGreen(binding.btnCategoryEtc)
+            greenToGray(binding.btnCategoryBeef)
+            greenToGray(binding.btnCategoryFruit)
+            greenToGray(binding.btnCategoryAquaticProducts)
+            greenToGray(binding.btnCategorySeasoning)
+            greenToGray(binding.btnCategoryProduct)
+            greenToGray(binding.btnCategoryVegetable)
             ingredientCategoryIdx = 7
-            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+            binding.btnAddGredient.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.btnAddGredient.setTextColor(getColor(R.color.white))
         }
 
     }
@@ -211,12 +217,14 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectBinding>(ActivityAddDire
         Log.d(TAG, "AddDirectActivity - btnSaveClick() : ${this.pickIconUrl}")
     }
 
-    private fun grayToBlue(tv: AppCompatTextView) {
-        tv.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+    private fun grayToGreen(tv: AppCompatTextView) {
+        tv.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+        tv.setTextColor(getColor(R.color.white))
     }
 
-    private fun blueToGray(tv: AppCompatTextView){
+    private fun greenToGray(tv: AppCompatTextView){
         tv.backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray_000))
+        tv.setTextColor(getColor(R.color.gray_500))
     }
 
     override fun onAddDirectSuccess(response: PostIngredientsResponse) {

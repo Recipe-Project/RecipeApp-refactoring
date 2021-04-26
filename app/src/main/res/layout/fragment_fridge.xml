@@ -324,6 +324,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:visibility="invisible"
         android:text="@string/inputRecipe"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/fab_add_recipe"
@@ -337,8 +338,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:focusable="true"
-        android:src="@drawable/ic_plus"
-        android:tint="@color/sky_blue"
+        android:backgroundTint="@color/green"
+        app:srcCompat="@drawable/ic_plus"
+        app:tint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

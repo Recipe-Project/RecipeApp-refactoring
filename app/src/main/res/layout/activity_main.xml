@@ -24,6 +24,7 @@
         app:itemTextColor="@drawable/menu_selector_color_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu"
+        android:theme="@style/bottomNavigationTheme"
         app:labelVisibilityMode="labeled"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,11 +15,9 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.IC_DEFAULT
 import com.recipe.android.recipeapp.config.BaseActivity
-import com.recipe.android.recipeapp.databinding.ActivityAddDirectBinding
 import com.recipe.android.recipeapp.databinding.ActivityAddDirectMyRecipeBinding
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
 import java.util.ArrayList
 
@@ -115,7 +113,7 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectMyRecipeBinding>(Activit
     }
 
     private fun grayToBlue(tv: AppCompatTextView) {
-        tv.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+        tv.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
     }
 
     private fun blueToGray(tv: AppCompatTextView){

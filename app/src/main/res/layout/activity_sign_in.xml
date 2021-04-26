@@ -10,13 +10,26 @@
         android:layout_height="209dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:src="@drawable/img_sign_in"
+        android:src="@drawable/img_splash"
         app:layout_constraintBottom_toTopOf="@+id/btn_kakao_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cafe_24_s_surround_air"
+        android:text="레시피\n저장소"
+        android:textColor="@color/green"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView2"
+        app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
+        app:layout_constraintTop_toTopOf="@+id/appCompatImageView2" />
+
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_kakao_sign_in"

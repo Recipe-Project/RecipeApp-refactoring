@@ -16,9 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/addDirect"
-            android:textColor="@color/gray_500"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            style="@style/Body1Style"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -183,9 +181,10 @@
         app:layout_constraintStart_toEndOf="@+id/btn_category_product"
         app:layout_constraintTop_toTopOf="@+id/btn_category_product" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_add_gredient"
         style="@style/ButtonStyle2"
+        android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"

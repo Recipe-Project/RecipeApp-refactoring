@@ -61,8 +61,8 @@ class MyPageFragment :
         }
 
         // 프로필 수정 버튼 클릭
-        binding.btnEditProfile.setOnClickListener {
-
+        binding.imgProfile.setOnClickListener {
+            // 수정 필요
         }
     }
 

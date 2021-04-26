@@ -9,8 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- 제플린 color name 참고 -->
-    <color name="sky_blue">#DBEDA0</color>
-    <color name="sky_blue2">#9dd6e3</color>
+    <color name="green">#61b15a</color>
     <color name="red">#e82840</color>
     <color name="gray_500">#212121</color>
     <color name="gray_400">#313131</color>

@@ -17,12 +17,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView"
+            style="@style/Body1Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/myPage"
-            android:textColor="@color/gray_500"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,50 +53,32 @@
                 android:layout_width="62dp"
                 android:layout_height="62dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_basic_profile"
+                android:src="@drawable/ic_add_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_user_name"
+                style="@style/Head3Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:text="@string/myPage"
-                android:textColor="@color/gray_500"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_profile" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/btn_edit_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/editProfile"
-                android:textColor="@color/gray_200"
-                android:textSize="12sp"
-                android:textStyle="normal"
-                app:layout_constraintEnd_toEndOf="@+id/tv_user_name"
-                app:layout_constraintStart_toStartOf="@+id/tv_user_name"
-                app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
-
+                app:layout_constraintTop_toBottomOf="@+id/img_profile"
+                tools:text="User Name" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView3"
+                style="@style/Subtitle1Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="43dp"
                 android:text="@string/scrapRecipe"
-                android:textColor="@color/gray_500"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
             <LinearLayout
                 android:id="@+id/btn_all_scrap_recipe"
@@ -107,19 +87,20 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+
+                android:paddingVertical="8dp"
+                android:paddingStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/appCompatTextView3">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/btn_view_all_scrap"
+                    style="@style/ButtonStyle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/view_all"
-                    android:textColor="@color/gray_500"
-                    android:textSize="14sp"
-                    android:textStyle="normal" />
+                    android:text="@string/view_all" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btn_view_all_scrap_arrow"
@@ -133,13 +114,11 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView7"
+                style="@style/Subtitle2Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/youtube"
-                android:textColor="@color/gray_500"
-                android:textSize="16sp"
-                android:textStyle="normal"
                 app:layout_constraintEnd_toStartOf="@+id/appCompatTextView6"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -147,12 +126,10 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView6"
+                style="@style/Subtitle2Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/blog"
-                android:textColor="@color/gray_500"
-                android:textSize="16sp"
-                android:textStyle="normal"
                 app:layout_constraintEnd_toStartOf="@+id/appCompatTextView8"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView7"
@@ -160,12 +137,10 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView8"
+                style="@style/Subtitle2Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recipe"
-                android:textColor="@color/gray_500"
-                android:textSize="16sp"
-                android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView6"
@@ -173,42 +148,39 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_cnt_youtube"
+                style="@style/Subtitle1Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="5"
-                android:textColor="@color/red"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textColor="@color/green"
                 app:layout_constraintEnd_toEndOf="@+id/appCompatTextView7"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7"
+                tools:text="5" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_cnt_blog"
+                style="@style/Subtitle1Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="5"
-                android:textColor="@color/red"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textColor="@color/green"
                 app:layout_constraintEnd_toEndOf="@+id/appCompatTextView6"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView6"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
+                tools:text="5" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_cnt_recipe"
+                style="@style/Subtitle1Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="5"
-                android:textColor="@color/red"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textColor="@color/green"
                 app:layout_constraintEnd_toEndOf="@+id/appCompatTextView8"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView8"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8" />
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8"
+                tools:text="5" />
 
             <View
                 android:id="@+id/line_middle"
@@ -224,14 +196,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/my_recipe"
+                style="@style/Subtitle1Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="28dp"
                 android:text="@string/myRecipe"
-                android:textColor="@color/gray_500"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/line_middle" />
 
@@ -243,19 +213,19 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:paddingVertical="8dp"
+                android:paddingStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/my_recipe"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/my_recipe">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/btn_view_all_my_recipe"
+                    style="@style/ButtonStyle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/view_all"
-                    android:textColor="@color/gray_500"
-                    android:textSize="14sp"
-                    android:textStyle="normal" />
+                    android:text="@string/view_all" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btn_view_all_my_recipe_arrow"

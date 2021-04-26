@@ -10,7 +10,6 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -87,7 +86,7 @@ class PickIngredientActivity :
 
         // 재료 검색
         binding.etSearch.setOnTouchListener { v, event ->
-            v.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
+            v.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     val imm =
@@ -199,7 +198,8 @@ class PickIngredientActivity :
     override fun pickItem(ingredient: Ingredient) {
         pickIngredientRecyclerViewItemList.add(ingredient)
         pickIngredientRecyclerViewAdapter.submitList(pickIngredientRecyclerViewItemList)
-        binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.sky_blue))
+        binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+        binding.btnNext.setTextColor(getColor(R.color.white))
         binding.rvPick.visibility = View.VISIBLE
         binding.rvPick.scrollToPosition(pickIngredientRecyclerViewItemList.size - 1)
     }

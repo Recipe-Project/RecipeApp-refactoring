@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_recipe_title"
+        style="@style/Subtitle1Style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@color/gray_500"
         android:background="@drawable/bg_time_radius"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:textColor="@color/gray_500"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="김치볶음밥" />
@@ -28,11 +29,14 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_recipe_explain"
+        style="@style/Body3Style"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="1dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         app:layout_constraintBottom_toBottomOf="@+id/img_recipe"
         app:layout_constraintEnd_toStartOf="@+id/img_recipe"
         app:layout_constraintStart_toStartOf="parent"

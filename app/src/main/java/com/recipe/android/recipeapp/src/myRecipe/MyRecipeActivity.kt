@@ -2,10 +2,13 @@ package com.recipe.android.recipeapp.src.myRecipe
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMyRecipeBinding
+import com.recipe.android.recipeapp.src.myPage.adapter.MyRecipeGridViewAdapter
 import com.recipe.android.recipeapp.src.myRecipe.`interface`.MyRecipeActivityView
 import com.recipe.android.recipeapp.src.myRecipe.adpater.MyRecipeRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.myRecipe.models.MyRecipeResponse
@@ -16,9 +19,14 @@ class MyRecipeActivity: BaseActivity<ActivityMyRecipeBinding>(ActivityMyRecipeBi
 
     val myRecipeRecyclerViewAdapter = MyRecipeRecyclerViewAdapter()
     var myRecipeList = ArrayList<MyRecipeResult>()
+    lateinit var myRecipeGridViewAdapter: MyRecipeGridViewAdapter
+
+    var isGridView = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        myRecipeGridViewAdapter = MyRecipeGridViewAdapter()
 
         // 리사이클러뷰 바인딩
         binding.rvMyRecipe.apply {
@@ -34,6 +42,28 @@ class MyRecipeActivity: BaseActivity<ActivityMyRecipeBinding>(ActivityMyRecipeBi
         // 뒤로가기 버튼
         binding.btnBack.setOnClickListener {
             finish()
+        }
+
+        // 그리드뷰
+        binding.btnView.setOnClickListener {
+            isGridView = !isGridView
+
+            if (isGridView) {
+                binding.btnView.setImageResource(R.drawable.ic_middle_listview)
+                binding.rvMyRecipe.apply {
+                    adapter = myRecipeGridViewAdapter
+                    layoutManager = GridLayoutManager(this@MyRecipeActivity, 3)
+                }
+                myRecipeGridViewAdapter.submitList(myRecipeList)
+            } else {
+                binding.btnView.setImageResource(R.drawable.ic_grid_view)
+                binding.rvMyRecipe.apply {
+                    adapter = myRecipeRecyclerViewAdapter
+                    layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                }
+                myRecipeRecyclerViewAdapter.submitList(myRecipeList)
+            }
+
         }
 
     }

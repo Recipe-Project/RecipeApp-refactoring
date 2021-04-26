@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">RecipeApp</string>
 
+    <string name="recipeStorage">레시피\n저장소</string>
+
     <!-- bottom navigation -->
     <string name="fridge">냉장고</string>
     <string name="recipeSearch">레시피검색</string>
