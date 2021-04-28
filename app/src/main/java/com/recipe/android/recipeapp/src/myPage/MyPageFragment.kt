@@ -11,8 +11,10 @@ import com.recipe.android.recipeapp.config.ApplicationClass.Companion.USER_IDX
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentMyPageBinding
+import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
 import com.recipe.android.recipeapp.src.myPage.`interface`.MyPageFragmentView
 import com.recipe.android.recipeapp.src.myPage.adapter.MyPageRecipeRecyclerViewAdapter
+import com.recipe.android.recipeapp.src.myPage.models.ModifyUserInfoResponse
 import com.recipe.android.recipeapp.src.myPage.models.MyRecipe
 import com.recipe.android.recipeapp.src.myPage.models.UserInfoResponse
 import com.recipe.android.recipeapp.src.myRecipe.MyRecipeActivity
@@ -21,7 +23,7 @@ import com.recipe.android.recipeapp.src.setting.SettingActivity
 
 class MyPageFragment :
     BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page),
-    MyPageFragmentView {
+    MyPageFragmentView, PickIngredientIconDialog.PickIcon {
 
     val TAG = "MyPageFragment"
 
@@ -62,7 +64,13 @@ class MyPageFragment :
 
         // 프로필 수정 버튼 클릭
         binding.imgProfile.setOnClickListener {
-            // 수정 필요
+            val pickIngredientIconDialog = PickIngredientIconDialog(
+                requireContext(),
+                requireActivity(),
+                null,
+                this
+            )
+            pickIngredientIconDialog.show()
         }
     }
 
@@ -85,7 +93,7 @@ class MyPageFragment :
     override fun onGetUserInfoSuccess(response: UserInfoResponse) {
         if (response.isSuccess) {
             val userInfoResult = response.result
-            if (userInfoResult.profilePhoto != "") {
+            if (userInfoResult.profilePhoto != null) {
                 Glide.with(requireContext()).load(userInfoResult.profilePhoto).into(binding.imgProfile)
             }
             binding.tvUserName.text = userInfoResult.userName
@@ -94,20 +102,39 @@ class MyPageFragment :
             binding.tvCntRecipe.text = userInfoResult.recipeScrapCnt.toString()
 
             // 나의 레시피 5개
-            myRecipeItemList.clear()
-            userInfoResult.myRecipeList.forEach {
-                myRecipeItemList.add(it)
+
+            if (userInfoResult.myRecipeList.isEmpty()) {
+                binding.tvMyRecipeCreate.visibility = View.VISIBLE
+                binding.btnMyRecipeCreate.visibility = View.VISIBLE
+                binding.rvMyRecipe.visibility = View.GONE
+            } else {
+                binding.tvMyRecipeCreate.visibility = View.GONE
+                binding.btnMyRecipeCreate.visibility = View.GONE
+                binding.rvMyRecipe.visibility = View.VISIBLE
+
+                myRecipeItemList.clear()
+                userInfoResult.myRecipeList.forEach {
+                    myRecipeItemList.add(it)
+                }
+                myPageRecipeRecyclerViewAdapter.submitList(myRecipeItemList, userInfoResult.myRecipeTotalSize)
             }
-            myPageRecipeRecyclerViewAdapter.submitList(myRecipeItemList, userInfoResult.myRecipeTotalSize)
-
-
-
 
         }
+    }
+
+    override fun onPatchUserInfoSuccess(response: ModifyUserInfoResponse) {
+        MyPageService(this).getUserInfo(userIdx)
     }
 
     override fun onGetUserInfoFailure(message: String) {
         showCustomToast(getString(R.string.networkError))
         Log.d(TAG, "MyPageFragment - onGetUserInfoFailure() : $message")
+    }
+
+    // 아이콘 선택 - 저장
+    override fun btnSaveClick(pickIconUrl: String?) {
+        if (pickIconUrl != null) {
+            MyPageService(this).patchUserInfo(userIdx, pickIconUrl)
+        }
     }
 }

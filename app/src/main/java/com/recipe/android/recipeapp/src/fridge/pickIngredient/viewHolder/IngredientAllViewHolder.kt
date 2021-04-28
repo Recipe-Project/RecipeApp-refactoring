@@ -24,6 +24,7 @@ class IngredientAllViewHolder(
             adapter = ingredientRecyclerViewAdapter
             layoutManager = GridLayoutManager(context, 4)
         }
+
         ingredientRecyclerViewAdapter.submitList(ingredientResult.ingredientList as ArrayList<Ingredient>)
     }
 }

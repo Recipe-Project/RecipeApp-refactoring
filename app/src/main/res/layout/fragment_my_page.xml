@@ -242,9 +242,38 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="20dp"
+                android:overScrollMode="never"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/my_recipe" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_my_recipe_create"
+                style="@style/Body2Style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/myRecipeCreate"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_recipe" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_my_recipe_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/radius_28"
+                android:backgroundTint="@color/green"
+                android:paddingHorizontal="23dp"
+                android:paddingVertical="12dp"
+                android:visibility="gone"
+                android:text="@string/myRecipeCreatePlease"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_my_recipe_create" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

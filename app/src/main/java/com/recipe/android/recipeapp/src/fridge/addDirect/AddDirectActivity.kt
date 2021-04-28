@@ -53,7 +53,7 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectBinding>(ActivityAddDire
             finish()
         }
 
-        // dialog
+        // dialog 아이콘 선택
         val pickIngredientIconDialog = PickIngredientIconDialog(
             this,
             this,

@@ -37,6 +37,8 @@
     <string name="pleaseEnterTitle">제목을 입력해주세요.</string>
     <string name="pleaseEnterContent">내용을 입력해주세요.</string>
     <string name="myRecipeSaveComplete">나만의 레시피 저장이 완료되었습니다.</string>
+    <string name="myRecipeCreate">나만의 레시피를 작성해보세요!</string>
+    <string name="myRecipeCreatePlease">레시피 작성하기</string>
 
     <!-- 마이페이지 / 나만의레시피 / 수정 -->
     <string name="Modify">수정</string>

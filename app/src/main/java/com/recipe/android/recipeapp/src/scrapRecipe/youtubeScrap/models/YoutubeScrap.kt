@@ -16,8 +16,10 @@ data class YoutubeScrap(
     val title: String,
     @SerializedName("userIdx")
     val userIdx: Int,
-    @SerializedName("youtubeIdx")
-    val youtubeIdx: Int,
+    @SerializedName("youtubeId")
+    val youtubeId: String,
     @SerializedName("youtubeUrl")
-    val youtubeUrl: String
+    val youtubeUrl: String,
+    @SerializedName("playTime")
+    val playTime: String
 )

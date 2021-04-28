@@ -4,6 +4,7 @@ import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.myPage.`interface`.MyPageFragmentView
 import com.recipe.android.recipeapp.src.myPage.`interface`.MyPageRetrofitInterface
+import com.recipe.android.recipeapp.src.myPage.models.ModifyUserInfoResponse
 import com.recipe.android.recipeapp.src.myPage.models.UserInfoResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +30,33 @@ class MyPageService(val view: MyPageFragmentView) {
 
             override fun onFailure(call: Call<UserInfoResponse>, t: Throwable) {
                 Log.d(TAG, "MyPageService - onFailure() : 마이페이지 조회 실패")
+                view.onGetUserInfoFailure(t.message ?: "통신오류")
+            }
+
+        })
+    }
+
+    fun patchUserInfo(userIdx: Int, profilePhoto: String){
+
+        val param = HashMap<String, Any>()
+        param["profilePhoto"] = profilePhoto
+
+        val myPageRetrofitInterface = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
+        myPageRetrofitInterface.patchUserInfo(userIdx, param).enqueue(object : Callback<ModifyUserInfoResponse>{
+            override fun onResponse(
+                call: Call<ModifyUserInfoResponse>,
+                response: Response<ModifyUserInfoResponse>
+            ) {
+                Log.d(TAG, "MyPageService - onResponse() : 회원 정보 수정 호출 성공")
+                if(response.body() == null) {
+                    view.onGetUserInfoFailure("response is null")
+                } else {
+                    view.onPatchUserInfoSuccess(response.body() as ModifyUserInfoResponse)
+                }
+            }
+
+            override fun onFailure(call: Call<ModifyUserInfoResponse>, t: Throwable) {
+                Log.d(TAG, "MyPageService - onFailure() : 회원 정보 수정 실패")
                 view.onGetUserInfoFailure(t.message ?: "통신오류")
             }
 

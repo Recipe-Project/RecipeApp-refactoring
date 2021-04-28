@@ -22,9 +22,9 @@
         android:id="@+id/img_thumbnail"
         android:layout_width="125dp"
         android:layout_height="91dp"
-        android:scaleType="centerCrop"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,12 +60,14 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_content"
         style="@style/Body3Style"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/gray_300"
+        app:layout_constraintEnd_toStartOf="@+id/img_thumbnail"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 

@@ -5,30 +5,40 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.DialogPickIngredientIconBinding
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientCategoryAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 
 class PickIngredientIconDialog(
     context: Context,
     private var activity: Activity,
-    private val ingredientsList: ArrayList<CategoryIngrediets>,
+    private val ingredientsList: ArrayList<CategoryIngrediets>?,
     val pickView: PickIcon
 ) : Dialog(context), PickIngredientActivityView {
 
     private lateinit var binding: DialogPickIngredientIconBinding
+    val TAG = "PickIngredientIconDialog"
 
     // pick icon url
     var pickIconUrl: String? = null
+
+    val newIngredientsList = ArrayList<CategoryIngrediets>()
+    lateinit var ingredientAllRecyclerViewAdapter: IngredientAllRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,15 +56,22 @@ class PickIngredientIconDialog(
         window!!.attributes = params
         window!!.attributes.windowAnimations = R.style.DialogAnimation
 
-        val ingredientAllRecyclerViewAdapter = IngredientAllRecyclerViewAdapter(this)
+        ingredientAllRecyclerViewAdapter = IngredientAllRecyclerViewAdapter(this)
         binding.rvIngredient.apply {
             adapter = ingredientAllRecyclerViewAdapter
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         }
-        ingredientAllRecyclerViewAdapter.submitList(ingredientsList)
+
+        if (ingredientsList == null){
+            PickIngredientService(this).getIngredients("")
+        } else {
+            ingredientAllRecyclerViewAdapter.submitList(ingredientsList)
+        }
 
         binding.btnCancel.setOnClickListener(PickDialogListener())
         binding.btnSave.setOnClickListener(PickDialogListener())
+
+
 
     }
 
@@ -76,6 +93,20 @@ class PickIngredientIconDialog(
     }
 
     override fun onGetIngredientSuccess(response: IngredientResponse) {
+        if (response.isSuccess) {
+            val ingredientResult = response.result.ingredients
+
+            newIngredientsList.clear()
+            ingredientResult.forEach {
+                newIngredientsList.add(it)
+            }
+
+            // 리사이클러뷰
+            ingredientAllRecyclerViewAdapter.submitList(newIngredientsList)
+        } else {
+            Toast.makeText(context, context.getString(R.string.networkError), Toast.LENGTH_LONG).show()
+            Log.d(TAG, "AddDirectActivity - onGetIngredientSuccess() : ${response.message}")
+        }
     }
 
     override fun onPostIngredientSuccess(response: PostIngredientsResponse) {

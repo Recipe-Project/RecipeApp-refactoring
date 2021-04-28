@@ -32,8 +32,11 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
                 view.onClickCount(binding.tvIngredientCnt.text.toString().toInt(), position)
             }
             binding.btnRemove.setOnClickListener {
-                ingredientCnt -= 1
-                binding.tvIngredientCnt.text = ingredientCnt.toString()
+                if (ingredientCnt > 0) {
+                    ingredientCnt -= 1
+                    binding.tvIngredientCnt.text = ingredientCnt.toString()
+                    view.onClickCount(binding.tvIngredientCnt.text.toString().toInt(), position)
+                }
             }
 
             binding.btnRefrigeration.setTextColor(context.getColor(R.color.green))

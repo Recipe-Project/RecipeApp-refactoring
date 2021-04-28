@@ -196,12 +196,21 @@ class PickIngredientActivity :
 
     // 재료 선택
     override fun pickItem(ingredient: Ingredient) {
-        pickIngredientRecyclerViewItemList.add(ingredient)
-        pickIngredientRecyclerViewAdapter.submitList(pickIngredientRecyclerViewItemList)
-        binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
-        binding.btnNext.setTextColor(getColor(R.color.white))
-        binding.rvPick.visibility = View.VISIBLE
-        binding.rvPick.scrollToPosition(pickIngredientRecyclerViewItemList.size - 1)
+        if (!pickIngredientRecyclerViewItemList.contains(ingredient)){
+            pickIngredientRecyclerViewItemList.add(ingredient)
+            pickIngredientRecyclerViewAdapter.submitList(pickIngredientRecyclerViewItemList)
+            binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.btnNext.setTextColor(getColor(R.color.white))
+            binding.rvPick.visibility = View.VISIBLE
+            binding.rvPick.scrollToPosition(pickIngredientRecyclerViewItemList.size - 1)
+        } else {
+            pickIngredientRecyclerViewItemList.remove(ingredient)
+            pickIngredientRecyclerViewAdapter.submitList(pickIngredientRecyclerViewItemList)
+            if (pickIngredientRecyclerViewItemList.size == 0) {
+                binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray_000))
+                binding.rvPick.visibility = View.GONE
+            }
+        }
     }
 
     // x 버튼으로 재료 빼기

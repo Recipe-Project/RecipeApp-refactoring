@@ -3,7 +3,6 @@ package com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.drawToBitmap
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.ItemIngredientBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
@@ -14,6 +13,8 @@ class IngredientRecyclerViewAdapter(val view: PickIngredientActivityView) :
     RecyclerView.Adapter<IngredientViewHolder>() {
 
     var ingredientList = ArrayList<Ingredient>()
+
+    var clickPosition = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
         return IngredientViewHolder(
@@ -27,9 +28,19 @@ class IngredientRecyclerViewAdapter(val view: PickIngredientActivityView) :
 
     override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
         holder.bindWithView(ingredientList[position])
-        holder.itemView.setOnClickListener {
-            view.pickItem(ingredientList[position])
+
+        if (clickPosition == position) {
+            holder.binding.circleGreen.visibility = View.VISIBLE
+        } else {
+            holder.binding.circleGreen.visibility = View.INVISIBLE
         }
+
+        holder.itemView.setOnClickListener {
+            clickPosition = position
+            view.pickItem(ingredientList[position])
+            notifyDataSetChanged()
+        }
+
     }
 
     override fun getItemCount(): Int {

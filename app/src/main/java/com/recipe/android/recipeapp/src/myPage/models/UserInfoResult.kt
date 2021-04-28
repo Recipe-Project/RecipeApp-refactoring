@@ -11,7 +11,7 @@ data class UserInfoResult(
     @SerializedName("myRecipeTotalSize")
     val myRecipeTotalSize: Int,
     @SerializedName("profilePhoto")
-    val profilePhoto: String,
+    val profilePhoto: String?,
     @SerializedName("recipeScrapCnt")
     val recipeScrapCnt: Int,
     @SerializedName("userIdx")

@@ -33,36 +33,6 @@ BlogScrapFragmnetView{
         // 정렬 기준 선택
         val items = arrayOf("최신순", "조회순")
 
-        val spinnerAdapter =
-            ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, items)
-        binding.spinner.adapter = spinnerAdapter
-
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                when (position) {
-                    0 -> {
-                        // 최신순
-                    }
-                    1 -> {
-                        // 조회순
-                    }
-                    2 -> {
-                        // 인기순
-                    }
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-        }
-
         blogScrapRecyclerViewAdapter = BlogScrapRecyclerViewAdpater()
         binding.rvScrapRecipe.apply {
             adapter = blogScrapRecyclerViewAdapter
