@@ -20,4 +20,7 @@
     <color name="transparent">#00000000</color>
     <color name="swipe_red">#e50011</color>
 
+    <color name="toolbar_bg">#61b15a</color>
+    <color name="counter_bg">#61b15a</color>
+
 </resources>

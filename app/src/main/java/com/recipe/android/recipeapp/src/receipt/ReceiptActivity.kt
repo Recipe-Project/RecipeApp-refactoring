@@ -24,7 +24,6 @@ import com.recipe.android.recipeapp.src.receipt.models.BuyItem
 import com.recipe.android.recipeapp.src.receipt.models.GetAllReceiptResponse
 import com.recipe.android.recipeapp.src.receipt.models.PostNewReceiptRequest
 import com.recipe.android.recipeapp.src.receipt.models.PostNewReceiptResponse
-import gun0912.tedimagepicker.builder.TedImagePicker
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat

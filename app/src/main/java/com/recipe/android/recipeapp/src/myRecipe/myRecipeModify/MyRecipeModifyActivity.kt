@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -109,7 +107,7 @@ class MyRecipeModifyActivity: BaseActivity<ActivityMyRecipeModifyBinding>(Activi
         // 이미지 피커 수정 필요
         val bitmap = (ContextCompat.getDrawable(
             this,
-            R.drawable.img_default_my_recipe
+            R.drawable.img_default_my_recipe_large
         ) as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)

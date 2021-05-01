@@ -12,4 +12,6 @@ interface PickIngredientActivityView {
     fun removePickItem(ingredient: Int)
 
     fun addDirectFailure(message: String)
+
+    fun removePickMyIngredients(ingredient: Ingredient)
 }

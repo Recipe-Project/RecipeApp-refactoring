@@ -22,7 +22,7 @@
         android:id="@+id/ingredient_iv"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        tools:src="@drawable/img_my_recipe_default"
+        tools:src="@drawable/img_my_recipe_default_small"
         app:layout_constraintTop_toTopOf="@id/checkbox"
         app:layout_constraintBottom_toBottomOf="@id/checkbox"
         app:layout_constraintStart_toEndOf="@id/checkbox"

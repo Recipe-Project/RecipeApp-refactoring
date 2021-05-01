@@ -8,6 +8,7 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.IC_DEFAULT
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
 import com.recipe.android.recipeapp.databinding.ItemPickIngredientBinding
+import com.recipe.android.recipeapp.databinding.ItemPickIngredientMyRecipeBinding
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
 
@@ -20,7 +21,7 @@ class PickItemRecyclerViewAdapter(val view: MyRecipeCreateActivityView) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickIngredientViewHolder {
         return PickIngredientViewHolder(
-            ItemPickIngredientBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemPickIngredientMyRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -37,7 +38,7 @@ class PickItemRecyclerViewAdapter(val view: MyRecipeCreateActivityView) :
         notifyDataSetChanged()
     }
 
-    inner class PickIngredientViewHolder(val binding: ItemPickIngredientBinding) :
+    inner class PickIngredientViewHolder(val binding: ItemPickIngredientMyRecipeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindWithView(ingredient: DirectIngredientList, position: Int) {
             binding.tvIngredientName.text = ingredient.ingredientName

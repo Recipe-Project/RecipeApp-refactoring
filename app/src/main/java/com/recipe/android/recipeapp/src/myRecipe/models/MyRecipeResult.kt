@@ -7,7 +7,7 @@ data class MyRecipeResult(
     @SerializedName("content")
     val content: String,
     @SerializedName("thumbnail")
-    val thumbnail: String,
+    val thumbnail: String?,
     @SerializedName("title")
     val title: String,
     @SerializedName("userRecipeIdx")

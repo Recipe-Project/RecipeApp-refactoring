@@ -4,11 +4,13 @@
     package="com.recipe.android.recipeapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- Image Picker -->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.CAMERA" />
+
 
     <application
         android:name=".config.ApplicationClass"
@@ -17,8 +19,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.RecipeApp">
+        android:theme="@style/Theme.RecipeApp"
+        android:usesCleartextTraffic="true">
 
         <activity android:name=".src.receipt.ReceiptActivity" />
         <activity

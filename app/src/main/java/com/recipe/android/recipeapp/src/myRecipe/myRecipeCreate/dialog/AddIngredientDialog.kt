@@ -42,10 +42,12 @@ class AddIngredientDialog(context: Context, private var activity: Activity, val 
         override fun onClick(v: View?) {
             when (v?.id) {
                 binding.btnAddDirect.id -> {
+                    // 재료 직접 추가 버튼
                     view.selectAddDirect()
                     dismiss()
                 }
                 binding.btnPickIngredient.id -> {
+                    // 재료 선택 버튼
                     view.selectPickDirect()
                     dismiss()
                 }

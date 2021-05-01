@@ -24,8 +24,6 @@ import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
 import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
-import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
-import gun0912.tedimagepicker.builder.TedImagePicker
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -96,12 +94,12 @@ class FridgeFragment :
 
         // 영수증 입력 버튼 클릭
         binding.fabAddRecipe.setOnClickListener {
-            TedImagePicker.with(requireContext()).start { uri ->
-                Log.d(TAG, uri.toString())
-                val intent = Intent(requireActivity(), ReceiptIngredientDialog::class.java)
-                intent.putExtra("uri", uri.toString())
-                startActivity(intent)
-            }
+//            TedImagePicker.with(requireContext()).start { uri ->
+//                Log.d(TAG, uri.toString())
+//                val intent = Intent(requireActivity(), ReceiptIngredientDialog::class.java)
+//                intent.putExtra("uri", uri.toString())
+//                startActivity(intent)
+//            }
         }
 
         binding.updateTv.setOnClickListener {

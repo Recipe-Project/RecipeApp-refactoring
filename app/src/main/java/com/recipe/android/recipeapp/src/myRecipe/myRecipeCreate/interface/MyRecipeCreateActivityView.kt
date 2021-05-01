@@ -15,4 +15,6 @@ interface MyRecipeCreateActivityView {
 
     fun pickItem(ingredient: Ingredient)
     fun removePickItem(ingredient: Int)
+
+    fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>)
 }

@@ -194,6 +194,10 @@ class PickIngredientActivity :
         showCustomToast(getString(R.string.networkError))
     }
 
+    override fun removePickMyIngredients(ingredient: Ingredient) {
+
+    }
+
     // 재료 선택
     override fun pickItem(ingredient: Ingredient) {
         if (!pickIngredientRecyclerViewItemList.contains(ingredient)){

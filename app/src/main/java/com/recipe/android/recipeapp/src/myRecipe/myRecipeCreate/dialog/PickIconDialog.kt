@@ -125,10 +125,16 @@ class PickIconDialog(
     override fun removePickItem(ingredient: Int) {
     }
 
+    override fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>) {
+
+    }
+
     override fun addDirectFailure(message: String) {
     }
 
+    override fun removePickMyIngredients(ingredient: Ingredient) {
 
+    }
 
 
 }

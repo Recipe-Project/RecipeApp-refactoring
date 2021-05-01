@@ -5,7 +5,6 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateRetrofitInterface
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreate
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +14,7 @@ class MyRecipeCreateService(val view: MyRecipeCreateActivityView) {
     val TAG = "MyRecipeCreateService"
 
     // 나만의 레시피 생성 api
-    fun postMyRecipeCreate(param: MyRecipeCreate) {
+    fun postMyRecipeCreate(param: HashMap<String, Any>) {
         val myRecipeCreateRetrofitInterface =
             ApplicationClass.sRetrofit.create(MyRecipeCreateRetrofitInterface::class.java)
         myRecipeCreateRetrofitInterface.postMyRecipeCreate(param).enqueue(object :

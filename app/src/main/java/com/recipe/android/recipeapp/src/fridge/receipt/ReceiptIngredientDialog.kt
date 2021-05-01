@@ -239,6 +239,10 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
 
     }
 
+    override fun removePickMyIngredients(ingredient: Ingredient) {
+
+    }
+
     override fun btnSaveClick(pickIconUrl: String?) {
 
     }

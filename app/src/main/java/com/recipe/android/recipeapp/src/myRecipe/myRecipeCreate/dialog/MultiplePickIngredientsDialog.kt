@@ -1,52 +1,48 @@
-package com.recipe.android.recipeapp.src.fridge.dialog
+package com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.DialogPickIngredientIconBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientCategoryAdapter
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.adapter.MultiplePickAllAdapter
 
-class PickIngredientIconDialog(
-    context: Context,
-    private var activity: Activity,
-    private val ingredientsList: ArrayList<CategoryIngrediets>?,
-    val pickView: PickIcon
-) : Dialog(context), PickIngredientActivityView {
+class MultiplePickIngredientsDialog(context: Context, val view: MyRecipeCreateActivityView): Dialog(context), PickIngredientActivityView {
 
+    val TAG = "MultiplePickIngredientsDialog"
     private lateinit var binding: DialogPickIngredientIconBinding
-    val TAG = "PickIngredientIconDialog"
-
-    // pick icon url
-    var pickIconUrl: String? = null
 
     val newIngredientsList = ArrayList<CategoryIngrediets>()
-    lateinit var ingredientAllRecyclerViewAdapter: IngredientAllRecyclerViewAdapter
+    lateinit var multiplePickAllAdapter: MultiplePickAllAdapter
+
+    val pickIngredientsMyRecipe = ArrayList<Ingredient>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DialogPickIngredientIconBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
         setCanceledOnTouchOutside(true)
         setCancelable(true)
+
         window!!.setBackgroundDrawable(ColorDrawable())
         window!!.setGravity(Gravity.BOTTOM)
         val params: WindowManager.LayoutParams = window!!.attributes
@@ -56,40 +52,24 @@ class PickIngredientIconDialog(
         window!!.attributes = params
         window!!.attributes.windowAnimations = R.style.DialogAnimation
 
-        ingredientAllRecyclerViewAdapter = IngredientAllRecyclerViewAdapter(this)
+        PickIngredientService(this).getIngredients("")
+
+        multiplePickAllAdapter = MultiplePickAllAdapter(this)
         binding.rvIngredient.apply {
-            adapter = ingredientAllRecyclerViewAdapter
-            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            adapter = multiplePickAllAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
-        if (ingredientsList == null){
-            PickIngredientService(this).getIngredients("")
-        } else {
-            ingredientAllRecyclerViewAdapter.submitList(ingredientsList)
+        binding.tvTitle.text = context.getString(R.string.ingredientPickDirect)
+
+        binding.btnCancel.setOnClickListener {
+            dismiss()
         }
 
-        binding.btnCancel.setOnClickListener(PickDialogListener())
-        binding.btnSave.setOnClickListener(PickDialogListener())
-
-
-
-    }
-
-    inner class PickDialogListener : View.OnClickListener {
-        override fun onClick(v: View?) {
-            when (v?.id) {
-                binding.btnSave.id -> {
-                    pickView.btnSaveClick(pickIconUrl)
-                    dismiss()
-                }
-                binding.btnCancel.id -> dismiss()
-            }
+        binding.btnSave.setOnClickListener {
+            view.pickBtnSaveClick(pickIngredientsMyRecipe)
+            dismiss()
         }
-
-    }
-
-    interface PickIcon {
-        fun btnSaveClick(pickIconUrl: String?)
     }
 
     override fun onGetIngredientSuccess(response: IngredientResponse) {
@@ -102,7 +82,7 @@ class PickIngredientIconDialog(
             }
 
             // 리사이클러뷰
-            ingredientAllRecyclerViewAdapter.submitList(newIngredientsList)
+            multiplePickAllAdapter.submitList(newIngredientsList)
         } else {
             Toast.makeText(context, context.getString(R.string.networkError), Toast.LENGTH_LONG).show()
             Log.d(TAG, "AddDirectActivity - onGetIngredientSuccess() : ${response.message}")
@@ -110,21 +90,23 @@ class PickIngredientIconDialog(
     }
 
     override fun onPostIngredientSuccess(response: PostIngredientsResponse) {
+
     }
 
     override fun pickItem(ingredient: Ingredient) {
-        pickIconUrl = ingredient.ingredientIcon
+        pickIngredientsMyRecipe.add(ingredient)
+        Log.d(TAG, "MultiplePickIngredientsDialog - pickItem() : $pickIngredientsMyRecipe")
     }
 
     override fun removePickItem(ingredient: Int) {
     }
 
     override fun addDirectFailure(message: String) {
+
     }
 
     override fun removePickMyIngredients(ingredient: Ingredient) {
-
+        pickIngredientsMyRecipe.remove(ingredient)
+        Log.d(TAG, "MultiplePickIngredientsDialog - removePickMyIngredients() : $pickIngredientsMyRecipe")
     }
-
-
 }

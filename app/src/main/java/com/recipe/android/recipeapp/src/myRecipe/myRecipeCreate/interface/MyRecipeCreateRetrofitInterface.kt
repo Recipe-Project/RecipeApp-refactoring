@@ -14,7 +14,7 @@ interface MyRecipeCreateRetrofitInterface {
     // 나만의 레시피 생성
     @POST("/my-recipes")
     fun postMyRecipeCreate(
-        @Body param: MyRecipeCreate
+        @Body param: HashMap<String, Any>
     ): Call<MyRecipeCreateResponse>
 
     // 재료조회

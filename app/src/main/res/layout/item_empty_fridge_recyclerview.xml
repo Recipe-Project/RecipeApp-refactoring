@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="fitXY"
-            tools:src="@drawable/img_default_my_recipe"/>
+            tools:src="@drawable/img_default_my_recipe_large"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/favorite_iv"
