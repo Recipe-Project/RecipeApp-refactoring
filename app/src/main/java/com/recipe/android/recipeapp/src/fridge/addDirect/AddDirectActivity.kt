@@ -233,8 +233,7 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectBinding>(ActivityAddDire
             finish()
         } else {
             when (response.code) {
-                2065 -> showCustomToast(response.message)
-                2069 -> showCustomToast(response.message)
+                2065, 2066, 2068, 2069 -> showCustomToast(response.message)
                 else -> showCustomToast(getString(R.string.networkError))
             }
         }

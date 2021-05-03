@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,9 +16,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <DatePicker
+        <CalendarView
             android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:calendarTextColor="@color/green"
@@ -31,20 +32,16 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_save"
             style="@style/ButtonStyle2"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/radius_28"
-            android:backgroundTint="@color/green"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/green"
             android:gravity="center"
-            android:text="@string/save"
+            android:text="@string/save2"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/datePicker"
-            app:layout_constraintStart_toStartOf="@+id/datePicker"
-            app:layout_constraintTop_toBottomOf="@+id/datePicker" />
+            app:layout_constraintStart_toStartOf="@+id/datePicker" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

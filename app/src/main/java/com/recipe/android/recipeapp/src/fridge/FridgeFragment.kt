@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.functions.FirebaseFunctions
+import com.opensooq.supernova.gligar.GligarPicker
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentFridgeBinding
@@ -24,6 +26,7 @@ import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
 import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
+import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -61,6 +64,8 @@ class FridgeFragment :
         var updateButtonFlag = false
     }
 
+    val PICKER_REQUEST_CODE = 5300
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,12 +99,8 @@ class FridgeFragment :
 
         // 영수증 입력 버튼 클릭
         binding.fabAddRecipe.setOnClickListener {
-//            TedImagePicker.with(requireContext()).start { uri ->
-//                Log.d(TAG, uri.toString())
-//                val intent = Intent(requireActivity(), ReceiptIngredientDialog::class.java)
-//                intent.putExtra("uri", uri.toString())
-//                startActivity(intent)
-//            }
+            GligarPicker().limit(1).requestCode(PICKER_REQUEST_CODE).withActivity(requireActivity())
+                .show()
         }
 
         binding.updateTv.setOnClickListener {
@@ -269,6 +270,22 @@ class FridgeFragment :
 
     override fun onSetExpiredAt(date: String, position: Int) {
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            PICKER_REQUEST_CODE -> {
+                showLoadingDialog()
+                val imagesList = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)
+                val pickImage = imagesList?.get(0)
+                val uri = Uri.parse("file://$pickImage")
+
+                val intent = Intent(requireActivity(), ReceiptIngredientDialog::class.java)
+                intent.putExtra("uri", uri.toString())
+                startActivity(intent)
+            }
+        }
     }
 
 

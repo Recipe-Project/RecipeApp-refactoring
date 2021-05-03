@@ -8,7 +8,9 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemBasketIngredientBinding
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
+import com.recipe.android.recipeapp.src.fridge.basket.`interface`.DateDialogInterface
 import com.recipe.android.recipeapp.src.fridge.basket.models.FridgeBasket
+import com.recipe.android.recipeapp.src.fridge.dialog.DateDialog
 
 class BasketRecyclerViewAdapter(val view: BasketActivityView):
 RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
@@ -19,7 +21,7 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
 
     val context = ApplicationClass.instance
 
-    inner class BasketViewHolder(val binding: ItemBasketIngredientBinding): RecyclerView.ViewHolder(binding.root){
+    inner class BasketViewHolder(val binding: ItemBasketIngredientBinding): RecyclerView.ViewHolder(binding.root), DateDialogInterface{
         fun bindWithView(ingredient: FridgeBasket, position: Int) {
             binding.tvIngredientName.text = ingredient.ingredientName
             if (ingredient.ingredientIcon != "") {
@@ -70,7 +72,7 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
 //            }
 
             if (ingredient.expiredAt == null) {
-                binding.tvExpired.text = "00.00.00 까지"
+                binding.tvExpired.text = "0000.00.00 까지"
             } else {
                 binding.tvExpired.text = ingredient.expiredAt
             }
@@ -78,9 +80,17 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
             binding.btnPickRemove.setOnClickListener {
                 view.onClickPickRemove(position)
             }
+
+            binding.tvExpired.setOnClickListener {
+                val dateDialog = DateDialog(context, this, position)
+                dateDialog.show()
+            }
         }
 
-
+        override fun clickDate(year: Int, month: Int, dayOfMonth: Int, position: Int) {
+            binding.tvExpired.text = "$year.$month.$dayOfMonth"
+            view.onClickExpiredAt(position, "$year.$month.$dayOfMonth")
+        }
     }
 
 
@@ -93,9 +103,9 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
     override fun onBindViewHolder(holder: BasketViewHolder, position: Int) {
         holder.bindWithView(ingredientList[position], position)
 
-        holder.binding.tvExpired.setOnClickListener {
-            view.onClickExpiredAt(position)
-        }
+//        holder.binding.tvExpired.setOnClickListener {
+//            view.onClickExpiredAt(position)
+//        }
 
     }
 
@@ -105,4 +115,6 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
         this.ingredientList = ingredientList
         notifyDataSetChanged()
     }
+
+
 }

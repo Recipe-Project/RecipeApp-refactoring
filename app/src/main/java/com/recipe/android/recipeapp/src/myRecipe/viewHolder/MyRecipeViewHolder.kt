@@ -12,7 +12,9 @@ import com.recipe.android.recipeapp.src.myRecipe.models.MyRecipeResult
 
 class MyRecipeViewHolder(val binding: ItemMyRecipeListBinding): RecyclerView.ViewHolder(binding.root) {
     fun bindWithView(myRecipeItem: MyRecipeResult) {
-        Glide.with(ApplicationClass.instance).load(myRecipeItem.thumbnail).transform(CenterCrop(), RoundedCorners(20)).into(binding.imgRecipe)
+        if (myRecipeItem.thumbnail != null) {
+            Glide.with(ApplicationClass.instance).load(myRecipeItem.thumbnail).transform(CenterCrop(), RoundedCorners(20)).into(binding.imgRecipe)
+        }
         binding.tvRecipeTitle.text = myRecipeItem.title
         binding.tvRecipeExplain.text = myRecipeItem.content
     }

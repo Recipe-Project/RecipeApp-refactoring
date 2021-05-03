@@ -180,6 +180,7 @@ class PickIngredientActivity :
         } else {
             when (response.code) {
                 3069 -> showCustomToast(response.message)
+                2068 -> showCustomToast(response.message)
                 else -> {
                     Log.d(TAG, "PickIngredientActivity - onPostIngredientSuccess() : ${response.message}")
                     showCustomToast(getString(R.string.networkError))

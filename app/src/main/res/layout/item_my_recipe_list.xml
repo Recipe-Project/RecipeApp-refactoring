@@ -24,6 +24,7 @@
         android:layout_width="63dp"
         android:layout_height="63dp"
         android:layout_marginTop="16dp"
+        android:src="@drawable/img_my_recipe_default_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

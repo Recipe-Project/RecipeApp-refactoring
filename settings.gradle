@@ -1,2 +1,3 @@
+include ':gligar'
 include ':app'
 rootProject.name = "RecipeApp"

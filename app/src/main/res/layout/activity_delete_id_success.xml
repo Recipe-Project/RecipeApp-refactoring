@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cafe_24_s_surround_air"
+        android:gravity="center"
+        android:lineHeight="29dp"
+        android:lineSpacingExtra="8sp"
+        android:text="레시피\n저장소"
+        android:textColor="@color/green"
+        android:textSize="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView24"
+        style="@style/Head3Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/deleteIdSuccess"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView23" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView22"
+        style="@style/Body1Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/thankYou"
+        app:layout_constraintBottom_toTopOf="@+id/btn_move_sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView24" />
+
+    <LinearLayout
+        android:id="@+id/btn_move_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:paddingStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_off"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView22"
+        app:layout_constraintStart_toStartOf="@+id/appCompatTextView22">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_view_all_my_recipe"
+            style="@style/ButtonStyle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/moveSignIn" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_view_all_my_recipe_arrow"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_keyboard_arrow_right"
+            app:tint="@color/gray_500" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_off"
+        style="@style/ButtonStyle2"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/radius_28"
+        android:backgroundTint="@color/green"
+        android:gravity="center"
+        android:text="@string/offApp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

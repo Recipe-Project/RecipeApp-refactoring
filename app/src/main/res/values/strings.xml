@@ -29,6 +29,7 @@
     <!-- 마이페이지 / 나만의레시피 / 생성 -->
     <string name="cancel">취소</string>
     <string name="save">저장</string>
+    <string name="save2">저장하기</string>
     <string name="title">제목</string>
     <string name="ingredientPick">재료</string>
     <string name="ingredientAddDirect">재료 직접 추가</string>
@@ -39,6 +40,8 @@
     <string name="myRecipeSaveComplete">나만의 레시피 저장이 완료되었습니다.</string>
     <string name="myRecipeCreate">나만의 레시피를 작성해보세요!</string>
     <string name="myRecipeCreatePlease">레시피 작성하기</string>
+    <string name="capture_new_image">카메라</string>
+    <string name="over_limit_msg">사진은 한 장만 선택할 수 있습니다.</string>
 
     <!-- 마이페이지 / 나만의레시피 / 수정 -->
     <string name="Modify">수정</string>
@@ -85,7 +88,7 @@
     <string name="category">카테고리</string>
     <string name="addIngredient">재료 추가하기</string>
     <string name="pickIcon">재료 아이콘 선택</string>
-    <string name="directAddSuccess">냉장고에 재료가 입력되었습니다!</string>
+    <string name="directAddSuccess">냉장고 바구니에 재료가 담겼습니다!</string>
     <string name="addIngredientInFloating">재료 입력</string>
 
     <!-- 나의 냉장고 / 냉장고 바구니 -->
@@ -127,6 +130,10 @@
     <string name="deleteIdConfirmDialog">레시피저장소를 탈퇴하시겠습니까?</string>
     <string name="yes">네</string>
     <string name="no">아니오</string>
+    <string name="deleteIdSuccess">레시피 저장소 탈퇴가 완료되었습니다.</string>
+    <string name="thankYou">레시피 저장소를 이용해 주셔서 감사합니다.</string>
+    <string name="moveSignIn">로그인화면으로 가기</string>
+    <string name="offApp">레시피 저장소 종료하기</string>
 
     <!-- 스크랩 레시피 -->
 

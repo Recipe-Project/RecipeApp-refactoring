@@ -111,11 +111,10 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
         fridgeBasketList[position].expiredAt = date
     }
 
-    override fun onClickExpiredAt(position: Int) {
-        val intent = Intent(this, DateDialog::class.java)
-        startActivityForResult(intent, 450)
+    override fun onClickExpiredAt(position: Int, expiredAt: String) {
+//        val intent = Intent(this, DateDialog::class.java)
+//        startActivityForResult(intent, 450)
 
-        val expiredAt = "$year.$month.$day"
         fridgeBasketList[position].expiredAt = expiredAt
     }
 

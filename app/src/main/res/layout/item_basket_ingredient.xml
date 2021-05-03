@@ -69,7 +69,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="00.00.00 까지" />
+                android:text="00.00.00" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_expired_2"
+                style="@style/Body2Style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 까지" />
         </LinearLayout>
 
         <LinearLayout

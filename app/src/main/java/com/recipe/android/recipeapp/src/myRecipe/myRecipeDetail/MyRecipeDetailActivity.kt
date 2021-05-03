@@ -48,6 +48,7 @@ class MyRecipeDetailActivity: BaseActivity<ActivityMyRecipeDetailBinding>(Activi
             intent.putExtra("thumbnail", thumbnail)
             startActivity(intent)
         }
+
     }
 
 
@@ -78,8 +79,10 @@ class MyRecipeDetailActivity: BaseActivity<ActivityMyRecipeDetailBinding>(Activi
     // 레시피 상세보기 성공
     override fun onGetMyRecipeDetailSuccess(response: MyRecipeDetailResponse) {
         if (response.isSuccess) {
-            thumbnail = response.result.thumbnail.toString()
-            Glide.with(this).load(thumbnail).into(binding.imgThumbnail)
+            if (response.result.thumbnail != null) {
+                thumbnail = response.result.thumbnail.toString()
+                Glide.with(this).load(thumbnail).into(binding.imgThumbnail)
+            }
 
             binding.tvTitle.text = response.result.title
             binding.tvContent.text = response.result.content

@@ -63,7 +63,7 @@ class MyRecipeCreateActivity :
     // 사진 유무
     private var isPhoto = false
 
-    lateinit var bitmap: Bitmap
+    var bitmap: Bitmap? = null
 
     lateinit var uri: Uri
 
@@ -130,6 +130,7 @@ class MyRecipeCreateActivity :
     }
 
     private fun showSingleImage(uri: Uri) {
+        dismissLoadingDialog()
         bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
         binding.imgPick.setImageBitmap(bitmap)
         isPhoto = true
@@ -155,14 +156,11 @@ class MyRecipeCreateActivity :
 
         } else {
             // 기본 이미지
-            bitmap = (ContextCompat.getDrawable(
-                this,
-                R.drawable.img_default_my_recipe_large
-            ) as BitmapDrawable).bitmap
+            bitmap = null
         }
 
         val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
 
 
