@@ -18,6 +18,7 @@ import com.opensooq.supernova.gligar.GligarPicker
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentFridgeBinding
+import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdapter

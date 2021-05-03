@@ -67,7 +67,6 @@ class ApplicationClass: Application() {
             sSharedPreferences.edit().putString(IC_DEFAULT, it.toString()).apply()
             Log.d(TAG, "ApplicationClass - onCreate() : ${sSharedPreferences.getString(IC_DEFAULT, "")}")
         }
-
     }
 
 

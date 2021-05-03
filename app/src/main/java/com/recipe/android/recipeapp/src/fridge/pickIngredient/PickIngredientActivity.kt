@@ -21,7 +21,7 @@ import com.recipe.android.recipeapp.databinding.ActivityPickIngredientBinding
 import com.recipe.android.recipeapp.src.fridge.addDirect.AddDirectActivity
 import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientCategoryAdapter
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientViewPagerAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.PickIngredientRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 
@@ -128,7 +128,7 @@ class PickIngredientActivity :
 
         lateinit var tabLayout: TabLayout
         lateinit var viewPager: ViewPager2
-        lateinit var ingredientCategoryAdapter: IngredientCategoryAdapter
+        lateinit var ingredientViewPagerAdapter: IngredientViewPagerAdapter
 
         if (response.isSuccess) {
 
@@ -145,15 +145,15 @@ class PickIngredientActivity :
             // 카테고리 탭 설정
             tabLayout = binding.tabLayout
             viewPager = binding.viewPager
-            ingredientCategoryAdapter = IngredientCategoryAdapter(this, this)
-            viewPager.adapter = ingredientCategoryAdapter
+            ingredientViewPagerAdapter = IngredientViewPagerAdapter(this, this)
+            viewPager.adapter = ingredientViewPagerAdapter
 
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = tabLayoutTextArray[position]
             }.attach()
 
             // 리사이클러뷰
-            ingredientCategoryAdapter.submitList(ingredients)
+            ingredientViewPagerAdapter.submitList(ingredients)
         } else {
             showCustomToast(getString(R.string.networkError))
             Log.d(TAG, "AddDirectActivity - onGetIngredientSuccess() : ${response.message}")

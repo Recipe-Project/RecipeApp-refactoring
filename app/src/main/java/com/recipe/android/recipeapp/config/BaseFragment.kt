@@ -11,6 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<B : ViewBinding>(
