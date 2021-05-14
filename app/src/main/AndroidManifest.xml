@@ -41,6 +41,18 @@
         <!-- 로그인 -->
         <activity android:name=".src.signIn.SignInActivity" />
 
+        <!-- 로그아웃 -->
+        <activity android:name=".src.setting.signOut.SignOutDialog"
+            android:theme="@style/dialogTheme" />
+
+        <!-- 개발자 페이지 -->
+        <activity android:name=".src.setting.developer.DeveloperInfoActivity"/>
+
+        <!-- 회원 탈퇴 -->
+        <activity android:name=".src.setting.deleteId.DeleteIdDialog"
+            android:theme="@style/dialogTheme"/>
+        <activity android:name=".src.setting.deleteId.DeleteIdSuccess"/>
+
         <!-- 냉장고 - 재료 선택 -->
         <activity android:name=".src.fridge.pickIngredient.PickIngredientActivity" />
         <activity android:name=".src.fridge.basket.BasketActivity" />
@@ -63,11 +75,11 @@
                     android:host="oauth"
                     android:scheme="kakao${KAKAO_API_KEY}" />
             </intent-filter>
-        </activity> <!-- 마이페이지 -->
+        </activity>
+
+        <!-- 마이페이지 -->
         <activity android:name=".src.setting.SettingActivity" />
-        <activity
-            android:name=".src.setting.dialog.DeleteIdDialog"
-            android:theme="@style/dialogTheme" />
+
 
         <!-- 나만의 레시피 -->
         <activity android:name=".src.myRecipe.MyRecipeActivity" />

@@ -105,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView14" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switch1"
+        android:id="@+id/switch_push"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/green"
@@ -126,34 +126,38 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView13" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView15"
+        android:id="@+id/btn_developer"
         style="@style/Body1Style"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="21dp"
         android:text="@string/developer"
         app:layout_constraintStart_toStartOf="@+id/view4"
         app:layout_constraintTop_toBottomOf="@+id/view4" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView16"
+        android:id="@+id/btn_sign_out"
         style="@style/Body1Style"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="21dp"
         android:text="@string/logOut"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView15"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView15" />
+        app:layout_constraintStart_toStartOf="@+id/btn_developer"
+        app:layout_constraintTop_toBottomOf="@+id/btn_developer" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_delete_id"
         style="@style/Body1Style"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="21dp"
         android:text="@string/deleteId"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView16"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView16" />
+        app:layout_constraintStart_toStartOf="@+id/btn_sign_out"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_out" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

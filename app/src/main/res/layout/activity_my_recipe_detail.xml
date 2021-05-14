@@ -125,6 +125,15 @@
                 app:layout_constraintStart_toStartOf="@+id/view"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
+
 
             <View
                 android:id="@+id/view2"
@@ -136,7 +145,7 @@
                 android:background="@color/gray_000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
+                app:layout_constraintTop_toBottomOf="@+id/rv_ingredient" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
