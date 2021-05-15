@@ -22,6 +22,10 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.recipe.android.recipeapp.BuildConfig
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.GOOGLE_LOGIN
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.KAKAO_LOGIN
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.LOGIN_TYPE
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.NAVER_LOGIN
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.USER_IDX
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
@@ -60,6 +64,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
                 Log.e(TAG, "로그인 실패", error)
             } else if (token != null) {
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
+                sSharedPreferences.edit().putString(LOGIN_TYPE, KAKAO_LOGIN).apply()
                 val kakaoAccessToken = token.accessToken
                 // 레저 서버 -> 카카오 로그인 API 호출
                 FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -90,16 +95,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
             }
         }
 
-//            // 카카오 연결 끊기
-//            UserApiClient.instance.unlink { error ->
-//                if (error != null) {
-//                    Log.e(TAG, "연결 끊기 실패", error)
-//                }
-//                else {
-//                    Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
-//                }
-//            }
-
         // 네이버 로그인 버튼 클릭
         binding.btnNaverSignIn.setOnClickListener {
 
@@ -118,6 +113,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
                         val expiresAt: Long = mOAuthLoginModule.getExpiresAt(applicationContext)
                         val tokenType: String = mOAuthLoginModule.getTokenType(applicationContext)
                         Log.d(TAG, "SignInDialog - run() : 네이버 로그인 성공 / $accessToken")
+                        sSharedPreferences.edit().putString(LOGIN_TYPE, NAVER_LOGIN).apply()
 
                         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                             if (!task.isSuccessful) {
@@ -235,6 +231,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
 
         // 구글 액세스 토큰
         Log.d(TAG, acct.idToken.toString())
+        sSharedPreferences.edit().putString(LOGIN_TYPE, GOOGLE_LOGIN).apply()
 
         // 레저 서버 -> 구글 로그인 API 호출
         SignInService(this).postGoogleLogin(acct.idToken.toString())

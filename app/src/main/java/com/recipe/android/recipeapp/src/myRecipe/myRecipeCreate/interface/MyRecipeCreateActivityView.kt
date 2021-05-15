@@ -8,6 +8,9 @@ interface MyRecipeCreateActivityView {
     fun onPostMyRecipeCreateSuccess(response: MyRecipeCreateResponse)
     fun onMyRecipeCreateFailure(message: String)
 
+    fun onPatchMyRecipeSuccess(response: MyRecipeCreateResponse)
+    fun onPatchMyRecipeFailure(message: String)
+
     fun onGetIngredientMyRecipeSuccess(response: IngredientResponse)
 
     fun selectAddDirect()

@@ -3,16 +3,17 @@ package com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.opensooq.supernova.gligar.GligarPicker
@@ -30,6 +31,7 @@ import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.MultipleP
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.PickIconDialog
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeModify.MyRecipeModifyService
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -69,9 +71,14 @@ class MyRecipeCreateActivity :
 
     val PICKER_REQUEST_CODE = 5300
 
+    var isModify = false
+
     // 리사이클러뷰
-    val pickItem = ArrayList<DirectIngredientList>()
+    var pickItem = ArrayList<DirectIngredientList>()
     lateinit var pickItemRecyclerViewAdapter: PickItemRecyclerViewAdapter
+
+    // 수정
+    private var myRecipeIdx: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +91,38 @@ class MyRecipeCreateActivity :
         // 취소 버튼 클릭
         binding.btnCancel.setOnClickListener {
             finish()
+        }
+
+        // 재료 선택
+        pickItemRecyclerViewAdapter = PickItemRecyclerViewAdapter(this)
+        binding.rvIngredient.apply {
+            adapter = pickItemRecyclerViewAdapter
+            layoutManager =
+                LinearLayoutManager(this@MyRecipeCreateActivity, RecyclerView.HORIZONTAL, false)
+        }
+
+        // 수정
+        isModify = intent?.getBooleanExtra("isModify", false) ?: false
+
+        if (isModify) {
+            myRecipeIdx = intent.getIntExtra("myRecipeIdx", 0)
+
+            // 저장된 입력레시피 정보
+            title = intent.getStringExtra("title")
+            content = intent.getStringExtra("content")
+            thumbnail = intent.getStringExtra("thumbnail")
+
+            // 기존 정보 표시
+            binding.etTitle.setText(title, TextView.BufferType.EDITABLE)
+            binding.etContent.setText(content, TextView.BufferType.EDITABLE)
+
+            if (thumbnail != null) {
+                Glide.with(this).load(thumbnail).centerCrop().into(binding.imgPick)
+            }
+
+            pickItem = intent?.extras?.getParcelableArrayList<Parcelable>("ingredientList") as ArrayList<DirectIngredientList>
+            pickItemRecyclerViewAdapter.submitList(pickItem)
+
         }
 
         // 저장 버튼 클릭
@@ -120,13 +159,7 @@ class MyRecipeCreateActivity :
             addIngredientDialog.show()
         }
 
-        // 재료 선택
-        pickItemRecyclerViewAdapter = PickItemRecyclerViewAdapter(this)
-        binding.rvIngredient.apply {
-            adapter = pickItemRecyclerViewAdapter
-            layoutManager =
-                LinearLayoutManager(this@MyRecipeCreateActivity, RecyclerView.HORIZONTAL, false)
-        }
+
     }
 
     private fun showSingleImage(uri: Uri) {
@@ -187,13 +220,22 @@ class MyRecipeCreateActivity :
 
                 thumbnail = downloadUri
 
-                val param = HashMap<String, Any>()
-                param["thumbnail"] = thumbnail!!
+                val param = HashMap<String, Any?>()
+                if (bitmap != null) {
+                    param["thumbnail"] = thumbnail!!
+                } else {
+                    param["thumbnail"] = null
+                }
+
                 param["title"] = title!!
                 param["content"] = content!!
                 param["ingredientList"] = pickItem
 
-                MyRecipeCreateService(this).postMyRecipeCreate(param)
+                if (isModify) {
+                    MyRecipeCreateService(this).patchMyRecipe(param, myRecipeIdx)
+                } else {
+                    MyRecipeCreateService(this).postMyRecipeCreate(param)
+                }
 
             } else {
                 showCustomToast(getString(R.string.networkError))
@@ -271,7 +313,23 @@ class MyRecipeCreateActivity :
     }
 
     override fun onMyRecipeCreateFailure(message: String) {
-        Log.d(TAG, "BasketActivity - onBasketServiceFailure() : $message")
+        Log.d(TAG, "MyRecipeCreateActivity - onMyRecipeCreateFailure() : $message")
+        showCustomToast(getString(R.string.networkError))
+    }
+
+    // 수정 성공
+    override fun onPatchMyRecipeSuccess(response: MyRecipeCreateResponse) {
+        dismissLoadingDialog()
+        if (response.isSuccess) {
+            showCustomToast(getString(R.string.myRecipeModifyComplete))
+            finish()
+        } else {
+            showCustomToast(getString(R.string.networkError))
+        }
+    }
+
+    override fun onPatchMyRecipeFailure(message: String) {
+        dismissLoadingDialog()
         showCustomToast(getString(R.string.networkError))
     }
 

@@ -1,6 +1,8 @@
 package com.recipe.android.recipeapp.src.fridge.home.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class GetFridgeResponse(
     @SerializedName("code")
@@ -20,7 +22,7 @@ data class FridgeObject (
     val fridges : ArrayList<GetFridgeResult>
 )
 
-
+@Parcelize
 data class GetFridgeResult(
     @SerializedName("ingredientCategoryIdx")
     val ingredientCategoryIdx : Int,
@@ -28,8 +30,9 @@ data class GetFridgeResult(
     val ingredientCategoryName : String,
     @SerializedName("ingredientList")
     val ingredientList : ArrayList<FridgeItem>
-)
+): Parcelable
 
+@Parcelize
 data class FridgeItem(
     @SerializedName("ingredientName")
     val ingredientName : String,
@@ -43,4 +46,4 @@ data class FridgeItem(
     val count : Int,
     @SerializedName("freshness")
     val freshness : Int
-)
+): Parcelable

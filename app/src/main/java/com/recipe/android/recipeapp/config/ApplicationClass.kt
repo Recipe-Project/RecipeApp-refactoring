@@ -40,6 +40,10 @@ class ApplicationClass: Application() {
         val IC_DEFAULT = "IC_DEFAULT"
         const val FCM_TOKEN = "FCM-TOKEN"
         val FCM_PUSH_OK = "FCM_PUSH_OK"
+        val LOGIN_TYPE = "LOGIN_TYPE"
+        val NAVER_LOGIN = "NAVER_LOGIN"
+        val GOOGLE_LOGIN = "GOOGLE_LOGIN"
+        val KAKAO_LOGIN = "KAKAO_LOGIN"
 
     }
 

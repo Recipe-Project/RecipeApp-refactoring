@@ -18,6 +18,7 @@ import com.recipe.android.recipeapp.src.myPage.models.ModifyUserInfoResponse
 import com.recipe.android.recipeapp.src.myPage.models.MyRecipe
 import com.recipe.android.recipeapp.src.myPage.models.UserInfoResponse
 import com.recipe.android.recipeapp.src.myRecipe.MyRecipeActivity
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateActivity
 import com.recipe.android.recipeapp.src.scrapRecipe.ScrapRecipeActivity
 import com.recipe.android.recipeapp.src.setting.SettingActivity
 
@@ -72,19 +73,24 @@ class MyPageFragment :
             )
             pickIngredientIconDialog.show()
         }
+
+        binding.btnMyRecipeCreate.setOnClickListener {
+            val intent = Intent (context, MyRecipeCreateActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "MyPageFragment - onStart() : ")
-        // 마이페이지 조회 api
-        MyPageService(this).getUserInfo(userIdx)
 
-        myPageRecipeRecyclerViewAdapter.notifyDataSetChanged()
     }
 
     override fun onResume() {
         super.onResume()
+
+        // 마이페이지 조회 api
+        MyPageService(this).getUserInfo(userIdx)
 
         Log.d(TAG, "MyPageFragment - onResume() : ")
 

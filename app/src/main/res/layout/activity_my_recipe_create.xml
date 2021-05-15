@@ -89,6 +89,20 @@
                 app:layout_constraintStart_toStartOf="@+id/view"
                 app:layout_constraintTop_toBottomOf="@+id/img_pick" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="start"
+                android:paddingTop="18dp"
+                android:paddingBottom="16dp"
+                android:textColorHint="@color/gray_500"
+                style="@style/Subtitle1Style"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/img_pick"/>
+
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
@@ -123,6 +137,8 @@
                 android:text="+ 재료추가"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
+
+/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_please_add_ingredient"

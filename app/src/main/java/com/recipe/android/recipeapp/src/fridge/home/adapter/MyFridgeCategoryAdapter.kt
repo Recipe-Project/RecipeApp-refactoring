@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.fridge.home.adapter
 
+import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -28,7 +29,12 @@ class MyFridgeCategoryAdapter(fa: FragmentActivity, val view : IngredientUpdateV
         return if (position != 0) {
             MyFridgeCategoryFragment(ingredients[position - 1], view)
         } else {
-            MyFridgeAllCategoryFragment(ingredients, view)
+            // MyFridgeAllCategoryFragment(ingredients, view)
+            val myFridgeAllCategoryFragment = MyFridgeAllCategoryFragment()
+            myFridgeAllCategoryFragment.arguments = Bundle().apply {
+                putParcelableArrayList("resultList", ingredients)
+            }
+            myFridgeAllCategoryFragment
         }
     }
 
