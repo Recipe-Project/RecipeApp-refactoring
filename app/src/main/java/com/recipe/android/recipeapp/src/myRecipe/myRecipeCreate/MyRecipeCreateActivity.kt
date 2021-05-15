@@ -25,13 +25,12 @@ import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.adapter.PickItemRecyclerViewAdapter
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.AddDirectActivity
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.AddDirectMyRecipeActivity
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.AddIngredientDialog
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.MultiplePickIngredientsDialog
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.PickIconDialog
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeModify.MyRecipeModifyService
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -70,6 +69,7 @@ class MyRecipeCreateActivity :
     lateinit var uri: Uri
 
     val PICKER_REQUEST_CODE = 5300
+    val ADD_DIRECT_CODE = 2900
 
     var isModify = false
 
@@ -259,8 +259,8 @@ class MyRecipeCreateActivity :
 
     // 재료 직접 추가 버튼
     override fun selectAddDirect() {
-        val intent = Intent(this, AddDirectActivity::class.java)
-        startActivity(intent)
+        val intent = Intent(this, AddDirectMyRecipeActivity::class.java)
+        startActivityForResult(intent, ADD_DIRECT_CODE)
     }
 
     // 재료 선택 버튼
@@ -270,7 +270,6 @@ class MyRecipeCreateActivity :
 
     }
 
-    // 재료 선택
     override fun pickItem(ingredient: Ingredient) {
 
     }
@@ -292,7 +291,11 @@ class MyRecipeCreateActivity :
     // 재료 선택 다이얼로그에서 저장 버튼 클릭
     override fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>) {
         pickIngredientsMyRecipe.forEach {
-            pickItem.add(DirectIngredientList(it.ingredientName, it.ingredientIcon))
+            if (it.ingredientIcon == "") {
+                pickItem.add(DirectIngredientList(it.ingredientName, null))
+            } else {
+                pickItem.add(DirectIngredientList(it.ingredientName, it.ingredientIcon))
+            }
         }
         pickItemRecyclerViewAdapter.submitList(pickItem)
         if (pickItem.size > 0) {
@@ -352,6 +355,10 @@ class MyRecipeCreateActivity :
                 uri = Uri.parse("file://$pickImage")
 
                 showSingleImage(uri)
+            }
+            ADD_DIRECT_CODE -> {
+                val data = data?.extras?.getParcelableArrayList<Parcelable>("pick") as java.util.ArrayList<Ingredient>
+                pickBtnSaveClick(data)
             }
         }
     }

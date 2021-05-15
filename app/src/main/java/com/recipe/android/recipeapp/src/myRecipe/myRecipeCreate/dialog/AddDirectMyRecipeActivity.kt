@@ -2,14 +2,18 @@ package com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
@@ -18,15 +22,19 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityAddDirectMyRecipeBinding
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateActivity
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import java.util.ArrayList
 
-interface AddDirectActivityView{
+interface AddDirectActivityView {
     fun onAddDirectSuccess(postIngredientsResponse: PostIngredientsResponse)
     fun onAddDirectFailure(message: String)
 }
 
-class AddDirectActivity : BaseActivity<ActivityAddDirectMyRecipeBinding>(ActivityAddDirectMyRecipeBinding::inflate),
+class AddDirectMyRecipeActivity :
+    BaseActivity<ActivityAddDirectMyRecipeBinding>(ActivityAddDirectMyRecipeBinding::inflate),
     PickIngredientIconDialog.PickIcon, AddDirectActivityView {
     val TAG = "AddDirectActivity"
 
@@ -35,11 +43,14 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectMyRecipeBinding>(Activit
     var ingredientName = ""
     var ingredientCategoryIdx: Int? = null
 
+    val pickIngredientsMyRecipe = ArrayList<Ingredient>()
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val ingredientsList = intent.extras?.getParcelableArrayList<Parcelable>("ingredientList") as ArrayList<CategoryIngrediets>
+        val ingredientsList =
+            intent.extras?.getParcelableArrayList<Parcelable>("ingredientList") as ArrayList<CategoryIngrediets>?
         Log.d(TAG, "AddDirectActivity - onCreate() : $ingredientsList")
 
         // cancel
@@ -86,19 +97,36 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectMyRecipeBinding>(Activit
             true
         }
 
+        binding.etInputGredient.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (count > 0) grayToBlue(binding.btnAddGredient)
+                else blueToGray(binding.btnAddGredient)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+
         // 재료추가하기 버튼
         binding.btnAddGredient.setOnClickListener {
             ingredientName = binding.etInputGredient.text.toString()
-            if (pickIconUrl == null) {
-                pickIconUrl = ApplicationClass.sSharedPreferences.getString(IC_DEFAULT, "")
+
+            pickIngredientsMyRecipe.add(Ingredient(pickIconUrl.toString(), 0, ingredientName))
+
+            if (ingredientName == "") {
+                showCustomToast("재료명을 입력해주세요.")
             }
 
-            if (ingredientCategoryIdx == null) {
-                showCustomToast("카테고리를 선택해주세요.")
-            } else if (ingredientName == "") {
-                showCustomToast("재료명을 입력해주세요.")
-            } else {
-            }
+            val intent = Intent()
+            intent.putExtra("pick", pickIngredientsMyRecipe)
+            setResult(300, intent)
+            finish()
         }
 
 
@@ -116,21 +144,12 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectMyRecipeBinding>(Activit
         tv.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
     }
 
-    private fun blueToGray(tv: AppCompatTextView){
+    private fun blueToGray(tv: AppCompatTextView) {
         tv.backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray_000))
     }
 
     override fun onAddDirectSuccess(response: PostIngredientsResponse) {
-        if (response.isSuccess) {
-            showCustomToast(getString(R.string.directAddSuccess))
-            finish()
-        } else {
-            when (response.code) {
-                2065 -> showCustomToast(response.message)
-                2069 -> showCustomToast(response.message)
-                else -> showCustomToast(getString(R.string.networkError))
-            }
-        }
+
     }
 
     override fun onAddDirectFailure(message: String) {
