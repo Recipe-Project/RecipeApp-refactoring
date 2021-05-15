@@ -182,7 +182,10 @@ class PickIngredientActivity :
                 3069 -> showCustomToast(response.message)
                 2068 -> showCustomToast(response.message)
                 else -> {
-                    Log.d(TAG, "PickIngredientActivity - onPostIngredientSuccess() : ${response.message}")
+                    Log.d(
+                        TAG,
+                        "PickIngredientActivity - onPostIngredientSuccess() : ${response.message}"
+                    )
                     showCustomToast(getString(R.string.networkError))
                 }
             }
@@ -201,7 +204,7 @@ class PickIngredientActivity :
 
     // 재료 선택
     override fun pickItem(ingredient: Ingredient) {
-        if (!pickIngredientRecyclerViewItemList.contains(ingredient)){
+        if (!pickIngredientRecyclerViewItemList.contains(ingredient)) {
             pickIngredientRecyclerViewItemList.add(ingredient)
             pickIngredientRecyclerViewAdapter.submitList(pickIngredientRecyclerViewItemList)
             binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
@@ -212,7 +215,8 @@ class PickIngredientActivity :
             pickIngredientRecyclerViewItemList.remove(ingredient)
             pickIngredientRecyclerViewAdapter.submitList(pickIngredientRecyclerViewItemList)
             if (pickIngredientRecyclerViewItemList.size == 0) {
-                binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray_000))
+                binding.btnNext.backgroundTintList =
+                    ColorStateList.valueOf(getColor(R.color.gray_000))
                 binding.rvPick.visibility = View.GONE
             }
         }

@@ -120,7 +120,8 @@ class MyRecipeCreateActivity :
                 Glide.with(this).load(thumbnail).centerCrop().into(binding.imgPick)
             }
 
-            pickItem = intent?.extras?.getParcelableArrayList<Parcelable>("ingredientList") as ArrayList<DirectIngredientList>
+            pickItem =
+                intent?.extras?.getParcelableArrayList<Parcelable>("ingredientList") as ArrayList<DirectIngredientList>
             pickItemRecyclerViewAdapter.submitList(pickItem)
 
         }
@@ -357,7 +358,8 @@ class MyRecipeCreateActivity :
                 showSingleImage(uri)
             }
             ADD_DIRECT_CODE -> {
-                val data = data?.extras?.getParcelableArrayList<Parcelable>("pick") as java.util.ArrayList<Ingredient>
+                val data =
+                    data?.extras?.getParcelableArrayList<Parcelable>("pick") as java.util.ArrayList<Ingredient>
                 pickBtnSaveClick(data)
             }
         }
