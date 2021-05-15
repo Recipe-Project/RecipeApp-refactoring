@@ -35,32 +35,10 @@ class DateDialog(context: Context, val dateSave: DateDialogInterface, val positi
         params.height = WindowManager.LayoutParams.WRAP_CONTENT
         window!!.attributes = params
 
-//        val calendar: Calendar = Calendar.getInstance()
-//        binding.datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)
-//        ) { view, year, monthOfYear, dayOfMonth ->
-//            Log.d(TAG, "DateDialog - onCreate() : $year, $monthOfYear, $dayOfMonth")
-//
-//            binding.btnSave.setOnClickListener {
-//
-//                dateSave.clickDate(year, monthOfYear+1, dayOfMonth, position)
-//                dismiss()
-//
-////                val intent = Intent()
-////                val bundle = Bundle()
-////                bundle.putInt("year", year)
-////                bundle.putInt("monthOfYear", monthOfYear+1)
-////                bundle.putInt("dayOfMonth", dayOfMonth)
-////                intent.putExtras(bundle)
-////                setResult(SET_DATE, intent)
-////                finish()
-//            }
-//
-//        }
-
         binding.datePicker.setOnDateChangeListener { view, year, month, dayOfMonth ->
             Log.d(TAG, "DateDialog - onCreate() : $year, $month, $dayOfMonth")
             binding.btnSave.setOnClickListener {
-                dateSave.clickDate(year, month+1, dayOfMonth, position)
+                dateSave.clickDate(year, month, dayOfMonth, position)
                 dismiss()
             }
         }

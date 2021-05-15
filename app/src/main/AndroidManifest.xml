@@ -57,10 +57,6 @@
         <activity android:name=".src.fridge.pickIngredient.PickIngredientActivity" />
         <activity android:name=".src.fridge.basket.BasketActivity" />
         <activity android:name=".src.fridge.addDirect.AddDirectActivity" />
-        <activity
-            android:name=".src.fridge.dialog.DateDialog"
-            android:theme="@style/dialogTheme" />
-
 
         <!-- 카카오 로그인 -->
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
@@ -93,6 +89,7 @@
         <activity
             android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
             android:theme="@style/dialogTheme" />
+        <activity android:name=".src.myRecipe.myRecipeCreate.dialog.AddDirectActivity"/>
 
 
         <!-- 스크랩 레시피 -->

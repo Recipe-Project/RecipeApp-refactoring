@@ -32,8 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/basket"
             android:textColor="@color/gray_500"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            style="@style/Body1Style"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,9 +66,9 @@
             style="@style/Subtitle2Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:text="0"
-            android:textColor="@color/green" />
+            android:textColor="@color/green"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Subtitle2Style"
@@ -79,25 +78,45 @@
             android:text="items" />
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rv_basket"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="16dp"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/view9"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/rv_basket" />-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </androidx.core.widget.NestedScrollView>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_basket"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:paddingBottom="100dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_basket"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
-    </androidx.core.widget.NestedScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
-
-
-    <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_save"
         style="@style/ButtonStyle2"
         android:layout_width="0dp"
@@ -109,6 +128,7 @@
         android:backgroundTint="@color/green"
         android:clickable="false"
         android:text="@string/save"
+        android:gravity="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

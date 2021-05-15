@@ -38,7 +38,7 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
         // 냉장고 바구니 조회
         BasketService(this).getBasket()
 
-        basketRecyclerViewAdapter = BasketRecyclerViewAdapter(this)
+        basketRecyclerViewAdapter = BasketRecyclerViewAdapter(this, this)
         binding.rvBasket.apply {
             adapter = basketRecyclerViewAdapter
             layoutManager = LinearLayoutManager(this@BasketActivity, RecyclerView.VERTICAL, false)
@@ -112,9 +112,6 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
     }
 
     override fun onClickExpiredAt(position: Int, expiredAt: String) {
-//        val intent = Intent(this, DateDialog::class.java)
-//        startActivityForResult(intent, 450)
-
         fridgeBasketList[position].expiredAt = expiredAt
     }
 
