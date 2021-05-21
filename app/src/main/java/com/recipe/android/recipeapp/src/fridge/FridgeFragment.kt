@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.fridge
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -67,6 +68,7 @@ class FridgeFragment :
 
     val PICKER_REQUEST_CODE = 5300
 
+    lateinit var uri: Uri
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -128,7 +130,7 @@ class FridgeFragment :
             updateButtonFlag = false
             showLoadingDialog()
             FridgeService(this).tryGetFridge()
-
+  
             // 레이아웃 변경
             binding.saveTv.visibility = View.INVISIBLE
             binding.cancelTv.visibility = View.INVISIBLE
@@ -277,17 +279,18 @@ class FridgeFragment :
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             PICKER_REQUEST_CODE -> {
+                Log.d(TAG, "FridgeFragment - onActivityResult() : success")
                 showLoadingDialog()
                 val imagesList = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)
                 val pickImage = imagesList?.get(0)
-                val uri = Uri.parse("file://$pickImage")
+                uri = Uri.parse("file://$pickImage")
+                Log.d(TAG, "FridgeFragment - onActivityResult() : $uri")
 
                 val intent = Intent(requireActivity(), ReceiptIngredientDialog::class.java)
                 intent.putExtra("uri", uri.toString())
+
                 startActivity(intent)
             }
         }
     }
-
-
 }

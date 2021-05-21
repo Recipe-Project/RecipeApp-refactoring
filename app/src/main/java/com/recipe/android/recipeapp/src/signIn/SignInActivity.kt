@@ -233,8 +233,22 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding
         Log.d(TAG, acct.idToken.toString())
         sSharedPreferences.edit().putString(LOGIN_TYPE, GOOGLE_LOGIN).apply()
 
-        // 레저 서버 -> 구글 로그인 API 호출
-        SignInService(this).postGoogleLogin(acct.idToken.toString())
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(ApplicationClass.TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val fcmToken = task.result
+            Log.d(ApplicationClass.TAG, "ApplicationClass - onCreate() : fcm 토큰 : $fcmToken")
+
+            sSharedPreferences.edit().putString(ApplicationClass.FCM_TOKEN, fcmToken.toString()).apply()
+
+            // 레저 서버 -> 구글 로그인 API 호출
+            SignInService(this).postGoogleLogin(acct.idToken.toString(), fcmToken.toString())
+        })
+
 
         //Google SignInAccount 객체에서 ID 토큰을 가져와서 Firebase Auth로 교환하고 Firebase에 인증
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)

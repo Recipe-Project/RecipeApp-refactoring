@@ -46,7 +46,7 @@ class DeleteIdDialog: BaseActivity<DialogDeleteIdBinding>(DialogDeleteIdBinding:
                 }
                 GOOGLE_LOGIN -> {
                     val firebaseAuth = FirebaseAuth.getInstance()
-                    firebaseAuth.getCurrentUser().delete()
+                    firebaseAuth.currentUser?.delete()
                 }
                 KAKAO_LOGIN -> {
                     UserApiClient.instance.unlink { error ->

@@ -3,7 +3,12 @@ package com.recipe.android.recipeapp.src.splash
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.recipe.android.recipeapp.R
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.FCM_TOKEN
+import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivitySplashBinding
 import com.recipe.android.recipeapp.src.MainActivity
@@ -22,6 +27,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         // 자동로그인 API 호출
         SplashSerivce(this).postAutoLogin()
 
+        Log.d(TAG, "SplashActivity - onCreate() : ${sSharedPreferences.getString(FCM_TOKEN, "")}")
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+            sSharedPreferences.edit().putString(FCM_TOKEN, token).apply()
+            Log.d(TAG, "SplashActivity - onCreate() : fcm 토큰 : $token")
+        })
     }
 
     override fun onPostAutoLoginSuccess(response: AutoLoginResponse) {

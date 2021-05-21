@@ -22,6 +22,15 @@
         android:theme="@style/Theme.RecipeApp"
         android:usesCleartextTraffic="true">
 
+        <service
+            android:name=".src.fcm.MyFirebaseMessagingService"
+            android:exported="false"
+            android:directBootAware="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".src.receipt.ReceiptActivity" />
         <activity
             android:name=".src.search.publicRecipe.recipeDetail.RecipeDetailActivity"
@@ -97,15 +106,6 @@
 
         <!-- 영수증 식재료 리스트 다이얼로그-->
         <activity android:name=".src.fridge.receipt.ReceiptIngredientDialog" />
-
-
-        <service
-            android:name=".src.fcm.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
 
     </application>

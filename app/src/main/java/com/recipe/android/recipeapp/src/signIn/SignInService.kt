@@ -67,10 +67,10 @@ class SignInService(val view: SignInActivityView) {
     }
 
     // 구글 로그인 API
-    fun postGoogleLogin(accessToken: String) {
+    fun postGoogleLogin(accessToken: String, fcmToken: String) {
         val signnInRetrofitInterface =
             ApplicationClass.sRetrofit.create(SignnInRetrofitInterface::class.java)
-        signnInRetrofitInterface.postGoogleLogin(accessToken)
+        signnInRetrofitInterface.postGoogleLogin(accessToken, fcmToken)
             .enqueue(object : Callback<SignInResponse> {
                 override fun onResponse(
                     call: Call<SignInResponse>,
