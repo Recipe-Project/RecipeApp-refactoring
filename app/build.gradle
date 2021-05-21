@@ -141,5 +141,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-messaging-directboot:20.2.0'
 
+  //  implementation 'gun0912.ted:tedimagepicker:1.1.10'
+
 
 }

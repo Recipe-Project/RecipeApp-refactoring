@@ -40,7 +40,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 showLoadingDialog()
                 val imagesList = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)
                 val pickImage = imagesList?.get(0)
-                val uri = Uri.parse("file://$pickImage")
+                val uri = Uri.parse("$pickImage")
                 Log.d(TAG, "FridgeFragment - onActivityResult() : $uri")
 
                 val intent = Intent(this, ReceiptIngredientDialog::class.java)
