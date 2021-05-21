@@ -21,7 +21,6 @@ import com.recipe.android.recipeapp.databinding.DialogPickIngredientIconBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientCategoryAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 
 class PickIngredientIconDialog(

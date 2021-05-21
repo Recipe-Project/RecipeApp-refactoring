@@ -55,11 +55,12 @@ class YoutubeRecipeService(val view : YoutubeRecipeView) {
         val youtubeRecipeInterface = ApplicationClass.sRetrofit.create(YoutubeRecipeInterface::class.java)
         youtubeRecipeInterface.postAddingScrap(request).enqueue(object : Callback<YoutubeRecipeScrapResponse> {
             override fun onResponse(call: Call<YoutubeRecipeScrapResponse>, response: Response<YoutubeRecipeScrapResponse>) {
-                Log.d(TAG, "YoutubeRecipeService - onResponse() : 유투브레시피 스크랩 성공")
+                //Log.d(TAG, "YoutubeRecipeService - onResponse() : 유투브레시피 스크랩 성공")
                 if(response.body() == null) {
                     view.onPostYoutubeRecipeScrapFailure("response is null")
                 } else {
                     view.onPostYoutubeRecipeScrapSuccess(response.body() as YoutubeRecipeScrapResponse)
+                    Log.d(TAG, "YoutubeRecipeService - onResponse() : 유투브레시피 스크랩 성공")
                 }
             }
 

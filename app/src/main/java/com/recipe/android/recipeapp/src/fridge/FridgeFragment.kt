@@ -275,12 +275,16 @@ class FridgeFragment :
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+
         when (requestCode) {
             PICKER_REQUEST_CODE -> {
                 showLoadingDialog()
                 val imagesList = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)
                 val pickImage = imagesList?.get(0)
                 val uri = Uri.parse("file://$pickImage")
+
+                Log.d(TAG, "$uri")
 
                 val intent = Intent(requireActivity(), ReceiptIngredientDialog::class.java)
                 intent.putExtra("uri", uri.toString())

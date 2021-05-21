@@ -3,7 +3,7 @@ package com.recipe.android.recipeapp.src.search.youtubeRecipe.models
 import com.google.gson.annotations.SerializedName
 
 data class YoutubeRecipeScrapRequest(
-    @SerializedName("youtubeIdx")
+    @SerializedName("youtubeId")
     val youtubeIdx : String,
     @SerializedName("title")
     val title : String,

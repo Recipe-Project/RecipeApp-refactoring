@@ -140,6 +140,9 @@ dependencies {
     // Recyclerview Swipe Decorator
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
+    // Gliger
+    implementation 'com.opensooq.supernova:gligar:1.1.0'
+
 
 
 
