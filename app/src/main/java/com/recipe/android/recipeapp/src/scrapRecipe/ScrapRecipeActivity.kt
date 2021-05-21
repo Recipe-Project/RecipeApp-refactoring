@@ -18,6 +18,8 @@ class ScrapRecipeActivity: BaseActivity<ActivityScrapRecipeBinding>(ActivityScra
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val position = intent?.getIntExtra("position", 0)
+
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
@@ -26,6 +28,7 @@ class ScrapRecipeActivity: BaseActivity<ActivityScrapRecipeBinding>(ActivityScra
         viewPager = binding.viewPager
 
         viewPager.adapter = ScrapViewPagerAdapter(this)
+        position?.let { viewPager.currentItem = position}
 
         val tabLayoutTextArray = arrayOf("유튜브", "블로그", "공공")
 

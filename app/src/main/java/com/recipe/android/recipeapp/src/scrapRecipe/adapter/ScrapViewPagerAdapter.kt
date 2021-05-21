@@ -19,8 +19,9 @@ class ScrapViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
             2 -> PublicScrapFragment()
             else -> YoutubeScrapFragment()
         }
-
     }
+
+
 
 
 }

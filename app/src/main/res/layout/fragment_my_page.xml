@@ -112,75 +112,93 @@
             </LinearLayout>
 
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView7"
-                style="@style/Subtitle2Style"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/layout_scrap"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/youtube"
-                app:layout_constraintEnd_toStartOf="@+id/appCompatTextView6"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView6"
-                style="@style/Subtitle2Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/blog"
-                app:layout_constraintEnd_toStartOf="@+id/appCompatTextView8"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/appCompatTextView7"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView7" />
+                <LinearLayout
+                    android:id="@+id/layout_scrap_youtube"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView8"
-                style="@style/Subtitle2Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/recipe"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/appCompatTextView6"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView6" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView7"
+                        style="@style/Subtitle2Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/youtube" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_cnt_youtube"
-                style="@style/Subtitle1Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:textColor="@color/green"
-                app:layout_constraintEnd_toEndOf="@+id/appCompatTextView7"
-                app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7"
-                tools:text="5" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cnt_youtube"
+                        style="@style/Subtitle1Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:textColor="@color/green"
+                        tools:text="5" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_cnt_blog"
-                style="@style/Subtitle1Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:textColor="@color/green"
-                app:layout_constraintEnd_toEndOf="@+id/appCompatTextView6"
-                app:layout_constraintStart_toStartOf="@+id/appCompatTextView6"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
-                tools:text="5" />
+                </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_cnt_recipe"
-                style="@style/Subtitle1Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:textColor="@color/green"
-                app:layout_constraintEnd_toEndOf="@+id/appCompatTextView8"
-                app:layout_constraintStart_toStartOf="@+id/appCompatTextView8"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8"
-                tools:text="5" />
+                <LinearLayout
+                    android:id="@+id/layout_scrap_blog"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView6"
+                        style="@style/Subtitle2Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/blog" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cnt_blog"
+                        style="@style/Subtitle1Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:textColor="@color/green"
+                        tools:text="5" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_scrap_public"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView8"
+                        style="@style/Subtitle2Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recipe" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cnt_recipe"
+                        style="@style/Subtitle1Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:textColor="@color/green"
+                        tools:text="5" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <View
                 android:id="@+id/line_middle"
@@ -192,7 +210,7 @@
                 android:background="@color/gray_000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_cnt_blog" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_scrap" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/my_recipe"
@@ -268,9 +286,9 @@
                 android:backgroundTint="@color/green"
                 android:paddingHorizontal="23dp"
                 android:paddingVertical="12dp"
-                android:visibility="gone"
                 android:text="@string/myRecipeCreatePlease"
                 android:textColor="@color/white"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_my_recipe_create" />

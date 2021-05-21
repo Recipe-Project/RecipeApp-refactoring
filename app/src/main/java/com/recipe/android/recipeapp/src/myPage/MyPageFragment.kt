@@ -20,6 +20,7 @@ import com.recipe.android.recipeapp.src.myPage.models.UserInfoResponse
 import com.recipe.android.recipeapp.src.myRecipe.MyRecipeActivity
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateActivity
 import com.recipe.android.recipeapp.src.scrapRecipe.ScrapRecipeActivity
+import com.recipe.android.recipeapp.src.scrapRecipe.adapter.ScrapViewPagerAdapter
 import com.recipe.android.recipeapp.src.setting.SettingActivity
 
 class MyPageFragment :
@@ -75,7 +76,25 @@ class MyPageFragment :
         }
 
         binding.btnMyRecipeCreate.setOnClickListener {
-            val intent = Intent (context, MyRecipeCreateActivity::class.java)
+            val intent = Intent(context, MyRecipeCreateActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.layoutScrapYoutube.setOnClickListener {
+            val intent = Intent(context, ScrapRecipeActivity::class.java)
+            intent.putExtra("position", 0)
+            startActivity(intent)
+        }
+
+        binding.layoutScrapBlog.setOnClickListener {
+            val intent = Intent(context, ScrapRecipeActivity::class.java)
+            intent.putExtra("position", 1)
+            startActivity(intent)
+        }
+
+        binding.layoutScrapPublic.setOnClickListener {
+            val intent = Intent(context, ScrapRecipeActivity::class.java)
+            intent.putExtra("position", 2)
             startActivity(intent)
         }
     }
@@ -122,7 +141,10 @@ class MyPageFragment :
                 userInfoResult.myRecipeList.forEach {
                     myRecipeItemList.add(it)
                 }
-                myPageRecipeRecyclerViewAdapter.submitList(myRecipeItemList, userInfoResult.myRecipeTotalSize)
+                myPageRecipeRecyclerViewAdapter.submitList(
+                    myRecipeItemList,
+                    userInfoResult.myRecipeTotalSize
+                )
             }
 
         }

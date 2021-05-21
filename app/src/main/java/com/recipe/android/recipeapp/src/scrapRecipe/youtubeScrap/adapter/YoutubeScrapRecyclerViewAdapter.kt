@@ -1,13 +1,23 @@
 package com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapRecipeBinding
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.viewHolder.YoutubeScrapViewHolder
+import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeRecipeService
+import com.recipe.android.recipeapp.src.search.youtubeRecipe.`interface`.YoutubeRecipeView
+import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResponse
+import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapRequest
+import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapResponse
 
-class YoutubeScrapRecyclerViewAdapter: RecyclerView.Adapter<YoutubeScrapViewHolder>() {
+class YoutubeScrapRecyclerViewAdapter : RecyclerView.Adapter<YoutubeScrapViewHolder>(),
+    YoutubeRecipeView {
 
     private var scrapRecipeItemList = ArrayList<YoutubeScrap>()
 
@@ -19,6 +29,17 @@ class YoutubeScrapRecyclerViewAdapter: RecyclerView.Adapter<YoutubeScrapViewHold
 
     override fun onBindViewHolder(holder: YoutubeScrapViewHolder, position: Int) {
         holder.bindWithView(scrapRecipeItemList[position])
+
+        holder.itemView.setOnClickListener {
+            holder.itemView.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                val uri = Uri.parse(scrapRecipeItemList[position].youtubeUrl)
+                intent.data = uri
+                intent.setPackage("com.google.android.youtube")
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                ContextCompat.startActivity(ApplicationClass.instance, intent, null)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -28,5 +49,24 @@ class YoutubeScrapRecyclerViewAdapter: RecyclerView.Adapter<YoutubeScrapViewHold
     fun submitList(scrapRecipeItemList: ArrayList<YoutubeScrap>) {
         this.scrapRecipeItemList = scrapRecipeItemList
         notifyDataSetChanged()
+    }
+
+    override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
+
+    }
+
+    override fun onGetYoutubeRecipeFailure(message: String) {
+    }
+
+    override fun onGetYoutubeRecipeMoreSuccess(response: YoutubeRecipeResponse) {
+    }
+
+    override fun onGetYoutubeRecipeMoreFailure(message: String) {
+    }
+
+    override fun onPostYoutubeRecipeScrapSuccess(response: YoutubeRecipeScrapResponse) {
+    }
+
+    override fun onPostYoutubeRecipeScrapFailure(message: String) {
     }
 }

@@ -150,8 +150,8 @@ class MyRecipeCreateActivity :
         }
 
         binding.imgPick.setOnClickListener {
-//            GligarPicker().limit(1).requestCode(PICKER_REQUEST_CODE).withActivity(this)
-//                .show()
+            GligarPicker().limit(1).requestCode(PICKER_REQUEST_CODE).withActivity(this)
+                .show()
         }
 
         // 재료 추가 버튼 클릭
