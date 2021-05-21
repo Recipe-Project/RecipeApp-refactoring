@@ -16,7 +16,7 @@ data class YoutubeRecipeScrapResponse(
 data class YoutubeRecipeScrapResult(
     @SerializedName("userIdx")
     val userIdx : Int,
-    @SerializedName("youtubeIdx")
+    @SerializedName("youtubeId")
     val youtubeIdx : String,
     @SerializedName("title")
     val title : String,
