@@ -102,7 +102,6 @@ class MyPageFragment :
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "MyPageFragment - onStart() : ")
-
     }
 
     override fun onResume() {
@@ -119,7 +118,8 @@ class MyPageFragment :
         if (response.isSuccess) {
             val userInfoResult = response.result
             if (userInfoResult.profilePhoto != null) {
-                Glide.with(requireContext()).load(userInfoResult.profilePhoto).into(binding.imgProfile)
+                Glide.with(requireContext()).load(userInfoResult.profilePhoto)
+                    .into(binding.imgProfile)
             }
             binding.tvUserName.text = userInfoResult.userName
             binding.tvCntYoutube.text = userInfoResult.youtubeScrapCnt.toString()
