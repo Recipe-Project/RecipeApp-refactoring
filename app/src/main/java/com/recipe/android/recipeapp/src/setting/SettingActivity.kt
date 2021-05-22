@@ -1,7 +1,9 @@
 package com.recipe.android.recipeapp.src.setting
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.FCM_PUSH_OK
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.USER_IDX
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
@@ -16,15 +18,6 @@ class SettingActivity: BaseActivity<ActivitySettingBinding>(ActivitySettingBindi
         super.onCreate(savedInstanceState)
 
         val userIdx = sSharedPreferences.getInt(USER_IDX, 0)
-
-        binding.switchPush.isChecked = sSharedPreferences.getBoolean(FCM_PUSH_OK, false)
-
-        binding.switchPush.setOnCheckedChangeListener { buttonView, isChecked ->
-            when (isChecked){
-                true -> sSharedPreferences.edit().putBoolean(FCM_PUSH_OK, true).apply()
-                false -> sSharedPreferences.edit().putBoolean(FCM_PUSH_OK, false).apply()
-            }
-        }
 
         // 탈퇴 버튼 클릭
         binding.btnDeleteId.setOnClickListener {
@@ -47,6 +40,13 @@ class SettingActivity: BaseActivity<ActivitySettingBinding>(ActivitySettingBindi
 
         binding.btnDeveloper.setOnClickListener {
             val intent = Intent(this, DeveloperInfoActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnPush.setOnClickListener {
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            val uri = Uri.fromParts("package", packageName, null)
+            intent.data = uri
             startActivity(intent)
         }
     }

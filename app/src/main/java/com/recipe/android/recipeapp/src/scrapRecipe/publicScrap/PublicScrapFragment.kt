@@ -12,6 +12,7 @@ import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentPublicScrapBinding
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.`interface`.PublicScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.adapter.PublicScrapRecyclerViewAdapter
+import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PostPublicScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrapResponse
 
@@ -47,7 +48,6 @@ class PublicScrapFragment : BaseFragment<FragmentPublicScrapBinding>(
 
     // 스크랩 조회 api 성공
     override fun onGetPublicScrapSuccess(response: PublicScrapResponse) {
-
         if (response.isSuccess) {
             publicScrapItemList.clear()
             response.result.scrapRecipeList?.forEach {
@@ -64,6 +64,10 @@ class PublicScrapFragment : BaseFragment<FragmentPublicScrapBinding>(
     override fun onGetPublicScrapFailure(message: String) {
         showCustomToast(getString(R.string.networkError))
         Log.d(TAG, "PublicScrapFragment - onGetPublicScrapFailure() : $message")
+    }
+
+    override fun onPostPublicScrapSuccess(postPublicScrapResponse: PostPublicScrapResponse) {
+
     }
 
 

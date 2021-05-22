@@ -3,8 +3,6 @@ package com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapPublicRecipeBinding
@@ -18,7 +16,9 @@ class PublicScrapRecyclerViewAdapter: RecyclerView.Adapter<PublicScrapViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicScrapViewHolder {
         return PublicScrapViewHolder(
-            ItemScrapPublicRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemScrapPublicRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            this,
+            publicRecipeItemList
         )
     }
 

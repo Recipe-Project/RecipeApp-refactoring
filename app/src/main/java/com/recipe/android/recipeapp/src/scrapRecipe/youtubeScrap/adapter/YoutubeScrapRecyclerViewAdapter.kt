@@ -10,10 +10,8 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapRecipeBinding
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.viewHolder.YoutubeScrapViewHolder
-import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeRecipeService
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.`interface`.YoutubeRecipeView
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResponse
-import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapResponse
 
 class YoutubeScrapRecyclerViewAdapter : RecyclerView.Adapter<YoutubeScrapViewHolder>(),
@@ -23,7 +21,9 @@ class YoutubeScrapRecyclerViewAdapter : RecyclerView.Adapter<YoutubeScrapViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YoutubeScrapViewHolder {
         return YoutubeScrapViewHolder(
-            ItemScrapRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemScrapRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            this,
+            scrapRecipeItemList
         )
     }
 

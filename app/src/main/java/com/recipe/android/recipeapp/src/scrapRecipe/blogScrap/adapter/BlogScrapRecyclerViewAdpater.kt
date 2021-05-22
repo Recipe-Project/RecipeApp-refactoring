@@ -17,7 +17,9 @@ class BlogScrapRecyclerViewAdpater: RecyclerView.Adapter<BlogScrapViewHolder>() 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogScrapViewHolder {
         return BlogScrapViewHolder(
-            ItemScrapRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemScrapRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            this,
+            blogScrapItemList
         )
     }
 

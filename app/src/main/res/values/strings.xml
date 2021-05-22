@@ -122,7 +122,7 @@
     <string name="newVersion">최신버전</string>
     <string name="newVersionValue">1.0.0</string>
     <string name="serviceSetting">서비스설정</string>
-    <string name="pushAlarm">푸시 알림 허용</string>
+    <string name="pushAlarm">유통기한 알림 허용하기</string>
     <string name="developer">개발자 소개</string>
     <string name="contactUs">Contact Us</string>
     <string name="developerEmail">recipeStorage2021@gmail.com</string>
