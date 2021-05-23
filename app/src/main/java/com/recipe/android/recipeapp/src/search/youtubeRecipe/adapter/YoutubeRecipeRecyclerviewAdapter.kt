@@ -81,7 +81,12 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(holder is RecipeViewHolder) {
-            holder.title.text = youtubeRecipeList[position]?.snippet?.title
+
+            // &#39;처리
+            val title = youtubeRecipeList[position]?.snippet?.title
+            title?.replace("&#39;", "\'")
+            holder.title.text = title
+            
             holder.channerName.text = youtubeRecipeList[position]?.snippet?.channelTitle
             holder.cnt.text = "없네.."
             holder.playTime.text = "00:00"
