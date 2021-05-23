@@ -38,6 +38,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                style="@style/Subtitle2Style"
                 android:text="@string/logOutConfirm"
                 android:gravity="center"
                 android:textColor="@color/gray_300"
