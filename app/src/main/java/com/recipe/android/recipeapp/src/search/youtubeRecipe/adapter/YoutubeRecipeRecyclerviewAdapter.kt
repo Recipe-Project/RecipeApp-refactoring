@@ -97,8 +97,6 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
             }
 
             holder.channerName.text = youtubeRecipeList[position]?.snippet?.channelTitle
-            holder.cnt.text = "없네.."
-            holder.playTime.text = "00:00"
 
             // postDate String Slicing
             val date = youtubeRecipeList[position]?.snippet?.publishTime
@@ -138,13 +136,9 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
         val title : TextView = binding.youtubeTitleTv
         val channerName : TextView = binding.youtubeNameTv
         val thumbnail : ImageView = binding.youtubeThumbnailImg
-        val cnt : TextView = binding.favoriteYoutubeRecipeCntTv
         val postDate : TextView = binding.youtubePostDate
         val scrapBtn : ImageView = binding.youtubeScrapBtn
-        val playTime : TextView = binding.youtubePlayTime
         val layout : ConstraintLayout = binding.youtubeResultFragRecyclerviewLayout
-
-
     }
 
     class LoadingViewHolder(val binding: ItemRecipeListLoadingBinding) : RecyclerView.ViewHolder(binding.root) {
