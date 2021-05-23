@@ -19,15 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fridge_frag_app_logo_iv"
-                android:layout_width="120dp"
-                android:layout_height="27dp"
-                android:layout_marginTop="18dp"
-                android:src="@drawable/ic_recipe_storge"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recipeStorage2"
+                android:textColor="@color/green"
+                android:textSize="16sp"
+                android:fontFamily="@font/cafe_24_s_surround_air"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="18dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fridge_frag_date_tv"
@@ -79,11 +82,11 @@
                 android:id="@+id/fridge_frag_line_top"
                 android:layout_width="0dp"
                 android:layout_height="3dp"
-                android:layout_marginTop="53dp"
-                android:background="@color/gray_300"
+                android:layout_marginTop="12dp"
+                android:background="@color/green"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/fridge_frag_app_logo_iv" />
+                app:layout_constraintTop_toBottomOf="@id/fridge_frag_date_tv" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fridge_frag_title"
@@ -245,7 +248,7 @@
                 android:layout_width="0dp"
                 android:layout_height="3dp"
                 android:layout_marginTop="48dp"
-                android:background="@color/gray_300"
+                android:background="@color/green"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/fridge_frag_dotted_line_bottom" />
