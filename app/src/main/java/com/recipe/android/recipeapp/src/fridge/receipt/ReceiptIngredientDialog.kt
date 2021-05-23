@@ -55,7 +55,7 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
         var uri : String? = null
         if(intent.hasExtra("uri")) {
             uri = intent.getStringExtra("uri")
-            val newUri = "file://" + uri
+            val newUri = "file://$uri"
             showLoadingDialog()
             recognizeReceipt(Uri.parse(newUri))
         }

@@ -33,14 +33,16 @@ class MyFridgeAllCategoryFragment
             resultList = getParcelableArrayList<Parcelable>("resultList") as ArrayList<GetFridgeResult>
         }
 
-        val myFridgeAllCategoryAdapter = updateView?.let {
-            MyFridgeAllIngredientRecyclerviewAdapter(
-                it
-            )
-        }
+//        val myFridgeAllCategoryAdapter = updateView?.let {
+//            MyFridgeAllIngredientRecyclerviewAdapter(
+//                it
+//            )
+//        }
+
+        val myFridgeAllCategoryAdapter = MyFridgeAllIngredientRecyclerviewAdapter()
         binding.rvAll.adapter = myFridgeAllCategoryAdapter
         binding.rvAll.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        myFridgeAllCategoryAdapter?.submitList(resultList)
+        myFridgeAllCategoryAdapter.submitList(resultList)
     }
 
     override fun onAttach(context: Context) {

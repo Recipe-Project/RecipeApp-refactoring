@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.fridge.home.fragment
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,17 +18,23 @@ import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientReque
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 
-class MyFridgeCategoryFragment(val result : GetFridgeResult, val updateView : IngredientUpdateView)
+class MyFridgeCategoryFragment()
     : BaseFragment<FragmentMyFridgeCategoryBinding>(FragmentMyFridgeCategoryBinding::bind, R.layout.fragment_my_fridge_category), FridgeUpdateView {
 
     val TAG = "MyFridgeCategoryFragment"
+    lateinit var result : GetFridgeResult
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.takeIf { it.containsKey("result") }?.apply {
+            result = getParcelable("result")!!
+        }
+
         val fridgeItemList = result.ingredientList
-        val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(requireContext(), updateView)
+        val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(requireContext())
         binding.rvIngredient.adapter = myFridgeIngredientRecyclerviewAdapter
+        myFridgeIngredientRecyclerviewAdapter.submitList(fridgeItemList)
 
         if(fridgeItemList.size != 0) {
             myFridgeIngredientRecyclerviewAdapter.submitList(fridgeItemList)
