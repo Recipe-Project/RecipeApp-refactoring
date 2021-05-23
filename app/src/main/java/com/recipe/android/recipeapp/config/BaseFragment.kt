@@ -1,18 +1,14 @@
 package com.recipe.android.recipeapp.config
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentFactory
 import androidx.viewbinding.ViewBinding
+import com.recipe.android.recipeapp.common.LoadingDialog
 
 abstract class BaseFragment<B : ViewBinding>(
     private val bind: (View) -> B,

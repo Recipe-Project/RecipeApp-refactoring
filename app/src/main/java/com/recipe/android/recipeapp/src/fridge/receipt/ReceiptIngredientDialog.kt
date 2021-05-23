@@ -40,7 +40,7 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
     PickIngredientActivityView, PickIngredientIconDialog.PickIcon {
 
     val TAG = "ReceiptIngredientDialog"
-    lateinit var bitmap : Bitmap
+    var bitmap : Bitmap? = null
     private lateinit var functions: FirebaseFunctions
     var receiptIngredientList = ArrayList<PostReceiptIngredientResult>()
     lateinit var receiptIngredientRecyclerviewAdapter : ReceiptIngredientRecyclerviewAdapter
@@ -55,9 +55,11 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
         var uri : String? = null
         if(intent.hasExtra("uri")) {
             uri = intent.getStringExtra("uri")
+
+            showLoadingDialog()
+            recognizeReceipt(Uri.parse(uri))
         }
-        showLoadingDialog()
-        recognizeReceipt(Uri.parse(uri))
+
 
         // 전체 재료 조회
         PickIngredientService(this).getIngredients("")
@@ -84,11 +86,11 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
         } else {
             bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
         }
-        bitmap = scaleBitmapDown(bitmap, 640)
+        bitmap = bitmap?.let { scaleBitmapDown(it, 640) }
 
         // Convert bitmap to base64 encoded string
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
         val base64encoded = Base64.encodeToString(imageBytes, Base64.NO_WRAP)
 
@@ -114,11 +116,14 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
         imageContext.add("languageHints", languageHints)
         request.add("imageContext", imageContext)
 
+        Log.d(TAG, "ReceiptIngredientDialog - recognizeReceipt() : request : $request")
+
         annotateImage(request.toString())
             .addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     // Task failed with an exception
                     Log.d(TAG, "ReceiptActivity - Text Recognition Failed")
+                    Log.d(TAG, "ReceiptIngredientDialog - recognizeReceipt() : result :  \n exceptions: ${task.exception}")
                 } else {
                     // Task completed successfully
                     Log.d(TAG, "ReceiptActivity - Text Recognition Success")

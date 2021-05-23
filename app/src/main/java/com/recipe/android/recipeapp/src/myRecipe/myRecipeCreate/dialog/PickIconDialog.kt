@@ -92,6 +92,14 @@ class PickIconDialog(
 
     }
 
+    override fun onPatchMyRecipeSuccess(response: MyRecipeCreateResponse) {
+
+    }
+
+    override fun onPatchMyRecipeFailure(message: String) {
+
+    }
+
     override fun onGetIngredientMyRecipeSuccess(response: IngredientResponse) {
         if (response.isSuccess) {
             ingredientsList.clear()

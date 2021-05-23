@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
+import com.recipe.android.recipeapp.common.SimpleResponse
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentBlogScrapBinding
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.`interface`.BlogScrapFragmnetView
@@ -30,9 +31,6 @@ BlogScrapFragmnetView{
         // 블로그 스크랩 조회
         BlogScrapService(this).getBlogScrap(1)
 
-        // 정렬 기준 선택
-        val items = arrayOf("최신순", "조회순")
-
         blogScrapRecyclerViewAdapter = BlogScrapRecyclerViewAdpater()
         binding.rvScrapRecipe.apply {
             adapter = blogScrapRecyclerViewAdapter
@@ -48,12 +46,16 @@ BlogScrapFragmnetView{
             blogScrapRecyclerViewAdapter.submitList(blogScrapItemList)
 
             binding.tvScrapCnt.text = response.result?.size.toString()
-        }
+        } else onBlogScrapFailure(response.message)
     }
 
-    override fun onGetBlogScrapFailure(message: String) {
+    override fun onBlogScrapFailure(message: String) {
         showCustomToast(getString(R.string.networkError))
         Log.d(TAG, "BlogScrapFragment - onGetBlogScrapFailure() : $message")
+    }
+
+    override fun onPostBlogScrapSuccess(response: SimpleResponse) {
+
     }
 
 

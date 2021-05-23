@@ -122,9 +122,13 @@
     <string name="newVersion">최신버전</string>
     <string name="newVersionValue">1.0.0</string>
     <string name="serviceSetting">서비스설정</string>
-    <string name="pushAlarm">푸시 알림 허용</string>
+    <string name="pushAlarm">유통기한 알림 허용하기</string>
     <string name="developer">개발자 소개</string>
+    <string name="contactUs">Contact Us</string>
+    <string name="developerEmail">recipeStorage2021@gmail.com</string>
     <string name="logOut">로그아웃</string>
+    <string name="logOutSuccess">로그아웃이 완료되었습니다.</string>
+    <string name="logOutConfirm">레시피 저장소를 로그아웃 하시겠어요?</string>
     <string name="deleteId">탈퇴</string>
     <string name="deleteIdDialog">탈퇴 시, 레시피 저장소에서 저장한 내용은 모두 삭제되며, 이후 복구가 불가능합니다.</string>
     <string name="deleteIdConfirmDialog">레시피저장소를 탈퇴하시겠습니까?</string>

@@ -7,12 +7,17 @@ import com.bumptech.glide.Glide
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemBasketIngredientBinding
+import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.DateDialogInterface
 import com.recipe.android.recipeapp.src.fridge.basket.models.FridgeBasket
 import com.recipe.android.recipeapp.src.fridge.dialog.DateDialog
+import java.sql.Date
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class BasketRecyclerViewAdapter(val view: BasketActivityView):
+class BasketRecyclerViewAdapter(val view: BasketActivityView, val activity: BasketActivity):
 RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
 
     private var ingredientList = ArrayList<FridgeBasket>()
@@ -21,7 +26,9 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
 
     val context = ApplicationClass.instance
 
-    inner class BasketViewHolder(val binding: ItemBasketIngredientBinding): RecyclerView.ViewHolder(binding.root), DateDialogInterface{
+    inner class BasketViewHolder(val binding: ItemBasketIngredientBinding): RecyclerView.ViewHolder(
+        binding.root
+    ), DateDialogInterface{
         fun bindWithView(ingredient: FridgeBasket, position: Int) {
             binding.tvIngredientName.text = ingredient.ingredientName
             if (ingredient.ingredientIcon != "") {
@@ -62,17 +69,8 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
                 binding.btnFrozen.setTextColor(context.getColor(R.color.gray_200))
             }
 
-//            binding.tvExpired.setOnClickListener {
-//                // 데이트피커
-//                val intent = Intent(context, DateDialog::class.java)
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                startActivity(context, intent, null)
-//                binding.tvExpired.text = intent.getIntExtra("year", 0).toString()
-//                view.onSetExpiredAt(binding.tvExpired.text.toString(), position)
-//            }
-
             if (ingredient.expiredAt == null) {
-                binding.tvExpired.text = "0000.00.00 까지"
+                binding.tvExpired.text = "0000.00.00"
             } else {
                 binding.tvExpired.text = ingredient.expiredAt
             }
@@ -81,15 +79,19 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
                 view.onClickPickRemove(position)
             }
 
-            binding.tvExpired.setOnClickListener {
-                val dateDialog = DateDialog(context, this, position)
+            binding.btnExpired.setOnClickListener {
+                val dateDialog = DateDialog(activity, this, position)
                 dateDialog.show()
             }
         }
 
         override fun clickDate(year: Int, month: Int, dayOfMonth: Int, position: Int) {
-            binding.tvExpired.text = "$year.$month.$dayOfMonth"
-            view.onClickExpiredAt(position, "$year.$month.$dayOfMonth")
+            val cal = Calendar.getInstance()
+            cal.set(year, month, dayOfMonth)
+            val date = cal.time
+            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.KOREAN)
+            binding.tvExpired.text = simpleDateFormat.format(date)
+            view.onClickExpiredAt(position, simpleDateFormat.format(date))
         }
     }
 
@@ -106,6 +108,7 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
 //        holder.binding.tvExpired.setOnClickListener {
 //            view.onClickExpiredAt(position)
 //        }
+
 
     }
 

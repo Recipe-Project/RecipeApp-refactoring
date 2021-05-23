@@ -1,5 +1,4 @@
 package com.recipe.android.recipeapp.src.fridge.home.adapter
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +14,14 @@ import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientReque
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 
-class MyFridgeAllIngredientRecyclerviewAdapter(val context : Context, val view: IngredientUpdateView) : RecyclerView.Adapter<MyFridgeAllIngredientRecyclerviewAdapter.CustomViewholder>() {
+class MyFridgeAllIngredientRecyclerviewAdapter(val view: IngredientUpdateView) : RecyclerView.Adapter<MyFridgeAllIngredientRecyclerviewAdapter.CustomViewholder>() {
 
     var resultList = ArrayList<GetFridgeResult>()
     lateinit var customViewholder : CustomViewholder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         val binding = FragmentMyFridgeCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CustomViewholder(binding, context, view)
+        return CustomViewholder(binding, parent.context, view)
     }
 
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {

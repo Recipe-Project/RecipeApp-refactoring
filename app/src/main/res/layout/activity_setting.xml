@@ -95,65 +95,63 @@
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView13"
+        android:id="@+id/btn_push"
         style="@style/Body1Style"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="21dp"
+        android:layout_marginTop="16dp"
         android:text="@string/pushAlarm"
         app:layout_constraintStart_toStartOf="@+id/appCompatTextView14"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView14" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:buttonTint="@color/green"
-        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView13"
-        app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/appCompatTextView13" />
 
     <View
         android:id="@+id/view4"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:background="@color/gray_000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView13" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_push" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView15"
+        android:id="@+id/btn_developer"
         style="@style/Body1Style"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="21dp"
         android:text="@string/developer"
         app:layout_constraintStart_toStartOf="@+id/view4"
         app:layout_constraintTop_toBottomOf="@+id/view4" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView16"
+        android:id="@+id/btn_sign_out"
         style="@style/Body1Style"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="21dp"
         android:text="@string/logOut"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView15"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView15" />
+        app:layout_constraintStart_toStartOf="@+id/btn_developer"
+        app:layout_constraintTop_toBottomOf="@+id/btn_developer" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_delete_id"
         style="@style/Body1Style"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="21dp"
         android:text="@string/deleteId"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView16"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView16" />
+        app:layout_constraintStart_toStartOf="@+id/btn_sign_out"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_out" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

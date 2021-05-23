@@ -4,17 +4,21 @@ import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientR
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreate
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface MyRecipeCreateRetrofitInterface {
 
     // 나만의 레시피 생성
     @POST("/my-recipes")
     fun postMyRecipeCreate(
-        @Body param: HashMap<String, Any>
+        @Body param: HashMap<String, Any?>
+    ): Call<MyRecipeCreateResponse>
+
+    // 나만의 레시피 수정
+    @PATCH("/my-recipes/{myRecipeIdx}")
+    fun patchMyRecipe(
+        @Body param: HashMap<String, Any?>,
+        @Path("myRecipeIdx") myRecipeIdx: Int
     ): Call<MyRecipeCreateResponse>
 
     // 재료조회

@@ -7,7 +7,7 @@ data class MyRecipeCreateResult(
     @SerializedName("content")
     val content: String,
     @SerializedName("ingredientList")
-    val ingredientList: List<Int>,
+    val ingredientList: List<DirectIngredientList>,
     @SerializedName("myRecipeIdx")
     val myRecipeIdx: Int?,
     @SerializedName("thumbnail")

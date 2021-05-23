@@ -14,6 +14,8 @@ class MyRecipeViewHolder(val binding: ItemMyRecipeListBinding): RecyclerView.Vie
     fun bindWithView(myRecipeItem: MyRecipeResult) {
         if (myRecipeItem.thumbnail != null) {
             Glide.with(ApplicationClass.instance).load(myRecipeItem.thumbnail).transform(CenterCrop(), RoundedCorners(20)).into(binding.imgRecipe)
+        } else {
+            binding.imgRecipe.setImageResource(R.drawable.img_my_recipe_default_small)
         }
         binding.tvRecipeTitle.text = myRecipeItem.title
         binding.tvRecipeExplain.text = myRecipeItem.content

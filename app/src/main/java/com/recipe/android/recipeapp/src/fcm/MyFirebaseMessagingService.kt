@@ -26,6 +26,8 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
 
         if (remoteMessage.data.isNotEmpty()) {
+            Log.d("body: ", remoteMessage.data["body"].toString())
+            Log.d("title: ", remoteMessage.data["title"].toString())
             sendNotification(remoteMessage)
         } else {
             Log.d(TAG, "MyFirebaseMessagingService - onMessageReceived() : fcm message is null")
@@ -44,8 +46,9 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(remoteMessage.data["body"].toString())
-            .setContentText(remoteMessage.data["title"].toString())
+            .setContentTitle(remoteMessage.data["title"].toString())
+            .setContentText(remoteMessage.data["body"].toString())
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
 

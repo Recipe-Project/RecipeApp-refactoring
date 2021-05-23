@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.config
+package com.recipe.android.recipeapp.common
 
 import android.app.Dialog
 import android.content.Context

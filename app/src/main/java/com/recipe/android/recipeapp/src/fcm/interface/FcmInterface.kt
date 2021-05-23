@@ -12,7 +12,7 @@ interface FcmInterface {
 
     )
 
-    @PATCH("/fcm/token")
+    @PATCH("/fcm-token")
     fun patchToken(
         @Body param: HashMap<String, Any>
     ): Call<FcmResponse>

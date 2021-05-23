@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_card_view"
     android:layout_width="match_parent"
     android:layout_height="111dp"
     android:layout_marginStart="20dp"
@@ -16,11 +17,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_pick_remove"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
             android:paddingStart="6dp"
+            android:paddingEnd="8dp"
             android:paddingBottom="6dp"
+            android:paddingTop="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_cancel_24"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,13 +44,13 @@
             style="@style/Subtitle2Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintBottom_toTopOf="@+id/btn_expired"
+            app:layout_constraintStart_toStartOf="@+id/btn_expired"
             app:layout_constraintTop_toTopOf="@+id/ic_ingredient"
             tools:text="토마토" />
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/btn_expired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -88,7 +90,7 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/ic_ingredient"
             app:layout_constraintStart_toEndOf="@+id/ic_ingredient"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/btn_expired">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
