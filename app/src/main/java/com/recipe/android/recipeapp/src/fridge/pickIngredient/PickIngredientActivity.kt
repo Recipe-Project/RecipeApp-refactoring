@@ -181,6 +181,7 @@ class PickIngredientActivity :
             when (response.code) {
                 3069 -> showCustomToast(response.message)
                 2068 -> showCustomToast(response.message)
+                2070 -> showCustomToast("재료를 선택해주세요.")
                 else -> {
                     Log.d(
                         TAG,

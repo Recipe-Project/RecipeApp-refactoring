@@ -25,12 +25,10 @@ import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.adapter.PickItemRecyclerViewAdapter
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.AddDirectMyRecipeActivity
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.AddIngredientDialog
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.MultiplePickIngredientsDialog
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.PickIconDialog
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.*
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
+import com.recipe.android.recipeapp.src.setting.deleteId.DeleteIdDialog
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -90,8 +88,10 @@ class MyRecipeCreateActivity :
 
         // 취소 버튼 클릭
         binding.btnCancel.setOnClickListener {
-            finish()
+            val intent = Intent(this, CreateCancelDialog::class.java)
+            startActivity(intent)
         }
+
 
         // 재료 선택
         pickItemRecyclerViewAdapter = PickItemRecyclerViewAdapter(this)
@@ -133,12 +133,14 @@ class MyRecipeCreateActivity :
 
             title = binding.etTitle.text.toString()
             if (title!!.isEmpty()) {
+                dismissLoadingDialog()
                 showCustomToast(getString(R.string.pleaseEnterTitle))
             }
 
             content = binding.etContent.text.toString()
 
             if (content!!.isEmpty()) {
+                dismissLoadingDialog()
                 showCustomToast(getString(R.string.pleaseEnterContent))
             }
 

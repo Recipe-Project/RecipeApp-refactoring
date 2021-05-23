@@ -99,6 +99,7 @@
             android:name=".src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog"
             android:theme="@style/dialogTheme" />
         <activity android:name=".src.myRecipe.myRecipeCreate.dialog.AddDirectMyRecipeActivity"/>
+        <activity android:name=".src.myRecipe.myRecipeCreate.dialog.CreateCancelDialog"/>
 
 
         <!-- 스크랩 레시피 -->

@@ -105,6 +105,8 @@ class AddDirectMyRecipeActivity :
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (count > 0) grayToBlue(binding.btnAddGredient)
                 else blueToGray(binding.btnAddGredient)
+
+                binding.btnAddGredient.setTextColor(getColor(R.color.white))
             }
 
             override fun afterTextChanged(s: Editable?) {

@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="320dp"
-        android:layout_height="208dp"
+        android:layout_height="157dp"
         android:background="@color/white"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/deleteId"
+                android:text="@string/cancelCreate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,24 +39,13 @@
                 style="@style/Subtitle2Style"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="@string/deleteIdDialog"
+                android:text="@string/cancelCreateMessage"
                 android:gravity="center"
                 android:textColor="@color/gray_300"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView18" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView20"
-                style="@style/Subtitle2Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/deleteIdConfirmDialog"
-                android:textColor="@color/gray_300"
-                app:layout_constraintEnd_toEndOf="@+id/appCompatTextView19"
-                app:layout_constraintStart_toStartOf="@+id/appCompatTextView19"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView19" />
 
             <View
                 android:id="@+id/view5"
@@ -84,7 +73,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="@string/yes"
+                android:text="@string/yesCreate"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view6"
@@ -96,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="@string/no"
+                android:text="@string/noCreate"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/view6"
                 app:layout_constraintStart_toStartOf="parent"

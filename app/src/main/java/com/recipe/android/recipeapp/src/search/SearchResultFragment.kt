@@ -14,7 +14,7 @@ import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeResultFragme
 class SearchResultFragment(private val keyword : String)
     : BaseFragment<FragmentSearchResultBinding>(FragmentSearchResultBinding::bind, R.layout.fragment_search_result) {
 
-    private val recipeTypeList = arrayListOf("동영상", "블로그", "공공")
+    private val recipeTypeList = arrayListOf("동영상", "블로그", "추천")
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

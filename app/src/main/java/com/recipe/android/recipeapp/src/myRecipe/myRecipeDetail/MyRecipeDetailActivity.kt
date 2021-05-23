@@ -37,6 +37,10 @@ class MyRecipeDetailActivity: BaseActivity<ActivityMyRecipeDetailBinding>(Activi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
         myRecipeIdx = intent.getIntExtra("myRecipeIdx", 0)
 
         myRecipeIngredientRecyclerViewAdapter = MyRecipeIngredientRecyclerViewAdapter()

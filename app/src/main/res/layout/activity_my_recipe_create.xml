@@ -133,6 +133,7 @@
                 android:paddingStart="24dp"
                 android:paddingTop="16dp"
                 android:paddingEnd="20dp"
+                android:textColor="@color/green"
                 android:paddingBottom="11dp"
                 android:text="+ 재료추가"
                 app:layout_constraintEnd_toEndOf="parent"
