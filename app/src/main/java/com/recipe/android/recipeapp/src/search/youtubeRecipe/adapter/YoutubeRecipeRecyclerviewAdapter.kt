@@ -2,6 +2,7 @@ package com.recipe.android.recipeapp.src.search.youtubeRecipe.adapter
 
 import android.annotation.SuppressLint
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,9 +85,17 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
 
             // &#39;처리
             val title = youtubeRecipeList[position]?.snippet?.title
-            title?.replace("&#39;", "\'")
-            holder.title.text = title
-            
+            if(title!!.contains("&#39;")) {
+                Log.d("test", "으아아아아악!!!")
+                val newTitle = title.replace("&#39;", "'")
+                holder.title.text = newTitle
+            } else if(title!!.contains("&quot;")) {
+                val newTitle = title.replace("&quot;", "\"")
+                holder.title.text = newTitle
+            } else {
+                holder.title.text = title
+            }
+
             holder.channerName.text = youtubeRecipeList[position]?.snippet?.channelTitle
             holder.cnt.text = "없네.."
             holder.playTime.text = "00:00"
