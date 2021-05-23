@@ -27,14 +27,18 @@ class MyFridgeCategoryAdapter(fa: FragmentActivity, val view : IngredientUpdateV
         Log.d(TAG, "MyFridgeCategoryAdapter - createFragment() : $position")
 
         return if (position != 0) {
-            MyFridgeCategoryFragment(ingredients[position - 1], view)
+            val myFridgeCategoryFragment = MyFridgeCategoryFragment()
+            myFridgeCategoryFragment.arguments = Bundle().apply {
+                putParcelable("result", ingredients[position - 1])
+            }
+            return myFridgeCategoryFragment
         } else {
             // MyFridgeAllCategoryFragment(ingredients, view)
             val myFridgeAllCategoryFragment = MyFridgeAllCategoryFragment()
             myFridgeAllCategoryFragment.arguments = Bundle().apply {
                 putParcelableArrayList("resultList", ingredients)
             }
-            myFridgeAllCategoryFragment
+            return myFridgeAllCategoryFragment
         }
     }
 

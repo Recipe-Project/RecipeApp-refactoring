@@ -14,7 +14,7 @@ import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
 
-class MyFridgeIngredientRecyclerviewAdapter(val context: Context, val view: IngredientUpdateView)
+class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
     : RecyclerView.Adapter<MyFridgeIngredientRecyclerviewAdapter.CustomViewholder>() {
 
     var fridgeItemList = ArrayList<FridgeItem>()
@@ -22,7 +22,7 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context, val view: Ingr
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         binding = ItemMyFridgeIngredientRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CustomViewholder(binding, context, view)
+        return CustomViewholder(binding, context)
     }
 
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
@@ -31,7 +31,7 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context, val view: Ingr
 
     override fun getItemCount(): Int = fridgeItemList.size
 
-    class CustomViewholder(val binding: ItemMyFridgeIngredientRecyclerviewBinding, val context: Context, val view : IngredientUpdateView)
+    class CustomViewholder(val binding: ItemMyFridgeIngredientRecyclerviewBinding, val context: Context)
         : RecyclerView.ViewHolder(binding.root) {
 
         var ingredientCnt : Int = 1
@@ -52,19 +52,19 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context, val view: Ingr
                 "실온" -> binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.green))
             }
             binding.freshnessRefrigerationTv.setOnClickListener {
-                view.onClickStorageMethod(context.getString(R.string.refrigeration), position)
+                //view.onClickStorageMethod(context.getString(R.string.refrigeration), position)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.green))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
             }
             binding.freshnessFrozenTv.setOnClickListener {
-                view.onClickStorageMethod(context.getString(R.string.frozen), position)
+                //view.onClickStorageMethod(context.getString(R.string.frozen), position)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.green))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
             }
             binding.freshnessRoomTemperatureTv.setOnClickListener {
-                view.onClickStorageMethod(context.getString(R.string.roomTemperature), position)
+                //view.onClickStorageMethod(context.getString(R.string.roomTemperature), position)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.green))
@@ -74,13 +74,13 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context, val view: Ingr
             binding.plusCntIv.setOnClickListener {
                 ingredientCnt += 1
                 binding.ingredientCntTv.text = ingredientCnt.toString()
-                view.onClickCount(binding.ingredientCntTv.text.toString().toInt(), position)
+                //view.onClickCount(binding.ingredientCntTv.text.toString().toInt(), position)
             }
             binding.minusCntIv.setOnClickListener {
                 if(ingredientCnt > 1) {
                     ingredientCnt -= 1
                     binding.ingredientCntTv.text = ingredientCnt.toString()
-                    view.onClickCount(binding.ingredientCntTv.text.toString().toInt(), position)
+                    //view.onClickCount(binding.ingredientCntTv.text.toString().toInt(), position)
                 }
             }
 
