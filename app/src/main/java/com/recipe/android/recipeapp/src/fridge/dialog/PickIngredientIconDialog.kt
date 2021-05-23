@@ -59,7 +59,7 @@ class PickIngredientIconDialog(
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         }
 
-        if (ingredientsList == null){
+        if (ingredientsList == null) {
             PickIngredientService(this).getIngredients("")
         } else {
             ingredientAllRecyclerViewAdapter.submitList(ingredientsList)
@@ -67,7 +67,6 @@ class PickIngredientIconDialog(
 
         binding.btnCancel.setOnClickListener(PickDialogListener())
         binding.btnSave.setOnClickListener(PickDialogListener())
-
 
 
     }
@@ -101,7 +100,8 @@ class PickIngredientIconDialog(
             // 리사이클러뷰
             ingredientAllRecyclerViewAdapter.submitList(newIngredientsList)
         } else {
-            Toast.makeText(context, context.getString(R.string.networkError), Toast.LENGTH_LONG).show()
+            Toast.makeText(context, context.getString(R.string.networkError), Toast.LENGTH_LONG)
+                .show()
             Log.d(TAG, "AddDirectActivity - onGetIngredientSuccess() : ${response.message}")
         }
     }

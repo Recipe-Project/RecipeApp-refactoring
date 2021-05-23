@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RecipeApp</string>
+    <string name="app_name">레시피저장소</string>
 
     <string name="recipeStorage">레시피\n저장소</string>
 
