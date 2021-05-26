@@ -161,8 +161,6 @@ class MyRecipeCreateActivity :
             val addIngredientDialog = AddIngredientDialog(this, this, this)
             addIngredientDialog.show()
         }
-
-
     }
 
     private fun showSingleImage(uri: Uri) {

@@ -19,6 +19,8 @@ class SearchResultFragment(private val keyword : String)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+
         val pagerAdapter = SearchResultViewPagerAdapter(this)
         pagerAdapter.addFragment(YoutubeResultFragment(keyword))
         pagerAdapter.addFragment(BlogResultFragment(keyword))

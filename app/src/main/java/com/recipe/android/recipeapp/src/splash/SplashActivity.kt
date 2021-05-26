@@ -12,6 +12,7 @@ import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPre
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivitySplashBinding
 import com.recipe.android.recipeapp.src.MainActivity
+import com.recipe.android.recipeapp.src.fcm.FcmService
 import com.recipe.android.recipeapp.src.signIn.SignInActivity
 import com.recipe.android.recipeapp.src.splash.`interface`.SplashActivityView
 import com.recipe.android.recipeapp.src.splash.models.AutoLoginResponse
@@ -37,8 +38,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
 
             // Get new FCM registration token
             val token = task.result
-            sSharedPreferences.edit().putString(FCM_TOKEN, token).apply()
+
             Log.d(TAG, "SplashActivity - onCreate() : fcm 토큰 : $token")
+
+            if(sSharedPreferences.getString(FCM_TOKEN, "") != token){
+                sSharedPreferences.edit().putString(FCM_TOKEN, token).apply()
+                if (token != null) {
+                    FcmService().patchFcm(token)
+                }
+            }
         })
     }
 
