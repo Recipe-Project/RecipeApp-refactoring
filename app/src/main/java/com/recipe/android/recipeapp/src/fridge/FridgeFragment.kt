@@ -274,8 +274,4 @@ class FridgeFragment :
     override fun onSetExpiredAt(date: String, position: Int) {
 
     }
-
-
-
-
 }

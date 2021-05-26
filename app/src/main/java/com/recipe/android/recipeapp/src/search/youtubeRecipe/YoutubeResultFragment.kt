@@ -63,42 +63,56 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
 
         // 검색된 게시물이 100개 초과시, 100+ 로 표기
         val totalCnt = response.pageInfo.totalResults
-        if(totalCnt > 100) {
-            binding.youtubeFragItemCnt.text = "100+"
+        if(totalCnt == 0) {
+            binding.youtubeResultFragRecylerview.visibility = View.GONE
+            binding.youtubeFragItemCntUnit.visibility = View.GONE
+            binding.youtubeFragItemCnt.visibility = View.GONE
+            binding.defaultTv.visibility = View.VISIBLE
+            binding.defaultTv.text = "'$keyword'에 대한\n검색결과가 없습니다."
         } else {
-            binding.youtubeFragItemCnt.text = response.pageInfo.totalResults.toString()
-        }
-        binding.youtubeFragItemCntUnit.visibility = View.VISIBLE
+            binding.youtubeResultFragRecylerview.visibility = View.VISIBLE
+            binding.youtubeFragItemCntUnit.visibility = View.VISIBLE
+            binding.youtubeFragItemCnt.visibility = View.VISIBLE
+            binding.defaultTv.visibility = View.GONE
 
-        val result = response.items
-        adapter.setYoutubeRecipe(result)
-        // nextToken
-        pageToken = response.nextPageToken
+            if(totalCnt > 100) {
+                binding.youtubeFragItemCnt.text = "100+"
+            } else {
+                binding.youtubeFragItemCnt.text = response.pageInfo.totalResults.toString()
+            }
+            binding.youtubeFragItemCntUnit.visibility = View.VISIBLE
 
-        // Youtube 영상 연결
-        adapter.youtubeRecipeItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeItemClick {
-            override fun onClick(view: View, position: Int) {
-                youtubeUrl = "https://www.youtube.com/watch?v=${result[position].id.videoId}"
-                startActivity(
-                    Intent(Intent.ACTION_VIEW)
-                        .setData(Uri.parse(youtubeUrl))
-                        .setPackage("com.google.android.youtube")
-                )
+            val result = response.items
+            adapter.setYoutubeRecipe(result)
+            // nextToken
+            pageToken = response.nextPageToken
+
+            // Youtube 영상 연결
+            adapter.youtubeRecipeItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeItemClick {
+                override fun onClick(view: View, position: Int) {
+                    youtubeUrl = "https://www.youtube.com/watch?v=${result[position].id.videoId}"
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW)
+                            .setData(Uri.parse(youtubeUrl))
+                            .setPackage("com.google.android.youtube")
+                    )
+                }
+            }
+            // Youtube 스크랩
+            adapter.youtubeRecipeScrapItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeScrapItemClick {
+                override fun onClick(view: View, position: Int) {
+                    YoutubeRecipeService(this@YoutubeResultFragment).postAddingScrap(
+                        YoutubeRecipeScrapRequest(result[position].id.videoId, result[position].snippet.title,
+                            result[position].snippet.thumbnails.default.url, youtubeUrl,
+                            formatPostDate(result[position].snippet.publishTime),
+                            result[position].snippet.channelTitle, "00:00")
+                    )
+                    // 토스트 메세지
+
+                }
             }
         }
-        // Youtube 스크랩
-        adapter.youtubeRecipeScrapItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeScrapItemClick {
-            override fun onClick(view: View, position: Int) {
-                YoutubeRecipeService(this@YoutubeResultFragment).postAddingScrap(
-                    YoutubeRecipeScrapRequest(result[position].id.videoId, result[position].snippet.title,
-                        result[position].snippet.thumbnails.default.url, youtubeUrl,
-                    formatPostDate(result[position].snippet.publishTime),
-                        result[position].snippet.channelTitle, "00:00")
-                )
-                // 토스트 메세지
 
-            }
-        }
     }
 
     override fun onGetYoutubeRecipeFailure(message: String) {

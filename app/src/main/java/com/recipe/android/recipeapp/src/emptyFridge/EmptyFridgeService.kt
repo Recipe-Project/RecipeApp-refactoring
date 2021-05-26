@@ -14,9 +14,9 @@ class EmptyFridgeService(val view : EmptyFridgeView) {
 
     val TAG = "EmptyFridgeService"
 
-    fun tryGetEmptyFridge() {
+    fun tryGetEmptyFridge(start : Int, display : Int) {
         val emptyFridgeInterface = ApplicationClass.sRetrofit.create(EmptyFridgeInterface::class.java)
-        emptyFridgeInterface.getEmptyFridge().enqueue(object : Callback<EmptyFridgeResponse> {
+        emptyFridgeInterface.getEmptyFridge(start, display).enqueue(object : Callback<EmptyFridgeResponse> {
             override fun onResponse(
                 call: Call<EmptyFridgeResponse>,
                 response: Response<EmptyFridgeResponse>
@@ -28,7 +28,6 @@ class EmptyFridgeService(val view : EmptyFridgeView) {
             override fun onFailure(call: Call<EmptyFridgeResponse>, t: Throwable) {
                 view.onGetEmptyFridgeFailure(t.message ?: "통신오류")
             }
-
         })
     }
 }
