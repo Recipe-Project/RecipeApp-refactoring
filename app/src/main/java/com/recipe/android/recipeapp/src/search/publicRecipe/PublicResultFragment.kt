@@ -36,32 +36,39 @@ class PublicResultFragment(private val keyword : String)
 
             val result = response.result
 
-            binding.publicFragItemCnt.text = result.size.toString()
-            binding.publicFragItemCntUnit.visibility = View.VISIBLE
+            if(result.size == 0) {
+                binding.publicResultFragRecylerview.visibility = View.GONE
+                binding.publicFragItemCntUnit.visibility = View.GONE
+                binding.publicFragItemCnt.visibility = View.GONE
+                binding.defaultTv.visibility = View.VISIBLE
+                binding.defaultTv.text = "'$keyword'에 대한\n검색결과가 없습니다."
+            } else {
+                binding.publicResultFragRecylerview.visibility = View.VISIBLE
+                binding.publicFragItemCntUnit.visibility = View.VISIBLE
+                binding.publicFragItemCnt.visibility = View.VISIBLE
+                binding.defaultTv.visibility = View.GONE
 
-            publicRecipeRecyclerviewAdapter.submitList(result)
+                binding.publicFragItemCnt.text = result.size.toString()
+                publicRecipeRecyclerviewAdapter.submitList(result)
 
-            // 공공레시피 상세 조회
-            publicRecipeRecyclerviewAdapter.publicRecipeItemClick = object : PublicResultRecyclerviewAdapter.PublicRecipeItemClick{
-                override fun onClick(view: View, position: Int) {
-                    val index = result[position].recipeId
-                    val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
-                    intent.putExtra("index", index)
-                    requireActivity().startActivity(intent)
+                // 공공레시피 상세 조회
+                publicRecipeRecyclerviewAdapter.publicRecipeItemClick = object : PublicResultRecyclerviewAdapter.PublicRecipeItemClick{
+                    override fun onClick(view: View, position: Int) {
+                        val index = result[position].recipeId
+                        val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
+                        intent.putExtra("index", index)
+                        requireActivity().startActivity(intent)
+                    }
+                }
+
+                // 공공레시피 스크랩
+                publicRecipeRecyclerviewAdapter.publicRecipeScrapClick = object : PublicResultRecyclerviewAdapter.PublicRecipeScrapClick {
+                    override fun onClick(view: View, position: Int) {
+                        val recipeId = publicRecipeRecyclerviewAdapter.publicResultList[position].recipeId
+                        PublicRecipeScrapService(this@PublicResultFragment).tryPostAddingScrap(PublicRecipeScrapRequest(recipeId = recipeId))
+                    }
                 }
             }
-
-            // 공공레시피 스크랩
-            publicRecipeRecyclerviewAdapter.publicRecipeScrapClick = object : PublicResultRecyclerviewAdapter.PublicRecipeScrapClick {
-                override fun onClick(view: View, position: Int) {
-                    val recipeId = publicRecipeRecyclerviewAdapter.publicResultList[position].recipeId
-                    PublicRecipeScrapService(this@PublicResultFragment).tryPostAddingScrap(PublicRecipeScrapRequest(recipeId = recipeId))
-                }
-            }
-
-
-
-
         }
     }
 

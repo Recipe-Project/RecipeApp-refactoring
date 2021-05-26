@@ -19,7 +19,7 @@ class BlogResultFragment(private val keyword : String)
     : BaseFragment<FragmentBlogResultBinding>(FragmentBlogResultBinding::bind, R.layout.fragment_blog_result), BlogRecipeView {
 
     private var start = 1
-    private var display = 10
+    private var display = 5
     private lateinit var adapter : BlogRecipeRecyclerviewAdapter
     private var flag = false
     // private var isNext = false // 다음 페이지 유무 변수가 하나 있어야 할 것 같습니다.
@@ -66,39 +66,51 @@ class BlogResultFragment(private val keyword : String)
         if (response.isSuccess) {
             // 검색된 게시물이 100개 초과시, 100+ 로 표기
             val totalCnt = response.result.total
-            if(totalCnt > 100) {
-                binding.blogFragItemCnt.text = "100+"
+
+            if(totalCnt == 0) {
+                binding.blogResultFragRecylerview.visibility = View.GONE
+                binding.blogFragItemCntUnit.visibility = View.GONE
+                binding.blogFragItemCnt.visibility = View.GONE
+                binding.defaultTv.visibility = View.VISIBLE
+                binding.defaultTv.text = "'$keyword'에 대한\n검색결과가 없습니다."
             } else {
-                binding.blogFragItemCnt.text = totalCnt.toString()
-            }
-            binding.blogFragItemCntUnit.visibility = View.VISIBLE
+                binding.blogResultFragRecylerview.visibility = View.VISIBLE
+                binding.blogFragItemCntUnit.visibility = View.VISIBLE
+                binding.blogFragItemCnt.visibility = View.VISIBLE
+                binding.defaultTv.visibility = View.GONE
 
-            val result = response.result.blogList
-            adapter.setBlogRecipe(result)
-
-            // 블로그 스크랩
-            adapter.blogRecipeScrapItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeScrapItemClick {
-                override fun onClick(view: View, position: Int) {
-                    BlogRecipeService(this@BlogResultFragment).tryPostAddingScrap(
-                        BlogRecipeScrapRequest(result[position].title, result[position].blogUrl, result[position].description, result[position].blogName,
-                        result[position].postDate, result[position].thumbnail)
-                    )
+                if(totalCnt > 100) {
+                    binding.blogFragItemCnt.text = "100+"
+                } else {
+                    binding.blogFragItemCnt.text = totalCnt.toString()
                 }
-            }
+                binding.blogFragItemCntUnit.visibility = View.VISIBLE
 
-            // 블로그 검색 결과 URL 연결
-            adapter.blogRecipeItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeItemClick {
-                override fun onClick(view: View, position: Int) {
-                    startActivity(
-                        Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse(result[position].blogUrl))
-                    )
+                val result = response.result.blogList
+                adapter.setBlogRecipe(result)
+
+                // 블로그 스크랩
+                adapter.blogRecipeScrapItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeScrapItemClick {
+                    override fun onClick(view: View, position: Int) {
+                        BlogRecipeService(this@BlogResultFragment).tryPostAddingScrap(
+                            BlogRecipeScrapRequest(result[position].title, result[position].blogUrl, result[position].description, result[position].blogName,
+                                result[position].postDate, result[position].thumbnail)
+                        )
+                    }
                 }
+
+                // 블로그 검색 결과 URL 연결
+                adapter.blogRecipeItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeItemClick {
+                    override fun onClick(view: View, position: Int) {
+                        startActivity(
+                            Intent(Intent.ACTION_VIEW)
+                                .setData(Uri.parse(result[position].blogUrl))
+                        )
+                    }
+                }
+                start += 10 // 불러온 데이터 수만큼 페이지 전환
+                flag = true
             }
-
-
-            start += 10 // 불러온 데이터 수만큼 페이지 전환
-            flag = true
         } else {
             // 통신에러
         }

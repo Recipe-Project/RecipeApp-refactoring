@@ -141,6 +141,7 @@ dependencies {
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
     implementation 'com.google.firebase:firebase-messaging-directboot:20.2.0'
+
     // Gliger
     implementation 'com.opensooq.supernova:gligar:1.1.0'
 

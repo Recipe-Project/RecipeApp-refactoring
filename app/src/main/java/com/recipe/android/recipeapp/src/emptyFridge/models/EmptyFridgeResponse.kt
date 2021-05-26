@@ -25,5 +25,5 @@ data class EmptyFridgeResult(
     @SerializedName("cookingTime")
     val cookingTime : String,
     @SerializedName("scrapCount")
-    val scrapCount : Int
+    val scrapCount : Long
 )

@@ -11,18 +11,20 @@ import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.emptyFridge.`interface`.EmptyFridgeView
 import com.recipe.android.recipeapp.src.emptyFridge.adapter.EmptyFridgeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResponse
-import com.recipe.android.recipeapp.src.search.KeywordFragment
 import com.recipe.android.recipeapp.src.search.SearchFragment
 import com.recipe.android.recipeapp.src.search.SearchResultFragment
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
 
 class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmptyFridgeBinding::bind, R.layout.fragment_empty_fridge), EmptyFridgeView {
 
+    private var start = 0
+    private var display = 1
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         showLoadingDialog()
-        EmptyFridgeService(this).tryGetEmptyFridge()
+        EmptyFridgeService(this).tryGetEmptyFridge(start, display)
     }
 
     override fun onGetEmptyFridgeSuccess(response: EmptyFridgeResponse) {

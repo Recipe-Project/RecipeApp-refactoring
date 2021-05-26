@@ -41,6 +41,19 @@
             tools:listitem="@layout/item_blog_result_frag_recyclerview"
             app:layout_constraintTop_toBottomOf="@id/blog_frag_item_cnt"/>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/default_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="'티라미슈'에 대한\n검색결과가 없습니다."
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="78dp"
+            style="@style/Body1Style"
+            android:gravity="center_horizontal"
+            android:visibility="gone"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
