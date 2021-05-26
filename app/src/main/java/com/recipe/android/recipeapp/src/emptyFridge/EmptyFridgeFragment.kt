@@ -15,10 +15,10 @@ import com.recipe.android.recipeapp.src.search.SearchFragment
 import com.recipe.android.recipeapp.src.search.SearchResultFragment
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
 
-class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmptyFridgeBinding::bind, R.layout.fragment_empty_fridge), EmptyFridgeView {
+class EmptyFridgeFragment : BaseFragmen t<FragmentEmptyFridgeBinding>(FragmentEmptyFridgeBinding::bind, R.layout.fragment_empty_fridge), EmptyFridgeView {
 
     private var start = 0
-    private var display = 1
+    private var display = 20
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
