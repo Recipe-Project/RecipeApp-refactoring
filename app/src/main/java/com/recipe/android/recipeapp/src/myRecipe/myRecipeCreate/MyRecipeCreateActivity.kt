@@ -88,8 +88,7 @@ class MyRecipeCreateActivity :
 
         // 취소 버튼 클릭
         binding.btnCancel.setOnClickListener {
-            val intent = Intent(this, CreateCancelDialog::class.java)
-            startActivity(intent)
+            CreateCancelDialog(this, this).show()
         }
 
 
@@ -161,6 +160,10 @@ class MyRecipeCreateActivity :
             val addIngredientDialog = AddIngredientDialog(this, this, this)
             addIngredientDialog.show()
         }
+    }
+
+    override fun onBackPressed() {
+        CreateCancelDialog(this, this).show()
     }
 
     private fun showSingleImage(uri: Uri) {
@@ -287,6 +290,10 @@ class MyRecipeCreateActivity :
             binding.tvPleaseAddIngredient.visibility = View.VISIBLE
         }
         binding.rvIngredient.scrollToPosition(pickItem.size - 1)
+    }
+
+    override fun cancelCreateRecipe() {
+        finish()
     }
 
     // 재료 선택 다이얼로그에서 저장 버튼 클릭

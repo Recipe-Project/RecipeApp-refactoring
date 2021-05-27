@@ -133,6 +133,10 @@ class PickIconDialog(
     override fun removePickItem(ingredient: Int) {
     }
 
+    override fun cancelCreateRecipe() {
+
+    }
+
     override fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>) {
 
     }
