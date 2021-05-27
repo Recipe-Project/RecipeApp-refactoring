@@ -1,11 +1,17 @@
 package com.recipe.android.recipeapp.src.search
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.NavHostFragment
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentKeywordBinding
+import com.recipe.android.recipeapp.src.search.`interface`.KeywordListener
 import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordView
 import com.recipe.android.recipeapp.src.search.adapter.PopularKeywordRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter
@@ -15,7 +21,11 @@ import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 
 class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBinding::bind, R.layout.fragment_keyword), SearchKeywordView {
 
+    val TAG = "KeywordFragment"
+
     lateinit var keyword : String
+
+    var keywordListener: KeywordListener? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,9 +76,26 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
                 RecentKeywordRecyclerviewAdapter.list.add(keyword)
                 SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
                 requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
+
+                Log.d(TAG, "KeywordFragment - onClick() : 이게 키워드 : $keyword")
+                keywordListener?.setKeyword(keyword)
             }
         }
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is KeywordListener) {
+            keywordListener = context
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        if (keywordListener != null) {
+            keywordListener = null;
+        }
     }
 
     override fun onGetPopularKeywordFailure(message: String) {

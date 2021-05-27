@@ -2,7 +2,6 @@ package com.recipe.android.recipeapp.src
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.navigation.fragment.NavHostFragment
@@ -12,24 +11,31 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMainBinding
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
+import com.recipe.android.recipeapp.src.search.SearchFragment
+import com.recipe.android.recipeapp.src.search.SearchResultFragment
+import com.recipe.android.recipeapp.src.search.`interface`.KeywordListener
 
-class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),
+    KeywordListener {
 
     val TAG = "MainActivity"
 
     val PICKER_REQUEST_CODE = 5300
 
+    lateinit var navHostFragment: NavHostFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // 네비게이션 호스트
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
 
         // 네비게이션 컨트롤러
         val navController = navHostFragment.navController
 
         // 바인딩
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -37,17 +43,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         when (requestCode) {
             PICKER_REQUEST_CODE -> {
                 Log.d(TAG, "FridgeFragment - onActivityResult() : success")
-                showLoadingDialog()
+
                 val imagesList = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)
-                val pickImage = imagesList?.get(0)
-                val uri = Uri.parse("$pickImage")
-                Log.d(TAG, "FridgeFragment - onActivityResult() : $uri")
+                if (imagesList != null) {
+                    showLoadingDialog()
+                    val pickImage = imagesList?.get(0)
+                    val uri = Uri.parse("$pickImage")
+                    Log.d(TAG, "FridgeFragment - onActivityResult() : $uri")
 
-                val intent = Intent(this, ReceiptIngredientDialog::class.java)
-                intent.putExtra("uri", uri.toString())
+                    val intent = Intent(this, ReceiptIngredientDialog::class.java)
+                    intent.putExtra("uri", uri.toString())
 
-                startActivity(intent)
+                    startActivity(intent)
+                }
+
             }
         }
     }
+
+    override fun setKeyword(keyword: String) {
+        val frag = navHostFragment.childFragmentManager.fragments.get(0) as SearchFragment
+        frag.setKeyword(keyword)
+    }
+
+
 }

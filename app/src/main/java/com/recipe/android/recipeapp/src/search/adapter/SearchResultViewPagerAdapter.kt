@@ -2,6 +2,12 @@ package com.recipe.android.recipeapp.src.search.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.BlogScrapFragment
+import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.PublicScrapFragment
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.YoutubeScrapFragment
+import com.recipe.android.recipeapp.src.search.blogRecipe.BlogResultFragment
+import com.recipe.android.recipeapp.src.search.publicRecipe.PublicResultFragment
+import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeResultFragment
 
 class SearchResultViewPagerAdapter(fragment : Fragment) : FragmentStateAdapter(fragment) {
 
@@ -15,4 +21,5 @@ class SearchResultViewPagerAdapter(fragment : Fragment) : FragmentStateAdapter(f
         fragmentList.add(fragment)
         notifyItemInserted(fragmentList.size - 1)
     }
+
 }
