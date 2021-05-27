@@ -357,12 +357,15 @@ class MyRecipeCreateActivity :
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             PICKER_REQUEST_CODE -> {
-                showLoadingDialog()
                 val imagesList = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)
-                val pickImage = imagesList?.get(0)
-                uri = Uri.parse("file://$pickImage")
+                if (imagesList != null) {
+                    showLoadingDialog()
 
-                showSingleImage(uri)
+                    val pickImage = imagesList?.get(0)
+                    uri = Uri.parse("file://$pickImage")
+
+                    showSingleImage(uri)
+                }
             }
             ADD_DIRECT_CODE -> {
                 val data =
