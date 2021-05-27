@@ -13,7 +13,7 @@ class SearchResultViewPagerAdapter(fragment : Fragment) : FragmentStateAdapter(f
 
     private var fragmentList : ArrayList<Fragment> = ArrayList()
 
-    override fun getItemCount(): Int = fragmentList.size
+    override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment = fragmentList[position]
 

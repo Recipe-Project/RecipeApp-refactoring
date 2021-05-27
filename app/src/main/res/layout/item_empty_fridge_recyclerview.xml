@@ -165,7 +165,7 @@
             android:id="@+id/youtube_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/blog"
+            android:text="@string/youtube"
             style="@style/Body3Style"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

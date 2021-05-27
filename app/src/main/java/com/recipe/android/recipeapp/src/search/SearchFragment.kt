@@ -46,7 +46,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
                     }
                 }
             ).commit()
-            binding.searchFragEt.setText(searchKeyword, TextView.BufferType.EDITABLE)
+            setKeyword(searchKeyword)
         } else {
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, KeywordFragment()).commitAllowingStateLoss()
         }
@@ -60,8 +60,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
                     RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색어 리스트에 검색어 추가
                     SearchService(this).postKeyword(keyword) // 검색어 서버로 전송
                     requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
-
-                    binding.searchFragEt.setText(keyword, TextView.BufferType.EDITABLE)
+                    setKeyword(keyword)
 
                     inputMethodManager.hideSoftInputFromWindow(binding.searchFragEt.windowToken, 0) // 검색 버튼 클릭 후 키보드 내리기 ( 점검 필요 )
                     true
