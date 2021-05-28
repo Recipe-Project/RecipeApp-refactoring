@@ -30,7 +30,7 @@ class ScrapRecipeActivity: BaseActivity<ActivityScrapRecipeBinding>(ActivityScra
         viewPager.adapter = ScrapViewPagerAdapter(this)
         position?.let { viewPager.currentItem = position}
 
-        val tabLayoutTextArray = arrayOf("유튜브", "블로그", "공공")
+        val tabLayoutTextArray = arrayOf("유튜브", "블로그", "추천")
 
         TabLayoutMediator(tabLayout, viewPager){tab, position ->
             tab.text = tabLayoutTextArray[position]

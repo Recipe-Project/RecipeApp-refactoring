@@ -99,10 +99,10 @@ class AddDirectActivity : BaseActivity<ActivityAddDirectBinding>(ActivityAddDire
                 pickIconUrl = ApplicationClass.sSharedPreferences.getString(IC_DEFAULT, "")
             }
 
-            if (ingredientCategoryIdx == null) {
+            if (ingredientName == "") {
+                showCustomToast("재료를 입력해주세요.")
+            } else if (ingredientCategoryIdx == null) {
                 showCustomToast("카테고리를 선택해주세요.")
-            } else if (ingredientName == "") {
-                showCustomToast("재료명을 입력해주세요.")
             } else {
                 // 재료 직접 입력으로 냉장고 바구니 담기
                 AddDirectService(this).addDirectService(

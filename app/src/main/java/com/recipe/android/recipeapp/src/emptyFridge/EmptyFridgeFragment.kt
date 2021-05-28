@@ -3,7 +3,9 @@ package com.recipe.android.recipeapp.src.emptyFridge
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.navArgs
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentEmptyFridgeBinding
@@ -56,8 +58,10 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
         val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         // 네비게이션 컨트롤러
         val navController = navHostFragment.navController
-        navController.navigate(R.id.searchFragment)
+        val bundle = bundleOf("searchType" to "blog", "searchKeyword" to keyword)
+        navController.navigate(R.id.searchFragment, bundle)
 //        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
+
     }
 
     override fun getYoutubeRecipe(keyword : String) {
@@ -65,7 +69,8 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
         val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         // 네비게이션 컨트롤러
         val navController = navHostFragment.navController
-        navController.navigate(R.id.searchFragment)
+        val bundle = bundleOf("searchType" to "youtube", "searchKeyword" to keyword)
+        navController.navigate(R.id.searchFragment, bundle)
 //        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
     }
 }

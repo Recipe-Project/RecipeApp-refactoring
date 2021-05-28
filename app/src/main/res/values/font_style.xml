@@ -74,7 +74,7 @@
     </style>
     <style name="TabTextStyle">
         <item name="android:fontFamily">@font/apple_sd_gothic_neo_medium</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/gray_500</item>
     </style>

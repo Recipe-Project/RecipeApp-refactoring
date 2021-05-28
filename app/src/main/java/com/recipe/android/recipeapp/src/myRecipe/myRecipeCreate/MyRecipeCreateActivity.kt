@@ -25,12 +25,10 @@ import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.adapter.PickItemRecyclerViewAdapter
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.AddDirectMyRecipeActivity
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.AddIngredientDialog
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.MultiplePickIngredientsDialog
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.PickIconDialog
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.*
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
+import com.recipe.android.recipeapp.src.setting.deleteId.DeleteIdDialog
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -90,8 +88,9 @@ class MyRecipeCreateActivity :
 
         // 취소 버튼 클릭
         binding.btnCancel.setOnClickListener {
-            finish()
+            CreateCancelDialog(this, this).show()
         }
+
 
         // 재료 선택
         pickItemRecyclerViewAdapter = PickItemRecyclerViewAdapter(this)
@@ -133,12 +132,14 @@ class MyRecipeCreateActivity :
 
             title = binding.etTitle.text.toString()
             if (title!!.isEmpty()) {
+                dismissLoadingDialog()
                 showCustomToast(getString(R.string.pleaseEnterTitle))
             }
 
             content = binding.etContent.text.toString()
 
             if (content!!.isEmpty()) {
+                dismissLoadingDialog()
                 showCustomToast(getString(R.string.pleaseEnterContent))
             }
 
@@ -159,8 +160,10 @@ class MyRecipeCreateActivity :
             val addIngredientDialog = AddIngredientDialog(this, this, this)
             addIngredientDialog.show()
         }
+    }
 
-
+    override fun onBackPressed() {
+        CreateCancelDialog(this, this).show()
     }
 
     private fun showSingleImage(uri: Uri) {
@@ -289,6 +292,10 @@ class MyRecipeCreateActivity :
         binding.rvIngredient.scrollToPosition(pickItem.size - 1)
     }
 
+    override fun cancelCreateRecipe() {
+        finish()
+    }
+
     // 재료 선택 다이얼로그에서 저장 버튼 클릭
     override fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>) {
         pickIngredientsMyRecipe.forEach {
@@ -350,12 +357,15 @@ class MyRecipeCreateActivity :
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             PICKER_REQUEST_CODE -> {
-                showLoadingDialog()
                 val imagesList = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)
-                val pickImage = imagesList?.get(0)
-                uri = Uri.parse("file://$pickImage")
+                if (imagesList != null) {
+                    showLoadingDialog()
 
-                showSingleImage(uri)
+                    val pickImage = imagesList?.get(0)
+                    uri = Uri.parse("file://$pickImage")
+
+                    showSingleImage(uri)
+                }
             }
             ADD_DIRECT_CODE -> {
                 val data =

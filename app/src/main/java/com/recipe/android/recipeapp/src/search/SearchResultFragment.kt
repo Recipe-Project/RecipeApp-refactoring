@@ -7,26 +7,51 @@ import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchResultBinding
 import com.recipe.android.recipeapp.src.search.adapter.SearchResultViewPagerAdapter
 import com.recipe.android.recipeapp.src.search.blogRecipe.BlogResultFragment
-import com.recipe.android.recipeapp.src.search.models.PublicRecipeResult
 import com.recipe.android.recipeapp.src.search.publicRecipe.PublicResultFragment
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeResultFragment
 
-class SearchResultFragment(private val keyword : String)
-    : BaseFragment<FragmentSearchResultBinding>(FragmentSearchResultBinding::bind, R.layout.fragment_search_result) {
 
-    private val recipeTypeList = arrayListOf("동영상", "블로그", "공공")
+class SearchResultFragment(private val keyword: String) : BaseFragment<FragmentSearchResultBinding>(
+    FragmentSearchResultBinding::bind,
+    R.layout.fragment_search_result
+) {
+
+    val TAG = "SearchResultFragment"
+
+    private val recipeTypeList = arrayListOf("유튜브", "블로그", "추천")
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val searchType = arguments?.getString("searchType")
+        val searchKeyword = arguments?.getString("searchKeyword")
 
         val pagerAdapter = SearchResultViewPagerAdapter(this)
         pagerAdapter.addFragment(YoutubeResultFragment(keyword))
         pagerAdapter.addFragment(BlogResultFragment(keyword))
         pagerAdapter.addFragment(PublicResultFragment(keyword))
+
         binding.searchResultFragViewpager.adapter = pagerAdapter
 
-        TabLayoutMediator(binding.searchResultFragTablayout, binding.searchResultFragViewpager) { tab, position ->
-            tab.text =recipeTypeList[position]
+        if (!searchType.isNullOrEmpty() && !searchKeyword.isNullOrEmpty()) {
+            when (searchType) {
+                "blog" -> {
+                    pagerAdapter.addFragment(BlogResultFragment(searchKeyword))
+                    binding.searchResultFragViewpager.setCurrentItem(1, false)
+                }
+                "youtube" -> {
+                    pagerAdapter.addFragment(BlogResultFragment(searchKeyword))
+                    binding.searchResultFragViewpager.setCurrentItem(0, false)
+                }
+            }
+        }
+
+        TabLayoutMediator(
+            binding.searchResultFragTablayout,
+            binding.searchResultFragViewpager
+        ) { tab, position ->
+            tab.text = recipeTypeList[position]
         }.attach()
+
     }
 }

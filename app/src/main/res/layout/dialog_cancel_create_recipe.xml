@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_height="157dp"
         android:background="@color/white"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/logOut"
+                android:text="@string/cancelCreate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,29 +36,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
+                style="@style/Subtitle2Style"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                style="@style/Subtitle2Style"
-                android:text="@string/logOutConfirm"
+                android:text="@string/cancelCreateMessage"
                 android:gravity="center"
                 android:textColor="@color/gray_300"
-                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView18" />
-
 
             <View
                 android:id="@+id/view5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="49dp"
                 android:background="@color/gray_000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView19" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <View
                 android:id="@+id/view6"
@@ -76,8 +72,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="@string/yes"
-                android:textSize="14sp"
+                android:text="@string/yesCreate"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view6"
@@ -89,8 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="@string/no"
-                android:textSize="14sp"
+                android:text="@string/noCreate"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/view6"
                 app:layout_constraintStart_toStartOf="parent"

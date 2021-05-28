@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">RecipeApp</string>
+    <string name="app_name">레시피저장소</string>
 
     <string name="recipeStorage">레시피\n저장소</string>
     <string name="recipeStorage2">레시피 저장소</string>
 
     <!-- bottom navigation -->
-    <string name="fridge">냉장고</string>
+    <string name="fridge">나의냉장고</string>
     <string name="recipeSearch">레시피검색</string>
     <string name="myPage">마이페이지</string>
 
@@ -14,7 +14,7 @@
 
     <string name="youtube">유튜브</string>
     <string name="blog">블로그</string>
-    <string name="recipe">레시피</string>
+    <string name="recipe">추천</string>
     <string name="myRecipe">나만의 레시피</string>
 
     <!-- 영수증 -->
@@ -43,6 +43,10 @@
     <string name="myRecipeCreatePlease">레시피 작성하기</string>
     <string name="capture_new_image">카메라</string>
     <string name="over_limit_msg">사진은 한 장만 선택할 수 있습니다.</string>
+    <string name="yesCreate">예</string>
+    <string name="noCreate">아니오</string>
+    <string name="cancelCreate">작성을 취소하시겠어요?</string>
+    <string name="cancelCreateMessage">작성 중인 내용은 저장되지 않아요.</string>
 
     <!-- 마이페이지 / 나만의레시피 / 수정 -->
     <string name="Modify">수정</string>
@@ -85,7 +89,7 @@
 
     <!-- 나의 냉장고 / 직접입력 -->
     <string name="direct">직접입력</string>
-    <string name="inputIngredient">재료를 입력하세요</string>
+    <string name="inputIngredient">재료를 입력해주세요.</string>
     <string name="category">카테고리</string>
     <string name="addIngredient">재료 추가하기</string>
     <string name="pickIcon">재료 아이콘 선택</string>
@@ -123,7 +127,7 @@
     <string name="newVersion">최신버전</string>
     <string name="newVersionValue">1.0.0</string>
     <string name="serviceSetting">서비스설정</string>
-    <string name="pushAlarm">유통기한 알림 허용하기</string>
+    <string name="pushAlarm">유통기한 알림 설정</string>
     <string name="developer">개발자 소개</string>
     <string name="contactUs">Contact Us</string>
     <string name="developerEmail">recipeStorage2021@gmail.com</string>
@@ -133,8 +137,8 @@
     <string name="deleteId">탈퇴</string>
     <string name="deleteIdDialog">탈퇴 시, 레시피 저장소에서 저장한 내용은 모두 삭제되며, 이후 복구가 불가능합니다.</string>
     <string name="deleteIdConfirmDialog">레시피저장소를 탈퇴하시겠습니까?</string>
-    <string name="yes">네</string>
-    <string name="no">아니오</string>
+    <string name="yes">확인</string>
+    <string name="no">취소</string>
     <string name="deleteIdSuccess">레시피 저장소 탈퇴가 완료되었습니다.</string>
     <string name="thankYou">레시피 저장소를 이용해 주셔서 감사합니다.</string>
     <string name="moveSignIn">로그인화면으로 가기</string>
