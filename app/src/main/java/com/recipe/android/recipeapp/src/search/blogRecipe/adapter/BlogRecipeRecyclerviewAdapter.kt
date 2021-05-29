@@ -1,24 +1,24 @@
 package com.recipe.android.recipeapp.src.search.blogRecipe.adapter
 
+import android.content.Context
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemBlogResultFragRecyclerviewBinding
 import com.recipe.android.recipeapp.databinding.ItemRecipeListLoadingBinding
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeListItem
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeResult
 
-class BlogRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class BlogRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     companion object {
         private const val TYPE_DATA = 0
@@ -36,6 +36,7 @@ class BlogRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHold
     var blogRecipeItemClick : BlogRecipeItemClick? = null
 
     private val blogRecipeList = mutableListOf<BlogRecipeListItem?>()
+    private val blogScrapStateList = mutableListOf<String?>()
 
     fun setBlogRecipe(list: ArrayList<BlogRecipeListItem>) {
         this.blogRecipeList.apply {
@@ -87,6 +88,15 @@ class BlogRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHold
 
             if(blogRecipeScrapItemClick != null) {
                 holder.scrapBtn.setOnClickListener {
+                    if(blogRecipeList[position]!!.userScrapYN == "Y") {
+                        blogRecipeList[position]!!.userScrapYN = "N"
+                        holder.scrapBtn.setImageResource(R.drawable.ic_favorite_empty_white)
+                        Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        blogRecipeList[position]!!.userScrapYN = "Y"
+                        holder.scrapBtn.setImageResource(R.drawable.ic_favorite_full_white)
+                        Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
+                    }
                     blogRecipeScrapItemClick?.onClick(it, position)
                 }
             }

@@ -9,11 +9,11 @@ data class PatchFridgeRequest(
 
 data class PatchFridgeObject(
     @SerializedName("ingredientName")
-    val ingredientName : String,
+    var ingredientName : String,
     @SerializedName("expiredAt")
-    val expiredAt : String,
+    var expiredAt : String?,
     @SerializedName("storageMethod")
     var storageMethod : String,
     @SerializedName("count")
-    val count : Int
+    var count : Int
 )

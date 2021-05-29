@@ -39,7 +39,7 @@ class EmptyFridgeRecyclerviewAdapter(val view : EmptyFridgeView) : RecyclerView.
 
     class CustomViewholder(val binding : ItemEmptyFridgeRecyclerviewBinding, val view : EmptyFridgeView) : RecyclerView.ViewHolder(binding.root) {
         fun bindWithView(result : EmptyFridgeResult) {
-            Glide.with(ApplicationClass.instance).load(result.thumbnail).transform(CenterCrop(), RoundedCorners(5)).into(binding.thumbnailIv)
+            Glide.with(ApplicationClass.instance).load(result.thumbnail).transform(CenterCrop(), RoundedCorners(20)).into(binding.thumbnailIv)
             binding.titleTv.text = result.title
             binding.contentTv.text = result.content
             binding.scrapCountTv.text = result.scrapCount.toString()

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:id="@+id/fridge_fragment_layout"
     tools:context="com.recipe.android.recipeapp.src.fridge.FridgeFragment">
 
     <ScrollView
@@ -37,9 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
-                android:fontFamily="@font/applesdgothicneoregular"
-                android:textColor="@color/gray_400"
-                android:textSize="16sp"
+                style="@style/Body1Style"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="21/02/28" />
@@ -90,7 +89,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fridge_frag_title"
-                style="@style/Subtitle1Style"
+                style="@style/Body1Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
@@ -119,19 +118,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fridge_frag_dotted_line"
                 app:tabGravity="fill"
+                app:tabTextColor="@color/gray_200"
+                app:tabSelectedTextColor="@color/gray_500"
                 app:tabIndicatorColor="@color/green"
                 app:tabIndicatorFullWidth="false"
                 app:tabIndicatorHeight="3dp"
                 app:tabMode="scrollable"
                 app:tabTextAppearance="@style/TabTextStyle"
-                app:tabPaddingEnd="16dp"
                 android:visibility="gone"/>
             
             <View
                 android:id="@+id/tab_layout_line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray_000"
+                android:background="@color/gray_100"
                 app:layout_constraintTop_toBottomOf="@id/tab_layout"
                 android:visibility="gone"/>
             
@@ -151,14 +151,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/product_name"
-                    style="@style/Body1Style"
+                    style="@style/Body2Style"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/product_freshness_tv"
-                    style="@style/Body1Style"
+                    style="@style/Body2Style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/freshness"
@@ -172,21 +172,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/product_cnt"
-                    style="@style/Body1Style"
+                    style="@style/Body2Style"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/all_check_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:button="@android:color/transparent"
                     android:background="@drawable/checkbox_style"
-                    android:checked="false"
+                    android:checked="true"
                     android:visibility="gone"/>
 
                 <androidx.appcompat.widget.AppCompatTextView

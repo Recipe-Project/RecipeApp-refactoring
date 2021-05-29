@@ -6,7 +6,9 @@
             <!-- 배경 -->
             <!-- 이미지 영역 -->
             <item
-                android:drawable="@drawable/ic_checkbox_empty" >
+                android:drawable="@drawable/ic_checkbox_unclicked_new"
+                android:height="28dp"
+                android:width="28dp">
             </item>
         </layer-list>
     </item>
@@ -18,7 +20,9 @@
             <!-- 배경 -->
             <!-- 이미지 영역 -->
             <item
-                android:drawable="@drawable/ic_checkbox" >
+                android:drawable="@drawable/ic_checkbox_clicked_new"
+                android:height="28dp"
+                android:width="28dp">
             </item>
         </layer-list>
     </item>

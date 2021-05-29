@@ -15,15 +15,18 @@ import com.recipe.android.recipeapp.src.search.`interface`.KeywordListener
 import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordView
 import com.recipe.android.recipeapp.src.search.adapter.PopularKeywordRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter
+import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter.Companion.list
 import com.recipe.android.recipeapp.src.search.models.PopularKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
+import okhttp3.internal.notifyAll
 
 class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBinding::bind, R.layout.fragment_keyword), SearchKeywordView {
 
     val TAG = "KeywordFragment"
 
     lateinit var keyword : String
+    lateinit var adapter : RecentKeywordRecyclerviewAdapter
 
     var keywordListener: KeywordListener? = null
 
@@ -36,7 +39,7 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
             binding.keywordFragEraseBtn.visibility = View.VISIBLE
             binding.keywordFragRecentKeywordRecylerview.visibility = View.VISIBLE
 
-            val adapter = RecentKeywordRecyclerviewAdapter()
+            adapter = RecentKeywordRecyclerviewAdapter()
             binding.keywordFragRecentKeywordRecylerview.adapter = adapter
 
             // 최근 검색어 기록으로 레시피 검색하기
@@ -60,6 +63,11 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
             binding.keywordFragRecentKeywordTv.visibility = View.GONE
             binding.keywordFragEraseBtn.visibility = View.GONE
             binding.keywordFragRecentKeywordRecylerview.visibility = View.GONE
+            binding.blank.visibility = View.GONE
+        }
+
+        binding.keywordFragEraseBtn.setOnClickListener {
+
         }
 
         // 인기검색어 조회

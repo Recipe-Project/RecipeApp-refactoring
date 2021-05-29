@@ -43,6 +43,8 @@ class MyFridgeAllCategoryFragment
         binding.rvAll.adapter = myFridgeAllCategoryAdapter
         binding.rvAll.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         myFridgeAllCategoryAdapter.submitList(resultList)
+
+
     }
 
     override fun onAttach(context: Context) {

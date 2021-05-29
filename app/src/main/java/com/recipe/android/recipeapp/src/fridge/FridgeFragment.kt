@@ -23,10 +23,7 @@ import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdapter
-import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResponse
-import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
-import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
-import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeResponse
+import com.recipe.android.recipeapp.src.fridge.home.models.*
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
 import java.text.SimpleDateFormat
@@ -56,7 +53,6 @@ class FridgeFragment :
     lateinit var bitmap : Bitmap
     private lateinit var functions: FirebaseFunctions
     var ingredients = ArrayList<GetFridgeResult>()
-    var fridgeUpdateList = ArrayList<PatchFridgeObject>()
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
@@ -64,6 +60,8 @@ class FridgeFragment :
 
     companion object {
         var updateButtonFlag = false
+        var patchFridgeList = ArrayList<PatchFridgeObject>()
+        var checkboxList = ArrayList<CheckboxData>()
     }
 
     val PICKER_REQUEST_CODE = 5300
@@ -80,6 +78,8 @@ class FridgeFragment :
         showLoadingDialog()
         FridgeService(this).tryGetFridge()
 
+        binding.tvAddDirect.visibility = View.INVISIBLE
+        binding.tvAddRecipe.visibility = View.INVISIBLE
 
         // + 버튼 클릭
         binding.fabAdd.setOnClickListener {
@@ -144,8 +144,10 @@ class FridgeFragment :
         }
 
         binding.saveTv.setOnClickListener {
-            // 냉장고 수정 저장하기(냉장고 수정 API 호출)
-
+            // 냉장고 수정 저장하기(냉장고 수정 API 호출 / 수정 완료되면 냉장고 조회 API 호출하기)
+            updateButtonFlag = false
+            showLoadingDialog()
+            FridgeService(this).tryPatchFridge(PatchFridgeRequest(patchFridgeList))
 
             // 레이아웃 변경
             binding.saveTv.visibility = View.INVISIBLE
@@ -158,6 +160,22 @@ class FridgeFragment :
             binding.allCheckTv.visibility = View.GONE
             binding.allCheckCheckbox.visibility = View.GONE
         }
+
+        // 전체 선택
+        binding.allCheckCheckbox.setOnClickListener {
+            if(binding.allCheckCheckbox.isChecked) {
+                for (i in checkboxList) {
+                    i.checked = true
+                }
+            } else {
+                for (i in checkboxList) {
+                    i.checked = false
+                }
+            }
+            FridgeService(this).tryGetFridge()
+        }
+
+
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -210,7 +228,6 @@ class FridgeFragment :
                 return@forEach
             }
         }
-        dismissLoadingDialog()
 
         if (myFridgeFlag) {
             Log.d(TAG, "FridgeFragment : Flag is true")
@@ -249,6 +266,8 @@ class FridgeFragment :
             binding.updateTv.visibility = View.GONE
             binding.fridgeFragDefaultTv.visibility = View.VISIBLE
         }
+        binding.fridgeFragmentLayout.requestFocus()
+        dismissLoadingDialog()
     }
 
     override fun onGetFridgeFailure(message: String) {
@@ -256,7 +275,7 @@ class FridgeFragment :
     }
 
     override fun onPatchFridgeSuccess(response: PatchFridgeResponse) {
-
+        FridgeService(this).tryGetFridge()
     }
 
     override fun onPatchFridgeFailure(message: String) {

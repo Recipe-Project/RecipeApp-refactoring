@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-
+            android:layout_marginTop="16dp"
             android:id="@+id/keyword_frag_erase_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,15 +32,21 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_right"/>
 
         <androidx.recyclerview.widget.RecyclerView
-
-            app:layout_constraintTop_toBottomOf="@id/keyword_frag_recent_keyword_tv"
             android:id="@+id/keyword_frag_recent_keyword_recylerview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            tools:listitem="@layout/item_recent_keyword_recyclerview"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/keyword_frag_recent_keyword_tv"
+            tools:listitem="@layout/item_recent_keyword_recyclerview" />
+
+        <View
+            android:id="@+id/blank"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toBottomOf="@+id/keyword_frag_recent_keyword_recylerview"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Subtitle2Style"
@@ -50,7 +56,7 @@
             android:text="@string/popular_keyword"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/keyword_frag_recent_keyword_recylerview"
+            app:layout_constraintTop_toBottomOf="@id/blank"
             android:layout_marginTop="16dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -62,6 +68,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_popular_keyword_recyclerview"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toBottomOf="@id/keyword_frag_popular_keyword_recylerview"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"
