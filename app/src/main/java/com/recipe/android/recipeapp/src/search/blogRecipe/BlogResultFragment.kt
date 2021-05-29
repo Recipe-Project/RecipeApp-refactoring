@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
@@ -19,15 +20,15 @@ class BlogResultFragment(private val keyword : String)
     : BaseFragment<FragmentBlogResultBinding>(FragmentBlogResultBinding::bind, R.layout.fragment_blog_result), BlogRecipeView {
 
     private var start = 1
-    private var display = 5
+    private var display = 30
     private lateinit var adapter : BlogRecipeRecyclerviewAdapter
     private var flag = false
-    // private var isNext = false // 다음 페이지 유무 변수가 하나 있어야 할 것 같습니다.
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = BlogRecipeRecyclerviewAdapter()
+        adapter = BlogRecipeRecyclerviewAdapter(requireContext())
         binding.blogResultFragRecylerview.adapter = adapter
 
         // 최초로 데이터 load
@@ -41,16 +42,22 @@ class BlogResultFragment(private val keyword : String)
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                val layoutManager = binding.blogResultFragRecylerview.layoutManager
+                val lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
+                val itemTotalCount = recyclerView.adapter!!.itemCount-2
 
-                if(flag) {
-                    val lastVisibleItem = (layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                    if (!binding.blogResultFragRecylerview.canScrollVertically(1)) {
-                        if(layoutManager.itemCount == lastVisibleItem) { // +1 해줘야 작동 시작...근데 지금 좀 이상함
-                            loadMoreData()
-                        }
+                val layoutManager = binding.blogResultFragRecylerview.layoutManager
+                if (!binding.blogResultFragRecylerview.canScrollVertically(1)) {
+                    adapter.setLoadingView(false)
+
+                    if(lastVisibleItemPosition == itemTotalCount) {
+                        loadMoreData()
                     }
                 }
+
+
+
+
             }
         })
     }
@@ -88,6 +95,7 @@ class BlogResultFragment(private val keyword : String)
 
                 val result = response.result.blogList
                 adapter.setBlogRecipe(result)
+                adapter.setLoadingView(false)
 
                 // 블로그 스크랩
                 adapter.blogRecipeScrapItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeScrapItemClick {
@@ -96,6 +104,7 @@ class BlogResultFragment(private val keyword : String)
                             BlogRecipeScrapRequest(result[position].title, result[position].blogUrl, result[position].description, result[position].blogName,
                                 result[position].postDate, result[position].thumbnail)
                         )
+
                     }
                 }
 
@@ -108,7 +117,7 @@ class BlogResultFragment(private val keyword : String)
                         )
                     }
                 }
-                start += 10 // 불러온 데이터 수만큼 페이지 전환
+                start += display // 불러온 데이터 수만큼 페이지 전환
                 flag = true
             }
         } else {
@@ -123,6 +132,8 @@ class BlogResultFragment(private val keyword : String)
     override fun onGetBlogRecipeMoreSuccess(response: BlogRecipeResponse) {
         // 너무 빨리 데이터가 로드되면 스크롤 되는 Ui 를 확인하기 어려우므로,
         // Handler 를 사용하여 1초간 postDelayed 시켜야할까...?
+
+        dismissLoadingDialog()
         if (response.isSuccess) {
             // isNext = response.is_Next // 있어야할 것 같습니다.
             val result = response.result.blogList
@@ -135,11 +146,12 @@ class BlogResultFragment(private val keyword : String)
                             BlogRecipeScrapRequest(result[position].title, result[position].blogUrl, result[position].description, result[position].blogName,
                                 result[position].postDate, result[position].thumbnail)
                         )
+
                     }
                 }
                 flag = true
             }
-            start += 10 // 불러온 데이터 수만큼 페이지 전환
+            start += display // 불러온 데이터 수만큼 페이지 전환
         } else {
             // 통신에러
         }

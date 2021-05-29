@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:id="@+id/layout_fridge"
+    android:id="@+id/fridge_fragment_layout"
+    android:focusable="true"
     tools:context="com.recipe.android.recipeapp.src.fridge.FridgeFragment">
 
     <ScrollView

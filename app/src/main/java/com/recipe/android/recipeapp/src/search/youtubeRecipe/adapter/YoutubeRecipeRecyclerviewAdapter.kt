@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemRecipeListLoadingBinding
 import com.recipe.android.recipeapp.databinding.ItemYoutubeResultFragRecyclerviewBinding
@@ -109,6 +111,15 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
 
             if(youtubeRecipeScrapItemClick != null) {
                 holder.scrapBtn.setOnClickListener {
+//                    if(publicResultList[position].userScrapYN == "Y") {
+//                        publicResultList[position].userScrapYN = "N"
+//                        holder.scrap.setImageResource(R.drawable.ic_favorite_empty_white)
+//                        Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+//                    } else {
+//                        publicResultList[position].userScrapYN = "Y"
+//                        holder.scrap.setImageResource(R.drawable.ic_favorite_full_white)
+//                        Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
+//                    }
                     youtubeRecipeScrapItemClick?.onClick(it, position)
                 }
             }

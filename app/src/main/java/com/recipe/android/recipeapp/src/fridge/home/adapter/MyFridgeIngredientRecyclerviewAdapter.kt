@@ -11,8 +11,10 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemMyFridgeIngredientRecyclerviewBinding
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment
-import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
+import com.recipe.android.recipeapp.src.fridge.FridgeFragment.Companion.checkboxList
+import com.recipe.android.recipeapp.src.fridge.home.models.CheckboxData
 import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
+import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
 
 class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
     : RecyclerView.Adapter<MyFridgeIngredientRecyclerviewAdapter.CustomViewholder>() {
@@ -37,11 +39,27 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
         var ingredientCnt : Int = 1
 
         fun bindWithView(fridgeItem: FridgeItem, position: Int) {
+            FridgeFragment.patchFridgeList.clear()
+            val patchItem : PatchFridgeObject = PatchFridgeObject(fridgeItem.ingredientName, fridgeItem.expiredAt, fridgeItem.storageMethod, fridgeItem.count)
+            FridgeFragment.patchFridgeList.add(patchItem)
+
+            if(position >= checkboxList.size)
+                checkboxList.add(position, CheckboxData(position, binding.checkbox.isChecked))
+            binding.checkbox.setOnClickListener {
+                checkboxList[position].checked = binding.checkbox.isChecked
+            }
+            binding.checkbox.isChecked = checkboxList[position].checked
+
+
             binding.ingredientNameTv.text = fridgeItem.ingredientName
             if(fridgeItem.ingredientIcon != null) {
                 Glide.with(ApplicationClass.instance).load(fridgeItem.ingredientIcon).into(binding.ingredientIv)
             }
-            binding.expireDateTv.text = fridgeItem.expiredAt
+            if(fridgeItem.expiredAt != null) {
+                binding.expireDateTv.text = fridgeItem.expiredAt
+            } else {
+                binding.expireDateTv.text = "00.00.00까지"
+            }
             ingredientCnt = fridgeItem.count
             binding.ingredientCntTv.text = ingredientCnt.toString()
 
@@ -56,18 +74,25 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.green))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
+                binding.checkbox.isChecked = true
+
+                FridgeFragment.patchFridgeList[position].storageMethod = "냉장"
             }
             binding.freshnessFrozenTv.setOnClickListener {
                 //view.onClickStorageMethod(context.getString(R.string.frozen), position)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.green))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
+
+                FridgeFragment.patchFridgeList[position].storageMethod = "냉동"
             }
             binding.freshnessRoomTemperatureTv.setOnClickListener {
                 //view.onClickStorageMethod(context.getString(R.string.roomTemperature), position)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.green))
+
+                FridgeFragment.patchFridgeList[position].storageMethod = "실온"
             }
 
             // count 세팅
@@ -75,28 +100,28 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 ingredientCnt += 1
                 binding.ingredientCntTv.text = ingredientCnt.toString()
                 //view.onClickCount(binding.ingredientCntTv.text.toString().toInt(), position)
+
+                FridgeFragment.patchFridgeList[position].count = ingredientCnt
             }
             binding.minusCntIv.setOnClickListener {
                 if(ingredientCnt > 1) {
                     ingredientCnt -= 1
                     binding.ingredientCntTv.text = ingredientCnt.toString()
                     //view.onClickCount(binding.ingredientCntTv.text.toString().toInt(), position)
+
+                    FridgeFragment.patchFridgeList[position].count = ingredientCnt
                 }
             }
-
-
-
-
 
             // freshness 세팅
             when(fridgeItem.freshness) {
                 1 -> {
                     // Red
-                    binding.freshnessIv.setImageResource(R.drawable.ic_freshness_red)
+                    binding.freshnessIv.setImageResource(R.drawable.ic_freshness_red_new)
                 }
                 2 -> {
                     // Yellow
-                    binding.freshnessIv.setImageResource(R.drawable.ic_freshness_yellow)
+                    binding.freshnessIv.setImageResource(R.drawable.ic_freshness_yellow_new)
                 }
                 3 -> {
                     // Green
@@ -111,12 +136,19 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 }
             }
 
+            // 달력 띄우기
+            binding.expireDateTv.setOnClickListener {
+
+            }
+
             if(FridgeFragment.updateButtonFlag) {
                 binding.checkbox.visibility = View.VISIBLE
                 binding.freshnessLayout.visibility = View.VISIBLE
                 binding.freshnessIv.visibility = View.GONE
                 binding.plusCntIv.visibility = View.VISIBLE
                 binding.minusCntIv.visibility = View.VISIBLE
+                binding.bottomView.visibility = View.GONE
+                binding.bottomLine.visibility = View.VISIBLE
 
             } else {
                 binding.checkbox.visibility = View.GONE
@@ -124,7 +156,10 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.freshnessIv.visibility = View.VISIBLE
                 binding.plusCntIv.visibility = View.GONE
                 binding.minusCntIv.visibility = View.GONE
+                binding.bottomView.visibility = View.VISIBLE
+                binding.bottomLine.visibility = View.GONE
             }
+
         }
 
     }

@@ -127,6 +127,7 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
             TabLayoutMediator(tabLayout, viewPager){tab, position ->
                 tab.text = tapTypeList[position]
             }.attach()
+
         }
     }
 

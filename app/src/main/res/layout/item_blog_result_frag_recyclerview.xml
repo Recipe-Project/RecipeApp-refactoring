@@ -92,8 +92,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/blog_scrap_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:src="@drawable/ic_favorite_empty_white"
         app:layout_constraintTop_toTopOf="@id/blog_thumbnail_img"
         app:layout_constraintEnd_toEndOf="@id/blog_thumbnail_img"
