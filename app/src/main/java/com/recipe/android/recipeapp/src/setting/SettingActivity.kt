@@ -11,6 +11,7 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivitySettingBinding
 import com.recipe.android.recipeapp.src.setting.deleteId.DeleteIdDialog
 import com.recipe.android.recipeapp.src.setting.developer.DeveloperInfoActivity
+import com.recipe.android.recipeapp.src.setting.openSource.OpenSourceActivity
 import com.recipe.android.recipeapp.src.setting.signOut.SignOutDialog
 
 class SettingActivity: BaseActivity<ActivitySettingBinding>(ActivitySettingBinding::inflate) {
@@ -47,6 +48,11 @@ class SettingActivity: BaseActivity<ActivitySettingBinding>(ActivitySettingBindi
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             val uri = Uri.fromParts("package", packageName, null)
             intent.data = uri
+            startActivity(intent)
+        }
+
+        binding.btnOpenSource.setOnClickListener {
+            val intent = Intent(this, OpenSourceActivity::class.java)
             startActivity(intent)
         }
     }

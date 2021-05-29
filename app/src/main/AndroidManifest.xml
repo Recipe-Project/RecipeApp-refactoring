@@ -57,6 +57,9 @@
         <!-- 개발자 페이지 -->
         <activity android:name=".src.setting.developer.DeveloperInfoActivity"/>
 
+        <!-- 오픈소스 -->
+        <activity android:name=".src.setting.openSource.OpenSourceActivity"/>
+
         <!-- 회원 탈퇴 -->
         <activity android:name=".src.setting.deleteId.DeleteIdDialog"
             android:theme="@style/dialogTheme"/>

@@ -130,7 +130,7 @@
     <string name="pushAlarm">유통기한 알림 설정</string>
     <string name="developer">개발자 소개</string>
     <string name="contactUs">Contact Us</string>
-    <string name="developerEmail">recipeStorage2021@gmail.com</string>
+    <string name="developerEmail">recipestorage2021@gmail.com</string>
     <string name="logOut">로그아웃</string>
     <string name="logOutSuccess">로그아웃이 완료되었습니다.</string>
     <string name="logOutConfirm">레시피 저장소를 로그아웃 하시겠어요?</string>
@@ -153,5 +153,74 @@
     <string name="fcmChannelName">레저: 레시피 저장소</string>
 
     <string name="emptyFridge">냉장고파먹기</string>
+
+    <!-- 오픈소스 -->
+    <string name="openSource">오픈소스 라이선스</string>
+    <string name="apache">Apache-2.0 License</string>
+
+    <string name="openSrcTitle1">Retrofit</string>
+    <string name="openSrcLink1">https://github.com/square/retrofit</string>
+    <string name="openSrcCopy1">Copyright 2013 Square, Inc.</string>
+
+    <string name="openSrcTitle2">OkHttp</string>
+    <string name="openSrcLink2">https://github.com/square/okhttp</string>
+    <string name="openSrcCopy2">Copyright 2019 Square, Inc.</string>
+
+    <string name="openSrcTitle3">Gson Converter</string>
+    <string name="openSrcLink3">https://github.com/square/retrofit/tree/master/retrofit-converters/gson</string>
+    <string name="openSrcCopy3">Copyright 2013 Square, Inc.</string>
+
+    <string name="openSrcTitle4">Logging Interceptor</string>
+    <string name="openSrcLink4">https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor</string>
+    <string name="openSrcCopy4">Copyright 2019 Square, Inc.</string>
+
+    <string name="openSrcTitle5"></string>
+    <string name="openSrcLink5"></string>
+    <string name="openSrcCopy5"></string>
+
+    <string name="openSrcTitle6"></string>
+    <string name="openSrcLink6"></string>
+    <string name="openSrcCopy6"></string>
+
+    <string name="openSrcTitle7"></string>
+    <string name="openSrcLink7"></string>
+    <string name="openSrcCopy7"></string>
+
+    <string name="openSrcTitle8"></string>
+    <string name="openSrcLink8"></string>
+    <string name="openSrcCopy8"></string>
+
+    <string name="openSrcTitle9"></string>
+    <string name="openSrcLink9"></string>
+    <string name="openSrcCopy9"></string>
+
+    <string name="openSrcTitle10"></string>
+    <string name="openSrcLink10"></string>
+    <string name="openSrcCopy10"></string>
+
+    <string name="openSrcTitle11"></string>
+    <string name="openSrcLink11"></string>
+    <string name="openSrcCopy11"></string>
+
+    <string name="openSrcTitle12"></string>
+    <string name="openSrcLink12"></string>
+    <string name="openSrcCopy12"></string>
+
+    <string name="openSrcTitle13"></string>
+    <string name="openSrcLink13"></string>
+    <string name="openSrcCopy13"></string>
+
+    <string name="openSrcTitle14"></string>
+    <string name="openSrcLink14"></string>
+    <string name="openSrcCopy14"></string>
+
+    <string name="openSrcTitle15"></string>
+    <string name="openSrcLink15"></string>
+    <string name="openSrcCopy15"></string>
+
+    <string name="openSrcTitle16"></string>
+    <string name="openSrcLink16"></string>
+    <string name="openSrcCopy16"></string>
+
 
 </resources>

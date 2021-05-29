@@ -73,6 +73,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:autoLink="email"
+        android:textColorLink="@color/gray_500"
         android:text="@string/developerEmail"
         app:layout_constraintStart_toStartOf="@+id/appCompatTextView15"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView15" />

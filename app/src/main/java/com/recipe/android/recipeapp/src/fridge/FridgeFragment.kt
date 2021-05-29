@@ -81,6 +81,10 @@ class FridgeFragment :
         FridgeService(this).tryGetFridge()
 
 
+        binding.tvAddDirect.visibility = View.INVISIBLE
+        binding.tvAddRecipe.visibility = View.INVISIBLE
+
+
         // + 버튼 클릭
         binding.fabAdd.setOnClickListener {
             setVisibility(isClicked)
