@@ -20,6 +20,7 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentFridgeBinding
 import com.recipe.android.recipeapp.src.MainActivity
+import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdapter
@@ -73,10 +74,6 @@ class FridgeFragment :
 
         // 현재 날짜 세팅
         setCurrentDay()
-
-        // 냉장고 조회
-        showLoadingDialog()
-        FridgeService(this).tryGetFridge()
 
         binding.tvAddDirect.visibility = View.INVISIBLE
         binding.tvAddRecipe.visibility = View.INVISIBLE
@@ -179,7 +176,18 @@ class FridgeFragment :
             FridgeService(this).tryGetFridge()
         }
 
+        // 바구니 액티비티
+        binding.btnBasket.setOnClickListener {
+            val intent = Intent(requireContext(), BasketActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        // 냉장고 조회
+        showLoadingDialog()
+        FridgeService(this).tryGetFridge()
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -225,6 +233,8 @@ class FridgeFragment :
         tabLayoutTextArray.add(getString(R.string.all))
 
         var myFridgeFlag = false
+
+        binding.tvBasketCnt.text = response.result.fridgeBasketCount.toString()
 
         response.result.fridges.forEach {
             if(it.ingredientList.size != 0) {

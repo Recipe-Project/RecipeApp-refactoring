@@ -33,7 +33,6 @@ class PublicScrapViewHolder(
             Glide.with(ApplicationClass.instance).load(publicScrapItem.thumbnail).transform(
                 CenterCrop(), RoundedCorners(20)
             ).into(binding.imgThumbnail)
-            // Glide.with(ApplicationClass.instance).load(publicScrapItem.thumbnail).into(binding.imgThumbnail)
         }
         binding.tvScrapCnt.text = publicScrapItem.scrapCount.toString()
         binding.tvContent.text = publicScrapItem.content

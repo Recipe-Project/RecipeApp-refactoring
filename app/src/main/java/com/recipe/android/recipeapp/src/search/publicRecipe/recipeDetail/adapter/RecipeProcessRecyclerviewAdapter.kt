@@ -38,6 +38,7 @@ class RecipeProcessRecyclerviewAdapter(private val list : ArrayList<PublicRecipe
 
     override fun getItemCount(): Int = list.size
 
+
     class CustomViewholder(val binding: ItemRecipeDetail2FragRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         val index : TextView = binding.recipeIndexTv
         val process : TextView = binding.recipeDetailExplainTv

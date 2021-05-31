@@ -34,6 +34,41 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="18dp"/>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_basket"
+                style="@style/ButtonStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:padding="7dp"
+                android:src="@drawable/ic_basket"
+                android:textColor="@color/gray_500"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fridge_frag_app_logo_iv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fridge_frag_app_logo_iv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_basket_cnt"
+                style="@style/Caption2Style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_basket_cnt"
+                android:backgroundTint="@color/green"
+                android:gravity="center"
+                android:paddingStart="6dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="6dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/btn_basket"
+                app:layout_constraintTop_toTopOf="@+id/btn_basket"
+                tools:text="1" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fridge_frag_date_tv"
                 android:layout_width="wrap_content"

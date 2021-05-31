@@ -290,6 +290,7 @@
                 android:text="@string/myRecipeCreatePlease"
                 android:textColor="@color/white"
                 android:visibility="gone"
+                style="@style/CaptionStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_my_recipe_create" />

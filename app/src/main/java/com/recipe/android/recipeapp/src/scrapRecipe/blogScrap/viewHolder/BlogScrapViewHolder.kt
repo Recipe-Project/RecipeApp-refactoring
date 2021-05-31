@@ -39,9 +39,6 @@ class BlogScrapViewHolder(
         binding.tvDate.text = blogScrapItem.postDate
         binding.tvSource.text = blogScrapItem.bloggerName
 
-        // 재생시간 삭제
-        binding.tvPlayTime.visibility = View.GONE
-
         binding.btnScrap.setOnClickListener {
             // 스크랩 취소
             val params = HashMap<String, Any>()

@@ -50,6 +50,7 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
         }
 
         binding.btnBack.setOnClickListener {
+
             finish()
         }
     }

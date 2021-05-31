@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -127,7 +128,6 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
             TabLayoutMediator(tabLayout, viewPager){tab, position ->
                 tab.text = tapTypeList[position]
             }.attach()
-
         }
     }
 

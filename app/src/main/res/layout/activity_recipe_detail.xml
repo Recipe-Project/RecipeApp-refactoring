@@ -270,14 +270,19 @@
                 android:background="@color/gray_000"
                 app:layout_constraintTop_toBottomOf="@id/recipe_detail_activity_tablayout"/>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/recipe_detail_activity_viewpager"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintTop_toBottomOf="@id/middle_line"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent">
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/recipe_detail_activity_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_left"

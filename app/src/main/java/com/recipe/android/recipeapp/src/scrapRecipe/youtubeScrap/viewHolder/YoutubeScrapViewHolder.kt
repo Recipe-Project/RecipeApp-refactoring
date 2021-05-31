@@ -37,7 +37,6 @@ class YoutubeScrapViewHolder(
         binding.tvScrapCnt.text = youtubeScrapItem.heartCount.toString()
         binding.tvDate.text = youtubeScrapItem.postDate
         binding.tvSource.text = youtubeScrapItem.channelName
-        binding.tvPlayTime.text = youtubeScrapItem.playTime
 
         binding.btnScrap.setOnClickListener {
             // 스크랩 취소

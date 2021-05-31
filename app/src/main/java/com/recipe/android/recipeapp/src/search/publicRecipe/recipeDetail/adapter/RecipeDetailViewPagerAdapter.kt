@@ -2,6 +2,7 @@ package com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.adapte
 
 import android.app.Activity
 import androidx.fragment.app.*
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.BlogScrapFragment
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.PublicScrapFragment
