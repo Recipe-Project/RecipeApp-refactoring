@@ -2,10 +2,13 @@ package com.recipe.android.recipeapp.src.emptyFridge
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentEmptyFridgeBinding
@@ -13,41 +16,100 @@ import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.emptyFridge.`interface`.EmptyFridgeView
 import com.recipe.android.recipeapp.src.emptyFridge.adapter.EmptyFridgeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResponse
+import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResult
 import com.recipe.android.recipeapp.src.search.SearchFragment
 import com.recipe.android.recipeapp.src.search.SearchResultFragment
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
 
 class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmptyFridgeBinding::bind, R.layout.fragment_empty_fridge), EmptyFridgeView {
 
+    val TAG = "EmptyFridgeFragment"
     private var start = 0
-    private var display = 30
-    private var page = 0    // 현재 페이지
-    var isPageEnd = false
+    private var display = 10
+    // private var totalCount = 0
+    private var isEnd = false
+    private var emptyFridgeList = mutableListOf<EmptyFridgeResult>()
+    private lateinit var emptyAdapter : EmptyFridgeRecyclerviewAdapter
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showLoadingDialog()
-        EmptyFridgeService(this).tryGetEmptyFridge(start, display)
+        val rv = binding.emptyFridgeFragRecyclerview
+
+        layoutManager = LinearLayoutManager(requireContext())
+        setUpRecyclerView()
+        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if(!rv.canScrollVertically(1)) {
+                    if(!isEnd) {
+                        showLoadingDialog()
+                        start += display
+                        EmptyFridgeService(this@EmptyFridgeFragment).tryGetEmptyFridge(start, display)
+                    }
+                }
+            }
+        })
     }
 
     override fun onGetEmptyFridgeSuccess(response: EmptyFridgeResponse) {
         dismissLoadingDialog()
-        if(response.result.size != 0) {
-            val adapter = EmptyFridgeRecyclerviewAdapter(this)
-            binding.emptyFridgeFragRecyclerview.adapter = adapter
-            adapter.submitList(response.result)
-        } else {
+        if(response.result.recipeList.isNullOrEmpty() && start == 0) {
+            Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 없음")
             // 냉장고가 텅 비었을 경우, Default 메세지 제공
             binding.emptyFridgeFragRecyclerview.visibility = View.INVISIBLE
             binding.emptyFridgeFragDefaultIv.visibility = View.VISIBLE
             binding.emptyFridgeFragDefaultTv.visibility = View.VISIBLE
+        } else if (response.result.recipeList.isNotEmpty() && start == 0) {
+            Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 있음")
+
+            binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
+            binding.emptyFridgeFragDefaultIv.visibility = View.INVISIBLE
+            binding.emptyFridgeFragDefaultTv.visibility = View.INVISIBLE
+
+            emptyFridgeList.addAll(response.result.recipeList)
+            emptyAdapter.submitList(emptyFridgeList)
+        } else if (response.result.recipeList.isNotEmpty() && start != 0) {
+            Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 있음")
+
+            binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
+            emptyFridgeList.addAll(response.result.recipeList)
+            emptyAdapter.notifyItemInserted(emptyFridgeList.size - 1)
+        }
+
+        if(response.result.recipeList.isNullOrEmpty() && start != 0) {
+            Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 없음")
+
+            binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
+            isEnd = true
         }
     }
 
     override fun onGetEmptyFridgeFailure(message: String) {
 
     }
+
+    private fun setUpRecyclerView() {
+        val rv = binding.emptyFridgeFragRecyclerview
+        rv.setHasFixedSize(true)
+        rv.layoutManager = layoutManager
+        emptyAdapter = EmptyFridgeRecyclerviewAdapter(this)
+        rv.adapter = emptyAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        start = 0
+        emptyAdapter.emptyFridgeList.clear()
+        isEnd = false
+        showLoadingDialog()
+        EmptyFridgeService(this).tryGetEmptyFridge(start, display)
+    }
+
+
 
     override fun getPublicRecipeDetail(id : Int) {
         val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
@@ -80,138 +142,3 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
 
 
 
-//class HomeFragment : BaseFragment<FragmentHomeBinding>(
-//    FragmentHomeBinding::bind,
-//    R.layout.fragment_home
-//), HomeView {
-//    private var nestlist = mutableListOf<NestInfo>()
-//    var adapter:HomeNestAdapter?=null
-//    private var page = 0    // 현재 페이지
-//    var isnestend = false
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        adapter = HomeNestAdapter(requireContext(), null, parentFragmentManager)
-//        binding.nestList.setOnClickListener(null)
-////    binding.homeLayoutEmpty.setOnClickListener {
-////      val intent = Intent(activity, NestActivity::class.java)
-////      startActivity(intent)
-////    }
-//        val addnestedialog = HomeAddNestDialog()
-//        binding.homeBtnAddnest.setOnClickListener {
-//            addnestedialog.show(parentFragmentManager, “addnestdialog”)
-//        }
-////    둥지 추가 후 바로 반영
-//        setFragmentResultListener(“addnest”) { _, bundle ->
-//            bundle.getString(“addnest_ok”)?.let {
-//            if (it == “ok”) {
-//                page = 0
-//                nestlist.clear()
-//                isnestend = false
-//                showLoadingDialog(requireContext())
-//                HomeService(this).tryGetNest(page)
-//            }
-//        }
-//        }
-////    둥지 수정 후 바로 반영
-//        setFragmentResultListener(“editnest”) { _, bundle ->
-//            bundle.getString(“editnest_ok”)?.let {
-//            if (it == “ok”) {
-//                page = 0
-//                nestlist.clear()
-//                isnestend = false
-//                showLoadingDialog(requireContext())
-//                HomeService(this).tryGetNest(page)
-//            }
-//        }
-//        }
-//        binding.nestList.layoutManager = LinearLayoutManager(
-//            requireContext(),
-//            LinearLayoutManager.HORIZONTAL,
-//            false
-//        )
-//        binding.nestList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-////       direction: 양수일경우엔 오른쪽 스크롤, 음수일경우엔 왼쪽 스크롤
-////        수평으로 더이상 스크롤이 안되면, 데이터를 더해서 불러옴
-//                if (!binding.nestList.canScrollHorizontally(1)){
-//                    if (!isnestend) {
-//                        dismissLoadingDialog()
-//                        showLoadingDialog(requireContext())
-//                        HomeService(this@HomeFragment).tryGetNest(++page)
-//                    }
-//                }
-//            }
-//        })
-//        //tip
-//        binding.imageButton.setOnClickListener {
-//            (activity as MainActivity).changeTipFragment(TipOneFragment())
-//        }
-//        binding.imageButton2.setOnClickListener {
-//            (activity as MainActivity).changeTipFragment(TipTwoFragment())
-//        }
-//    }
-//    override fun onResume() {
-//        super.onResume()
-//        page = 0
-//        nestlist.clear()
-//        isnestend = false
-//        showLoadingDialog(requireContext())
-//        HomeService(this).tryGetNest(page)
-//    }
-//    override fun onAddNestSuccess(response: AddNestResponse) {
-//        TODO(“Not yet implemented”)
-//    }
-//    override fun onAddNestFailure(message: String) {
-//        TODO(“Not yet implemented”)
-//    }
-//    override fun onGetNestSuccess(response: GetNestResponse) {
-//        dismissLoadingDialog()
-////   맨 처음(page=0) 둥지가 없으면
-//        if (page==0 && response.result.roomInfo.isNullOrEmpty()){
-//            Log.d(“둥지“, “둥지없음“)
-//            binding.homeTvOwnerEmpty.text = “‘”+response.result.userName+“‘”
-//            binding.homeLayoutUser.visibility = View.INVISIBLE
-//            binding.homeDrawableBird.visibility = View.INVISIBLE
-//            binding.nestList.visibility = View.INVISIBLE
-//            binding.homeLayoutUserEmpty.visibility = View.VISIBLE
-//            binding.homeLayoutEmpty.visibility = View.VISIBLE
-//        }
-////   맨 처음(page=0) -> 둥지가 하나라도 있으면
-//        else if (page==0 && response.result.roomInfo.isNotEmpty()){
-//            Log.d(“둥지“, “둥지있음“)
-//            binding.homeTvOwner.text = “‘”+response.result.userName+“’”
-//            binding.homeLayoutUser.visibility = View.VISIBLE
-//            binding.homeDrawableBird.visibility = View.VISIBLE
-//            binding.homeLayoutUserEmpty.visibility = View.INVISIBLE
-//            binding.nestList.visibility = View.VISIBLE
-//            binding.homeLayoutEmpty.visibility = View.INVISIBLE
-//            nestlist.addAll(response.result.roomInfo)
-//            adapter = HomeNestAdapter(requireContext(), nestlist, parentFragmentManager)
-//            binding.nestList.adapter = adapter
-//        }
-////   page=1부터 불러오고, 둥지가 있으면 추가해줘야함 ->
-//        else if (page!=0 && response.result.roomInfo.isNotEmpty()){
-//            Log.d(“둥지“, “둥지추가“)
-//            binding.nestList.visibility = View.VISIBLE
-//            nestlist.addAll(response.result.roomInfo)
-//            adapter!!.notifyItemInserted(nestlist.size-1)
-//        }
-////    페이지추가 끝
-//        if (page!=0 && response.result.roomInfo.isNullOrEmpty()){
-//            Log.d(“둥지“, “둥지끝“)
-//            binding.nestList.visibility = View.VISIBLE
-//            isnestend = true
-//        }
-//    }
-//    override fun onGetNestFailure(message: String) {
-//        dismissLoadingDialog()
-//        showCustomToast(message)
-//    }
-//    override fun onPutNestSuccess(response: PutEditNestResponse) {
-//        TODO(“Not yet implemented”)
-//    }
-//    override fun onPutNestFailure(message: String) {
-//        TODO(“Not yet implemented”)
-//    }
-//}

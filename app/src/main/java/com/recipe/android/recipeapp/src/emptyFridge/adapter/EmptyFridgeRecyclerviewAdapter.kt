@@ -14,7 +14,7 @@ import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResult
 
 class EmptyFridgeRecyclerviewAdapter(val view : EmptyFridgeView) : RecyclerView.Adapter<EmptyFridgeRecyclerviewAdapter.CustomViewholder>() {
 
-    var emptyFridgeList = ArrayList<EmptyFridgeResult>()
+    var emptyFridgeList = mutableListOf<EmptyFridgeResult>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         val binding = ItemEmptyFridgeRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -50,7 +50,7 @@ class EmptyFridgeRecyclerviewAdapter(val view : EmptyFridgeView) : RecyclerView.
         val youtube : ConstraintLayout = binding.youtubeRecipeLayout
     }
 
-    fun submitList(emptyFridgeList : ArrayList<EmptyFridgeResult>) {
+    fun submitList(emptyFridgeList : MutableList<EmptyFridgeResult>) {
         this.emptyFridgeList = emptyFridgeList
         notifyDataSetChanged()
     }
