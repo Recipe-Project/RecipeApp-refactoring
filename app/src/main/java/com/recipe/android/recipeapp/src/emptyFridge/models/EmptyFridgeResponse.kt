@@ -10,7 +10,14 @@ data class EmptyFridgeResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("result")
-    val result : ArrayList<EmptyFridgeResult>
+    val result : EmptyFridgeSpecific
+)
+
+data class EmptyFridgeSpecific(
+    @SerializedName("total")
+    val total : Int,
+    @SerializedName("recipeList")
+    val recipeList : ArrayList<EmptyFridgeResult>
 )
 
 data class EmptyFridgeResult(
