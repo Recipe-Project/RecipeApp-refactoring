@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.fridge.basket
 
 import android.util.Log
+import com.recipe.android.recipeapp.common.SimpleResponse
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketRetrofitInterface
@@ -89,6 +90,26 @@ class BasketService(val view: BasketActivityView) {
             override fun onFailure(call: Call<DeleteBasketResponse>, t: Throwable) {
                 Log.d(TAG, "BasketService - onFailure() : 냉장고 바구니에서 재료 삭제 api 호출 실패")
                 Log.d(TAG, "BasketService - onFailure() : ${t.message}")
+            }
+
+        })
+    }
+
+    // 냉장고 바구니 수정
+    fun patchBasket(param: HashMap<String, Any>){
+        val basketRetrofitInterface =
+            ApplicationClass.sRetrofit.create(BasketRetrofitInterface::class.java)
+        basketRetrofitInterface.patchBasket(param).enqueue(object :
+            Callback<SimpleResponse>{
+            override fun onResponse(
+                call: Call<SimpleResponse>,
+                response: Response<SimpleResponse>
+            ) {
+
+            }
+
+            override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
+
             }
 
         })

@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.fridge.basket.`interface`
 
 import com.bumptech.glide.load.resource.SimpleResource
+import com.recipe.android.recipeapp.common.SimpleResponse
 import com.recipe.android.recipeapp.src.fridge.basket.models.BasketResponse
 import com.recipe.android.recipeapp.src.fridge.basket.models.DeleteBasketResponse
 import com.recipe.android.recipeapp.src.fridge.basket.models.PostFridge
@@ -21,4 +22,9 @@ interface BasketRetrofitInterface {
     fun deleteBasket(
         @Query("ingredient") ingredient: String
     ): Call<DeleteBasketResponse>
+
+    @PATCH("/fridges/basket")
+    fun patchBasket(
+        @Body param: HashMap<String, Any>
+    ): Call<SimpleResponse>
 }
