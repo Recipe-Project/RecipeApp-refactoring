@@ -158,6 +158,8 @@
     <string name="openSource">오픈소스 라이선스</string>
     <string name="apache">Apache-2.0 License</string>
 
+    <string name="privacy">개인정보처리방침</string>
+
     <string name="openSrcTitle1">Retrofit</string>
     <string name="openSrcLink1">https://github.com/square/retrofit</string>
     <string name="openSrcCopy1">Copyright 2013 Square, Inc.</string>

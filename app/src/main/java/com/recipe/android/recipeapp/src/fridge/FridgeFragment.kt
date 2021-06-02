@@ -76,10 +76,9 @@ class FridgeFragment :
         setCurrentDay()
 
         binding.tvAddDirect.visibility = View.INVISIBLE
+        binding.tvAddDirect.isClickable = false
         binding.tvAddRecipe.visibility = View.INVISIBLE
-
-        binding.tvAddDirect.visibility = View.INVISIBLE
-        binding.tvAddRecipe.visibility = View.INVISIBLE
+        binding.tvAddRecipe.isClickable = false
 
 
         // + 버튼 클릭
@@ -188,6 +187,7 @@ class FridgeFragment :
         // 냉장고 조회
         showLoadingDialog()
         FridgeService(this).tryGetFridge()
+        binding.scrollTop.scrollTo(0,0)
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -220,11 +220,15 @@ class FridgeFragment :
             binding.fabAddRecipe.visibility = View.VISIBLE
             binding.tvAddDirect.visibility = View.VISIBLE
             binding.tvAddRecipe.visibility = View.VISIBLE
+            binding.tvAddDirect.isClickable = true
+            binding.tvAddRecipe.isClickable = true
         } else {
             binding.fabAddDirect.visibility = View.INVISIBLE
             binding.fabAddRecipe.visibility = View.INVISIBLE
             binding.tvAddDirect.visibility = View.INVISIBLE
             binding.tvAddRecipe.visibility = View.INVISIBLE
+            binding.tvAddDirect.isClickable = false
+            binding.tvAddRecipe.isClickable = false
         }
     }
 
@@ -280,8 +284,8 @@ class FridgeFragment :
             binding.updateTv.visibility = View.GONE
             binding.fridgeFragDefaultTv.visibility = View.VISIBLE
         }
-        binding.fridgeFragmentLayout.requestFocus()
         dismissLoadingDialog()
+        binding.scrollTop.scrollTo(0,0)
     }
 
     override fun onGetFridgeFailure(message: String) {

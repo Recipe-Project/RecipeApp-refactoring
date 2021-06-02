@@ -106,6 +106,15 @@
         app:layout_constraintStart_toStartOf="@+id/appCompatTextView14"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView14" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_push"
+        app:layout_constraintEnd_toEndOf="@+id/view4"
+        app:layout_constraintTop_toTopOf="@+id/btn_push" />
+
 
     <View
         android:id="@+id/view4"
@@ -131,6 +140,15 @@
         app:layout_constraintStart_toStartOf="@+id/view4"
         app:layout_constraintTop_toBottomOf="@+id/view4" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_developer"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView3"
+        app:layout_constraintTop_toTopOf="@+id/btn_developer" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_open_source"
         style="@style/Body1Style"
@@ -143,15 +161,65 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_developer" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_privacy"
+        style="@style/Body1Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="21dp"
+        android:paddingVertical="12dp"
+        android:text="@string/privacy"
+        app:layout_constraintStart_toStartOf="@+id/view4"
+        app:layout_constraintTop_toBottomOf="@+id/btn_open_source" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_privacy"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView3"
+        app:layout_constraintTop_toTopOf="@+id/btn_privacy" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/gray_000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_privacy" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_open_source"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView3"
+        app:layout_constraintTop_toBottomOf="@+id/btn_developer" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_sign_out"
         style="@style/Body1Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="12dp"
+        android:layout_marginTop="12dp"
         android:paddingHorizontal="21dp"
+        android:paddingVertical="12dp"
         android:text="@string/logOut"
         app:layout_constraintStart_toStartOf="@+id/btn_open_source"
-        app:layout_constraintTop_toBottomOf="@+id/btn_open_source" />
+        app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sign_out"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView3"
+        app:layout_constraintTop_toTopOf="@+id/btn_sign_out" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_delete_id"
@@ -162,6 +230,14 @@
         android:paddingHorizontal="21dp"
         android:text="@string/deleteId"
         app:layout_constraintStart_toStartOf="@+id/btn_sign_out"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_out" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_delete_id"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView3"
         app:layout_constraintTop_toBottomOf="@+id/btn_sign_out" />
 
 
