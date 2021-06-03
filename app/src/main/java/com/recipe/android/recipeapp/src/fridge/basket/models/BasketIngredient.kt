@@ -4,11 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class BasketIngredient(
     @SerializedName("ingredientIcon")
-    val ingredientIcon: Any?,
+    var ingredientIcon: Any?,
     @SerializedName("ingredientIdx")
-    val ingredientIdx: Int,
+    var ingredientIdx: Int,
     @SerializedName("ingredientName")
-    val ingredientName: String,
+    var ingredientName: String,
     @SerializedName("ingredientCategoryIdx")
-    val ingredientCategoryIdx: Int
+    var ingredientCategoryIdx: Int,
+    @SerializedName("ingredientCnt")
+    var ingredientCnt: Int,
+    @SerializedName("storageMethod")
+    var storageMethod: String,
+    @SerializedName("expiredAt")
+    var expiredAt: String?
 )

@@ -12,8 +12,6 @@ import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.adapter.BasketRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.basket.models.*
-import com.recipe.android.recipeapp.src.fridge.dialog.DateDialog
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 
 class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding::inflate),
     BasketActivityView {
@@ -32,6 +30,8 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
 
     var deletePosition = 0
 
+    val patchFridgeBasketList = ArrayList<PatchBasket>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,13 +46,43 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
 
         // 저장 버튼
         binding.btnSave.setOnClickListener {
+            basketItemList.forEach {
+                fridgeBasketList.add(
+                    FridgeBasket(
+                        it.ingredientCnt,
+                        it.expiredAt,
+                        it.ingredientCategoryIdx,
+                        it.ingredientIcon.toString(),
+                        it.ingredientName,
+                        it.storageMethod
+                    )
+                )
+            }
             BasketService(this).postFridge(fridgeBasketList)
         }
 
         binding.btnBack.setOnClickListener {
-
-            finish()
+            onBackPressed()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        basketItemList.forEach {
+            patchFridgeBasketList.add(
+                PatchBasket(
+                    it.ingredientName,
+                    it.ingredientCnt,
+                    it.storageMethod,
+                    it.expiredAt
+                )
+            )
+        }
+
+        val param = HashMap<String, Any>()
+        param["fridgeBasketList"] = patchFridgeBasketList
+        BasketService(this).patchBasket(param)
+        finish()
     }
 
     // 냉장고 바구니 조회 성공
@@ -63,19 +93,7 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
             response.result.ingredientList.forEach {
                 basketItemList.add(it)
             }
-            basketItemList.forEach {
-                fridgeBasketList.add(
-                    FridgeBasket(
-                        1,
-                        null,
-                        it.ingredientCategoryIdx,
-                        it.ingredientIcon.toString(),
-                        it.ingredientName,
-                        getString(R.string.refrigeration)
-                    )
-                )
-            }
-            basketRecyclerViewAdapter.submitList(fridgeBasketList)
+            basketRecyclerViewAdapter.submitList(basketItemList)
         } else {
             showCustomToast(getString(R.string.networkError))
         }
@@ -99,27 +117,27 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
 
     // 냉장, 냉동, 실온 선택
     override fun onClickStorageMethod(method: String, position: Int) {
-        fridgeBasketList[position].storageMethod = method
+        basketItemList[position].storageMethod = method
     }
 
     // 개수 조절
     override fun onClickCount(cnt: Int, position: Int) {
-        fridgeBasketList[position].count = cnt
+        basketItemList[position].ingredientCnt = cnt
     }
 
     // 유통기한
     override fun onSetExpiredAt(date: String, position: Int) {
-        fridgeBasketList[position].expiredAt = date
+        basketItemList[position].expiredAt = date
     }
 
-    override fun onClickExpiredAt(position: Int, expiredAt: String) {
-        fridgeBasketList[position].expiredAt = expiredAt
+    override fun onClickExpiredAt(position: Int, expiredAt: String?) {
+        basketItemList[position].expiredAt = expiredAt
     }
 
     // 냉장고 바구니에서 재료 삭제 호출
     override fun onClickPickRemove(position: Int) {
         deletePosition = position
-        BasketService(this).deleteBasket(fridgeBasketList[position].ingredientName)
+        BasketService(this).deleteBasket(basketItemList[position].ingredientName)
     }
 
     // 삭제 성공
@@ -127,8 +145,8 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
         if (deleteBasketResponse.isSuccess) {
             when (deleteBasketResponse.code) {
                 1000 -> {
-                    fridgeBasketList.removeAt(deletePosition)
-                    basketRecyclerViewAdapter.submitList(fridgeBasketList)
+                    basketItemList.removeAt(deletePosition)
+                    basketRecyclerViewAdapter.submitList(basketItemList)
                 }
                 else -> {
                     showCustomToast(getString(R.string.networkError))
@@ -145,12 +163,12 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when(requestCode) {
+        when (requestCode) {
             405 -> if (resultCode == 4500) {
                 val bundle = data?.extras
                 year = bundle?.get("year") as Int
-                month = bundle?.get("monthOfYear") as Int
-                day = bundle?.get("dayOfMonth") as Int
+                month = bundle.get("monthOfYear") as Int
+                day = bundle.get("dayOfMonth") as Int
             }
         }
     }

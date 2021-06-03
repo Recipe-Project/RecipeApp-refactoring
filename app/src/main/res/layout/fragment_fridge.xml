@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/recipeStorage2"
                 android:textColor="@color/green"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:fontFamily="@font/cafe_24_s_surround_air"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -77,9 +77,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
-                android:fontFamily="@font/applesdgothicneoregular"
-                android:textColor="@color/gray_400"
-                android:textSize="16sp"
+                android:textColor="@color/black"
+                style="@style/Body1Style"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="21/02/28" />
@@ -90,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/update"
                 style="@style/Body1Style"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="65dp"
@@ -130,7 +130,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fridge_frag_title"
-                style="@style/Subtitle1Style"
+                style="@style/Body1Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
@@ -191,14 +191,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/product_name"
-                    style="@style/Body1Style"
+                    style="@style/Body2Style"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/product_freshness_tv"
-                    style="@style/Body1Style"
+                    style="@style/Body2Style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/freshness"
@@ -212,7 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/product_cnt"
-                    style="@style/Body1Style"
+                    style="@style/Body2Style"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>

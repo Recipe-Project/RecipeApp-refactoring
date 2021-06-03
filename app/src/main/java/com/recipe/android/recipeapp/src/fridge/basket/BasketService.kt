@@ -100,16 +100,20 @@ class BasketService(val view: BasketActivityView) {
         val basketRetrofitInterface =
             ApplicationClass.sRetrofit.create(BasketRetrofitInterface::class.java)
         basketRetrofitInterface.patchBasket(param).enqueue(object :
-            Callback<SimpleResponse>{
+            Callback<SimpleResponse> {
             override fun onResponse(
                 call: Call<SimpleResponse>,
                 response: Response<SimpleResponse>
             ) {
-
+                if (response.body() == null) Log.d(
+                    TAG,
+                    "BasketService - onResponse() : response is null"
+                )
+                else Log.d(TAG, "BasketService - onResponse() : 냉장고 바구니 수정 성공")
             }
 
             override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
-
+                Log.d(TAG, "BasketService - onFailure() : 냉장고 바구니 수정 실패")
             }
 
         })

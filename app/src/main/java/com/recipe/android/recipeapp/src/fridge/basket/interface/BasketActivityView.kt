@@ -12,7 +12,7 @@ interface BasketActivityView {
     fun onClickCount(cnt: Int, position: Int)
     fun onSetExpiredAt(date: String, position: Int)
 
-    fun onClickExpiredAt(position: Int, expiredAt: String)
+    fun onClickExpiredAt(position: Int, expiredAt: String?)
 
     fun onClickPickRemove(position: Int)
     fun onDeleteBasketSuccess(deleteBasketResponse: DeleteBasketResponse)

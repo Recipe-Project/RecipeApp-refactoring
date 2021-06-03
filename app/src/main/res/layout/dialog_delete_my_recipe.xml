@@ -40,6 +40,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:gravity="center"
+                style="@style/Subtitle2Style"
                 android:text="@string/deleteMyRecipeDialogMessage1"
                 android:textColor="@color/gray_300"
                 android:textSize="14sp"

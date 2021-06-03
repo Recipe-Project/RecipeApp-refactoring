@@ -76,9 +76,9 @@ class FridgeFragment :
         setCurrentDay()
 
         binding.tvAddDirect.visibility = View.INVISIBLE
-        binding.tvAddDirect.isClickable = false
+        binding.fabAddDirect.isClickable = false
         binding.tvAddRecipe.visibility = View.INVISIBLE
-        binding.tvAddRecipe.isClickable = false
+        binding.fabAddRecipe.isClickable = false
 
 
         // + 버튼 클릭
@@ -220,15 +220,15 @@ class FridgeFragment :
             binding.fabAddRecipe.visibility = View.VISIBLE
             binding.tvAddDirect.visibility = View.VISIBLE
             binding.tvAddRecipe.visibility = View.VISIBLE
-            binding.tvAddDirect.isClickable = true
-            binding.tvAddRecipe.isClickable = true
+            binding.fabAddDirect.isClickable = true
+            binding.fabAddRecipe.isClickable = true
         } else {
             binding.fabAddDirect.visibility = View.INVISIBLE
             binding.fabAddRecipe.visibility = View.INVISIBLE
             binding.tvAddDirect.visibility = View.INVISIBLE
             binding.tvAddRecipe.visibility = View.INVISIBLE
-            binding.tvAddDirect.isClickable = false
-            binding.tvAddRecipe.isClickable = false
+            binding.fabAddDirect.isClickable = false
+            binding.fabAddRecipe.isClickable = false
         }
     }
 

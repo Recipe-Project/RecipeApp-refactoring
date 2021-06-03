@@ -12,9 +12,10 @@ import com.recipe.android.recipeapp.databinding.ActivitySettingBinding
 import com.recipe.android.recipeapp.src.setting.deleteId.DeleteIdDialog
 import com.recipe.android.recipeapp.src.setting.developer.DeveloperInfoActivity
 import com.recipe.android.recipeapp.src.setting.openSource.OpenSourceActivity
+import com.recipe.android.recipeapp.src.setting.privacy.PrivacyActivity
 import com.recipe.android.recipeapp.src.setting.signOut.SignOutDialog
 
-class SettingActivity: BaseActivity<ActivitySettingBinding>(ActivitySettingBinding::inflate) {
+class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,6 +54,11 @@ class SettingActivity: BaseActivity<ActivitySettingBinding>(ActivitySettingBindi
 
         binding.btnOpenSource.setOnClickListener {
             val intent = Intent(this, OpenSourceActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnPrivacy.setOnClickListener {
+            val intent = Intent(this, PrivacyActivity::class.java)
             startActivity(intent)
         }
     }

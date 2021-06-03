@@ -1,8 +1,10 @@
 package com.recipe.android.recipeapp.src.setting.openSource
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.databinding.ItemOpenSourceBinding
 
 class OpenSourceRecyclerViewAdapter:
@@ -10,13 +12,26 @@ class OpenSourceRecyclerViewAdapter:
 
     var openSourceList = ArrayList<OpenSource>()
 
+    var isLicenseClick = false
+
     inner class OpenSourceViewHolder (val binding: ItemOpenSourceBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindWithView(openSource: OpenSource) {
+            binding.tvLicense.visibility = View.GONE
             binding.tvTitle.text = openSource.title
             binding.tvLink.text = openSource.link
-            binding.tvCopy.text = openSource.copy
-            binding.tvLicense.text = openSource.license
+            binding.tvLicense.text = openSource.copy
+
+            binding.lvLicense.setOnClickListener {
+                isLicenseClick = !isLicenseClick
+                if (isLicenseClick) {
+                    binding.icLicense.setImageResource(R.drawable.ic_arrow_drop_up)
+                    binding.tvLicense.visibility = View.VISIBLE
+                } else {
+                    binding.icLicense.setImageResource(R.drawable.ic_arrow_drop_down)
+                    binding.tvLicense.visibility = View.GONE
+                }
+            }
         }
     }
 

@@ -60,6 +60,8 @@
         <!-- 오픈소스 -->
         <activity android:name=".src.setting.openSource.OpenSourceActivity"/>
 
+        <activity android:name=".src.setting.privacy.PrivacyActivity"/>
+
         <!-- 회원 탈퇴 -->
         <activity android:name=".src.setting.deleteId.DeleteIdDialog"
             android:theme="@style/dialogTheme"/>

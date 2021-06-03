@@ -10,9 +10,8 @@ import com.recipe.android.recipeapp.databinding.ItemBasketIngredientBinding
 import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.DateDialogInterface
-import com.recipe.android.recipeapp.src.fridge.basket.models.FridgeBasket
+import com.recipe.android.recipeapp.src.fridge.basket.models.BasketIngredient
 import com.recipe.android.recipeapp.src.fridge.dialog.DateDialog
-import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -20,7 +19,7 @@ import kotlin.collections.ArrayList
 class BasketRecyclerViewAdapter(val view: BasketActivityView, val activity: BasketActivity):
 RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
 
-    private var ingredientList = ArrayList<FridgeBasket>()
+    private var ingredientList = ArrayList<BasketIngredient>()
 
     private var ingredientCnt = 1
 
@@ -29,7 +28,7 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
     inner class BasketViewHolder(val binding: ItemBasketIngredientBinding): RecyclerView.ViewHolder(
         binding.root
     ), DateDialogInterface{
-        fun bindWithView(ingredient: FridgeBasket, position: Int) {
+        fun bindWithView(ingredient: BasketIngredient, position: Int) {
             binding.tvIngredientName.text = ingredient.ingredientName
             if (ingredient.ingredientIcon != "") {
                 Glide.with(context).load(ingredient.ingredientIcon).into(binding.icIngredient)
@@ -69,8 +68,16 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
                 binding.btnFrozen.setTextColor(context.getColor(R.color.gray_200))
             }
 
+            when (ingredient.storageMethod) {
+                "냉장" -> binding.btnRefrigeration.performClick()
+                "냉동" -> binding.btnFrozen.performClick()
+                "실온" -> binding.btnRoomTemperature.performClick()
+            }
+
+            binding.tvIngredientCnt.text = ingredient.ingredientCnt.toString()
+
             if (ingredient.expiredAt == null) {
-                binding.tvExpired.text = "0000.00.00"
+                binding.tvExpired.text = "00.00.00까지"
             } else {
                 binding.tvExpired.text = ingredient.expiredAt
             }
@@ -105,16 +112,11 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
     override fun onBindViewHolder(holder: BasketViewHolder, position: Int) {
         holder.bindWithView(ingredientList[position], position)
 
-//        holder.binding.tvExpired.setOnClickListener {
-//            view.onClickExpiredAt(position)
-//        }
-
-
     }
 
     override fun getItemCount(): Int = ingredientList.size
 
-    fun submitList(ingredientList: ArrayList<FridgeBasket>) {
+    fun submitList(ingredientList: ArrayList<BasketIngredient>) {
         this.ingredientList = ingredientList
         notifyDataSetChanged()
     }

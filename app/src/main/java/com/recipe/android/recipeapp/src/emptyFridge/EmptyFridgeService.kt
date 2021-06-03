@@ -16,13 +16,18 @@ class EmptyFridgeService(val view : EmptyFridgeView) {
 
     fun tryGetEmptyFridge(start : Int, display : Int) {
         val emptyFridgeInterface = ApplicationClass.sRetrofit.create(EmptyFridgeInterface::class.java)
-        emptyFridgeInterface.getEmptyFridge(start, display).enqueue(object : Callback<EmptyFridgeResponse> {
+        emptyFridgeInterface.getEmptyFridge(start, display).enqueue(object :
+            Callback<EmptyFridgeResponse> {
             override fun onResponse(
                 call: Call<EmptyFridgeResponse>,
                 response: Response<EmptyFridgeResponse>
             ) {
-                Log.d(TAG, "EmptyFridgeService - onResponse() : 냉장고비우기 조회 성공" )
-                view.onGetEmptyFridgeSuccess(response.body() as EmptyFridgeResponse)
+                Log.d(TAG, "EmptyFridgeService - onResponse() : 냉장고비우기 조회 성공")
+                if (response.body() == null) {
+                    Log.d(TAG, "EmptyFridgeService - onResponse() : response is null")
+                } else {
+                    view.onGetEmptyFridgeSuccess(response.body() as EmptyFridgeResponse)
+                }
             }
 
             override fun onFailure(call: Call<EmptyFridgeResponse>, t: Throwable) {
