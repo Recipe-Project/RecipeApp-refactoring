@@ -68,17 +68,8 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String) {
-        super.onNewToken(token)
-
         sSharedPreferences.edit().putString(FCM_TOKEN, token).apply()
-
         FcmService().patchFcm(token)
-
     }
-
-    private fun sendRegistrationToServer(token: String) {
-        Log.d(TAG, "sendRegistrationTokenToServer($token)")
-    }
-
 
 }
