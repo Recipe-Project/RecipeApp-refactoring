@@ -23,8 +23,6 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
 
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        super.onMessageReceived(remoteMessage)
-
         if (remoteMessage.data.isNotEmpty()) {
             Log.d("body: ", remoteMessage.data["body"].toString())
             Log.d("title: ", remoteMessage.data["title"].toString())
