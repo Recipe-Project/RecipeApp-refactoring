@@ -47,6 +47,10 @@
         <!-- 메인 -->
         <activity android:name=".src.MainActivity" />
 
+        <!-- 재료 삭제 다이얼로그 -->
+        <activity android:name=".src.fridge.home.dialog.DeleteDialog"
+            android:theme="@style/dialogTheme"/>
+
         <!-- 로그인 -->
         <activity android:name=".src.signIn.SignInActivity" />
 

@@ -43,11 +43,17 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
+                val visibleItemCount = layoutManager.childCount
+                val pastVisibleItem = layoutManager.findFirstVisibleItemPosition()
+                val total = emptyAdapter.itemCount
+
                 if(!rv.canScrollVertically(1)) {
-                    if(!isEnd) {
-                        showLoadingDialog()
-                        start += display
-                        EmptyFridgeService(this@EmptyFridgeFragment).tryGetEmptyFridge(start, display)
+                    if(visibleItemCount + pastVisibleItem >= total) {
+                        if(!isEnd) {
+                            showLoadingDialog()
+                            start += display
+                            EmptyFridgeService(this@EmptyFridgeFragment).tryGetEmptyFridge(start, display)
+                        }
                     }
                 }
             }
@@ -58,13 +64,11 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
         dismissLoadingDialog()
         if(response.result.recipeList.isNullOrEmpty() && start == 0) {
             Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 없음")
-            // 냉장고가 텅 비었을 경우, Default 메세지 제공
             binding.emptyFridgeFragRecyclerview.visibility = View.INVISIBLE
             binding.emptyFridgeFragDefaultIv.visibility = View.VISIBLE
             binding.emptyFridgeFragDefaultTv.visibility = View.VISIBLE
         } else if (response.result.recipeList.isNotEmpty() && start == 0) {
             Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 있음")
-
             binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
             binding.emptyFridgeFragDefaultIv.visibility = View.INVISIBLE
             binding.emptyFridgeFragDefaultTv.visibility = View.INVISIBLE
@@ -125,7 +129,6 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
         val bundle = bundleOf("searchType" to "blog", "searchKeyword" to keyword)
         navController.navigate(R.id.searchFragment, bundle)
 //        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
-
     }
 
     override fun getYoutubeRecipe(keyword : String) {

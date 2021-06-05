@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.fridge.home.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemMyFridgeIngredientRecyclerviewBinding
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment.Companion.checkboxList
+import com.recipe.android.recipeapp.src.fridge.FridgeFragment.Companion.patchFridgeList
 import com.recipe.android.recipeapp.src.fridge.home.models.CheckboxData
 import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
 import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
@@ -19,7 +21,10 @@ import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
 class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
     : RecyclerView.Adapter<MyFridgeIngredientRecyclerviewAdapter.CustomViewholder>() {
 
+    val TAG = "MyFridgeIngredientRecyclerviewAdapter"
+
     var fridgeItemList = ArrayList<FridgeItem>()
+
     lateinit var binding : ItemMyFridgeIngredientRecyclerviewBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
@@ -29,27 +34,33 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
 
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
         holder.bindWithView(fridgeItemList[position], position)
+
+        patchFridgeList.forEach {
+            Log.d(TAG, "PatchFridgeList : ${it.ingredientName}, ${it.expiredAt}, ${it.storageMethod}, ${it.count}" )
+            Log.d(TAG, "PatchFridgeList's Size : ${FridgeFragment.patchFridgeList.size}")
+            Log.d(TAG, "체크박스 리스트 사이즈 : ${checkboxList.size}")
+        }
     }
 
     override fun getItemCount(): Int = fridgeItemList.size
 
-    class CustomViewholder(val binding: ItemMyFridgeIngredientRecyclerviewBinding, val context: Context)
+    inner class CustomViewholder(val binding: ItemMyFridgeIngredientRecyclerviewBinding, val context: Context)
         : RecyclerView.ViewHolder(binding.root) {
 
         var ingredientCnt : Int = 1
 
         fun bindWithView(fridgeItem: FridgeItem, position: Int) {
-            FridgeFragment.patchFridgeList.clear()
-            val patchItem : PatchFridgeObject = PatchFridgeObject(fridgeItem.ingredientName, fridgeItem.expiredAt, fridgeItem.storageMethod, fridgeItem.count)
-            FridgeFragment.patchFridgeList.add(patchItem)
 
-            if(position >= checkboxList.size)
-                checkboxList.add(position, CheckboxData(position, binding.checkbox.isChecked))
+//            if(position >= checkboxList.size) {
+//                checkboxList.add(position, CheckboxData(position, binding.checkbox.isChecked, fridgeItem.ingredientName))
+//                Log.d(TAG, "체크박스 리스트 사이즈 : ${checkboxList.size}")
+//            }
+
+
             binding.checkbox.setOnClickListener {
                 checkboxList[position].checked = binding.checkbox.isChecked
             }
             binding.checkbox.isChecked = checkboxList[position].checked
-
 
             binding.ingredientNameTv.text = fridgeItem.ingredientName
             if(fridgeItem.ingredientIcon != null) {
@@ -74,7 +85,6 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.freshnessRefrigerationTv.setTextColor(ContextCompat.getColor(context, R.color.green))
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
-                binding.checkbox.isChecked = true
 
                 FridgeFragment.patchFridgeList[position].storageMethod = "냉장"
             }
@@ -159,9 +169,7 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.bottomView.visibility = View.VISIBLE
                 binding.bottomLine.visibility = View.GONE
             }
-
         }
-
     }
 
     fun submitList(fridgeItemList: ArrayList<FridgeItem>) {

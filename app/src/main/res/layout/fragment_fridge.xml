@@ -217,10 +217,21 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/all_check_checkbox"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/delete_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/delete_part_of_item"
+                    style="@style/Body2Style"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"/>
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/all_check_checkbox"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -234,7 +245,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/all_check"
-                    style="@style/Body1Style"
+                    style="@style/Body2Style"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/all_check_checkbox"

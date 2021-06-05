@@ -18,12 +18,7 @@ import com.recipe.android.recipeapp.databinding.ItemRecipeListLoadingBinding
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeListItem
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeResult
 
-class BlogRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-
-    companion object {
-        private const val TYPE_DATA = 0
-        private const val TYPE_LOADING = 1
-    }
+class BlogRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<BlogRecipeRecyclerviewAdapter.CustomViewHolder>(){
 
     interface BlogRecipeScrapItemClick {
         fun onClick(view: View, position: Int)
@@ -35,90 +30,45 @@ class BlogRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapte
     }
     var blogRecipeItemClick : BlogRecipeItemClick? = null
 
-    private val blogRecipeList = mutableListOf<BlogRecipeListItem?>()
-    private val blogScrapStateList = mutableListOf<String?>()
+    var blogRecipeList = mutableListOf<BlogRecipeListItem>()
 
-    fun setBlogRecipe(list: ArrayList<BlogRecipeListItem>) {
-        this.blogRecipeList.apply {
-            clear()
-            addAll(list)
-        }
-        notifyDataSetChanged()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogRecipeRecyclerviewAdapter.CustomViewHolder {
+        val binding = ItemBlogResultFragRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CustomViewHolder(binding)
     }
 
-    fun addBlogRecipe(list: ArrayList<BlogRecipeListItem>) {
-        this.blogRecipeList.addAll(list)
-        notifyDataSetChanged()
-    }
+    override fun onBindViewHolder(holder: BlogRecipeRecyclerviewAdapter.CustomViewHolder, position: Int) {
+        holder.title.text = blogRecipeList[position]?.title
+        holder.blogName.text = blogRecipeList[position]?.blogName
+        Glide.with(ApplicationClass.instance).load(blogRecipeList[position]?.thumbnail).transform(CenterCrop(), RoundedCorners(3)).into(holder.thumbnail)
+        holder.cnt.text = blogRecipeList[position]?.userScrapCnt.toString()
+        holder.postDate.text = blogRecipeList[position]?.postDate
 
-    fun setLoadingView(b: Boolean){
-        if(b) {
-            android.os.Handler(Looper.getMainLooper()).post {
-                this.blogRecipeList.add(null)
-                notifyItemInserted(blogRecipeList.size - 1)
-            }
-        } else {
-            if(this.blogRecipeList[blogRecipeList.size - 1] == null) {
-                this.blogRecipeList.removeAt(blogRecipeList.size - 1)
-                notifyItemRemoved(blogRecipeList.size)
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        when(viewType) {
-            TYPE_DATA -> {
-                val binding = ItemBlogResultFragRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return RecipeViewHolder(binding)
-            }
-            else -> {
-                val binding = ItemRecipeListLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return LoadingViewHolder(binding)
-            }
-        }
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder is RecipeViewHolder) {
-            holder.title.text = blogRecipeList[position]?.title
-            holder.blogName.text = blogRecipeList[position]?.blogName
-            Glide.with(ApplicationClass.instance).load(blogRecipeList[position]?.thumbnail).transform(CenterCrop(), RoundedCorners(3)).into(holder.thumbnail)
-            holder.cnt.text = blogRecipeList[position]?.userScrapCnt.toString()
-            holder.postDate.text = blogRecipeList[position]?.postDate
-
-            if(blogRecipeScrapItemClick != null) {
-                holder.scrapBtn.setOnClickListener {
-                    if(blogRecipeList[position]!!.userScrapYN == "Y") {
-                        blogRecipeList[position]!!.userScrapYN = "N"
-                        holder.scrapBtn.setImageResource(R.drawable.ic_favorite_empty_white)
-                        Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
-                    } else {
-                        blogRecipeList[position]!!.userScrapYN = "Y"
-                        holder.scrapBtn.setImageResource(R.drawable.ic_favorite_full_white)
-                        Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                    blogRecipeScrapItemClick?.onClick(it, position)
+        if(blogRecipeScrapItemClick != null) {
+            holder.scrapBtn.setOnClickListener {
+                if(blogRecipeList[position]!!.userScrapYN == "Y") {
+                    blogRecipeList[position]!!.userScrapYN = "N"
+                    holder.scrapBtn.setImageResource(R.drawable.ic_favorite_empty_white)
+                    Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                } else {
+                    blogRecipeList[position]!!.userScrapYN = "Y"
+                    holder.scrapBtn.setImageResource(R.drawable.ic_favorite_full_white)
+                    Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
                 }
+                blogRecipeScrapItemClick?.onClick(it, position)
             }
+        }
 
-            if(blogRecipeItemClick != null) {
-                holder.layout.setOnClickListener {
-                    blogRecipeItemClick?.onClick(it, position)
-                }
+        if(blogRecipeItemClick != null) {
+            holder.layout.setOnClickListener {
+                blogRecipeItemClick?.onClick(it, position)
             }
         }
     }
 
     override fun getItemCount(): Int = blogRecipeList.size
 
-    override fun getItemViewType(position: Int): Int {
-        return when(blogRecipeList[position]) {
-            null -> TYPE_LOADING
-            else -> TYPE_DATA
-        }
-    }
-
-    class RecipeViewHolder(val binding: ItemBlogResultFragRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    class CustomViewHolder(val binding: ItemBlogResultFragRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         val title : TextView = binding.blogTitleTv
         val blogName : TextView = binding.blogNameTv
         val thumbnail : ImageView = binding.blogThumbnailImg
@@ -128,8 +78,9 @@ class BlogRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapte
         val layout : ConstraintLayout = binding.blogResultFragRecyclerviewLayout
     }
 
-    class LoadingViewHolder(val binding: ItemRecipeListLoadingBinding) : RecyclerView.ViewHolder(binding.root) {
-        val progressBar : ProgressBar = binding.blogRecipeProgressBar
+    fun submitList(list : MutableList<BlogRecipeListItem>) {
+        this.blogRecipeList = list
+        notifyDataSetChanged()
     }
 }
 

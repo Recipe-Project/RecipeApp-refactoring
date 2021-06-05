@@ -10,9 +10,6 @@ interface YoutubeRecipeView {
     fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse)
     fun onGetYoutubeRecipeFailure(message: String)
 
-    fun onGetYoutubeRecipeMoreSuccess(response: YoutubeRecipeResponse)
-    fun onGetYoutubeRecipeMoreFailure(message: String)
-
     fun onPostYoutubeRecipeScrapSuccess(response: YoutubeRecipeScrapResponse)
     fun onPostYoutubeRecipeScrapFailure(message: String)
 }

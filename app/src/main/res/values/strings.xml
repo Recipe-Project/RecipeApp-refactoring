@@ -72,6 +72,7 @@
     <string name="my_fridge_default_tv">나의 냉장고에 음식을 채워보세요!</string>
     <string name="update">편집</string>
     <string name="all_check">전체선택</string>
+    <string name="delete_part_of_item">선택삭제</string>
 
     <!-- 나의 냉장고 / 재료 선택 -->
     <string name="selectIngredient">재료</string>

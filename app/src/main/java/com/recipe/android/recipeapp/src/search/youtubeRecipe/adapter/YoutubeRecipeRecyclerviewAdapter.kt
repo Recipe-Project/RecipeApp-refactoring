@@ -19,15 +19,11 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemRecipeListLoadingBinding
 import com.recipe.android.recipeapp.databinding.ItemYoutubeResultFragRecyclerviewBinding
+import com.recipe.android.recipeapp.src.search.blogRecipe.adapter.BlogRecipeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResult
 import java.text.SimpleDateFormat
 
-class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-
-    companion object {
-        private const val Y_TYPE_DATA = 0
-        private const val Y_TYPE_LOADING = 1
-    }
+class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<YoutubeRecipeRecyclerviewAdapter.CustomViewHolder>(){
 
     interface YoutubeRecipeScrapItemClick {
         fun onClick(view: View, position: Int)
@@ -39,78 +35,40 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     }
     var youtubeRecipeItemClick : YoutubeRecipeItemClick? = null
 
-    private val youtubeRecipeList = mutableListOf<YoutubeRecipeResult?>()
+    var youtubeRecipeList = mutableListOf<YoutubeRecipeResult>()
 
-    fun setYoutubeRecipe(list: ArrayList<YoutubeRecipeResult>) {
-        this.youtubeRecipeList.apply {
-            clear()
-            addAll(list)
-        }
-        notifyDataSetChanged()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YoutubeRecipeRecyclerviewAdapter.CustomViewHolder {
+        val binding = ItemYoutubeResultFragRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return YoutubeRecipeRecyclerviewAdapter.CustomViewHolder(binding)
     }
 
-    fun addYoutubeRecipe(list: ArrayList<YoutubeRecipeResult>) {
-        this.youtubeRecipeList.addAll(list)
-        notifyDataSetChanged()
-    }
-
-    fun setLoadingView(b: Boolean){
-        if(b) {
-            android.os.Handler(Looper.getMainLooper()).post {
-                this.youtubeRecipeList.add(null)
-                notifyItemInserted(youtubeRecipeList.size - 1)
-            }
+    override fun onBindViewHolder(holder: YoutubeRecipeRecyclerviewAdapter.CustomViewHolder, position: Int) {
+        val title = youtubeRecipeList[position]?.snippet?.title
+        if(title!!.contains("&#39;")) {
+            val newTitle = title.replace("&#39;", "'")
+            holder.title.text = newTitle
+        } else if(title!!.contains("&quot;")) {
+            val newTitle = title.replace("&quot;", "\"")
+            holder.title.text = newTitle
         } else {
-            if(this.youtubeRecipeList[youtubeRecipeList.size - 1] == null) {
-                this.youtubeRecipeList.removeAt(youtubeRecipeList.size - 1)
-                notifyItemRemoved(youtubeRecipeList.size)
-            }
+            holder.title.text = title
         }
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        when(viewType) {
-            Y_TYPE_DATA -> {
-                val binding = ItemYoutubeResultFragRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return RecipeViewHolder(binding)
-            }
-            else -> {
-                val binding = ItemRecipeListLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return LoadingViewHolder(binding)
-            }
+        holder.channerName.text = youtubeRecipeList[position]?.snippet?.channelTitle
+
+        // postDate String Slicing
+        val date = youtubeRecipeList[position]?.snippet?.publishTime
+        if(date != null) {
+            val strNewDate : String = formatPostDate(date)
+            holder.postDate.text = strNewDate
         }
-    }
 
+        Glide.with(ApplicationClass.instance).load(youtubeRecipeList[position]?.snippet?.thumbnails?.default?.url).transform(
+            CenterCrop(), RoundedCorners(3)
+        ).into(holder.thumbnail)
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder is RecipeViewHolder) {
-
-            val title = youtubeRecipeList[position]?.snippet?.title
-            if(title!!.contains("&#39;")) {
-                val newTitle = title.replace("&#39;", "'")
-                holder.title.text = newTitle
-            } else if(title!!.contains("&quot;")) {
-                val newTitle = title.replace("&quot;", "\"")
-                holder.title.text = newTitle
-            } else {
-                holder.title.text = title
-            }
-
-            holder.channerName.text = youtubeRecipeList[position]?.snippet?.channelTitle
-
-            // postDate String Slicing
-            val date = youtubeRecipeList[position]?.snippet?.publishTime
-            if(date != null) {
-                val strNewDate : String = formatPostDate(date)
-                holder.postDate.text = strNewDate
-            }
-
-            Glide.with(ApplicationClass.instance).load(youtubeRecipeList[position]?.snippet?.thumbnails?.default?.url).transform(
-                CenterCrop(), RoundedCorners(3)
-            ).into(holder.thumbnail)
-
-            if(youtubeRecipeScrapItemClick != null) {
-                holder.scrapBtn.setOnClickListener {
+        if(youtubeRecipeScrapItemClick != null) {
+            holder.scrapBtn.setOnClickListener {
 //                    if(publicResultList[position].userScrapYN == "Y") {
 //                        publicResultList[position].userScrapYN = "N"
 //                        holder.scrap.setImageResource(R.drawable.ic_favorite_empty_white)
@@ -120,28 +78,20 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
 //                        holder.scrap.setImageResource(R.drawable.ic_favorite_full_white)
 //                        Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
 //                    }
-                    youtubeRecipeScrapItemClick?.onClick(it, position)
-                }
+                youtubeRecipeScrapItemClick?.onClick(it, position)
             }
-            if(youtubeRecipeItemClick != null) {
-                holder.layout.setOnClickListener {
-                    youtubeRecipeItemClick?.onClick(it, position)
-                }
+        }
+        if(youtubeRecipeItemClick != null) {
+            holder.layout.setOnClickListener {
+                youtubeRecipeItemClick?.onClick(it, position)
             }
-
         }
     }
 
     override fun getItemCount(): Int = youtubeRecipeList.size
 
-    override fun getItemViewType(position: Int): Int {
-        return when(youtubeRecipeList[position]) {
-            null -> Y_TYPE_LOADING
-            else -> Y_TYPE_DATA
-        }
-    }
 
-    class RecipeViewHolder(val binding: ItemYoutubeResultFragRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    class CustomViewHolder(val binding: ItemYoutubeResultFragRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         val title : TextView = binding.youtubeTitleTv
         val channerName : TextView = binding.youtubeNameTv
         val thumbnail : ImageView = binding.youtubeThumbnailImg
@@ -150,8 +100,9 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
         val layout : ConstraintLayout = binding.youtubeResultFragRecyclerviewLayout
     }
 
-    class LoadingViewHolder(val binding: ItemRecipeListLoadingBinding) : RecyclerView.ViewHolder(binding.root) {
-        val progressBar : ProgressBar = binding.blogRecipeProgressBar
+    fun submitList(list : MutableList<YoutubeRecipeResult>) {
+        this.youtubeRecipeList = list
+        notifyDataSetChanged()
     }
 
     @SuppressLint("SimpleDateFormat")

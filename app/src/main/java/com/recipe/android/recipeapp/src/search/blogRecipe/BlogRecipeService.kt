@@ -31,20 +31,6 @@ class BlogRecipeService(val view: BlogRecipeView) {
         })
     }
 
-    fun getBlogRecipeMore(keyword : String, display : Int, start : Int) {
-        val blogRecipeInterface = ApplicationClass.sRetrofit.create(BlogRecipeInterface::class.java)
-        blogRecipeInterface.getBlogRecipe(keyword, display, start).enqueue(object : Callback<BlogRecipeResponse>{
-            override fun onResponse(call: Call<BlogRecipeResponse>, response: Response<BlogRecipeResponse>) {
-                Log.d(TAG, "BlogRecipeService - onResponse() : 블로그레시피 추가 조회 성공")
-                view.onGetBlogRecipeMoreSuccess(response.body() as BlogRecipeResponse)
-            }
-
-            override fun onFailure(call: Call<BlogRecipeResponse>, t: Throwable) {
-                view.onGetBlogRecipeMoreFailure(t.message ?: "통신오류")
-            }
-        })
-    }
-
     fun tryPostAddingScrap(request : BlogRecipeScrapRequest) {
         val blogRecipeInterface = ApplicationClass.sRetrofit.create(BlogRecipeInterface::class.java)
         blogRecipeInterface.postAddingScrap(request).enqueue(object : Callback<BlogRecipeScrapResponse>{

@@ -35,22 +35,6 @@ class YoutubeRecipeService(val view : YoutubeRecipeView) {
         })
     }
 
-    fun getYoutubeRecipeMore(part : String, type : String, maxResults : Int, key : String, q : String, pageToken : String) {
-        val youtubeRecipeInterface = ApplicationClass.yRetrofit.create(YoutubeRecipeInterface::class.java)
-        youtubeRecipeInterface.getYoutubeRecipe(part, type, maxResults, key, q, pageToken).enqueue(object : Callback<YoutubeRecipeResponse> {
-            override fun onResponse(call: Call<YoutubeRecipeResponse>, response: Response<YoutubeRecipeResponse>) {
-                if(response.isSuccessful) {
-                    Log.d(TAG, "YoutubeRecipeService - onResponse() : 유투브레시피 조회 성공")
-                    view.onGetYoutubeRecipeMoreSuccess(response.body() as YoutubeRecipeResponse)
-                }
-            }
-
-            override fun onFailure(call: Call<YoutubeRecipeResponse>, t: Throwable) {
-                view.onGetYoutubeRecipeMoreFailure(t.message ?: "통신오류")
-            }
-        })
-    }
-
     fun postAddingScrap(request: YoutubeRecipeScrapRequest) {
         val youtubeRecipeInterface = ApplicationClass.sRetrofit.create(YoutubeRecipeInterface::class.java)
         youtubeRecipeInterface.postAddingScrap(request).enqueue(object : Callback<YoutubeRecipeScrapResponse> {

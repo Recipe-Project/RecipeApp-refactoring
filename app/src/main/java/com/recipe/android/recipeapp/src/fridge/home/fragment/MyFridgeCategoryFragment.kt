@@ -19,7 +19,7 @@ import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeIngredientRe
 import com.recipe.android.recipeapp.src.fridge.home.models.*
 
 class MyFridgeCategoryFragment()
-    : BaseFragment<FragmentMyFridgeCategoryBinding>(FragmentMyFridgeCategoryBinding::bind, R.layout.fragment_my_fridge_category), FridgeUpdateView {
+    : BaseFragment<FragmentMyFridgeCategoryBinding>(FragmentMyFridgeCategoryBinding::bind, R.layout.fragment_my_fridge_category) {
 
     val TAG = "MyFridgeCategoryFragment"
     lateinit var result : GetFridgeResult
@@ -34,23 +34,28 @@ class MyFridgeCategoryFragment()
         val fridgeItemList = result.ingredientList
         val myFridgeIngredientRecyclerviewAdapter = MyFridgeIngredientRecyclerviewAdapter(requireContext())
         binding.rvIngredient.adapter = myFridgeIngredientRecyclerviewAdapter
+
+        // Test
+        myFridgeIngredientRecyclerviewAdapter.fridgeItemList.clear()
+
         myFridgeIngredientRecyclerviewAdapter.submitList(fridgeItemList)
 
         if(fridgeItemList.size != 0) {
             myFridgeIngredientRecyclerviewAdapter.submitList(fridgeItemList)
-            val swipeDelete = object : SwipeToDeleteCallback(requireContext()) {
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val ingredientName = fridgeItemList[viewHolder.adapterPosition].ingredientName
-                    myFridgeIngredientRecyclerviewAdapter.deleteItem(viewHolder.adapterPosition)
-                    // 냉장고 삭제 API 호출
-                    FridgeUpdateService(this@MyFridgeCategoryFragment).tryDeleteIngredient(DeleteIngredientRequest(ingredientName))
-                    if(myFridgeIngredientRecyclerviewAdapter.fridgeItemList.size == 0) {
-                        binding.tvCategory.visibility = View.GONE
-                    }
-                }
-            }
-            val touchHelper = ItemTouchHelper(swipeDelete)
-            touchHelper.attachToRecyclerView(binding.rvIngredient)
+
+//            val swipeDelete = object : SwipeToDeleteCallback(requireContext()) {
+//                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                    val ingredientName = fridgeItemList[viewHolder.adapterPosition].ingredientName
+//                    myFridgeIngredientRecyclerviewAdapter.deleteItem(viewHolder.adapterPosition)
+//                    // 냉장고 삭제 API 호출
+//                    FridgeUpdateService(this@MyFridgeCategoryFragment).tryDeleteIngredient(DeleteIngredientRequest(ingredientName))
+//                    if(myFridgeIngredientRecyclerviewAdapter.fridgeItemList.size == 0) {
+//                        binding.tvCategory.visibility = View.GONE
+//                    }
+//                }
+//            }
+//            val touchHelper = ItemTouchHelper(swipeDelete)
+//            touchHelper.attachToRecyclerView(binding.rvIngredient)
 
             // 카테고리 이름
             binding.tvCategory.text = result.ingredientCategoryName
@@ -64,17 +69,4 @@ class MyFridgeCategoryFragment()
 
 
     }
-
-    override fun onDeleteIngredientSuccess(response: DeleteIngredientResponse) {
-
-
-
-
-    }
-
-    override fun onDeleteIngredientFailure(message: String) {
-
-    }
-
-
 }

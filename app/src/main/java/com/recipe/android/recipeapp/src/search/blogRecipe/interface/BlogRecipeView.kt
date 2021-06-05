@@ -8,8 +8,6 @@ interface BlogRecipeView {
     fun onGetBlogRecipeSuccess(response: BlogRecipeResponse)
     fun onGetBlogRecipeFailure(message: String)
 
-    fun onGetBlogRecipeMoreSuccess(response: BlogRecipeResponse)
-    fun onGetBlogRecipeMoreFailure(message: String)
 
     fun onPostBlogRecipeScrapSuccess(response: BlogRecipeScrapResponse)
     fun onPostBlogRecipeScrapFailure(message: String)

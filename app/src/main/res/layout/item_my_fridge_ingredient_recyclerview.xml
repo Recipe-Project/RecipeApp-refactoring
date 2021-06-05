@@ -15,7 +15,7 @@
         android:layout_marginStart="20dp"
         android:button="@android:color/transparent"
         android:background="@drawable/checkbox_style"
-        android:checked="true"
+        android:checked="false"
         android:visibility="gone"/>
 
     <androidx.appcompat.widget.AppCompatImageView

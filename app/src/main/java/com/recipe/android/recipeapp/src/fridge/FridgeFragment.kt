@@ -24,6 +24,7 @@ import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdapter
+import com.recipe.android.recipeapp.src.fridge.home.dialog.DeleteDialog
 import com.recipe.android.recipeapp.src.fridge.home.models.*
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
@@ -54,6 +55,7 @@ class FridgeFragment :
     lateinit var bitmap : Bitmap
     private lateinit var functions: FirebaseFunctions
     var ingredients = ArrayList<GetFridgeResult>()
+    var allCheckBoxFlag = false
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
@@ -61,7 +63,7 @@ class FridgeFragment :
 
     companion object {
         var updateButtonFlag = false
-        var patchFridgeList = ArrayList<PatchFridgeObject>()
+        var patchFridgeList = mutableListOf<PatchFridgeObject>()
         var checkboxList = ArrayList<CheckboxData>()
     }
 
@@ -72,6 +74,9 @@ class FridgeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Button Fix
+        updateButtonFlag = false
+
         // 현재 날짜 세팅
         setCurrentDay()
 
@@ -79,7 +84,6 @@ class FridgeFragment :
         binding.fabAddDirect.isClickable = false
         binding.tvAddRecipe.visibility = View.INVISIBLE
         binding.fabAddRecipe.isClickable = false
-
 
         // + 버튼 클릭
         binding.fabAdd.setOnClickListener {
@@ -112,7 +116,6 @@ class FridgeFragment :
             showLoadingDialog()
             FridgeService(this).tryGetFridge()
 
-
             // 레이아웃 변경
             binding.saveTv.visibility = View.VISIBLE
             binding.cancelTv.visibility = View.VISIBLE
@@ -121,6 +124,8 @@ class FridgeFragment :
 
             binding.productNameTv.visibility = View.GONE
             binding.productFreshnessTv.visibility = View.GONE
+            binding.productCountTv.visibility = View.GONE
+            binding.deleteTv.visibility = View.VISIBLE
             binding.allCheckTv.visibility = View.VISIBLE
             binding.allCheckCheckbox.visibility = View.VISIBLE
         }
@@ -139,6 +144,8 @@ class FridgeFragment :
 
             binding.productNameTv.visibility = View.VISIBLE
             binding.productFreshnessTv.visibility = View.VISIBLE
+            binding.productCountTv.visibility = View.VISIBLE
+            binding.deleteTv.visibility = View.GONE
             binding.allCheckTv.visibility = View.GONE
             binding.allCheckCheckbox.visibility = View.GONE
         }
@@ -157,6 +164,8 @@ class FridgeFragment :
 
             binding.productNameTv.visibility = View.VISIBLE
             binding.productFreshnessTv.visibility = View.VISIBLE
+            binding.productCountTv.visibility = View.VISIBLE
+            binding.deleteTv.visibility = View.GONE
             binding.allCheckTv.visibility = View.GONE
             binding.allCheckCheckbox.visibility = View.GONE
         }
@@ -167,12 +176,19 @@ class FridgeFragment :
                 for (i in checkboxList) {
                     i.checked = true
                 }
+                allCheckBoxFlag = true
             } else {
                 for (i in checkboxList) {
                     i.checked = false
                 }
             }
             FridgeService(this).tryGetFridge()
+        }
+
+        // 선택 삭제
+        binding.deleteTv.setOnClickListener {
+            val intent = Intent(requireContext(), DeleteDialog::class.java)
+            startActivity(intent)
         }
 
         // 바구니 액티비티
@@ -233,6 +249,11 @@ class FridgeFragment :
     }
 
     override fun onGetFridgeSuccess(response: GetFridgeResponse) {
+
+        // List clear
+        FridgeFragment.patchFridgeList.clear()
+        FridgeFragment.checkboxList.clear()
+
         var tabLayoutTextArray = ArrayList<String>()
         tabLayoutTextArray.add(getString(R.string.all))
 
@@ -250,12 +271,29 @@ class FridgeFragment :
         if (myFridgeFlag) {
             Log.d(TAG, "FridgeFragment : Flag is true")
             val ingredientResult = response.result.fridges
+            var cnt = 0
 
             ingredients.clear()
             ingredientResult.forEach {
                 ingredients.add(it)
                 tabLayoutTextArray.add(it.ingredientCategoryName)
+                if(it.ingredientList.isNotEmpty()) {
+                    it.ingredientList.forEach {
+                        patchFridgeList.add(PatchFridgeObject(
+                            it.ingredientName,
+                            it.expiredAt,
+                            it.storageMethod,
+                            it.count))
+
+                        if(allCheckBoxFlag) {
+                            checkboxList.add(CheckboxData(cnt++, true, it.ingredientName))
+                        } else {
+                            checkboxList.add(CheckboxData(cnt++, false, it.ingredientName))
+                        }
+                    }
+                }
             }
+            allCheckBoxFlag = false
             // visibility 변경
             binding.viewPager.visibility = View.VISIBLE
             binding.tabLayout.visibility = View.VISIBLE

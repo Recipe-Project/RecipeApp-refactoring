@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class PatchFridgeRequest(
     @SerializedName("patchFridgeList")
-    val patchFridgeList : ArrayList<PatchFridgeObject>
+    val patchFridgeList : MutableList<PatchFridgeObject>
 )
 
 data class PatchFridgeObject(

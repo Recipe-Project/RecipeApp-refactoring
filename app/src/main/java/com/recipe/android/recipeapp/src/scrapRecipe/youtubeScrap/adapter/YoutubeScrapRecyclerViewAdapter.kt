@@ -54,14 +54,7 @@ class YoutubeScrapRecyclerViewAdapter : RecyclerView.Adapter<YoutubeScrapViewHol
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
 
     }
-
     override fun onGetYoutubeRecipeFailure(message: String) {
-    }
-
-    override fun onGetYoutubeRecipeMoreSuccess(response: YoutubeRecipeResponse) {
-    }
-
-    override fun onGetYoutubeRecipeMoreFailure(message: String) {
     }
 
     override fun onPostYoutubeRecipeScrapSuccess(response: YoutubeRecipeScrapResponse) {

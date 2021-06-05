@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class DeleteIngredientRequest(
     @SerializedName("ingredientName")
-    val ingredientName : String
+    val ingredientName : ArrayList<String>
 )

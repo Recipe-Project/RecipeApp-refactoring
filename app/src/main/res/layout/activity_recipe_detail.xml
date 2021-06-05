@@ -29,6 +29,7 @@
             app:expandedTitleTextAppearance="@style/Head2Style">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/before_scroll_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

@@ -9,6 +9,7 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityBasketBinding
 import com.recipe.android.recipeapp.src.MainActivity
+import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.adapter.BasketRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.basket.models.*
@@ -101,6 +102,7 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
 
     override fun onPostFridgeSuccess(response: PostFridgeResponse) {
         if (response.isSuccess) {
+            FridgeFragment.patchFridgeList.clear()
             showCustomToast(getString(R.string.fridgeSuccessMessage))
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
@@ -147,6 +149,7 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
                 1000 -> {
                     basketItemList.removeAt(deletePosition)
                     basketRecyclerViewAdapter.submitList(basketItemList)
+                    binding.tvBasketCnt.text = basketItemList.size.toString()
                 }
                 else -> {
                     showCustomToast(getString(R.string.networkError))
