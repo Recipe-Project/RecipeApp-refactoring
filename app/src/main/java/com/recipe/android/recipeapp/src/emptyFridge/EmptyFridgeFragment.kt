@@ -61,32 +61,34 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
 
     override fun onGetEmptyFridgeSuccess(response: EmptyFridgeResponse) {
         dismissLoadingDialog()
-        if(response.result.recipeList.isNullOrEmpty() && start == 0) {
-            Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 없음")
-            binding.emptyFridgeFragRecyclerview.visibility = View.INVISIBLE
-            binding.emptyFridgeFragDefaultIv.visibility = View.VISIBLE
-            binding.emptyFridgeFragDefaultTv.visibility = View.VISIBLE
-        } else if (response.result.recipeList.isNotEmpty() && start == 0) {
-            Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 있음")
-            binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
-            binding.emptyFridgeFragDefaultIv.visibility = View.INVISIBLE
-            binding.emptyFridgeFragDefaultTv.visibility = View.INVISIBLE
+        if (activity != null) {
+            if(response.result.recipeList.isNullOrEmpty() && start == 0) {
+                Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 없음")
+                binding.emptyFridgeFragRecyclerview.visibility = View.INVISIBLE
+                binding.emptyFridgeFragDefaultIv.visibility = View.VISIBLE
+                binding.emptyFridgeFragDefaultTv.visibility = View.VISIBLE
+            } else if (response.result.recipeList.isNotEmpty() && start == 0) {
+                Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 있음")
+                binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
+                binding.emptyFridgeFragDefaultIv.visibility = View.INVISIBLE
+                binding.emptyFridgeFragDefaultTv.visibility = View.INVISIBLE
 
-            emptyFridgeList.addAll(response.result.recipeList)
-            emptyAdapter.submitList(emptyFridgeList)
-        } else if (response.result.recipeList.isNotEmpty() && start != 0) {
-            Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 있음")
+                emptyFridgeList.addAll(response.result.recipeList)
+                emptyAdapter.submitList(emptyFridgeList)
+            } else if (response.result.recipeList.isNotEmpty() && start != 0) {
+                Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 있음")
 
-            binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
-            emptyFridgeList.addAll(response.result.recipeList)
-            emptyAdapter.notifyItemInserted(emptyFridgeList.size - 1)
-        }
+                binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
+                emptyFridgeList.addAll(response.result.recipeList)
+                emptyAdapter.notifyItemInserted(emptyFridgeList.size - 1)
+            }
 
-        if(response.result.recipeList.isNullOrEmpty() && start != 0) {
-            Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 없음")
+            if(response.result.recipeList.isNullOrEmpty() && start != 0) {
+                Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 없음")
 
-            binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
-            isEnd = true
+                binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
+                isEnd = true
+            }
         }
     }
 
