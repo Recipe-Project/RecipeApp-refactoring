@@ -39,11 +39,11 @@ data class FridgeItem(
     @SerializedName("ingredientIcon")
     val ingredientIcon : String,
     @SerializedName("expiredAt")
-    val expiredAt : String,
+    var expiredAt : String,
     @SerializedName("storageMethod")
-    val storageMethod : String,
+    var storageMethod : String,
     @SerializedName("count")
-    val count : Int,
+    var count : Int,
     @SerializedName("freshness")
     val freshness : Int
 ): Parcelable

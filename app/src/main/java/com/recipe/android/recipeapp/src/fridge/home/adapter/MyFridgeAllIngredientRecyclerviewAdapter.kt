@@ -48,24 +48,14 @@ class MyFridgeAllIngredientRecyclerviewAdapter() : RecyclerView.Adapter<MyFridge
                 binding.tvCategory.text = fridgeResult.ingredientCategoryName
                 Log.d("test", fridgeResult.ingredientCategoryName)
                 myFridgeIngredientRecyclerviewAdapter.submitList(ingredientList)
-
-//                val swipeDelete = object : SwipeToDeleteCallback(context) {
-//                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//                        val ingredientName = ingredientList[viewHolder.adapterPosition].ingredientName
-//                        myFridgeIngredientRecyclerviewAdapter.deleteItem(viewHolder.adapterPosition)
-//
-//                        // 냉장고 삭제 API 호출
-//                        FridgeUpdateService(this@CustomViewholder).tryDeleteIngredient(DeleteIngredientRequest(ingredientName))
-//                        binding.tvCategory.visibility = View.GONE
-//                    }
-//                }
-//                val touchHelper = ItemTouchHelper(swipeDelete)
-//                touchHelper.attachToRecyclerView(binding.rvIngredient)
+                myFridgeIngredientRecyclerviewAdapter.getIndex(adapterPosition)
+                Log.d("test", "adapterPosition : $adapterPosition" )
             } else {
                 binding.rvIngredient.visibility = View.GONE
                 binding.tvCategory.visibility = View.GONE
                 binding.bottomMargin.visibility = View.GONE
             }
+
         }
 
         override fun onDeleteIngredientSuccess(response: DeleteIngredientResponse) {

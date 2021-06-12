@@ -30,6 +30,7 @@ class MyFridgeCategoryAdapter(fa: FragmentActivity, val view : IngredientUpdateV
             val myFridgeCategoryFragment = MyFridgeCategoryFragment()
             myFridgeCategoryFragment.arguments = Bundle().apply {
                 putParcelable("result", ingredients[position - 1])
+                putInt("index", position - 1)
             }
             return myFridgeCategoryFragment
         } else {

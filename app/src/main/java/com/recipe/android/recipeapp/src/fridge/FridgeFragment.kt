@@ -55,7 +55,7 @@ class FridgeFragment :
     lateinit var bitmap : Bitmap
     private lateinit var functions: FirebaseFunctions
     var ingredients = ArrayList<GetFridgeResult>()
-    var allCheckBoxFlag = false
+    var patchIngredientList = mutableListOf<PatchFridgeObject>()
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
@@ -63,8 +63,8 @@ class FridgeFragment :
 
     companion object {
         var updateButtonFlag = false
-        var patchFridgeList = mutableListOf<PatchFridgeObject>()
-        var checkboxList = ArrayList<CheckboxData>()
+        var patchFridgeList = mutableListOf<GetFridgeResult>()
+        var checkboxList = mutableListOf<CheckboxData>()
     }
 
     val PICKER_REQUEST_CODE = 5300
@@ -154,7 +154,27 @@ class FridgeFragment :
             // 냉장고 수정 저장하기(냉장고 수정 API 호출 / 수정 완료되면 냉장고 조회 API 호출하기)
             updateButtonFlag = false
             showLoadingDialog()
-            FridgeService(this).tryPatchFridge(PatchFridgeRequest(patchFridgeList))
+
+            patchFridgeList.forEach { p ->
+                p.ingredientList.forEach {
+
+                    if(it.expiredAt != null) {
+                        it.expiredAt = it.expiredAt.substring(0, it.expiredAt.length-2)
+                        it.expiredAt = "20${it.expiredAt}"
+                    }
+                    Log.d(TAG, "유통기한 : ${it.expiredAt}")
+
+                    patchIngredientList.add(PatchFridgeObject(
+                        it.ingredientName,
+                        it.expiredAt,
+                        it.storageMethod,
+                        it.count
+                    ))
+                }
+            }
+
+
+            FridgeService(this).tryPatchFridge(PatchFridgeRequest(patchIngredientList))
 
             // 레이아웃 변경
             binding.saveTv.visibility = View.INVISIBLE
@@ -172,16 +192,6 @@ class FridgeFragment :
 
         // 전체 선택
         binding.allCheckCheckbox.setOnClickListener {
-            if(binding.allCheckCheckbox.isChecked) {
-                for (i in checkboxList) {
-                    i.checked = true
-                }
-                allCheckBoxFlag = true
-            } else {
-                for (i in checkboxList) {
-                    i.checked = false
-                }
-            }
             FridgeService(this).tryGetFridge()
         }
 
@@ -251,6 +261,7 @@ class FridgeFragment :
     override fun onGetFridgeSuccess(response: GetFridgeResponse) {
 
         // List clear
+        patchIngredientList.clear()
         FridgeFragment.patchFridgeList.clear()
         FridgeFragment.checkboxList.clear()
 
@@ -274,26 +285,35 @@ class FridgeFragment :
             var cnt = 0
 
             ingredients.clear()
-            ingredientResult.forEach {
-                ingredients.add(it)
-                tabLayoutTextArray.add(it.ingredientCategoryName)
-                if(it.ingredientList.isNotEmpty()) {
-                    it.ingredientList.forEach {
-                        patchFridgeList.add(PatchFridgeObject(
-                            it.ingredientName,
-                            it.expiredAt,
-                            it.storageMethod,
-                            it.count))
 
-                        if(allCheckBoxFlag) {
+            // 가져온 식재료 데이터
+            ingredientResult.forEach { p ->
+                ingredients.add(p)
+
+                // 탭 레이아웃 text array 에 category 이름 하나씩 추가
+                tabLayoutTextArray.add(p.ingredientCategoryName)
+
+                // 식재료 수정 리스트
+                patchFridgeList.add(p)
+
+
+                // 해당 카테고리 식재료가 존재한다면
+                if(p.ingredientList.isNotEmpty()) {
+
+                    // 해당 식재료를 식재료 수정 리스트에 추가
+                    p.ingredientList.forEach {
+
+                        // 전체 선택 체크박스가 True면
+                        if(binding.allCheckCheckbox.isChecked) {
+                            // 모두 Checked 상태로 체크박스 리스트에 식재료 추가
                             checkboxList.add(CheckboxData(cnt++, true, it.ingredientName))
                         } else {
+                            // 아니면 모두 UnChecked 상태로 체크박스 리스트에 식재료 추가
                             checkboxList.add(CheckboxData(cnt++, false, it.ingredientName))
                         }
                     }
                 }
             }
-            allCheckBoxFlag = false
             // visibility 변경
             binding.viewPager.visibility = View.VISIBLE
             binding.tabLayout.visibility = View.VISIBLE
@@ -331,7 +351,14 @@ class FridgeFragment :
     }
 
     override fun onPatchFridgeSuccess(response: PatchFridgeResponse) {
-        FridgeService(this).tryGetFridge()
+        if(response.isSuccess) {
+            FridgeService(this).tryGetFridge()
+        } else {
+            showCustomToast("식재료 수정에 실패했습니다.")
+            Log.d(TAG, response.message)
+        }
+
+
     }
 
     override fun onPatchFridgeFailure(message: String) {

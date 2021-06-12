@@ -14,9 +14,15 @@ import com.recipe.android.recipeapp.databinding.ItemMyFridgeIngredientRecyclervi
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment.Companion.checkboxList
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment.Companion.patchFridgeList
+import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
+import com.recipe.android.recipeapp.src.fridge.basket.`interface`.DateDialogInterface
+import com.recipe.android.recipeapp.src.fridge.dialog.DateDialog
 import com.recipe.android.recipeapp.src.fridge.home.models.CheckboxData
 import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
 import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
     : RecyclerView.Adapter<MyFridgeIngredientRecyclerviewAdapter.CustomViewholder>() {
@@ -24,6 +30,7 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
     val TAG = "MyFridgeIngredientRecyclerviewAdapter"
 
     var fridgeItemList = ArrayList<FridgeItem>()
+    var index = 0
 
     lateinit var binding : ItemMyFridgeIngredientRecyclerviewBinding
 
@@ -34,30 +41,20 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
 
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
         holder.bindWithView(fridgeItemList[position], position)
-
-        patchFridgeList.forEach {
-            Log.d(TAG, "PatchFridgeList : ${it.ingredientName}, ${it.expiredAt}, ${it.storageMethod}, ${it.count}" )
-            Log.d(TAG, "PatchFridgeList's Size : ${FridgeFragment.patchFridgeList.size}")
-            Log.d(TAG, "체크박스 리스트 사이즈 : ${checkboxList.size}")
-        }
     }
 
     override fun getItemCount(): Int = fridgeItemList.size
 
     inner class CustomViewholder(val binding: ItemMyFridgeIngredientRecyclerviewBinding, val context: Context)
-        : RecyclerView.ViewHolder(binding.root) {
+        : RecyclerView.ViewHolder(binding.root), DateDialogInterface {
 
         var ingredientCnt : Int = 1
 
         fun bindWithView(fridgeItem: FridgeItem, position: Int) {
 
-//            if(position >= checkboxList.size) {
-//                checkboxList.add(position, CheckboxData(position, binding.checkbox.isChecked, fridgeItem.ingredientName))
-//                Log.d(TAG, "체크박스 리스트 사이즈 : ${checkboxList.size}")
-//            }
-
-
             binding.checkbox.setOnClickListener {
+                Log.d(TAG, "Position 값 비교 // position : $position, adapterPosition : $adapterPosition")
+
                 checkboxList[position].checked = binding.checkbox.isChecked
             }
             binding.checkbox.isChecked = checkboxList[position].checked
@@ -86,7 +83,8 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
 
-                FridgeFragment.patchFridgeList[position].storageMethod = "냉장"
+                FridgeFragment.patchFridgeList[index].ingredientList[position].storageMethod = "냉장"
+                // FridgeFragment.patchFridgeList[position].storageMethod = "냉장"
             }
             binding.freshnessFrozenTv.setOnClickListener {
                 //view.onClickStorageMethod(context.getString(R.string.frozen), position)
@@ -94,7 +92,8 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.green))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
 
-                FridgeFragment.patchFridgeList[position].storageMethod = "냉동"
+                FridgeFragment.patchFridgeList[index].ingredientList[position].storageMethod = "냉동"
+                // FridgeFragment.patchFridgeList[position].storageMethod = "냉동"
             }
             binding.freshnessRoomTemperatureTv.setOnClickListener {
                 //view.onClickStorageMethod(context.getString(R.string.roomTemperature), position)
@@ -102,7 +101,8 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.freshnessFrozenTv.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
                 binding.freshnessRoomTemperatureTv.setTextColor(ContextCompat.getColor(context, R.color.green))
 
-                FridgeFragment.patchFridgeList[position].storageMethod = "실온"
+                FridgeFragment.patchFridgeList[index].ingredientList[position].storageMethod = "실온"
+                // FridgeFragment.patchFridgeList[position].storageMethod = "실온"
             }
 
             // count 세팅
@@ -111,7 +111,10 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.ingredientCntTv.text = ingredientCnt.toString()
                 //view.onClickCount(binding.ingredientCntTv.text.toString().toInt(), position)
 
-                FridgeFragment.patchFridgeList[position].count = ingredientCnt
+                Log.d(TAG, "디버깅!!! index : $index, position : $position")
+                FridgeFragment.patchFridgeList[index].ingredientList[position].count = ingredientCnt
+
+                // FridgeFragment.patchFridgeList[position].count = ingredientCnt
             }
             binding.minusCntIv.setOnClickListener {
                 if(ingredientCnt > 1) {
@@ -119,7 +122,8 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                     binding.ingredientCntTv.text = ingredientCnt.toString()
                     //view.onClickCount(binding.ingredientCntTv.text.toString().toInt(), position)
 
-                    FridgeFragment.patchFridgeList[position].count = ingredientCnt
+                    FridgeFragment.patchFridgeList[index].ingredientList[position].count = ingredientCnt
+                    // FridgeFragment.patchFridgeList[position].count = ingredientCnt
                 }
             }
 
@@ -148,7 +152,8 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
 
             // 달력 띄우기
             binding.expireDateTv.setOnClickListener {
-
+                val dateDialog = DateDialog(context, this, position)
+                dateDialog.show()
             }
 
             if(FridgeFragment.updateButtonFlag) {
@@ -170,6 +175,14 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
                 binding.bottomLine.visibility = View.GONE
             }
         }
+
+        override fun clickDate(year: Int, month: Int, dayOfMonth: Int, position: Int) {
+            val cal = Calendar.getInstance()
+            cal.set(year, month, dayOfMonth)
+            val date = cal.time
+            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.KOREAN)
+            binding.expireDateTv.text = simpleDateFormat.format(date) 
+        }
     }
 
     fun submitList(fridgeItemList: ArrayList<FridgeItem>) {
@@ -177,8 +190,8 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
         notifyDataSetChanged()
     }
 
-    fun deleteItem(index : Int) {
-        fridgeItemList.removeAt(index)
+    fun getIndex(index : Int) {
+        this.index = index
         notifyDataSetChanged()
     }
 }

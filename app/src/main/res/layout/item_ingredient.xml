@@ -28,6 +28,18 @@
         app:layout_constraintTop_toBottomOf="@+id/ic_ingredient"
         tools:text="닭고기" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_ingredient_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Caption2Style"
+        android:textColor="@color/gray_300"
+        app:layout_constraintStart_toStartOf="@id/tv_ingredient_name"
+        app:layout_constraintEnd_toEndOf="@id/tv_ingredient_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_ingredient_name"
+        tools:text="120ml"
+        android:layout_marginTop="2dp"/>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/circle_green"
         android:layout_width="0dp"
