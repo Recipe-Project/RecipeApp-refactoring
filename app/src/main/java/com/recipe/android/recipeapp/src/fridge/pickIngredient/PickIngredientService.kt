@@ -4,6 +4,7 @@ import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientRetrofitInterface
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.GetBasketCntResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
 import retrofit2.Call
@@ -64,6 +65,28 @@ class PickIngredientService(val view: PickIngredientActivityView) {
                 view.addDirectFailure(t.message ?: "통신오류")
             }
 
+        })
+    }
+
+    fun getBasketCnt() {
+        val pickIngredientRetrofitInterface =
+            ApplicationClass.sRetrofit.create(PickIngredientRetrofitInterface::class.java)
+        pickIngredientRetrofitInterface.getBasketCnt().enqueue(object :
+            Callback<GetBasketCntResponse> {
+            override fun onResponse(
+                call: Call<GetBasketCntResponse>,
+                response: Response<GetBasketCntResponse>
+            ) {
+                if (response.body() == null) {
+                    Log.d(TAG, "PickIngredientService - onResponse() : response is null")
+                } else {
+                    view.getBasketCntSuccess(response.body() as GetBasketCntResponse)
+                }
+            }
+
+            override fun onFailure(call: Call<GetBasketCntResponse>, t: Throwable) {
+                Log.d(TAG, "PickIngredientService - onFailure() : ${t.message}")
+            }
         })
     }
 }

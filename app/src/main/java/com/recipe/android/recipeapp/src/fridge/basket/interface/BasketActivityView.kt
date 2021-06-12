@@ -15,7 +15,7 @@ interface BasketActivityView {
     fun onClickExpiredAt(position: Int, expiredAt: String?)
 
     fun onClickPickRemove(position: Int)
-    fun onDeleteBasketSuccess(deleteBasketResponse: DeleteBasketResponse)
+    fun onDeleteBasketSuccess(deleteBasketResponse: DeleteBasketResponse, ingredient: String)
 
     fun onBasketServiceFailure(message: String)
 }

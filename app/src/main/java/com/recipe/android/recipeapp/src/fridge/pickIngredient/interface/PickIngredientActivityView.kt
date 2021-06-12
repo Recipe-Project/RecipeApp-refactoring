@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`
 
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.GetBasketCntResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
@@ -14,4 +15,6 @@ interface PickIngredientActivityView {
     fun addDirectFailure(message: String)
 
     fun removePickMyIngredients(ingredient: Ingredient)
+
+    fun getBasketCntSuccess(response: GetBasketCntResponse)
 }

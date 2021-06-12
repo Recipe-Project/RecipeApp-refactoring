@@ -16,10 +16,7 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.DialogPickIngredientIconBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.adapter.MultiplePickAllAdapter
 
@@ -108,5 +105,9 @@ class MultiplePickIngredientsDialog(context: Context, val view: MyRecipeCreateAc
     override fun removePickMyIngredients(ingredient: Ingredient) {
         pickIngredientsMyRecipe.remove(ingredient)
         Log.d(TAG, "MultiplePickIngredientsDialog - removePickMyIngredients() : $pickIngredientsMyRecipe")
+    }
+
+    override fun getBasketCntSuccess(response: GetBasketCntResponse) {
+
     }
 }

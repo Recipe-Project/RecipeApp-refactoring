@@ -23,10 +23,7 @@ import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.PostReceiptIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientDialogView
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientView
@@ -245,6 +242,10 @@ class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(Dia
     }
 
     override fun removePickMyIngredients(ingredient: Ingredient) {
+
+    }
+
+    override fun getBasketCntSuccess(response: GetBasketCntResponse) {
 
     }
 
