@@ -31,6 +31,7 @@ class BlogResultFragment(private val keyword : String)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         layoutManager = LinearLayoutManager(requireContext())
         setUpRecyclerView()
         binding.blogResultFragRecylerview.addOnScrollListener(object : RecyclerView.OnScrollListener(){
@@ -44,7 +45,6 @@ class BlogResultFragment(private val keyword : String)
                 if(!binding.blogResultFragRecylerview.canScrollVertically(1)) {
                     if(visibleItemCount + pastVisibleItem >= total) {
                         if(!isEnd) {
-                            showLoadingDialog()
                             start += display
                             BlogRecipeService(this@BlogResultFragment).getBlogRecipe(keyword = keyword, display = display, start = start)
                         }
@@ -52,6 +52,13 @@ class BlogResultFragment(private val keyword : String)
                 }
             }
         })
+
+        start = 1
+        blogAdapter.blogRecipeList.clear()
+        isEnd = false
+        showLoadingDialog()
+        BlogRecipeService(this@BlogResultFragment).getBlogRecipe(keyword = keyword, display = display, start = start)
+
     }
 
     private fun setUpRecyclerView() {
@@ -65,11 +72,7 @@ class BlogResultFragment(private val keyword : String)
     override fun onResume() {
         super.onResume()
 
-        start = 1
-        blogAdapter.blogRecipeList.clear()
-        isEnd = false
-        showLoadingDialog()
-        BlogRecipeService(this@BlogResultFragment).getBlogRecipe(keyword = keyword, display = display, start = start)
+
     }
 
     override fun onGetBlogRecipeSuccess(response: BlogRecipeResponse) {

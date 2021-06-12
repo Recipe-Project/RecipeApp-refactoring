@@ -41,10 +41,6 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
         layoutManager = LinearLayoutManager(requireContext())
         setUpRecyclerView()
         initScrollListener()
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         pageToken = ""
         youtubeAdapter.youtubeRecipeList.clear()
@@ -74,7 +70,6 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
                 if (!binding.youtubeResultFragRecylerview.canScrollVertically(1)) {
                     if(visibleItemCount + pastVisibleItem >= total) {
                         if(!isEnd) {
-                            showLoadingDialog()
                             YoutubeRecipeService(this@YoutubeResultFragment).getYoutubeRecipe("id, snippet", "video", display, BuildConfig.GOOGLE_API_KEY, keyword, pageToken)
                         }
                     }
