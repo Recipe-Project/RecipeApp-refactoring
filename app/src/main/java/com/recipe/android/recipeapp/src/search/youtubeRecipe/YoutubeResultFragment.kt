@@ -12,6 +12,11 @@ import com.recipe.android.recipeapp.BuildConfig
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentYoutubeResultBinding
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.YoutubeScrapService
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.`interface`.YoutubeScrapFragmentView
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.PostYoutubeScrapResponse
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrap
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrapResponse
 import com.recipe.android.recipeapp.src.search.blogRecipe.BlogRecipeService
 import com.recipe.android.recipeapp.src.search.blogRecipe.adapter.BlogRecipeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeListItem
@@ -23,7 +28,8 @@ import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecip
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapResponse
 import java.text.SimpleDateFormat
 
-class YoutubeResultFragment(private val keyword : String) : BaseFragment<FragmentYoutubeResultBinding>(FragmentYoutubeResultBinding::bind, R.layout.fragment_youtube_result), YoutubeRecipeView {
+class YoutubeResultFragment(private val keyword : String) : BaseFragment<FragmentYoutubeResultBinding>(FragmentYoutubeResultBinding::bind, R.layout.fragment_youtube_result),
+    YoutubeRecipeView, YoutubeScrapFragmentView {
 
     val TAG = "YoutubeResultFragment"
     private var display = 30
@@ -35,19 +41,19 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
     private lateinit var youtubeAdapter : YoutubeRecipeRecyclerviewAdapter
     private lateinit var layoutManager: LinearLayoutManager
 
+    // 스크랩 조회
+    private var youtubeScrapItemList = ArrayList<YoutubeScrap>()
+    private var isScrapList = mutableListOf<Boolean>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 유튜브 스크랩 조회
+        YoutubeScrapService(this).getYoutubeScrap(1)
 
         layoutManager = LinearLayoutManager(requireContext())
         setUpRecyclerView()
         initScrollListener()
-
-        pageToken = ""
-        youtubeAdapter.youtubeRecipeList.clear()
-        isEnd = false
-        showLoadingDialog()
-        YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, BuildConfig.GOOGLE_API_KEY, keyword, pageToken)
-
     }
 
     private fun setUpRecyclerView() {
@@ -80,6 +86,10 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
 
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
         dismissLoadingDialog()
+
+        response.items.forEach {
+            isScrapList.add(false)
+        }
 
         // 검색된 게시물이 100개 초과시, 100+ 로 표기
         val totalCnt = response.pageInfo.totalResults
@@ -171,5 +181,28 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
             return newDateFormat.format(formatDate)
         }
         return ""
+    }
+
+    override fun onGetYoutubeScrapSuccess(response: YoutubeScrapResponse) {
+        if (response.isSuccess) {
+            response.result.scrapYoutubeList?.forEach {
+                youtubeScrapItemList.add(it)
+            }
+            Log.d(TAG, "YoutubeScrapFragment - onGetYoutubeScrapSuccess() : ${response.result.scrapYoutubeCount}")
+        }
+        pageToken = ""
+        youtubeAdapter.youtubeRecipeList.clear()
+        isEnd = false
+        showLoadingDialog()
+        YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, BuildConfig.GOOGLE_API_KEY, keyword, pageToken)
+    }
+
+    override fun onGetYoutubeScrapFailure(message: String) {
+        showCustomToast(getString(R.string.networkError))
+        Log.d(TAG, "YoutubeScrapFragment - onGetYoutubeScrapFailure() : $message")
+    }
+
+    override fun onPostYoutubeScrapSuccess(response: PostYoutubeScrapResponse) {
+
     }
 }
