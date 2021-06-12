@@ -50,7 +50,6 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
                 if(!rv.canScrollVertically(1)) {
                     if(visibleItemCount + pastVisibleItem >= total) {
                         if(!isEnd) {
-                            showLoadingDialog()
                             start += display
                             EmptyFridgeService(this@EmptyFridgeFragment).tryGetEmptyFridge(start, display)
                         }
