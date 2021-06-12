@@ -52,13 +52,6 @@ class BlogResultFragment(private val keyword : String)
                 }
             }
         })
-
-        start = 1
-        blogAdapter.blogRecipeList.clear()
-        isEnd = false
-        showLoadingDialog()
-        BlogRecipeService(this@BlogResultFragment).getBlogRecipe(keyword = keyword, display = display, start = start)
-
     }
 
     private fun setUpRecyclerView() {
@@ -72,6 +65,11 @@ class BlogResultFragment(private val keyword : String)
     override fun onResume() {
         super.onResume()
 
+        start = 1
+        blogAdapter.blogRecipeList.clear()
+        isEnd = false
+        showLoadingDialog()
+        BlogRecipeService(this@BlogResultFragment).getBlogRecipe(keyword = keyword, display = display, start = start)
 
     }
 

@@ -37,7 +37,9 @@ class DeleteDialog : BaseActivity<DialogSignOutBinding>(DialogSignOutBinding::in
 
             FridgeUpdateService(this).tryDeleteIngredient(DeleteIngredientRequest(deleteList))
             deleteList.clear()
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
 
         binding.btnNo.setOnClickListener {

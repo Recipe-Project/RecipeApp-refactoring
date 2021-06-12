@@ -41,13 +41,15 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
         layoutManager = LinearLayoutManager(requireContext())
         setUpRecyclerView()
         initScrollListener()
+    }
 
+    override fun onResume() {
+        super.onResume()
         pageToken = ""
         youtubeAdapter.youtubeRecipeList.clear()
         isEnd = false
         showLoadingDialog()
         YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, BuildConfig.GOOGLE_API_KEY, keyword, pageToken)
-
     }
 
     private fun setUpRecyclerView() {
