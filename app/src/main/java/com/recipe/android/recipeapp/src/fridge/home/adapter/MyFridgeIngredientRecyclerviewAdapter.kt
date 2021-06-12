@@ -53,11 +53,13 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
         fun bindWithView(fridgeItem: FridgeItem, position: Int) {
 
             binding.checkbox.setOnClickListener {
-                Log.d(TAG, "Position 값 비교 // position : $position, adapterPosition : $adapterPosition")
+                Log.d(TAG, "Position 값 비교 // index : $index, position : $position")
 
-                checkboxList[position].checked = binding.checkbox.isChecked
+                checkboxList[index].checkList[position].checked = binding.checkbox.isChecked
+
+                // checkboxList[position].checked = binding.checkbox.isChecked
             }
-            binding.checkbox.isChecked = checkboxList[position].checked
+            binding.checkbox.isChecked = checkboxList[index].checkList[position].checked
 
             binding.ingredientNameTv.text = fridgeItem.ingredientName
             if(fridgeItem.ingredientIcon != null) {
@@ -181,7 +183,13 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
             cal.set(year, month, dayOfMonth)
             val date = cal.time
             val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.KOREAN)
-            binding.expireDateTv.text = simpleDateFormat.format(date) 
+            var formatDate = simpleDateFormat.format(date)
+            formatDate = formatDate.substring(2)
+            formatDate += "까지"
+
+            binding.expireDateTv.text = formatDate
+
+            FridgeFragment.patchFridgeList[index].ingredientList[position].expiredAt = formatDate
         }
     }
 

@@ -57,6 +57,7 @@ class FridgeFragment :
     var ingredients = ArrayList<GetFridgeResult>()
     var patchIngredientList = mutableListOf<PatchFridgeObject>()
 
+
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
     lateinit var myFridgeCategoryAdapter : MyFridgeCategoryAdapter
@@ -283,6 +284,7 @@ class FridgeFragment :
             Log.d(TAG, "FridgeFragment : Flag is true")
             val ingredientResult = response.result.fridges
             var cnt = 0
+            var index = 0
 
             ingredients.clear()
 
@@ -296,22 +298,25 @@ class FridgeFragment :
                 // 식재료 수정 리스트
                 patchFridgeList.add(p)
 
-
-                // 해당 카테고리 식재료가 존재한다면
-                if(p.ingredientList.isNotEmpty()) {
-
-                    // 해당 식재료를 식재료 수정 리스트에 추가
-                    p.ingredientList.forEach {
-
-                        // 전체 선택 체크박스가 True면
+                val checkboxObject = CheckboxData(mutableListOf())
+                if(p.ingredientList.size != 0) {
+                    p.ingredientList.forEach{
                         if(binding.allCheckCheckbox.isChecked) {
-                            // 모두 Checked 상태로 체크박스 리스트에 식재료 추가
-                            checkboxList.add(CheckboxData(cnt++, true, it.ingredientName))
+                            checkboxObject.checkList.add(CheckboxObject(cnt++, true, it.ingredientName))
+
+                            //checkboxList[index].checkList.add(CheckboxObject(cnt++, true, it.ingredientName))
+                            Log.d(TAG, "체크박스 디버깅 / cnt : $cnt")
                         } else {
-                            // 아니면 모두 UnChecked 상태로 체크박스 리스트에 식재료 추가
-                            checkboxList.add(CheckboxData(cnt++, false, it.ingredientName))
+                            checkboxObject.checkList.add(CheckboxObject(cnt++, false, it.ingredientName))
+
+                            //checkboxList[index].checkList.add(CheckboxObject(cnt++, false, it.ingredientName))
+                            Log.d(TAG, "체크박스 디버깅 / cnt : $cnt")
                         }
                     }
+                    FridgeFragment.checkboxList.add(checkboxObject)
+                    cnt = 0
+                } else {
+                    checkboxList.add(CheckboxData(mutableListOf()))
                 }
             }
             // visibility 변경

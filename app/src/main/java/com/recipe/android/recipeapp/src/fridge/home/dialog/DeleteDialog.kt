@@ -27,11 +27,14 @@ class DeleteDialog : BaseActivity<DialogSignOutBinding>(DialogSignOutBinding::in
         binding.appCompatTextView19.text = "냉장고 재료를 삭제하시겠어요?"
 
         binding.btnYes.setOnClickListener {
-            for (i in FridgeFragment.checkboxList) {
-                if(i.checked) {
-                    deleteList.add(i.deleteIngredient)
+            for(i in FridgeFragment.checkboxList) {
+                i.checkList.forEach {
+                    if(it.checked) {
+                        deleteList.add(it.deleteIngredient)
+                    }
                 }
             }
+
             FridgeUpdateService(this).tryDeleteIngredient(DeleteIngredientRequest(deleteList))
             deleteList.clear()
             startActivity(Intent(this, MainActivity::class.java))
