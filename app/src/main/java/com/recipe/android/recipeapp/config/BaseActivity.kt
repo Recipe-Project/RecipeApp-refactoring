@@ -27,7 +27,7 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
     }
 
     fun showCustomToast(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     fun showLoadingDialog(){

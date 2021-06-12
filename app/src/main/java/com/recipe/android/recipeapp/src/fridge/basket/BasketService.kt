@@ -83,7 +83,7 @@ class BasketService(val view: BasketActivityView) {
                 if (response.body() == null) {
                     Log.d(TAG, "BasketService - onResponse() : response is null")
                 } else {
-                    view.onDeleteBasketSuccess(response.body() as DeleteBasketResponse)
+                    view.onDeleteBasketSuccess(response.body() as DeleteBasketResponse, ingredient)
                 }
             }
 

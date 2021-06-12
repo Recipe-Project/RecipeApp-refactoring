@@ -47,24 +47,32 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
 
         // 저장 버튼
         binding.btnSave.setOnClickListener {
-            basketItemList.forEach {
-                fridgeBasketList.add(
-                    FridgeBasket(
-                        it.ingredientCnt,
-                        it.expiredAt,
-                        it.ingredientCategoryIdx,
-                        it.ingredientIcon.toString(),
-                        it.ingredientName,
-                        it.storageMethod
-                    )
-                )
-            }
-            BasketService(this).postFridge(fridgeBasketList)
+            saveBasket()
         }
 
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun saveBasket(){
+        Log.d(TAG, "BasketActivity - onCreate() : $basketItemList")
+
+        fridgeBasketList.clear()
+        basketItemList.forEach {
+            fridgeBasketList.add(
+                FridgeBasket(
+                    it.ingredientCnt,
+                    it.expiredAt,
+                    it.ingredientCategoryIdx,
+                    it.ingredientIcon.toString(),
+                    it.ingredientName,
+                    it.storageMethod
+                )
+            )
+        }
+
+        BasketService(this).postFridge(fridgeBasketList)
     }
 
     override fun onBackPressed() {
@@ -112,6 +120,9 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
                     // 냉장고에 이미 있는 재료일 경우
                     showCustomToast(response.message)
                 }
+                2073 -> {
+                    showCustomToast("냉장고 바구니가 비어있습니다.")
+                }
                 else -> onBasketServiceFailure(response.message)
             }
         }
@@ -143,11 +154,22 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
     }
 
     // 삭제 성공
-    override fun onDeleteBasketSuccess(deleteBasketResponse: DeleteBasketResponse) {
+    override fun onDeleteBasketSuccess(
+        deleteBasketResponse: DeleteBasketResponse,
+        ingredient: String
+    ) {
         if (deleteBasketResponse.isSuccess) {
             when (deleteBasketResponse.code) {
                 1000 -> {
-                    basketItemList.removeAt(deletePosition)
+
+                    for (i in basketItemList.indices) {
+                        if (basketItemList[i].ingredientName == ingredient) {
+                            basketItemList.removeAt(i)
+                            break
+                        }
+                    }
+
+                    Log.d(TAG, "BasketActivity - onDeleteBasketSuccess() : $basketItemList")
                     basketRecyclerViewAdapter.submitList(basketItemList)
                     binding.tvBasketCnt.text = basketItemList.size.toString()
                 }

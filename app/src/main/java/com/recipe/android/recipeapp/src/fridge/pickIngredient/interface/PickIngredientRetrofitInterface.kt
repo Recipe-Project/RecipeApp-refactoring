@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`
 
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.GetBasketCntResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
 import retrofit2.Call
@@ -21,4 +22,7 @@ interface PickIngredientRetrofitInterface {
     fun postIngredients(
         @Body param: HashMap<String, Any>
     ): Call<PostIngredientsResponse>
+
+    @GET("/fridges/basket/count")
+    fun getBasketCnt(): Call<GetBasketCntResponse>
 }

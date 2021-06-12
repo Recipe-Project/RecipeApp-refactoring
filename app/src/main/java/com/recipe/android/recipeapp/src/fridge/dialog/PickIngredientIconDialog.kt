@@ -123,5 +123,9 @@ class PickIngredientIconDialog(
 
     }
 
+    override fun getBasketCntSuccess(response: GetBasketCntResponse) {
+
+    }
+
 
 }

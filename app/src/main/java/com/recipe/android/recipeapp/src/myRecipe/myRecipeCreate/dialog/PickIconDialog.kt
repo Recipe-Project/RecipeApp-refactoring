@@ -148,5 +148,9 @@ class PickIconDialog(
 
     }
 
+    override fun getBasketCntSuccess(response: GetBasketCntResponse) {
+
+    }
+
 
 }

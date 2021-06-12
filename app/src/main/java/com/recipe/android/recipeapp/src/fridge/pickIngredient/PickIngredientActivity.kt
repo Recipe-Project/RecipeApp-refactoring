@@ -132,8 +132,6 @@ class PickIngredientActivity :
 
         if (response.isSuccess) {
 
-            binding.tvBasketCnt.text = response.result.fridgeBasketCount.toString()
-
             val ingredientResult = response.result.ingredients
 
             ingredients.clear()
@@ -168,6 +166,8 @@ class PickIngredientActivity :
             binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray_000))
             binding.rvPick.visibility = View.GONE
         }
+
+        PickIngredientService(this).getBasketCnt()
     }
 
     // 재료 선택 후 냉장고 바구니에 담기 성공
@@ -230,6 +230,12 @@ class PickIngredientActivity :
         if (pickIngredientRecyclerViewItemList.size == 0) {
             binding.btnNext.backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray_000))
             binding.rvPick.visibility = View.GONE
+        }
+    }
+
+    override fun getBasketCntSuccess(response: GetBasketCntResponse) {
+        if (response.isSuccess) {
+            binding.tvBasketCnt.text = response.result.fridgesBasketCount.toString()
         }
     }
 }

@@ -66,5 +66,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         frag.setKeyword(keyword)
     }
 
+    var time: Long = 0
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - time >= 2000) {
+            time = System.currentTimeMillis()
+            showCustomToast("뒤로 가기 버튼을 한번 더 누르면 종료합니다.")
+        } else if (System.currentTimeMillis() - time < 2000) {
+            finish()
+        }
+    }
 
 }
