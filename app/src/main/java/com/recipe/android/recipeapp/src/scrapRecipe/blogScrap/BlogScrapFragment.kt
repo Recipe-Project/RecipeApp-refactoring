@@ -3,8 +3,6 @@ package com.recipe.android.recipeapp.src.scrapRecipe.blogScrap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
@@ -25,13 +23,15 @@ BlogScrapFragmnetView{
     private var blogScrapItemList = ArrayList<BlogScrapResult>()
     private lateinit var blogScrapRecyclerViewAdapter: BlogScrapRecyclerViewAdpater
 
+    var scrapCnt = 0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // 블로그 스크랩 조회
         BlogScrapService(this).getBlogScrap(1)
 
-        blogScrapRecyclerViewAdapter = BlogScrapRecyclerViewAdpater()
+        blogScrapRecyclerViewAdapter = BlogScrapRecyclerViewAdpater(this)
         binding.rvScrapRecipe.apply {
             adapter = blogScrapRecyclerViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -45,7 +45,9 @@ BlogScrapFragmnetView{
             }
             blogScrapRecyclerViewAdapter.submitList(blogScrapItemList)
 
-            binding.tvScrapCnt.text = response.result?.size.toString()
+            scrapCnt = response.result?.size ?: 0
+            binding.tvScrapCnt.text = scrapCnt.toString()
+
         } else onBlogScrapFailure(response.message)
     }
 
@@ -55,7 +57,10 @@ BlogScrapFragmnetView{
     }
 
     override fun onPostBlogScrapSuccess(response: SimpleResponse) {
-
+        if (response.isSuccess) {
+            scrapCnt -= 1
+            binding.tvScrapCnt.text = scrapCnt.toString()
+        }
     }
 
 

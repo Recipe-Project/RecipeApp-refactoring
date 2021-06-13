@@ -8,13 +8,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapRecipeBinding
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.`interface`.YoutubeScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.viewHolder.YoutubeScrapViewHolder
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.`interface`.YoutubeRecipeView
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResponse
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapResponse
 
-class YoutubeScrapRecyclerViewAdapter : RecyclerView.Adapter<YoutubeScrapViewHolder>(),
+class YoutubeScrapRecyclerViewAdapter(val view: YoutubeScrapFragmentView) : RecyclerView.Adapter<YoutubeScrapViewHolder>(),
     YoutubeRecipeView {
 
     private var scrapRecipeItemList = ArrayList<YoutubeScrap>()
@@ -23,7 +24,8 @@ class YoutubeScrapRecyclerViewAdapter : RecyclerView.Adapter<YoutubeScrapViewHol
         return YoutubeScrapViewHolder(
             ItemScrapRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             this,
-            scrapRecipeItemList
+            scrapRecipeItemList,
+            view
         )
     }
 

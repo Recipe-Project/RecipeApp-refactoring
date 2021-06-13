@@ -3,8 +3,6 @@ package com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
@@ -25,13 +23,15 @@ YoutubeScrapFragmentView{
     private var youtubeScrapItemList = ArrayList<YoutubeScrap>()
     lateinit var youtubeScrapRecyclerViewAdapter: YoutubeScrapRecyclerViewAdapter
 
+    var scrapCnt = 0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // 유튜브 스크랩 조회
         YoutubeScrapService(this).getYoutubeScrap(1)
 
-        youtubeScrapRecyclerViewAdapter = YoutubeScrapRecyclerViewAdapter()
+        youtubeScrapRecyclerViewAdapter = YoutubeScrapRecyclerViewAdapter(this)
         binding.rvScrapRecipe.apply {
             adapter = youtubeScrapRecyclerViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -46,8 +46,10 @@ YoutubeScrapFragmentView{
             }
             youtubeScrapRecyclerViewAdapter.submitList(youtubeScrapItemList)
 
-            binding.tvScrapCnt.text = response.result.scrapYoutubeCount.toString()
             Log.d(TAG, "YoutubeScrapFragment - onGetYoutubeScrapSuccess() : ${response.result.scrapYoutubeCount}")
+
+            scrapCnt = response.result.scrapYoutubeCount
+            binding.tvScrapCnt.text = scrapCnt.toString()
         }
     }
 
@@ -58,5 +60,9 @@ YoutubeScrapFragmentView{
     }
 
     override fun onPostYoutubeScrapSuccess(response: PostYoutubeScrapResponse) {
+        if (response.isSuccess) {
+            scrapCnt -= 1
+            binding.tvScrapCnt.text = scrapCnt.toString()
+        }
     }
 }

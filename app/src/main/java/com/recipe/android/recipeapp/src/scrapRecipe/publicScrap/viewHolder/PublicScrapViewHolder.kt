@@ -18,7 +18,8 @@ import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScr
 class PublicScrapViewHolder(
     val binding: ItemScrapPublicRecipeBinding,
     val publicScrapRecyclerViewAdapter: PublicScrapRecyclerViewAdapter,
-    val publicRecipeItemList: ArrayList<PublicScrap>
+    val publicRecipeItemList: ArrayList<PublicScrap>,
+    val view: PublicScrapFragmentView
 ) :
     RecyclerView.ViewHolder(binding.root), PublicScrapFragmentView {
 
@@ -57,6 +58,7 @@ class PublicScrapViewHolder(
             Toast.makeText(ApplicationClass.instance, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
             publicRecipeItemList.remove(publicScrapItem)
             publicScrapRecyclerViewAdapter.notifyDataSetChanged()
+            view.onPostPublicScrapSuccess(response)
         } else {
             Toast.makeText(ApplicationClass.instance, ApplicationClass.instance.getText(R.string.networkError), Toast.LENGTH_SHORT).show()
         }

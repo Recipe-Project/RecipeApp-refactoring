@@ -8,10 +8,11 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapRecipeBinding
+import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.`interface`.BlogScrapFragmnetView
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.models.BlogScrapResult
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.viewHolder.BlogScrapViewHolder
 
-class BlogScrapRecyclerViewAdpater: RecyclerView.Adapter<BlogScrapViewHolder>() {
+class BlogScrapRecyclerViewAdpater(val view: BlogScrapFragmnetView) : RecyclerView.Adapter<BlogScrapViewHolder>() {
 
     private var blogScrapItemList = ArrayList<BlogScrapResult>()
 
@@ -19,7 +20,8 @@ class BlogScrapRecyclerViewAdpater: RecyclerView.Adapter<BlogScrapViewHolder>() 
         return BlogScrapViewHolder(
             ItemScrapRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             this,
-            blogScrapItemList
+            blogScrapItemList,
+            view
         )
     }
 

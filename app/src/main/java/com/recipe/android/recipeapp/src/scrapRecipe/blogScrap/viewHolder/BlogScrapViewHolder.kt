@@ -1,6 +1,5 @@
 package com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.viewHolder
 
-import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -19,7 +18,8 @@ import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.models.BlogScrapRe
 class BlogScrapViewHolder(
     val binding: ItemScrapRecipeBinding,
     val blogScrapRecyclerViewAdpater: BlogScrapRecyclerViewAdpater,
-    val blogScrapItemList: ArrayList<BlogScrapResult>
+    val blogScrapItemList: ArrayList<BlogScrapResult>,
+    val view: BlogScrapFragmnetView
 ) :
     RecyclerView.ViewHolder(binding.root), BlogScrapFragmnetView {
 
@@ -65,6 +65,7 @@ class BlogScrapViewHolder(
             Toast.makeText(ApplicationClass.instance, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
             blogScrapItemList.remove(blogScrapItem)
             blogScrapRecyclerViewAdpater.notifyDataSetChanged()
+            view.onPostBlogScrapSuccess(response)
         } else {
             Toast.makeText(ApplicationClass.instance, ApplicationClass.instance.getText(R.string.networkError), Toast.LENGTH_SHORT).show()
         }

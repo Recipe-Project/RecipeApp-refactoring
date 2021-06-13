@@ -3,8 +3,6 @@ package com.recipe.android.recipeapp.src.scrapRecipe.publicScrap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
@@ -27,22 +25,19 @@ class PublicScrapFragment : BaseFragment<FragmentPublicScrapBinding>(
     private var publicScrapItemList = ArrayList<PublicScrap>()
     lateinit var publicScrapRecyclerViewAdapter: PublicScrapRecyclerViewAdapter
 
+    var scrapCnt = 0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // 공공레시피 스크랩 조회
         PublicScrapService(this).getPublicScrap(1)
 
-        publicScrapRecyclerViewAdapter = PublicScrapRecyclerViewAdapter()
+        publicScrapRecyclerViewAdapter = PublicScrapRecyclerViewAdapter(this)
         binding.rvScrapRecipe.apply {
             adapter = publicScrapRecyclerViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
-
-    }
-
-    override fun onStart() {
-        super.onStart()
 
     }
 
@@ -56,7 +51,8 @@ class PublicScrapFragment : BaseFragment<FragmentPublicScrapBinding>(
             publicScrapRecyclerViewAdapter.submitList(publicScrapItemList)
             Log.d(TAG, "PublicScrapFragment - onGetPublicScrapSuccess() : $publicScrapItemList")
 
-            binding.tvScrapCnt.text = response.result.scrapRecipeCount.toString()
+            scrapCnt = response.result.scrapRecipeCount
+            binding.tvScrapCnt.text = scrapCnt.toString()
         }
     }
 
@@ -67,7 +63,10 @@ class PublicScrapFragment : BaseFragment<FragmentPublicScrapBinding>(
     }
 
     override fun onPostPublicScrapSuccess(postPublicScrapResponse: PostPublicScrapResponse) {
-
+        if (postPublicScrapResponse.isSuccess) {
+            scrapCnt -= 1
+            binding.tvScrapCnt.text = scrapCnt.toString()
+        }
     }
 
 

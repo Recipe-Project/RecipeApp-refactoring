@@ -42,6 +42,9 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.afterScrollBackBtn.setOnClickListener { onBackPressed() }
+        binding.beforeScrollBackBtn.setOnClickListener { onBackPressed() }
+
         // 해당 레시피 인덱스 가져오기
         if(intent.hasExtra("index")) {
             val index = intent.getIntExtra("index", 0)

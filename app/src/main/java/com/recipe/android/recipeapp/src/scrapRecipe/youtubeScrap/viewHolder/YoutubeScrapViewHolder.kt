@@ -18,7 +18,8 @@ import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeS
 class YoutubeScrapViewHolder(
     val binding: ItemScrapRecipeBinding,
     val youtubeScrapRecyclerViewAdapter: YoutubeScrapRecyclerViewAdapter,
-    val scrapRecipeItemList: ArrayList<YoutubeScrap>
+    val scrapRecipeItemList: ArrayList<YoutubeScrap>,
+    val view: YoutubeScrapFragmentView
 ) : RecyclerView.ViewHolder(binding.root),
     YoutubeScrapFragmentView {
 
@@ -64,6 +65,7 @@ class YoutubeScrapViewHolder(
             Toast.makeText(ApplicationClass.instance, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
             scrapRecipeItemList.remove(youtubeScrapItem)
             youtubeScrapRecyclerViewAdapter.notifyDataSetChanged()
+            view.onPostYoutubeScrapSuccess(response)
         } else {
             Toast.makeText(
                 ApplicationClass.instance,
