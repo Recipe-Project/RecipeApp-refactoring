@@ -264,6 +264,7 @@ class MyRecipeCreateActivity :
     // 재료 직접 추가 버튼
     override fun selectAddDirect() {
         val intent = Intent(this, AddDirectMyRecipeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivityForResult(intent, ADD_DIRECT_CODE)
     }
 
@@ -297,8 +298,8 @@ class MyRecipeCreateActivity :
     }
 
     // 재료 선택 다이얼로그에서 저장 버튼 클릭
-    override fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>) {
-        pickIngredientsMyRecipe.forEach {
+    override fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>?) {
+        pickIngredientsMyRecipe?.forEach {
             if (it.ingredientIcon == "") {
                 pickItem.add(DirectIngredientList(it.ingredientName, null))
             } else {
@@ -369,7 +370,7 @@ class MyRecipeCreateActivity :
             }
             ADD_DIRECT_CODE -> {
                 val data =
-                    data?.extras?.getParcelableArrayList<Parcelable>("pick") as java.util.ArrayList<Ingredient>
+                    data?.extras?.getParcelableArrayList<Parcelable>("pick") as java.util.ArrayList<Ingredient>?
                 pickBtnSaveClick(data)
             }
         }

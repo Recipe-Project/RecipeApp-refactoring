@@ -21,5 +21,5 @@ interface MyRecipeCreateActivityView {
 
     fun cancelCreateRecipe()
 
-    fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>)
+    fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>?)
 }
