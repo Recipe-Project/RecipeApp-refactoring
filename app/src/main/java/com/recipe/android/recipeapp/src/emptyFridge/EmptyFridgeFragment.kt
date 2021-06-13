@@ -86,7 +86,6 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
             if(response.result.recipeList.isNullOrEmpty() && start != 0) {
                 Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 없음")
 
-                binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
                 isEnd = true
             }
         }

@@ -3,6 +3,8 @@ package com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R

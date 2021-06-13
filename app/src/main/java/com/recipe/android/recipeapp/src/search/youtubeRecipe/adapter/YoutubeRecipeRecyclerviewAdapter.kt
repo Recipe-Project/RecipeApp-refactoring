@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.search.youtubeRecipe.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,11 +24,14 @@ import com.recipe.android.recipeapp.src.search.blogRecipe.adapter.BlogRecipeRecy
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResult
 import java.text.SimpleDateFormat
 
-class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<YoutubeRecipeRecyclerviewAdapter.CustomViewHolder>(){
+class YoutubeRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<YoutubeRecipeRecyclerviewAdapter.CustomViewHolder>(){
 
     interface YoutubeRecipeScrapItemClick {
         fun onClick(view: View, position: Int)
     }
+
+    val TAG = "YoutubeRecipeRecyclerviewAdapter"
+
     var youtubeRecipeScrapItemClick : YoutubeRecipeScrapItemClick? = null
 
     interface YoutubeRecipeItemClick {
@@ -37,47 +41,57 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<YoutubeRecipeRecyc
 
     var youtubeRecipeList = mutableListOf<YoutubeRecipeResult>()
 
+    var isScrapList = mutableListOf<Boolean>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YoutubeRecipeRecyclerviewAdapter.CustomViewHolder {
         val binding = ItemYoutubeResultFragRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return YoutubeRecipeRecyclerviewAdapter.CustomViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: YoutubeRecipeRecyclerviewAdapter.CustomViewHolder, position: Int) {
-        val title = youtubeRecipeList[position]?.snippet?.title
-        if(title!!.contains("&#39;")) {
+        Log.d(TAG, "position : $position, title : ${youtubeRecipeList[position].snippet.title}")
+
+        val title = youtubeRecipeList[position].snippet.title
+        if(title.contains("&#39;")) {
             val newTitle = title.replace("&#39;", "'")
             holder.title.text = newTitle
-        } else if(title!!.contains("&quot;")) {
+        } else if(title.contains("&quot;")) {
             val newTitle = title.replace("&quot;", "\"")
             holder.title.text = newTitle
         } else {
             holder.title.text = title
         }
 
-        holder.channerName.text = youtubeRecipeList[position]?.snippet?.channelTitle
+        holder.channerName.text = youtubeRecipeList[position].snippet.channelTitle
 
         // postDate String Slicing
-        val date = youtubeRecipeList[position]?.snippet?.publishTime
+        val date = youtubeRecipeList[position].snippet.publishTime
         if(date != null) {
             val strNewDate : String = formatPostDate(date)
             holder.postDate.text = strNewDate
         }
 
-        Glide.with(ApplicationClass.instance).load(youtubeRecipeList[position]?.snippet?.thumbnails?.default?.url).transform(
+        Glide.with(ApplicationClass.instance).load(youtubeRecipeList[position].snippet.thumbnails.default.url).transform(
             CenterCrop(), RoundedCorners(3)
         ).into(holder.thumbnail)
 
+        // 스크랩
+        if(isScrapList[position]) {
+            holder.scrapBtn.setImageResource(R.drawable.ic_favorite_full_white)
+        } else {
+            holder.scrapBtn.setImageResource(R.drawable.ic_favorite_empty_white)
+        }
         if(youtubeRecipeScrapItemClick != null) {
             holder.scrapBtn.setOnClickListener {
-//                    if(publicResultList[position].userScrapYN == "Y") {
-//                        publicResultList[position].userScrapYN = "N"
-//                        holder.scrap.setImageResource(R.drawable.ic_favorite_empty_white)
-//                        Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
-//                    } else {
-//                        publicResultList[position].userScrapYN = "Y"
-//                        holder.scrap.setImageResource(R.drawable.ic_favorite_full_white)
-//                        Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
-//                    }
+                if(isScrapList[position]) {
+                    isScrapList[position] = false
+                    holder.scrapBtn.setImageResource(R.drawable.ic_favorite_empty_white)
+                    Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                } else {
+                    isScrapList[position] = true
+                    holder.scrapBtn.setImageResource(R.drawable.ic_favorite_full_white)
+                    Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
+                }
                 youtubeRecipeScrapItemClick?.onClick(it, position)
             }
         }
@@ -102,6 +116,11 @@ class YoutubeRecipeRecyclerviewAdapter : RecyclerView.Adapter<YoutubeRecipeRecyc
 
     fun submitList(list : MutableList<YoutubeRecipeResult>) {
         this.youtubeRecipeList = list
+        notifyDataSetChanged()
+    }
+
+    fun submitIsScrapList(list : MutableList<Boolean>) {
+        this.isScrapList = list
         notifyDataSetChanged()
     }
 
