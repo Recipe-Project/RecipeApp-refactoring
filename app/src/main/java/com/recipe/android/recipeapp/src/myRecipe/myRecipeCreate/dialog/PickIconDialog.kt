@@ -137,7 +137,7 @@ class PickIconDialog(
 
     }
 
-    override fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>) {
+    override fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>?) {
 
     }
 

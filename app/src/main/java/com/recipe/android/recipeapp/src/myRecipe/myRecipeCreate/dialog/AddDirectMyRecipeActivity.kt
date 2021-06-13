@@ -134,6 +134,11 @@ class AddDirectMyRecipeActivity :
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
     override fun btnSaveClick(pickIconUrl: String?) {
         this.pickIconUrl = pickIconUrl
         if (pickIconUrl != null) {
