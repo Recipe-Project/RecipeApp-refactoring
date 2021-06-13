@@ -260,7 +260,11 @@ class FridgeFragment :
     }
 
     override fun onGetFridgeSuccess(response: GetFridgeResponse) {
-        if(response.isSuccess) {
+
+        if (activity != null) {
+
+            binding.tvBasketCnt.text = response.result.fridgeBasketCount.toString()
+
             // List clear
             patchIngredientList.clear()
             FridgeFragment.patchFridgeList.clear()
@@ -270,9 +274,6 @@ class FridgeFragment :
             tabLayoutTextArray.add(getString(R.string.all))
 
             var myFridgeFlag = false
-
-            binding.tvBasketCnt.text = response.result.fridgeBasketCount.toString()
-
             response.result.fridges.forEach {
                 if(it.ingredientList.size != 0) {
                     myFridgeFlag = true
@@ -280,7 +281,7 @@ class FridgeFragment :
                 }
             }
 
-            if (myFridgeFlag) {
+            if (myFridgeFlag && activity != null) {
                 Log.d(TAG, "FridgeFragment : Flag is true")
                 val ingredientResult = response.result.fridges
                 var cnt = 0
@@ -338,7 +339,7 @@ class FridgeFragment :
 
                 // 리사이클러뷰
                 myFridgeCategoryAdapter.submitList(ingredients)
-            } else {
+            } else if (activity != null) {
                 Log.d(TAG, "Flag False : 냉장고에 재료 없음")
                 // visibility 변경
                 binding.viewPager.visibility = View.GONE
