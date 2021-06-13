@@ -29,7 +29,17 @@ class BlogScrapViewHolder(
 
         this.blogScrapItem = blogScrapItem
 
-        binding.tvTitle.text = blogScrapItem.title
+        val title = blogScrapItem.title
+        if(title.contains("&#39;")) {
+            val newTitle = title.replace("&#39;", "'")
+            binding.tvTitle.text = newTitle
+        } else if(title.contains("&quot;")) {
+            val newTitle = title.replace("&quot;", "\"")
+            binding.tvTitle.text = newTitle
+        } else {
+            binding.tvTitle.text = title
+        }
+
         if (blogScrapItem.thumbnail != null) {
             Glide.with(ApplicationClass.instance).load(blogScrapItem.thumbnail).transform(
                 CenterCrop(), RoundedCorners(20)

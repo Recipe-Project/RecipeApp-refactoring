@@ -95,10 +95,21 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
     }
 
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
+
         dismissLoadingDialog()
 
         response.items.forEach { p ->
-            isScrapList.add(false)
+            var scrapFlag = false
+            for(i in youtubeScrapItemList) {
+                if(i.youtubeId == p.id.videoId) {
+                    isScrapList.add(true)
+                    scrapFlag = true
+                    break
+                }
+            }
+            if(!scrapFlag) {
+                isScrapList.add(false)
+            }
         }
 
         // 검색된 게시물이 100개 초과시, 100+ 로 표기
