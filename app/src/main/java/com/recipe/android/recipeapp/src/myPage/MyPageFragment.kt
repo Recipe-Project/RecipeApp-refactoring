@@ -82,13 +82,13 @@ class MyPageFragment :
 
         binding.layoutScrapYoutube.setOnClickListener {
             val intent = Intent(context, ScrapRecipeActivity::class.java)
-            intent.putExtra("position", 0)
+            intent.putExtra("position", 1)
             startActivity(intent)
         }
 
         binding.layoutScrapBlog.setOnClickListener {
             val intent = Intent(context, ScrapRecipeActivity::class.java)
-            intent.putExtra("position", 1)
+            intent.putExtra("position", 0)
             startActivity(intent)
         }
 

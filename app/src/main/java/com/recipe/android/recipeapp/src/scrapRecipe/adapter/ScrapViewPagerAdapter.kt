@@ -14,10 +14,10 @@ class ScrapViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> YoutubeScrapFragment()
-            1 -> BlogScrapFragment()
+            0 -> BlogScrapFragment()
+            1 -> YoutubeScrapFragment()
             2 -> PublicScrapFragment()
-            else -> YoutubeScrapFragment()
+            else -> BlogScrapFragment()
         }
     }
 

@@ -124,6 +124,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3">
 
                 <LinearLayout
+                    android:id="@+id/layout_scrap_blog"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView6"
+                        style="@style/Subtitle2Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/blog" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cnt_blog"
+                        style="@style/Subtitle1Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:textColor="@color/green"
+                        tools:text="5" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/layout_scrap_youtube"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -147,31 +172,6 @@
                         android:textColor="@color/green"
                         tools:text="5" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_scrap_blog"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/appCompatTextView6"
-                        style="@style/Subtitle2Style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/blog" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_cnt_blog"
-                        style="@style/Subtitle1Style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:textColor="@color/green"
-                        tools:text="5" />
                 </LinearLayout>
 
                 <LinearLayout
