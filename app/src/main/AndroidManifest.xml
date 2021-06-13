@@ -45,7 +45,8 @@
             </intent-filter>
         </activity>
         <!-- 메인 -->
-        <activity android:name=".src.MainActivity" />
+        <activity android:name=".src.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <!-- 재료 삭제 다이얼로그 -->
         <activity android:name=".src.fridge.home.dialog.DeleteDialog"
