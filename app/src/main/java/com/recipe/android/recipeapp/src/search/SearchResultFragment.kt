@@ -37,11 +37,11 @@ class SearchResultFragment(private val keyword: String) : BaseFragment<FragmentS
             when (searchType) {
                 "blog" -> {
                     pagerAdapter.addFragment(BlogResultFragment(searchKeyword))
-                    binding.searchResultFragViewpager.setCurrentItem(1, false)
+                    binding.searchResultFragViewpager.setCurrentItem(0, false)
                 }
                 "youtube" -> {
                     pagerAdapter.addFragment(BlogResultFragment(searchKeyword))
-                    binding.searchResultFragViewpager.setCurrentItem(0, false)
+                    binding.searchResultFragViewpager.setCurrentItem(1, false)
                 }
             }
         }
