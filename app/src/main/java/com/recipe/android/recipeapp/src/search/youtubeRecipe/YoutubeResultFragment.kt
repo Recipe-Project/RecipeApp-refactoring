@@ -56,11 +56,21 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
         initScrollListener()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        pageToken = ""
+        youtubeAdapter.youtubeRecipeList.clear()
+        isEnd = false
+        showLoadingDialog()
+        YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, BuildConfig.GOOGLE_API_KEY, keyword, pageToken)
+    }
+
     private fun setUpRecyclerView() {
         val rv = binding.youtubeResultFragRecylerview
         rv.setHasFixedSize(true)
         rv.layoutManager = layoutManager
-        youtubeAdapter = YoutubeRecipeRecyclerviewAdapter()
+        youtubeAdapter = YoutubeRecipeRecyclerviewAdapter(requireContext())
         rv.adapter = youtubeAdapter
     }
 
@@ -87,7 +97,7 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
         dismissLoadingDialog()
 
-        response.items.forEach {
+        response.items.forEach { p ->
             isScrapList.add(false)
         }
 
@@ -117,13 +127,17 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
 
             youtubeRecipeList.addAll(response.items)
             youtubeAdapter.submitList(youtubeRecipeList)
+            youtubeAdapter.submitIsScrapList(isScrapList)
         } else if (response.items.isNotEmpty() && pageToken != "") {
             pageToken = response.nextPageToken
             Log.d(TAG, "onGetYoutubeRecipeSuccess : 추가 데이터 있음")
             binding.youtubeResultFragRecylerview.visibility = View.VISIBLE
             youtubeRecipeList.addAll(response.items)
             youtubeAdapter.notifyItemInserted(youtubeRecipeList.size - 1)
+
+            youtubeAdapter.notifyItemInserted(isScrapList.size - 1)
         }
+        Log.d(TAG, "스크랩여부리스트사이즈 : ${isScrapList.size}")
 
 
         val result = response.items
@@ -141,21 +155,25 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
         // Youtube 스크랩
         youtubeAdapter.youtubeRecipeScrapItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeScrapItemClick {
             override fun onClick(view: View, position: Int) {
-                youtubeUrl = "https://www.youtube.com/watch?v=${result[position].id.videoId}"
+                youtubeUrl = "https://www.youtube.com/watch?v=${youtubeAdapter.youtubeRecipeList[position].id.videoId}"
+                Log.d(TAG, "position : $position!!!!")
                 YoutubeRecipeService(this@YoutubeResultFragment).postAddingScrap(
                     YoutubeRecipeScrapRequest(
-                        result[position].id.videoId,
-                        result[position].snippet.title,
-                        result[position].snippet.thumbnails.default.url,
+                        youtubeAdapter.youtubeRecipeList[position].id.videoId,
+
+                        youtubeAdapter.youtubeRecipeList[position].snippet.title,
+                        youtubeAdapter.youtubeRecipeList[position].snippet.thumbnails.default.url,
                         youtubeUrl,
-                        formatPostDate(result[position].snippet.publishTime),
-                        result[position].snippet.channelTitle,
+                        formatPostDate(youtubeAdapter.youtubeRecipeList[position].snippet.publishTime),
+                        youtubeAdapter.youtubeRecipeList[position].snippet.channelTitle,
                         "00:00")
                 )
-                Log.d(TAG, "${result[position].id.videoId}, ${result[position].snippet.title}, ${result[position].snippet.thumbnails.default.url}, " +
-                        "$youtubeUrl, ${formatPostDate(result[position].snippet.publishTime)}, ${result[position].snippet.channelTitle}")
+                Log.d(TAG, "${youtubeAdapter.youtubeRecipeList[position].id.videoId}, " +
+                        "${youtubeAdapter.youtubeRecipeList[position].snippet.title}, " +
+                        "${youtubeAdapter.youtubeRecipeList[position].snippet.thumbnails.default.url}, " +
+                        "$youtubeUrl, ${formatPostDate(youtubeAdapter.youtubeRecipeList[position].snippet.publishTime)}, " + youtubeAdapter.youtubeRecipeList[position].snippet.channelTitle
+                )
                 // 토스트 메세지
-
             }
         }
     }
@@ -190,11 +208,6 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
             }
             Log.d(TAG, "YoutubeScrapFragment - onGetYoutubeScrapSuccess() : ${response.result.scrapYoutubeCount}")
         }
-        pageToken = ""
-        youtubeAdapter.youtubeRecipeList.clear()
-        isEnd = false
-        showLoadingDialog()
-        YoutubeRecipeService(this).getYoutubeRecipe("id, snippet", "video", display, BuildConfig.GOOGLE_API_KEY, keyword, pageToken)
     }
 
     override fun onGetYoutubeScrapFailure(message: String) {

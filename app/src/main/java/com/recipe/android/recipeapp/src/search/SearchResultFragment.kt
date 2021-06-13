@@ -18,7 +18,7 @@ class SearchResultFragment(private val keyword: String) : BaseFragment<FragmentS
 
     val TAG = "SearchResultFragment"
 
-    private val recipeTypeList = arrayListOf("유튜브", "블로그", "추천")
+    private val recipeTypeList = arrayListOf("블로그", "유투브", "추천")
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -27,8 +27,8 @@ class SearchResultFragment(private val keyword: String) : BaseFragment<FragmentS
         val searchKeyword = arguments?.getString("searchKeyword")
 
         val pagerAdapter = SearchResultViewPagerAdapter(this)
-        pagerAdapter.addFragment(YoutubeResultFragment(keyword))
         pagerAdapter.addFragment(BlogResultFragment(keyword))
+        pagerAdapter.addFragment(YoutubeResultFragment(keyword))
         pagerAdapter.addFragment(PublicResultFragment(keyword))
 
         binding.searchResultFragViewpager.adapter = pagerAdapter

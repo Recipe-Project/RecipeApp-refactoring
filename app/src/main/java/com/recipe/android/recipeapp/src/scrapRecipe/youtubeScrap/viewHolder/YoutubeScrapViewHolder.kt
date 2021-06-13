@@ -28,7 +28,17 @@ class YoutubeScrapViewHolder(
 
         this.youtubeScrapItem = youtubeScrapItem
 
-        binding.tvTitle.text = youtubeScrapItem.title
+        val title = youtubeScrapItem.title
+        if(title.contains("&#39;")) {
+            val newTitle = title.replace("&#39;", "'")
+            binding.tvTitle.text = newTitle
+        } else if(title.contains("&quot;")) {
+            val newTitle = title.replace("&quot;", "\"")
+            binding.tvTitle.text = newTitle
+        } else {
+            binding.tvTitle.text = title
+        }
+
         if (youtubeScrapItem.thumbnail != null) {
             Glide.with(ApplicationClass.instance).load(youtubeScrapItem.thumbnail).transform(
                 CenterCrop(), RoundedCorners(20)

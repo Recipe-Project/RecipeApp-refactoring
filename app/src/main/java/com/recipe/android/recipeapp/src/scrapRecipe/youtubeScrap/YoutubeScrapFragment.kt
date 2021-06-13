@@ -58,5 +58,7 @@ YoutubeScrapFragmentView{
     }
 
     override fun onPostYoutubeScrapSuccess(response: PostYoutubeScrapResponse) {
+        // 유튜브 스크랩 조회
+        YoutubeScrapService(this).getYoutubeScrap(1)
     }
 }
