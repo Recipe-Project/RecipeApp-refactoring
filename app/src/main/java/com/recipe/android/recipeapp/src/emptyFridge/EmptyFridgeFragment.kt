@@ -60,8 +60,9 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
     }
 
     override fun onGetEmptyFridgeSuccess(response: EmptyFridgeResponse) {
-        dismissLoadingDialog()
+
         if (activity != null) {
+            val newEmptyFridgeList = response.result.recipeList
             if(response.result.recipeList.isNullOrEmpty() && start == 0) {
                 Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 없음")
                 if (activity != null) {
@@ -75,15 +76,18 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
                     binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
                     binding.emptyFridgeFragDefaultIv.visibility = View.INVISIBLE
                     binding.emptyFridgeFragDefaultTv.visibility = View.INVISIBLE
+                    emptyFridgeList.clear()
+                    emptyFridgeList.addAll(newEmptyFridgeList)
+                    emptyAdapter.submitList(emptyFridgeList)
                 }
-                emptyFridgeList.addAll(response.result.recipeList)
-                emptyAdapter.submitList(emptyFridgeList)
+
             } else if (response.result.recipeList.isNotEmpty() && start != 0) {
                 Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 있음")
 
                 if (activity != null) {
                     binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
-                    emptyFridgeList.addAll(response.result.recipeList)
+                    emptyFridgeList.clear()
+                    emptyFridgeList.addAll(newEmptyFridgeList)
                     emptyAdapter.notifyItemInserted(emptyFridgeList.size - 1)
                 }
             }
@@ -94,6 +98,8 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
                 isEnd = true
             }
         }
+
+        dismissLoadingDialog()
     }
 
     override fun onGetEmptyFridgeFailure(message: String) {
@@ -101,21 +107,24 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
     }
 
     private fun setUpRecyclerView() {
-        val rv = binding.emptyFridgeFragRecyclerview
-        rv.setHasFixedSize(true)
-        rv.layoutManager = layoutManager
-        emptyAdapter = EmptyFridgeRecyclerviewAdapter(this)
-        rv.adapter = emptyAdapter
+        if (activity != null) {
+            val rv = binding.emptyFridgeFragRecyclerview
+            rv.setHasFixedSize(true)
+            rv.layoutManager = layoutManager
+            emptyAdapter = EmptyFridgeRecyclerviewAdapter(this)
+            rv.adapter = emptyAdapter
+        }
     }
 
     override fun onResume() {
         super.onResume()
 
-        start = 0
-        emptyAdapter.emptyFridgeList.clear()
-        isEnd = false
-        showLoadingDialog()
-        EmptyFridgeService(this).tryGetEmptyFridge(start, display)
+        if (activity != null) {
+            start = 0
+            isEnd = false
+            showLoadingDialog()
+            EmptyFridgeService(this).tryGetEmptyFridge(start, display)
+        }
     }
 
 

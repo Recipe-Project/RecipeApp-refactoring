@@ -115,7 +115,7 @@ class MyPageFragment :
     }
 
     override fun onGetUserInfoSuccess(response: UserInfoResponse) {
-        if (response.isSuccess) {
+        if (response.isSuccess && activity != null) {
             val userInfoResult = response.result
             if (userInfoResult.profilePhoto != null) {
                 Glide.with(requireContext()).load(userInfoResult.profilePhoto)
