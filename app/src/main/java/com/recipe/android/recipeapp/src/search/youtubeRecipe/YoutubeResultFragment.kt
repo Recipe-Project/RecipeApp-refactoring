@@ -95,6 +95,7 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
     }
 
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
+
         dismissLoadingDialog()
 
         response.items.forEach { p ->
