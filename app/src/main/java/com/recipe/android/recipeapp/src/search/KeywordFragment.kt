@@ -75,21 +75,23 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
     }
 
     override fun onGetPopularKeywordSuccess(response: PopularKeywordResponse) {
-        val result = response.result
-        val adapter = PopularKeywordRecyclerviewAdapter(result)
-        binding.keywordFragPopularKeywordRecylerview.adapter = adapter
-        adapter.popularKeywordItemClick = object : PopularKeywordRecyclerviewAdapter.PopularKeywordItemClick {
-            override fun onClick(view: View, position: Int) {
-                keyword = result[position].bestKeyword
-                RecentKeywordRecyclerviewAdapter.list.add(keyword)
-                SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
 
-                Log.d(TAG, "KeywordFragment - onClick() : 이게 키워드 : $keyword")
-                keywordListener?.setKeyword(keyword)
+        if (response.isSuccess) {
+            val result = response.result
+            val adapter = PopularKeywordRecyclerviewAdapter(result)
+            binding.keywordFragPopularKeywordRecylerview.adapter = adapter
+            adapter.popularKeywordItemClick = object : PopularKeywordRecyclerviewAdapter.PopularKeywordItemClick {
+                override fun onClick(view: View, position: Int) {
+                    keyword = result[position].bestKeyword
+                    RecentKeywordRecyclerviewAdapter.list.add(keyword)
+                    SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
+
+                    Log.d(TAG, "KeywordFragment - onClick() : 이게 키워드 : $keyword")
+                    keywordListener?.setKeyword(keyword)
+                }
             }
         }
-
     }
 
     override fun onAttach(context: Context) {

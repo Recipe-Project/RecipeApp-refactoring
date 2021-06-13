@@ -38,20 +38,31 @@ class BlogRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: BlogRecipeRecyclerviewAdapter.CustomViewHolder, position: Int) {
-        holder.title.text = blogRecipeList[position]?.title
-        holder.blogName.text = blogRecipeList[position]?.blogName
-        Glide.with(ApplicationClass.instance).load(blogRecipeList[position]?.thumbnail).transform(CenterCrop(), RoundedCorners(3)).into(holder.thumbnail)
-        holder.cnt.text = blogRecipeList[position]?.userScrapCnt.toString()
-        holder.postDate.text = blogRecipeList[position]?.postDate
+
+        val title = blogRecipeList[position].title
+        if(title.contains("&#39;")) {
+            val newTitle = title.replace("&#39;", "'")
+            holder.title.text = newTitle
+        } else if(title.contains("&quot;")) {
+            val newTitle = title.replace("&quot;", "\"")
+            holder.title.text = newTitle
+        } else {
+            holder.title.text = title
+        }
+
+        holder.blogName.text = blogRecipeList[position].blogName
+        Glide.with(ApplicationClass.instance).load(blogRecipeList[position].thumbnail).transform(CenterCrop(), RoundedCorners(3)).into(holder.thumbnail)
+        holder.cnt.text = blogRecipeList[position].userScrapCnt.toString()
+        holder.postDate.text = blogRecipeList[position].postDate
 
         if(blogRecipeScrapItemClick != null) {
             holder.scrapBtn.setOnClickListener {
-                if(blogRecipeList[position]!!.userScrapYN == "Y") {
-                    blogRecipeList[position]!!.userScrapYN = "N"
+                if(blogRecipeList[position].userScrapYN == "Y") {
+                    blogRecipeList[position].userScrapYN = "N"
                     holder.scrapBtn.setImageResource(R.drawable.ic_favorite_empty_white)
                     Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
                 } else {
-                    blogRecipeList[position]!!.userScrapYN = "Y"
+                    blogRecipeList[position].userScrapYN = "Y"
                     holder.scrapBtn.setImageResource(R.drawable.ic_favorite_full_white)
                     Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
                 }
