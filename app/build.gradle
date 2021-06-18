@@ -9,6 +9,7 @@ plugins {
     // navigation
     id 'androidx.navigation.safeargs.kotlin'
 
+    id 'com.google.firebase.crashlytics'
 
 }
 
@@ -145,7 +146,5 @@ dependencies {
     // Gliger
     implementation 'com.opensooq.supernova:gligar:1.1.0'
 
-
-
-
+    implementation 'com.google.firebase:firebase-crashlytics'
 }
