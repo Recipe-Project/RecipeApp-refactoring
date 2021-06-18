@@ -97,94 +97,95 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
     override fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse) {
 
         dismissLoadingDialog()
-
-        response.items.forEach { p ->
-            var scrapFlag = false
-            for(i in youtubeScrapItemList) {
-                if(i.youtubeId == p.id.videoId) {
-                    isScrapList.add(true)
-                    scrapFlag = true
-                    break
+        if (activity != null) {
+            response.items.forEach { p ->
+                var scrapFlag = false
+                for(i in youtubeScrapItemList) {
+                    if(i.youtubeId == p.id.videoId) {
+                        isScrapList.add(true)
+                        scrapFlag = true
+                        break
+                    }
+                }
+                if(!scrapFlag) {
+                    isScrapList.add(false)
                 }
             }
-            if(!scrapFlag) {
-                isScrapList.add(false)
+
+            // 검색된 게시물이 100개 초과시, 100+ 로 표기
+            val totalCnt = response.pageInfo.totalResults
+
+            if(totalCnt > 100) {
+                binding.youtubeFragItemCnt.text = "100+"
+            } else {
+                binding.youtubeFragItemCnt.text = response.pageInfo.totalResults.toString()
             }
-        }
 
-        // 검색된 게시물이 100개 초과시, 100+ 로 표기
-        val totalCnt = response.pageInfo.totalResults
+            if(response.items.isNullOrEmpty() && pageToken == "") {
+                Log.d(TAG, "onGetYoutubeRecipeSuccess : 데이터 없음")
+                binding.youtubeResultFragRecylerview.visibility = View.GONE
+                binding.youtubeFragItemCntUnit.visibility = View.GONE
+                binding.youtubeFragItemCnt.visibility = View.GONE
+                binding.defaultTv.visibility = View.VISIBLE
+                binding.defaultTv.text = "'$keyword'에 대한\n검색결과가 없습니다."
+            } else if (response.items.isNotEmpty() && pageToken == "") {
+                pageToken = response.nextPageToken
+                Log.d(TAG, "onGetYoutubeRecipeSuccess : 데이터 있음")
+                binding.youtubeResultFragRecylerview.visibility = View.VISIBLE
+                binding.youtubeFragItemCntUnit.visibility = View.VISIBLE
+                binding.youtubeFragItemCnt.visibility = View.VISIBLE
+                binding.defaultTv.visibility = View.GONE
 
-        if(totalCnt > 100) {
-            binding.youtubeFragItemCnt.text = "100+"
-        } else {
-            binding.youtubeFragItemCnt.text = response.pageInfo.totalResults.toString()
-        }
+                youtubeRecipeList.addAll(response.items)
+                youtubeAdapter.submitList(youtubeRecipeList)
+                youtubeAdapter.submitIsScrapList(isScrapList)
+            } else if (response.items.isNotEmpty() && pageToken != "") {
+                pageToken = response.nextPageToken
+                Log.d(TAG, "onGetYoutubeRecipeSuccess : 추가 데이터 있음")
+                binding.youtubeResultFragRecylerview.visibility = View.VISIBLE
+                youtubeRecipeList.addAll(response.items)
+                youtubeAdapter.notifyItemInserted(youtubeRecipeList.size - 1)
 
-        if(response.items.isNullOrEmpty() && pageToken == "") {
-            Log.d(TAG, "onGetYoutubeRecipeSuccess : 데이터 없음")
-            binding.youtubeResultFragRecylerview.visibility = View.GONE
-            binding.youtubeFragItemCntUnit.visibility = View.GONE
-            binding.youtubeFragItemCnt.visibility = View.GONE
-            binding.defaultTv.visibility = View.VISIBLE
-            binding.defaultTv.text = "'$keyword'에 대한\n검색결과가 없습니다."
-        } else if (response.items.isNotEmpty() && pageToken == "") {
-            pageToken = response.nextPageToken
-            Log.d(TAG, "onGetYoutubeRecipeSuccess : 데이터 있음")
-            binding.youtubeResultFragRecylerview.visibility = View.VISIBLE
-            binding.youtubeFragItemCntUnit.visibility = View.VISIBLE
-            binding.youtubeFragItemCnt.visibility = View.VISIBLE
-            binding.defaultTv.visibility = View.GONE
-
-            youtubeRecipeList.addAll(response.items)
-            youtubeAdapter.submitList(youtubeRecipeList)
-            youtubeAdapter.submitIsScrapList(isScrapList)
-        } else if (response.items.isNotEmpty() && pageToken != "") {
-            pageToken = response.nextPageToken
-            Log.d(TAG, "onGetYoutubeRecipeSuccess : 추가 데이터 있음")
-            binding.youtubeResultFragRecylerview.visibility = View.VISIBLE
-            youtubeRecipeList.addAll(response.items)
-            youtubeAdapter.notifyItemInserted(youtubeRecipeList.size - 1)
-
-            youtubeAdapter.notifyItemInserted(isScrapList.size - 1)
-        }
-        Log.d(TAG, "스크랩여부리스트사이즈 : ${isScrapList.size}")
-
-
-        val result = response.items
-        // Youtube 영상 연결
-        youtubeAdapter.youtubeRecipeItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeItemClick {
-            override fun onClick(view: View, position: Int) {
-                youtubeUrl = "https://www.youtube.com/watch?v=${result[position].id.videoId}"
-                startActivity(
-                    Intent(Intent.ACTION_VIEW)
-                        .setData(Uri.parse(youtubeUrl))
-                        .setPackage("com.google.android.youtube")
-                )
+                youtubeAdapter.notifyItemInserted(isScrapList.size - 1)
             }
-        }
-        // Youtube 스크랩
-        youtubeAdapter.youtubeRecipeScrapItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeScrapItemClick {
-            override fun onClick(view: View, position: Int) {
-                youtubeUrl = "https://www.youtube.com/watch?v=${youtubeAdapter.youtubeRecipeList[position].id.videoId}"
-                Log.d(TAG, "position : $position!!!!")
-                YoutubeRecipeService(this@YoutubeResultFragment).postAddingScrap(
-                    YoutubeRecipeScrapRequest(
-                        youtubeAdapter.youtubeRecipeList[position].id.videoId,
+            Log.d(TAG, "스크랩여부리스트사이즈 : ${isScrapList.size}")
 
-                        youtubeAdapter.youtubeRecipeList[position].snippet.title,
-                        youtubeAdapter.youtubeRecipeList[position].snippet.thumbnails.default.url,
-                        youtubeUrl,
-                        formatPostDate(youtubeAdapter.youtubeRecipeList[position].snippet.publishTime),
-                        youtubeAdapter.youtubeRecipeList[position].snippet.channelTitle,
-                        "00:00")
-                )
-                Log.d(TAG, "${youtubeAdapter.youtubeRecipeList[position].id.videoId}, " +
-                        "${youtubeAdapter.youtubeRecipeList[position].snippet.title}, " +
-                        "${youtubeAdapter.youtubeRecipeList[position].snippet.thumbnails.default.url}, " +
-                        "$youtubeUrl, ${formatPostDate(youtubeAdapter.youtubeRecipeList[position].snippet.publishTime)}, " + youtubeAdapter.youtubeRecipeList[position].snippet.channelTitle
-                )
-                // 토스트 메세지
+
+            val result = response.items
+            // Youtube 영상 연결
+            youtubeAdapter.youtubeRecipeItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeItemClick {
+                override fun onClick(view: View, position: Int) {
+                    youtubeUrl = "https://www.youtube.com/watch?v=${result[position].id.videoId}"
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW)
+                            .setData(Uri.parse(youtubeUrl))
+                            .setPackage("com.google.android.youtube")
+                    )
+                }
+            }
+            // Youtube 스크랩
+            youtubeAdapter.youtubeRecipeScrapItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeScrapItemClick {
+                override fun onClick(view: View, position: Int) {
+                    youtubeUrl = "https://www.youtube.com/watch?v=${youtubeAdapter.youtubeRecipeList[position].id.videoId}"
+                    Log.d(TAG, "position : $position!!!!")
+                    YoutubeRecipeService(this@YoutubeResultFragment).postAddingScrap(
+                        YoutubeRecipeScrapRequest(
+                            youtubeAdapter.youtubeRecipeList[position].id.videoId,
+
+                            youtubeAdapter.youtubeRecipeList[position].snippet.title,
+                            youtubeAdapter.youtubeRecipeList[position].snippet.thumbnails.default.url,
+                            youtubeUrl,
+                            formatPostDate(youtubeAdapter.youtubeRecipeList[position].snippet.publishTime),
+                            youtubeAdapter.youtubeRecipeList[position].snippet.channelTitle,
+                            "00:00")
+                    )
+                    Log.d(TAG, "${youtubeAdapter.youtubeRecipeList[position].id.videoId}, " +
+                            "${youtubeAdapter.youtubeRecipeList[position].snippet.title}, " +
+                            "${youtubeAdapter.youtubeRecipeList[position].snippet.thumbnails.default.url}, " +
+                            "$youtubeUrl, ${formatPostDate(youtubeAdapter.youtubeRecipeList[position].snippet.publishTime)}, " + youtubeAdapter.youtubeRecipeList[position].snippet.channelTitle
+                    )
+                    // 토스트 메세지
+                }
             }
         }
     }

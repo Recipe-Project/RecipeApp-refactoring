@@ -55,8 +55,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.searchFragEt.setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-
                     keyword = binding.searchFragEt.text.toString()
+                    if (RecentKeywordRecyclerviewAdapter.list.contains(keyword)) RecentKeywordRecyclerviewAdapter.list.remove(keyword)
                     RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색어 리스트에 검색어 추가
                     SearchService(this).postKeyword(keyword) // 검색어 서버로 전송
                     requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()

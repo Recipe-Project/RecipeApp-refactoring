@@ -116,7 +116,7 @@ class MyRecipeCreateActivity :
             binding.etContent.setText(content, TextView.BufferType.EDITABLE)
 
             if (thumbnail != null) {
-                Glide.with(this).load(thumbnail).centerCrop().into(binding.imgPick)
+                Glide.with(this).load(thumbnail).thumbnail(0.1f).centerCrop().into(binding.imgPick)
             }
 
             pickItem =
@@ -174,78 +174,148 @@ class MyRecipeCreateActivity :
     }
 
     private fun imageUpload() {
-        if (isPhoto) {
-            // 사진
-            try {
-                bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    ImageDecoder.decodeBitmap(
-                        ImageDecoder.createSource(
-                            contentResolver,
-                            uri
+        if (isModify) {
+            if (isPhoto) {
+                try {
+                    bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                contentResolver,
+                                uri
+                            )
                         )
-                    )
-                } else {
-                    MediaStore.Images.Media.getBitmap(contentResolver, uri)
+                    } else {
+                        MediaStore.Images.Media.getBitmap(contentResolver, uri)
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
 
-        } else {
-            // 기본 이미지
-            bitmap = null
-        }
-
-        val baos = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
+                val baos = ByteArrayOutputStream()
+                bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
 
 
-        var timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        var imgFileName = "${userIdx}/${userIdx}_${timeStamp}_.png"
-        val storage = Firebase.storage("gs://recipeapp-a79ed.appspot.com")
-        val storageRef = storage.reference
+                var timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+                var imgFileName = "${userIdx}/${userIdx}_${timeStamp}_.png"
+                val storage = Firebase.storage("gs://recipeapp-a79ed.appspot.com")
+                val storageRef = storage.reference
 
-        val ref = storageRef.child(imgFileName)
-        var uploadTask = ref.putBytes(data)
+                val ref = storageRef.child(imgFileName)
+                var uploadTask = ref.putBytes(data)
 
 
-        val urlTask = uploadTask.continueWithTask { task ->
-            if (!task.isSuccessful) {
-                task.exception?.let {
-                    throw it
+                val urlTask = uploadTask.continueWithTask { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
+                    }
+                    ref.downloadUrl
+                }.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        downloadUri = task.result.toString()
+                        Log.d(
+                            TAG,
+                            "MyRecipeCreateActivity - imageUpload() : 다운로드 uri : $downloadUri"
+                        )
+
+                        thumbnail = downloadUri
+
+                        val param = HashMap<String, Any?>()
+                        if (bitmap != null) {
+                            param["thumbnail"] = thumbnail!!
+                        } else {
+                            param["thumbnail"] = null
+                        }
+
+                        param["title"] = title!!
+                        param["content"] = content!!
+                        param["ingredientList"] = pickItem
+
+
+                        MyRecipeCreateService(this).patchMyRecipe(param, myRecipeIdx)
+
+                    } else {
+                        showCustomToast(getString(R.string.networkError))
+                    }
                 }
-            }
-            ref.downloadUrl
-        }.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                downloadUri = task.result.toString()
-                Log.d(TAG, "MyRecipeCreateActivity - imageUpload() : 다운로드 uri : $downloadUri")
-
-                thumbnail = downloadUri
-
+            } else {
                 val param = HashMap<String, Any?>()
-                if (bitmap != null) {
-                    param["thumbnail"] = thumbnail!!
-                } else {
-                    param["thumbnail"] = null
-                }
-
+                param["thumbnail"] = thumbnail
                 param["title"] = title!!
                 param["content"] = content!!
                 param["ingredientList"] = pickItem
-
-                if (isModify) {
-                    MyRecipeCreateService(this).patchMyRecipe(param, myRecipeIdx)
-                } else {
-                    MyRecipeCreateService(this).postMyRecipeCreate(param)
+                MyRecipeCreateService(this).patchMyRecipe(param, myRecipeIdx)
+            }
+        } else {
+            if (isPhoto) {
+                // 사진
+                try {
+                    bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                contentResolver,
+                                uri
+                            )
+                        )
+                    } else {
+                        MediaStore.Images.Media.getBitmap(contentResolver, uri)
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
                 }
 
             } else {
-                showCustomToast(getString(R.string.networkError))
+                // 기본 이미지
+                bitmap = null
+            }
+
+            val baos = ByteArrayOutputStream()
+            bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+
+
+            var timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            var imgFileName = "${userIdx}/${userIdx}_${timeStamp}_.png"
+            val storage = Firebase.storage("gs://recipeapp-a79ed.appspot.com")
+            val storageRef = storage.reference
+
+            val ref = storageRef.child(imgFileName)
+            var uploadTask = ref.putBytes(data)
+
+
+            val urlTask = uploadTask.continueWithTask { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                ref.downloadUrl
+            }.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    downloadUri = task.result.toString()
+                    Log.d(TAG, "MyRecipeCreateActivity - imageUpload() : 다운로드 uri : $downloadUri")
+
+                    thumbnail = downloadUri
+
+                    val param = HashMap<String, Any?>()
+                    if (bitmap != null) {
+                        param["thumbnail"] = thumbnail!!
+                    } else {
+                        param["thumbnail"] = null
+                    }
+
+                    param["title"] = title!!
+                    param["content"] = content!!
+                    param["ingredientList"] = pickItem
+
+                    MyRecipeCreateService(this).postMyRecipeCreate(param)
+                } else {
+                    showCustomToast(getString(R.string.networkError))
+                }
             }
         }
-
     }
 
     override fun onResume() {
@@ -264,7 +334,6 @@ class MyRecipeCreateActivity :
     // 재료 직접 추가 버튼
     override fun selectAddDirect() {
         val intent = Intent(this, AddDirectMyRecipeActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivityForResult(intent, ADD_DIRECT_CODE)
     }
 
@@ -306,7 +375,8 @@ class MyRecipeCreateActivity :
                 pickItem.add(DirectIngredientList(it.ingredientName, it.ingredientIcon))
             }
         }
-        pickItemRecyclerViewAdapter.submitList(pickItem)
+        Log.d(TAG, "MyRecipeCreateActivity - pickBtnSaveClick() : 선택한 아이템 : $pickItem")
+
         if (pickItem.size > 0) {
             binding.rvIngredient.visibility = View.VISIBLE
             binding.tvPleaseAddIngredient.visibility = View.INVISIBLE
@@ -314,6 +384,7 @@ class MyRecipeCreateActivity :
             binding.rvIngredient.visibility = View.GONE
             binding.tvPleaseAddIngredient.visibility = View.VISIBLE
         }
+        pickItemRecyclerViewAdapter.submitList(pickItem)
         binding.rvIngredient.scrollToPosition(pickItem.size - 1)
     }
 
@@ -369,9 +440,12 @@ class MyRecipeCreateActivity :
                 }
             }
             ADD_DIRECT_CODE -> {
-                val data =
-                    data?.extras?.getParcelableArrayList<Parcelable>("pick") as java.util.ArrayList<Ingredient>?
-                pickBtnSaveClick(data)
+                onNewIntent(intent)
+                val pickData =
+                    data?.extras?.getParcelableArrayList<Parcelable>("addIngredient") as? ArrayList<Ingredient>
+                pickBtnSaveClick(pickData)
+
+
             }
         }
     }

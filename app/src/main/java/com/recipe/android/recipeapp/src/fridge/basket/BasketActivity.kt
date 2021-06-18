@@ -136,6 +136,17 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
     // 개수 조절
     override fun onClickCount(cnt: Int, position: Int) {
         basketItemList[position].ingredientCnt = cnt
+        basketRecyclerViewAdapter.notifyDataSetChanged()
+    }
+
+    override fun onUpCnt(position: Int, cnt: Int) {
+        basketItemList[position].ingredientCnt = cnt
+        basketRecyclerViewAdapter.notifyDataSetChanged()
+    }
+
+    override fun onDownCnt(position: Int, cnt: Int) {
+        basketItemList[position].ingredientCnt = cnt
+        basketRecyclerViewAdapter.notifyDataSetChanged()
     }
 
     // 유통기한

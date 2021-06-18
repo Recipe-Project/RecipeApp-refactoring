@@ -1,7 +1,9 @@
 package com.recipe.android.recipeapp.src.emptyFridge
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
@@ -21,15 +23,19 @@ import com.recipe.android.recipeapp.src.search.SearchFragment
 import com.recipe.android.recipeapp.src.search.SearchResultFragment
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
 
-class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmptyFridgeBinding::bind, R.layout.fragment_empty_fridge), EmptyFridgeView {
+class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(
+    FragmentEmptyFridgeBinding::bind,
+    R.layout.fragment_empty_fridge
+), EmptyFridgeView {
 
     val TAG = "EmptyFridgeFragment"
     private var start = 0
     private var display = 10
+
     // private var totalCount = 0
     private var isEnd = false
     private var emptyFridgeList = mutableListOf<EmptyFridgeResult>()
-    private lateinit var emptyAdapter : EmptyFridgeRecyclerviewAdapter
+    private lateinit var emptyAdapter: EmptyFridgeRecyclerviewAdapter
     private lateinit var layoutManager: LinearLayoutManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +43,7 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
 
         val rv = binding.emptyFridgeFragRecyclerview
 
-        layoutManager = LinearLayoutManager(requireContext())
+        layoutManager = LinearLayoutManagerWrapper(requireContext(), LinearLayoutManager.VERTICAL, false)
         setUpRecyclerView()
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -47,11 +53,14 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
                 val pastVisibleItem = layoutManager.findFirstVisibleItemPosition()
                 val total = emptyAdapter.itemCount
 
-                if(!rv.canScrollVertically(1)) {
-                    if(visibleItemCount + pastVisibleItem >= total) {
-                        if(!isEnd) {
+                if (!rv.canScrollVertically(1)) {
+                    if (visibleItemCount + pastVisibleItem >= total) {
+                        if (!isEnd) {
                             start += display
-                            EmptyFridgeService(this@EmptyFridgeFragment).tryGetEmptyFridge(start, display)
+                            EmptyFridgeService(this@EmptyFridgeFragment).tryGetEmptyFridge(
+                                start,
+                                display
+                            )
                         }
                     }
                 }
@@ -63,7 +72,7 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
 
         if (activity != null) {
             val newEmptyFridgeList = response.result.recipeList
-            if(response.result.recipeList.isNullOrEmpty() && start == 0) {
+            if (response.result.recipeList.isNullOrEmpty() && start == 0) {
                 Log.d(TAG, "onGetEmptyFridgeSuccess : 데이터 없음")
                 if (activity != null) {
                     binding.emptyFridgeFragRecyclerview.visibility = View.INVISIBLE
@@ -84,7 +93,7 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
             } else if (response.result.recipeList.isNotEmpty() && start != 0) {
                 Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 있음")
 
-                if (activity != null) {
+                if (activity != null && requireActivity().supportFragmentManager.fragments.last() is EmptyFridgeFragment) {
                     binding.emptyFridgeFragRecyclerview.visibility = View.VISIBLE
                     emptyFridgeList.clear()
                     emptyFridgeList.addAll(newEmptyFridgeList)
@@ -92,7 +101,7 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
                 }
             }
 
-            if(response.result.recipeList.isNullOrEmpty() && start != 0) {
+            if (response.result.recipeList.isNullOrEmpty() && start != 0) {
                 Log.d(TAG, "onGetEmptyFridgeSuccess : 추가 데이터 없음")
 
                 isEnd = true
@@ -128,16 +137,16 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
     }
 
 
-
-    override fun getPublicRecipeDetail(id : Int) {
+    override fun getPublicRecipeDetail(id: Int) {
         val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
         intent.putExtra("index", id)
         requireActivity().startActivity(intent)
     }
 
-    override fun getBlogRecipe(keyword : String) {
+    override fun getBlogRecipe(keyword: String) {
         // 네비게이션 호스트
-        val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navHostFragment =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         // 네비게이션 컨트롤러
         val navController = navHostFragment.navController
         val bundle = bundleOf("searchType" to "blog", "searchKeyword" to keyword)
@@ -145,9 +154,10 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
 //        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
     }
 
-    override fun getYoutubeRecipe(keyword : String) {
+    override fun getYoutubeRecipe(keyword: String) {
         // 네비게이션 호스트
-        val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navHostFragment =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         // 네비게이션 컨트롤러
         val navController = navHostFragment.navController
         val bundle = bundleOf("searchType" to "youtube", "searchKeyword" to keyword)
@@ -155,6 +165,29 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(FragmentEmp
 //        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
     }
 }
+
+class LinearLayoutManagerWrapper : LinearLayoutManager {
+    constructor(context: Context) : super(context) {}
+    constructor(context: Context, orientation: Int, reverseLayout: Boolean) : super(
+        context,
+        orientation,
+        reverseLayout
+    ) {
+    }
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(
+        context,
+        attrs,
+        defStyleAttr,
+        defStyleRes
+    ) {
+    }
+
+    override fun supportsPredictiveItemAnimations(): Boolean {
+        return false
+    }
+}
+
 
 
 

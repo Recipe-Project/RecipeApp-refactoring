@@ -87,6 +87,7 @@ class PickIngredientActivity :
         // 재료 검색
         binding.etSearch.setOnTouchListener { v, event ->
             v.backgroundTintList = ColorStateList.valueOf(getColor(R.color.green))
+            binding.tabLineSearch.setBackgroundColor(getColor(R.color.green))
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     val imm =
@@ -99,6 +100,7 @@ class PickIngredientActivity :
                     binding.etSearch.setOnKeyListener { v, keyCode, event ->
                         if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                             imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+                            binding.etSearch.clearFocus()
                             showLoadingDialog()
                             PickIngredientService(this).getIngredients(binding.etSearch.text.toString())
                             true
@@ -108,6 +110,14 @@ class PickIngredientActivity :
                 }
             }
             true
+        }
+
+        binding.btnSearch.setOnClickListener {
+            showLoadingDialog()
+            PickIngredientService(this).getIngredients(binding.etSearch.text.toString())
+            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+            binding.etSearch.clearFocus()
         }
 
         // 바구니 액티비티

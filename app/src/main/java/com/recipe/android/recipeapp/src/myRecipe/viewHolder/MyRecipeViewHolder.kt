@@ -13,7 +13,7 @@ import com.recipe.android.recipeapp.src.myRecipe.models.MyRecipeResult
 class MyRecipeViewHolder(val binding: ItemMyRecipeListBinding): RecyclerView.ViewHolder(binding.root) {
     fun bindWithView(myRecipeItem: MyRecipeResult) {
         if (myRecipeItem.thumbnail != null) {
-            Glide.with(ApplicationClass.instance).load(myRecipeItem.thumbnail).transform(CenterCrop(), RoundedCorners(20)).into(binding.imgRecipe)
+            Glide.with(ApplicationClass.instance).load(myRecipeItem.thumbnail).transform(CenterCrop(), RoundedCorners(20)).thumbnail(0.1f).into(binding.imgRecipe)
         } else {
             binding.imgRecipe.setImageResource(R.drawable.img_my_recipe_default_small)
         }

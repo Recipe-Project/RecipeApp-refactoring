@@ -42,7 +42,7 @@ YoutubeScrapFragmentView{
 
     // 스크랩 조회 api 성공
     override fun onGetYoutubeScrapSuccess(response: YoutubeScrapResponse) {
-        if (response.isSuccess) {
+        if (response.isSuccess && activity != null) {
             response.result.scrapYoutubeList?.forEach {
                 youtubeScrapItemList.add(it)
             }

@@ -107,21 +107,30 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_search"
         style="@style/Body1Style"
-        android:maxLines="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
-        android:drawableEnd="@drawable/ic_search_black"
-        android:hint="@string/searchIngredient"
+        android:layout_marginEnd="10dp"
         android:background="@null"
+        android:hint="@string/searchIngredient"
+        android:maxLines="1"
         android:textColor="@color/black"
         android:textColorHint="@color/gray_200"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_pick" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:padding="4dp"
+        android:src="@drawable/ic_search_black"
+        app:layout_constraintBottom_toBottomOf="@+id/et_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_search" />
 
     <View
         android:id="@+id/tab_line_search"

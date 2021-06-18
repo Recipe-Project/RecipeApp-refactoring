@@ -38,6 +38,10 @@ class PickItemRecyclerViewAdapter(val view: MyRecipeCreateActivityView) :
         notifyDataSetChanged()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     inner class PickIngredientViewHolder(val binding: ItemPickIngredientMyRecipeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindWithView(ingredient: DirectIngredientList, position: Int) {

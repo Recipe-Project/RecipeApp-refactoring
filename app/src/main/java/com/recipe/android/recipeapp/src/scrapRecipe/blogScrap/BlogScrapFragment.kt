@@ -39,7 +39,7 @@ BlogScrapFragmnetView{
     }
 
     override fun onGetBlogScrapSuccess(response: BlogScrapResponse) {
-        if (response.isSuccess) {
+        if (response.isSuccess && activity != null) {
             response.result?.forEach {
                 blogScrapItemList.add(it)
             }

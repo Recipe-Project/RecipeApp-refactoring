@@ -3,6 +3,7 @@ package com.recipe.android.recipeapp.config
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.kakao.sdk.common.KakaoSdk
@@ -51,6 +52,8 @@ class ApplicationClass: Application() {
         super.onCreate()
 
         instance = this
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         sSharedPreferences =
             applicationContext.getSharedPreferences(

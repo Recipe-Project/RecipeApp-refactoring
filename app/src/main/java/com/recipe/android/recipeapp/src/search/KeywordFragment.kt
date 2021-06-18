@@ -21,12 +21,14 @@ import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 import okhttp3.internal.notifyAll
 
-class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBinding::bind, R.layout.fragment_keyword), SearchKeywordView {
+class KeywordFragment :
+    BaseFragment<FragmentKeywordBinding>(FragmentKeywordBinding::bind, R.layout.fragment_keyword),
+    SearchKeywordView {
 
     val TAG = "KeywordFragment"
 
-    lateinit var keyword : String
-    lateinit var adapter : RecentKeywordRecyclerviewAdapter
+    lateinit var keyword: String
+    lateinit var adapter: RecentKeywordRecyclerviewAdapter
 
     var keywordListener: KeywordListener? = null
 
@@ -43,22 +45,28 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
             binding.keywordFragRecentKeywordRecylerview.adapter = adapter
 
             // 최근 검색어 기록으로 레시피 검색하기
-            adapter.recentKeywordItemClick = object : RecentKeywordRecyclerviewAdapter.RecentKeywordItemClick{
-                override fun onClick(view: View, position: Int) {
-                    keyword = RecentKeywordRecyclerviewAdapter.list[position]
-                    RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색에 목록에 추가
-                    SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
+            adapter.recentKeywordItemClick =
+                object : RecentKeywordRecyclerviewAdapter.RecentKeywordItemClick {
+                    override fun onClick(view: View, position: Int) {
+                        keyword = RecentKeywordRecyclerviewAdapter.list[position]
+                        list.removeAt(position)
+                        RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색에 목록에 추가
+                        SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword))
+                            .commitAllowingStateLoss()
+                        keywordListener?.setKeyword(keyword)
+                    }
                 }
-            }
 
             // 최근 검색어 삭제하기
-            adapter.keywordClearItemClick = object : RecentKeywordRecyclerviewAdapter.KeywordClearItemClick{
-                override fun onClick(view: View, position: Int) {
-                    Toast.makeText(requireContext(), "검색어가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+            adapter.keywordClearItemClick =
+                object : RecentKeywordRecyclerviewAdapter.KeywordClearItemClick {
+                    override fun onClick(view: View, position: Int) {
+                        Toast.makeText(requireContext(), "검색어가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
-        // 검색기록 x
+            // 검색기록 x
         } else {
             binding.keywordFragRecentKeywordTv.visibility = View.GONE
             binding.keywordFragEraseBtn.visibility = View.GONE
@@ -80,17 +88,23 @@ class KeywordFragment : BaseFragment<FragmentKeywordBinding>(FragmentKeywordBind
             val result = response.result
             val adapter = PopularKeywordRecyclerviewAdapter(result)
             binding.keywordFragPopularKeywordRecylerview.adapter = adapter
-            adapter.popularKeywordItemClick = object : PopularKeywordRecyclerviewAdapter.PopularKeywordItemClick {
-                override fun onClick(view: View, position: Int) {
-                    keyword = result[position].bestKeyword
-                    RecentKeywordRecyclerviewAdapter.list.add(keyword)
-                    SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
+            adapter.popularKeywordItemClick =
+                object : PopularKeywordRecyclerviewAdapter.PopularKeywordItemClick {
+                    override fun onClick(view: View, position: Int) {
+                        keyword = result[position].bestKeyword
+                        if (RecentKeywordRecyclerviewAdapter.list.contains(keyword)) RecentKeywordRecyclerviewAdapter.list.remove(
+                            keyword
+                        )
+                        RecentKeywordRecyclerviewAdapter.list.add(keyword)
+                        SearchService(this@KeywordFragment).postKeyword(keyword) // 검색어 서버로 전송
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword))
+                            .commitAllowingStateLoss()
 
-                    Log.d(TAG, "KeywordFragment - onClick() : 이게 키워드 : $keyword")
-                    keywordListener?.setKeyword(keyword)
+                        Log.d(TAG, "KeywordFragment - onClick() : 이게 키워드 : $keyword")
+                        keywordListener?.setKeyword(keyword)
+                    }
                 }
-            }
         }
     }
 

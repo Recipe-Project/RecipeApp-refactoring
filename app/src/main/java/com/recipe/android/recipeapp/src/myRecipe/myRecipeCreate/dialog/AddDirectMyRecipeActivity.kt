@@ -1,6 +1,7 @@
 package com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -125,13 +126,13 @@ class AddDirectMyRecipeActivity :
                 showCustomToast("재료명을 입력해주세요.")
             }
 
+            Log.d(TAG, "MyRecipeCreateActivity - onCreate() : 여기 $pickIngredientsMyRecipe")
+
             val intent = Intent()
-            intent.putExtra("pick", pickIngredientsMyRecipe)
-            setResult(300, intent)
+            intent.putExtra("addIngredient", pickIngredientsMyRecipe)
+            setResult(Activity.RESULT_OK, intent)
             finish()
         }
-
-
     }
 
     override fun onBackPressed() {

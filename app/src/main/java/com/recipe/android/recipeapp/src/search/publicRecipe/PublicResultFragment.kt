@@ -31,7 +31,7 @@ class PublicResultFragment(private val keyword : String)
     }
 
     override fun onGetPublicRecipeSuccess(response: PublicRecipeResponse) {
-        if(response.isSuccess) {
+        if (activity != null && response.isSuccess) {
             dismissLoadingDialog()
 
             val result = response.result

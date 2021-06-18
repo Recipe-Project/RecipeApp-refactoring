@@ -43,7 +43,7 @@ class PublicScrapFragment : BaseFragment<FragmentPublicScrapBinding>(
 
     // 스크랩 조회 api 성공
     override fun onGetPublicScrapSuccess(response: PublicScrapResponse) {
-        if (response.isSuccess) {
+        if (response.isSuccess && activity != null) {
             publicScrapItemList.clear()
             response.result.scrapRecipeList?.forEach {
                 publicScrapItemList.add(it)

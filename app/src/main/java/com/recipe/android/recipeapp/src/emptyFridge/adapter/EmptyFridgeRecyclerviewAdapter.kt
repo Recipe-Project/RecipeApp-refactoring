@@ -22,17 +22,22 @@ class EmptyFridgeRecyclerviewAdapter(val view : EmptyFridgeView) : RecyclerView.
         return CustomViewholder(binding, view)
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
-        if (emptyFridgeList.size > 0 && position < emptyFridgeList.size) {
-            holder.bindWithView(emptyFridgeList[position])
+        val realPosition = holder.adapterPosition
+        if (emptyFridgeList.size > 0 && realPosition < emptyFridgeList.size) {
+            holder.bindWithView(emptyFridgeList[realPosition])
             holder.public.setOnClickListener {
-                view.getPublicRecipeDetail(emptyFridgeList[position].recipeId)
+                view.getPublicRecipeDetail(emptyFridgeList[realPosition].recipeId)
             }
             holder.blog.setOnClickListener {
-                view.getBlogRecipe(emptyFridgeList[position].title)
+                view.getBlogRecipe(emptyFridgeList[realPosition].title)
             }
             holder.youtube.setOnClickListener {
-                view.getYoutubeRecipe(emptyFridgeList[position].title)
+                view.getYoutubeRecipe(emptyFridgeList[realPosition].title)
             }
         }
     }

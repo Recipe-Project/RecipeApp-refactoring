@@ -55,11 +55,9 @@ class MyFridgeAllIngredientRecyclerviewAdapter() : RecyclerView.Adapter<MyFridge
                 binding.tvCategory.visibility = View.GONE
                 binding.bottomMargin.visibility = View.GONE
             }
-
         }
 
         override fun onDeleteIngredientSuccess(response: DeleteIngredientResponse) {
-
         }
 
         override fun onDeleteIngredientFailure(message: String) {

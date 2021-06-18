@@ -18,4 +18,7 @@ interface BasketActivityView {
     fun onDeleteBasketSuccess(deleteBasketResponse: DeleteBasketResponse, ingredient: String)
 
     fun onBasketServiceFailure(message: String)
+
+    fun onUpCnt(position: Int, cnt:Int)
+    fun onDownCnt(position: Int, cnt:Int)
 }

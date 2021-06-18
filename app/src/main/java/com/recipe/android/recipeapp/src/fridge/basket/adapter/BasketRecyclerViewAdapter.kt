@@ -21,29 +21,29 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
 
     private var ingredientList = ArrayList<BasketIngredient>()
 
-    private var ingredientCnt = 1
-
     val context = ApplicationClass.instance
 
     inner class BasketViewHolder(val binding: ItemBasketIngredientBinding): RecyclerView.ViewHolder(
         binding.root
     ), DateDialogInterface{
         fun bindWithView(ingredient: BasketIngredient, position: Int) {
+
+            val ingredientCnt = ingredient.ingredientCnt
+            binding.tvIngredientCnt.text = ingredientCnt.toString()
+
             binding.tvIngredientName.text = ingredient.ingredientName
             if (ingredient.ingredientIcon != "") {
                 Glide.with(context).load(ingredient.ingredientIcon).into(binding.icIngredient)
             }
 
             binding.btnAdd.setOnClickListener{
-                ingredientCnt += 1
-                binding.tvIngredientCnt.text = ingredientCnt.toString()
-                view.onClickCount(binding.tvIngredientCnt.text.toString().toInt(), position)
+                view.onUpCnt(position, ingredientCnt + 1)
+                binding.tvIngredientCnt.text = (ingredientCnt + 1).toString()
             }
             binding.btnRemove.setOnClickListener {
-                if (ingredientCnt > 0) {
-                    ingredientCnt -= 1
-                    binding.tvIngredientCnt.text = ingredientCnt.toString()
-                    view.onClickCount(binding.tvIngredientCnt.text.toString().toInt(), position)
+                if (ingredientCnt > 1) {
+                    view.onDownCnt(position, ingredientCnt - 1)
+                    binding.tvIngredientCnt.text = (ingredientCnt - 1).toString()
                 }
             }
 
@@ -73,8 +73,6 @@ RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){
                 "냉동" -> binding.btnFrozen.performClick()
                 "실온" -> binding.btnRoomTemperature.performClick()
             }
-
-            binding.tvIngredientCnt.text = ingredient.ingredientCnt.toString()
 
             if (ingredient.expiredAt == null) {
                 binding.tvExpired.text = "00.00.00까지"

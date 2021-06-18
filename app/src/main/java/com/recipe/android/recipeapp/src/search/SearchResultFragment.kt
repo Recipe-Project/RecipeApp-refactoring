@@ -18,7 +18,7 @@ class SearchResultFragment(private val keyword: String) : BaseFragment<FragmentS
 
     val TAG = "SearchResultFragment"
 
-    private val recipeTypeList = arrayListOf("블로그", "유투브", "추천")
+    private val recipeTypeList = arrayListOf("블로그", "유튜브", "추천")
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

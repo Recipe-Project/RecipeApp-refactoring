@@ -79,68 +79,69 @@ class BlogResultFragment(private val keyword : String)
 
         dismissLoadingDialog()
 
-        if(response.isSuccess) {
-            val totalCnt = response.result.total
+        if (activity != null) {
+            if(response.isSuccess) {
+                val totalCnt = response.result.total
 
-            if(totalCnt > 100) {
-                binding.blogFragItemCnt.text = "100+"
-            } else {
-                binding.blogFragItemCnt.text = totalCnt.toString()
-            }
-
-            if(response.result.blogList.isNullOrEmpty() && start == 1) {
-                Log.d(TAG, "onGetBlogRecipeSuccess : 데이터 없음")
-                binding.blogResultFragRecylerview.visibility = View.GONE
-                binding.blogFragItemCntUnit.visibility = View.GONE
-                binding.blogFragItemCnt.visibility = View.GONE
-                binding.defaultTv.visibility = View.VISIBLE
-                binding.defaultTv.text = "'$keyword'에 대한\n검색결과가 없습니다."
-            } else if (response.result.blogList.isNotEmpty() && start == 1) {
-                Log.d(TAG, "onGetBlogRecipeSuccess : 데이터 있음")
-                binding.blogResultFragRecylerview.visibility = View.VISIBLE
-                binding.blogFragItemCntUnit.visibility = View.VISIBLE
-                binding.blogFragItemCnt.visibility = View.VISIBLE
-                binding.defaultTv.visibility = View.GONE
-
-                blogRecipeList.addAll(response.result.blogList)
-                blogAdapter.submitList(blogRecipeList)
-            } else if (response.result.blogList.isNotEmpty() && start != 1) {
-                Log.d(TAG, "onGetBlogRecipeSuccess : 추가 데이터 있음")
-                binding.blogResultFragRecylerview.visibility = View.VISIBLE
-                blogRecipeList.addAll(response.result.blogList)
-                blogAdapter.notifyItemInserted(blogRecipeList.size - 1)
-            }
-
-            if(response.result.blogList.isNullOrEmpty() && start != 1) {
-                Log.d(TAG, "onGetBlogRecipeSuccess : 추가 데이터 없음")
-
-                binding.blogResultFragRecylerview.visibility = View.VISIBLE
-                isEnd = true
-            }
-
-            val result = response.result.blogList
-            // 블로그 스크랩
-            blogAdapter.blogRecipeScrapItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeScrapItemClick {
-                override fun onClick(view: View, position: Int) {
-                    BlogRecipeService(this@BlogResultFragment).tryPostAddingScrap(
-                        BlogRecipeScrapRequest(result[position].title, result[position].blogUrl, result[position].description, result[position].blogName,
-                            result[position].postDate, result[position].thumbnail)
-                    )
-
+                if(totalCnt > 100) {
+                    binding.blogFragItemCnt.text = "100+"
+                } else {
+                    binding.blogFragItemCnt.text = totalCnt.toString()
                 }
-            }
 
-            // 블로그 검색 결과 URL 연결
-            blogAdapter.blogRecipeItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeItemClick {
-                override fun onClick(view: View, position: Int) {
-                    startActivity(
-                        Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse(result[position].blogUrl))
-                    )
+                if(response.result.blogList.isNullOrEmpty() && start == 1) {
+                    Log.d(TAG, "onGetBlogRecipeSuccess : 데이터 없음")
+                    binding.blogResultFragRecylerview.visibility = View.GONE
+                    binding.blogFragItemCntUnit.visibility = View.GONE
+                    binding.blogFragItemCnt.visibility = View.GONE
+                    binding.defaultTv.visibility = View.VISIBLE
+                    binding.defaultTv.text = "'$keyword'에 대한\n검색결과가 없습니다."
+                } else if (response.result.blogList.isNotEmpty() && start == 1) {
+                    Log.d(TAG, "onGetBlogRecipeSuccess : 데이터 있음")
+                    binding.blogResultFragRecylerview.visibility = View.VISIBLE
+                    binding.blogFragItemCntUnit.visibility = View.VISIBLE
+                    binding.blogFragItemCnt.visibility = View.VISIBLE
+                    binding.defaultTv.visibility = View.GONE
+
+                    blogRecipeList.addAll(response.result.blogList)
+                    blogAdapter.submitList(blogRecipeList)
+                } else if (response.result.blogList.isNotEmpty() && start != 1) {
+                    Log.d(TAG, "onGetBlogRecipeSuccess : 추가 데이터 있음")
+                    binding.blogResultFragRecylerview.visibility = View.VISIBLE
+                    blogRecipeList.addAll(response.result.blogList)
+                    blogAdapter.notifyItemInserted(blogRecipeList.size - 1)
+                }
+
+                if(response.result.blogList.isNullOrEmpty() && start != 1) {
+                    Log.d(TAG, "onGetBlogRecipeSuccess : 추가 데이터 없음")
+
+                    binding.blogResultFragRecylerview.visibility = View.VISIBLE
+                    isEnd = true
+                }
+
+                val result = response.result.blogList
+                // 블로그 스크랩
+                blogAdapter.blogRecipeScrapItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeScrapItemClick {
+                    override fun onClick(view: View, position: Int) {
+                        BlogRecipeService(this@BlogResultFragment).tryPostAddingScrap(
+                            BlogRecipeScrapRequest(result[position].title, result[position].blogUrl, result[position].description, result[position].blogName,
+                                result[position].postDate, result[position].thumbnail)
+                        )
+
+                    }
+                }
+
+                // 블로그 검색 결과 URL 연결
+                blogAdapter.blogRecipeItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeItemClick {
+                    override fun onClick(view: View, position: Int) {
+                        startActivity(
+                            Intent(Intent.ACTION_VIEW)
+                                .setData(Uri.parse(result[position].blogUrl))
+                        )
+                    }
                 }
             }
         }
-
     }
 
     override fun onGetBlogRecipeFailure(message: String) {
