@@ -13,13 +13,9 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemMyFridgeIngredientRecyclerviewBinding
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment.Companion.checkboxList
-import com.recipe.android.recipeapp.src.fridge.FridgeFragment.Companion.patchFridgeList
-import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.DateDialogInterface
 import com.recipe.android.recipeapp.src.fridge.dialog.DateDialog
-import com.recipe.android.recipeapp.src.fridge.home.models.CheckboxData
 import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
-import com.recipe.android.recipeapp.src.fridge.home.models.PatchFridgeObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -31,6 +27,7 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
 
     var fridgeItemList = ArrayList<FridgeItem>()
     var index = 0
+    var isEditMode = false
 
     lateinit var binding : ItemMyFridgeIngredientRecyclerviewBinding
 
@@ -43,7 +40,14 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
         holder.bindWithView(fridgeItemList[position], position)
     }
 
-    override fun getItemCount(): Int = fridgeItemList.size
+    override fun getItemCount(): Int {
+        Log.d(TAG, "MyFridgeIngredientRecyclerviewAdapter - getItemCount() : ${fridgeItemList.size}")
+        return fridgeItemList.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
     inner class CustomViewholder(val binding: ItemMyFridgeIngredientRecyclerviewBinding, val context: Context)
         : RecyclerView.ViewHolder(binding.root), DateDialogInterface {
@@ -154,8 +158,10 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
 
             // 달력 띄우기
             binding.expireDateTv.setOnClickListener {
-                val dateDialog = DateDialog(context, this, position)
-                dateDialog.show()
+                if (isEditMode) {
+                    val dateDialog = DateDialog(context, this, position)
+                    dateDialog.show()
+                }
             }
 
             if(FridgeFragment.updateButtonFlag) {
@@ -193,8 +199,9 @@ class MyFridgeIngredientRecyclerviewAdapter(val context: Context)
         }
     }
 
-    fun submitList(fridgeItemList: ArrayList<FridgeItem>) {
+    fun submitList(fridgeItemList: ArrayList<FridgeItem>, isEditMode: Boolean) {
         this.fridgeItemList = fridgeItemList
+        this.isEditMode = isEditMode
         notifyDataSetChanged()
     }
 

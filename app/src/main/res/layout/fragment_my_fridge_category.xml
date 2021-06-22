@@ -1,55 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ingredient_layout">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_category"
+        style="@style/Subtitle2Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="육류" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:descendantFocusability="blocksDescendants">
+        android:layout_marginTop="8dp"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintTop_toBottomOf="@+id/tv_category"
+        android:clipToPadding="false"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_category"
-            style="@style/ButtonStyle2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/gray_500"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="육류" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/default_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_fridge_default_tv"
+        style="@style/Body2Style"
+        android:textColor="@color/gray_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/fridge_frag_dotted_line_bottom"
+        android:visibility="gone"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_ingredient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_category"
-            android:layout_marginTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/default_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/my_fridge_default_tv"
-            style="@style/Body2Style"
-            android:textColor="@color/gray_200"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="97dp"
-            android:visibility="gone"/>
+    <View
+        android:id="@+id/fridge_frag_dotted_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/dotted_lines_horizontal"
+        android:layerType="software"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="@id/rv_ingredient"
+        app:layout_constraintStart_toStartOf="@id/rv_ingredient"
+        app:layout_constraintTop_toBottomOf="@id/rv_ingredient"
+        app:layout_goneMarginTop="145dp"/>
 
-        <View
-            android:id="@+id/bottom_margin"
-            android:layout_width="match_parent"
-            android:layout_height="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/rv_ingredient" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    <View
+        android:id="@+id/fridge_frag_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/green"
+        app:layout_constraintTop_toBottomOf="@id/fridge_frag_dotted_line_bottom" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toTopOf="@id/fridge_frag_line_bottom"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

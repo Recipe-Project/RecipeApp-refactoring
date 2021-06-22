@@ -1,7 +1,6 @@
 package com.recipe.android.recipeapp.src.fridge
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -18,8 +17,7 @@ import com.google.firebase.functions.FirebaseFunctions
 import com.opensooq.supernova.gligar.GligarPicker
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
-import com.recipe.android.recipeapp.databinding.FragmentFridgeBinding
-import com.recipe.android.recipeapp.src.MainActivity
+import com.recipe.android.recipeapp.databinding.FragmentFridgeNewBinding
 import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
@@ -27,13 +25,12 @@ import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdap
 import com.recipe.android.recipeapp.src.fridge.home.dialog.DeleteDialog
 import com.recipe.android.recipeapp.src.fridge.home.models.*
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivity
-import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class FridgeFragment :
-    BaseFragment<FragmentFridgeBinding>(FragmentFridgeBinding::bind, R.layout.fragment_fridge),
+    BaseFragment<FragmentFridgeNewBinding>(FragmentFridgeNewBinding::bind, R.layout.fragment_fridge_new),
     FridgeView, IngredientUpdateView {
 
     val TAG = "FridgeFragment"
@@ -56,6 +53,8 @@ class FridgeFragment :
     private lateinit var functions: FirebaseFunctions
     var ingredients = ArrayList<GetFridgeResult>()
     var patchIngredientList = mutableListOf<PatchFridgeObject>()
+
+    var isEditMode = false
 
 
     lateinit var tabLayout: TabLayout
@@ -111,7 +110,11 @@ class FridgeFragment :
                 .show()
         }
 
+
         binding.updateTv.setOnClickListener {
+
+            isEditMode = true
+
             // 냉장고 수정
             updateButtonFlag = true
             showLoadingDialog()
@@ -153,6 +156,8 @@ class FridgeFragment :
 
         binding.saveTv.setOnClickListener {
             // 냉장고 수정 저장하기(냉장고 수정 API 호출 / 수정 완료되면 냉장고 조회 API 호출하기)
+            isEditMode = false
+
             updateButtonFlag = false
             showLoadingDialog()
 
@@ -338,7 +343,10 @@ class FridgeFragment :
                 }.attach()
 
                 // 리사이클러뷰
-                myFridgeCategoryAdapter.submitList(ingredients)
+                myFridgeCategoryAdapter.submitList(ingredients, isEditMode)
+
+                viewPager.offscreenPageLimit = 5
+
             } else if (activity != null) {
                 Log.d(TAG, "Flag False : 냉장고에 재료 없음")
                 // visibility 변경
@@ -352,7 +360,6 @@ class FridgeFragment :
             binding.scrollTop.scrollTo(0,0)
         }
     }
-
     override fun onGetFridgeFailure(message: String) {
 
     }

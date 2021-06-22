@@ -29,14 +29,14 @@ class IngredientViewPagerAdapter(fa: FragmentActivity, val view: PickIngredientA
             categoryFragment.arguments = Bundle().apply {
                 putParcelable("ingredients", ingredients[position - 1])
             }
-            return categoryFragment
+            categoryFragment
         } else {
             //AllCategoryFragment(ingredients, view)
             val allFragment = AllCategoryFragment()
             allFragment.arguments = Bundle().apply {
                 putParcelableArrayList("ingredients", ingredients)
             }
-            return allFragment
+            allFragment
         }
     }
 

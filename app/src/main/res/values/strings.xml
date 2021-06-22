@@ -126,7 +126,7 @@
     <string name="help">고객지원</string>
     <string name="versionInfo">버전정보</string>
     <string name="newVersion">최신버전</string>
-    <string name="newVersionValue">1.0.0</string>
+    <string name="newVersionValue">1.3.0</string>
     <string name="serviceSetting">서비스설정</string>
     <string name="pushAlarm">유통기한 알림 설정</string>
     <string name="developer">개발자 소개</string>

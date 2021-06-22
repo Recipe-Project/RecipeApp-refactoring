@@ -75,7 +75,8 @@ class KeywordFragment :
         }
 
         binding.keywordFragEraseBtn.setOnClickListener {
-
+            list.clear()
+            adapter.notifyDataSetChanged()
         }
 
         // 인기검색어 조회

@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
@@ -41,6 +43,7 @@ class AllCategoryFragment: BaseFragment<FragmentCategoryAllBinding>(
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         }
         ingredientAllRecyclerViewAdapter.submitList(ingredients)
+
 
     }
 
