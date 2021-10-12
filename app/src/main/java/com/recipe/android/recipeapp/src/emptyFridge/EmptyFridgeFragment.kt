@@ -45,6 +45,9 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(
 
         layoutManager = LinearLayoutManagerWrapper(requireContext(), LinearLayoutManager.VERTICAL, false)
         setUpRecyclerView()
+
+        getEmptyFridge()
+
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -66,6 +69,15 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(
                 }
             }
         })
+    }
+
+    private fun getEmptyFridge(){
+        if (activity != null) {
+            start = 0
+            isEnd = false
+            showLoadingDialog()
+            EmptyFridgeService(this).tryGetEmptyFridge(start, display)
+        }
     }
 
     override fun onGetEmptyFridgeSuccess(response: EmptyFridgeResponse) {
@@ -124,18 +136,6 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(
             rv.adapter = emptyAdapter
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-
-        if (activity != null) {
-            start = 0
-            isEnd = false
-            showLoadingDialog()
-            EmptyFridgeService(this).tryGetEmptyFridge(start, display)
-        }
-    }
-
 
     override fun getPublicRecipeDetail(id: Int) {
         val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
