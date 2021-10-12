@@ -21,7 +21,6 @@ class RecipeDetailFragment2(private val processList: ArrayList<PublicRecipeProce
 
         adapter = RecipeProcessRecyclerviewAdapter(processList)
         binding.recipeDetail2FragRecyclerview.adapter = adapter
-
     }
 
 
