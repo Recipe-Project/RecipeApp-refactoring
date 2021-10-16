@@ -35,6 +35,9 @@ class BlogResultFragment(private val keyword : String)
 
         layoutManager = LinearLayoutManager(requireContext())
         setUpRecyclerView()
+
+        getBlogRecipe()
+
         binding.blogResultFragRecylerview.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -55,23 +58,22 @@ class BlogResultFragment(private val keyword : String)
         })
     }
 
+    private fun getBlogRecipe(){
+        if (activity != null) {
+            start = 1
+            blogAdapter.blogRecipeList.clear()
+            isEnd = false
+            showLoadingDialog()
+            BlogRecipeService(this@BlogResultFragment).getBlogRecipe(keyword = keyword, display = display, start = start)
+        }
+    }
+
     private fun setUpRecyclerView() {
         val rv = binding.blogResultFragRecylerview
         rv.setHasFixedSize(true)
         rv.layoutManager = layoutManager
         blogAdapter = BlogRecipeRecyclerviewAdapter(requireContext())
         rv.adapter = blogAdapter
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        start = 1
-        blogAdapter.blogRecipeList.clear()
-        isEnd = false
-        showLoadingDialog()
-        BlogRecipeService(this@BlogResultFragment).getBlogRecipe(keyword = keyword, display = display, start = start)
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -118,28 +120,27 @@ class BlogResultFragment(private val keyword : String)
                     binding.blogResultFragRecylerview.visibility = View.VISIBLE
                     isEnd = true
                 }
-
-                val result = response.result.blogList
-                // 블로그 스크랩
-                blogAdapter.blogRecipeScrapItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeScrapItemClick {
-                    override fun onClick(view: View, position: Int) {
-                        BlogRecipeService(this@BlogResultFragment).tryPostAddingScrap(
-                            BlogRecipeScrapRequest(result[position].title, result[position].blogUrl, result[position].description, result[position].blogName,
-                                result[position].postDate, result[position].thumbnail)
-                        )
-
-                    }
-                }
+                //val result = response.result.blogList
+//                // 블로그 스크랩
+//                blogAdapter.blogRecipeScrapItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeScrapItemClick {
+//                    override fun onClick(view: View, position: Int) {
+//                        BlogRecipeService(this@BlogResultFragment).tryPostAddingScrap(
+//                            BlogRecipeScrapRequest(result[position].title, result[position].blogUrl, result[position].description, result[position].blogName,
+//                                result[position].postDate, result[position].thumbnail)
+//                        )
+//
+//                    }
+//                }
 
                 // 블로그 검색 결과 URL 연결
-                blogAdapter.blogRecipeItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeItemClick {
-                    override fun onClick(view: View, position: Int) {
-                        startActivity(
-                            Intent(Intent.ACTION_VIEW)
-                                .setData(Uri.parse(result[position].blogUrl))
-                        )
-                    }
-                }
+//                blogAdapter.blogRecipeItemClick = object : BlogRecipeRecyclerviewAdapter.BlogRecipeItemClick {
+//                    override fun onClick(view: View, position: Int) {
+//                        startActivity(
+//                            Intent(Intent.ACTION_VIEW)
+//                                .setData(Uri.parse(result[position].blogUrl))
+//                        )
+//                    }
+//                }
             }
         }
     }

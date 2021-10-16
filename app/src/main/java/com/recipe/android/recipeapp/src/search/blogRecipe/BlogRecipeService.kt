@@ -13,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
 
-class BlogRecipeService(val view: BlogRecipeView) {
+class BlogRecipeService(val view: BlogRecipeView?) {
 
     val TAG = "BlogRecipeService"
 
@@ -22,11 +22,11 @@ class BlogRecipeService(val view: BlogRecipeView) {
         blogRecipeInterface.getBlogRecipe(keyword, display, start).enqueue(object : Callback<BlogRecipeResponse>{
             override fun onResponse(call: Call<BlogRecipeResponse>, response: Response<BlogRecipeResponse>) {
                 Log.d(TAG, "BlogRecipeService - onResponse() : 블로그레시피 조회 성공")
-                view.onGetBlogRecipeSuccess(response.body() as BlogRecipeResponse)
+                view?.onGetBlogRecipeSuccess(response.body() as BlogRecipeResponse)
             }
 
             override fun onFailure(call: Call<BlogRecipeResponse>, t: Throwable) {
-                view.onGetBlogRecipeFailure(t.message ?: "통신오류")
+                view?.onGetBlogRecipeFailure(t.message ?: "통신오류")
             }
         })
     }
@@ -36,11 +36,11 @@ class BlogRecipeService(val view: BlogRecipeView) {
         blogRecipeInterface.postAddingScrap(request).enqueue(object : Callback<BlogRecipeScrapResponse>{
             override fun onResponse(call: Call<BlogRecipeScrapResponse>, response: Response<BlogRecipeScrapResponse>) {
                 Log.d(TAG, "BlogRecipeService - onResponse() : 블로그레시피 스크랩 성공")
-                view.onPostBlogRecipeScrapSuccess(response.body() as BlogRecipeScrapResponse)
+                view?.onPostBlogRecipeScrapSuccess(response.body() as BlogRecipeScrapResponse)
             }
 
             override fun onFailure(call: Call<BlogRecipeScrapResponse>, t: Throwable) {
-                view.onPostBlogRecipeScrapFailure(t.message ?: "통신오류")
+                view?.onPostBlogRecipeScrapFailure(t.message ?: "통신오류")
             }
 
         })
