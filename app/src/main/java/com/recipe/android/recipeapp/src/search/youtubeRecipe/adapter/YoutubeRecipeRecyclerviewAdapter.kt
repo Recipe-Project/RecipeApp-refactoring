@@ -2,6 +2,8 @@ package com.recipe.android.recipeapp.src.search.youtubeRecipe.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,7 +23,9 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemRecipeListLoadingBinding
 import com.recipe.android.recipeapp.databinding.ItemYoutubeResultFragRecyclerviewBinding
 import com.recipe.android.recipeapp.src.search.blogRecipe.adapter.BlogRecipeRecyclerviewAdapter
+import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeRecipeService
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResult
+import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapRequest
 import java.text.SimpleDateFormat
 
 class YoutubeRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<YoutubeRecipeRecyclerviewAdapter.CustomViewHolder>(){
@@ -95,11 +99,21 @@ class YoutubeRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Ada
                 youtubeRecipeScrapItemClick?.onClick(it, position)
             }
         }
-        if(youtubeRecipeItemClick != null) {
-            holder.layout.setOnClickListener {
-                youtubeRecipeItemClick?.onClick(it, position)
-            }
+
+        holder.itemView.setOnClickListener {
+            val youtubeUrl = "https://www.youtube.com/watch?v=${youtubeRecipeList[position].id.videoId}"
+            context.startActivity(
+                Intent(Intent.ACTION_VIEW)
+                    .setData(Uri.parse(youtubeUrl))
+                    .setPackage("com.google.android.youtube")
+            )
         }
+
+//        if(youtubeRecipeItemClick != null) {
+//            holder.layout.setOnClickListener {
+//                youtubeRecipeItemClick?.onClick(it, position)
+//            }
+//        }
     }
 
     override fun getItemCount(): Int = youtubeRecipeList.size

@@ -153,16 +153,16 @@ class YoutubeResultFragment(private val keyword : String) : BaseFragment<Fragmen
 
             val result = response.items
             // Youtube 영상 연결
-            youtubeAdapter.youtubeRecipeItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeItemClick {
-                override fun onClick(view: View, position: Int) {
-                    youtubeUrl = "https://www.youtube.com/watch?v=${result[position].id.videoId}"
-                    startActivity(
-                        Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse(youtubeUrl))
-                            .setPackage("com.google.android.youtube")
-                    )
-                }
-            }
+//            youtubeAdapter.youtubeRecipeItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeItemClick {
+//                override fun onClick(view: View, position: Int) {
+//                    youtubeUrl = "https://www.youtube.com/watch?v=${result[position].id.videoId}"
+//                    startActivity(
+//                        Intent(Intent.ACTION_VIEW)
+//                            .setData(Uri.parse(youtubeUrl))
+//                            .setPackage("com.google.android.youtube")
+//                    )
+//                }
+//            }
             // Youtube 스크랩
             youtubeAdapter.youtubeRecipeScrapItemClick = object : YoutubeRecipeRecyclerviewAdapter.YoutubeRecipeScrapItemClick {
                 override fun onClick(view: View, position: Int) {
