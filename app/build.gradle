@@ -147,4 +147,10 @@ dependencies {
     implementation 'com.opensooq.supernova:gligar:1.1.0'
 
     implementation 'com.google.firebase:firebase-crashlytics'
+
+    def lifecycle_version = "2.3.1"
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 }
