@@ -17,6 +17,8 @@ class PublicPagerFragment1() :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.takeIf { it.containsKey("data") }?.apply {
 
+        }
     }
 }

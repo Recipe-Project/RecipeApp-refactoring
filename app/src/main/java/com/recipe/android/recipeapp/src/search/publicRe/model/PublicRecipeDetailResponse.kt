@@ -1,7 +1,10 @@
 package com.recipe.android.recipeapp.src.search.publicRe.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class PublicRecipeDetailResponse(
     @SerializedName("isSuccess")
     val isSuccess: Boolean,
@@ -11,8 +14,9 @@ data class PublicRecipeDetailResponse(
     val message: String,
     @SerializedName("result")
     val result: PublicRecipeDetailResult
-)
+): Parcelable
 
+@Parcelize
 data class PublicRecipeDetailResult(
     @SerializedName("recipeId")
     val recipeId: Int,
@@ -34,8 +38,9 @@ data class PublicRecipeDetailResult(
     var userScrapYN: String,
     @SerializedName("userScrapCnt")
     val userScrapCnt: Int
-)
+): Parcelable
 
+@Parcelize
 data class PublicRecipeIngredient(
     @SerializedName("recipeIngredientIdx")
     val recipeIngredientIdx: Int,
@@ -47,8 +52,9 @@ data class PublicRecipeIngredient(
     val recipeIngredientCpcty: String,
     @SerializedName("inFridgeYN")
     val inFridgeYN : String
-)
+): Parcelable
 
+@Parcelize
 data class PublicRecipeProcess(
     @SerializedName("recipeProcessIdx")
     val recipeProcessIdx: Int,
@@ -58,4 +64,4 @@ data class PublicRecipeProcess(
     val recipeProcessDc: String,
     @SerializedName("recipeProcessImg")
     val recipeProcessImg: String
-)
+): Parcelable

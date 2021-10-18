@@ -2,16 +2,13 @@ package com.recipe.android.recipeapp.src.search.publicRe.presentation
 
 import android.os.Bundle
 import android.util.Log
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityPublicRecipeDetailBinding
 import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
 import com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager.PublicPagerAdapter
 import com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager.PublicPagerFragment1
 import com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager.PublicPagerFragment2
-import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeDetailService
 
 class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding>(
     ActivityPublicRecipeDetailBinding::inflate) {
@@ -59,7 +56,8 @@ class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding
             listOf(
                 PublicPagerFragment1(),
                 PublicPagerFragment2()
-            )
+            ),
+            data
         )
         binding.viewPager.adapter = adapter
     }

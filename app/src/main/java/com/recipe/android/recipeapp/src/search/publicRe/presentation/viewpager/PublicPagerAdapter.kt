@@ -1,21 +1,29 @@
 package com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
 
 private const val NUM_PAGES = 2
 
-class PublicPagerAdapter(fa: FragmentActivity, private val fragmentList: List<Fragment>) : FragmentStateAdapter(fa) {
+class PublicPagerAdapter(
+    fa: FragmentActivity,
+    private val fragmentList: List<Fragment>,
+    private val data: PublicRecipeDetailResponse
+) : FragmentStateAdapter(fa) {
 
     override fun getItemCount(): Int = NUM_PAGES
 
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> fragmentList[0]
+        val fragment = when (position) {
             1 -> fragmentList[1]
             else -> fragmentList[0]
         }
+        fragment.arguments = Bundle().apply {
+            putParcelable("data", data)
+        }
+        return fragment
     }
-
 }
