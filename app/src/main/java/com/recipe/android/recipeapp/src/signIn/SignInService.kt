@@ -1,9 +1,7 @@
 package com.recipe.android.recipeapp.src.signIn
 
 import android.util.Log
-import com.kakao.sdk.auth.model.OAuthToken
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.signIn.`interface`.SignInActivityView
 import com.recipe.android.recipeapp.src.signIn.`interface`.SignnInRetrofitInterface
 import com.recipe.android.recipeapp.src.signIn.models.SignInResponse
 import retrofit2.Call

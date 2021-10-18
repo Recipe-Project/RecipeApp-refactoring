@@ -3,9 +3,11 @@ package com.recipe.android.recipeapp.src.fridge.basket
 import android.util.Log
 import com.recipe.android.recipeapp.common.SimpleResponse
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketRetrofitInterface
-import com.recipe.android.recipeapp.src.fridge.basket.models.*
+import com.recipe.android.recipeapp.src.fridge.basket.models.BasketResponse
+import com.recipe.android.recipeapp.src.fridge.basket.models.DeleteBasketResponse
+import com.recipe.android.recipeapp.src.fridge.basket.models.FridgeBasket
+import com.recipe.android.recipeapp.src.fridge.basket.models.PostFridgeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

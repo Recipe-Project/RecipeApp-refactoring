@@ -13,12 +13,17 @@ import androidx.fragment.app.FragmentTransaction
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchBinding
-import com.recipe.android.recipeapp.src.search.`interface`.KeywordListener
-import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordView
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.models.PopularKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
 
+interface SearchKeywordView {
+    fun onGetPopularKeywordSuccess(response: PopularKeywordResponse)
+    fun onGetPopularKeywordFailure(message: String)
+
+    fun onPostKeywordSuccess(response: PostKeywordResponse)
+    fun onPostKeywordFailure(message: String)
+}
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search), SearchKeywordView{
 

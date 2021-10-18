@@ -4,15 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentCategoryAllBinding
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.*
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
 

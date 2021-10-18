@@ -12,7 +12,6 @@ import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPre
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentMyPageBinding
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
-import com.recipe.android.recipeapp.src.myPage.`interface`.MyPageFragmentView
 import com.recipe.android.recipeapp.src.myPage.adapter.MyPageRecipeRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.myPage.models.ModifyUserInfoResponse
 import com.recipe.android.recipeapp.src.myPage.models.MyRecipe
@@ -20,8 +19,13 @@ import com.recipe.android.recipeapp.src.myPage.models.UserInfoResponse
 import com.recipe.android.recipeapp.src.myRecipe.MyRecipeActivity
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateActivity
 import com.recipe.android.recipeapp.src.scrapRecipe.ScrapRecipeActivity
-import com.recipe.android.recipeapp.src.scrapRecipe.adapter.ScrapViewPagerAdapter
 import com.recipe.android.recipeapp.src.setting.SettingActivity
+
+interface MyPageFragmentView {
+    fun onGetUserInfoSuccess(response: UserInfoResponse)
+    fun onPatchUserInfoSuccess(response: ModifyUserInfoResponse)
+    fun onGetUserInfoFailure(message: String)
+}
 
 class MyPageFragment :
     BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page),

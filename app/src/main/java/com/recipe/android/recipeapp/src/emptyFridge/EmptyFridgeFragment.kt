@@ -8,20 +8,23 @@ import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentEmptyFridgeBinding
-import com.recipe.android.recipeapp.src.MainActivity
-import com.recipe.android.recipeapp.src.emptyFridge.`interface`.EmptyFridgeView
 import com.recipe.android.recipeapp.src.emptyFridge.adapter.EmptyFridgeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResponse
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResult
-import com.recipe.android.recipeapp.src.search.SearchFragment
-import com.recipe.android.recipeapp.src.search.SearchResultFragment
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
+
+interface EmptyFridgeView {
+    fun onGetEmptyFridgeSuccess(response : EmptyFridgeResponse)
+    fun onGetEmptyFridgeFailure(message : String)
+    fun getPublicRecipeDetail(id : Int)
+    fun getBlogRecipe(keyword : String)
+    fun getYoutubeRecipe(keyword : String)
+}
 
 class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(
     FragmentEmptyFridgeBinding::bind,

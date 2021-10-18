@@ -17,11 +17,15 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMyRecipeModifyBinding
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreate
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeModify.`interface`.MyRecipeModifyActivityView
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
+interface MyRecipeModifyActivityView {
+    fun onPatchMyRecipeSuccess(response: MyRecipeCreateResponse)
+    fun onPatchMyRecipeFailure(message: String)
+}
 
 class MyRecipeModifyActivity: BaseActivity<ActivityMyRecipeModifyBinding>(ActivityMyRecipeModifyBinding::inflate), MyRecipeModifyActivityView {
 

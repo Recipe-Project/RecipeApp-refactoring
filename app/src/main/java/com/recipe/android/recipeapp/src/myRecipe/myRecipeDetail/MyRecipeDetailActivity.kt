@@ -11,12 +11,16 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMyRecipeDetailBinding
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateActivity
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.`interface`.MyRecipeDetailActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.adapter.MyRecipeIngredientRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.dialog.MyRecipeDeleteDialog
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.models.MyRecipeDeleteResponse
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.models.MyRecipeDetailResponse
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeModify.MyRecipeModifyActivity
+
+interface MyRecipeDetailActivityView {
+    fun onGetMyRecipeDetailSuccess(response: MyRecipeDetailResponse)
+    fun onGetMyRecipeDetailFailure(message: String)
+    fun onDeleteMyRecipeSuccess(response: MyRecipeDeleteResponse)
+}
 
 class MyRecipeDetailActivity: BaseActivity<ActivityMyRecipeDetailBinding>(ActivityMyRecipeDetailBinding::inflate), MyRecipeDetailActivityView {
 

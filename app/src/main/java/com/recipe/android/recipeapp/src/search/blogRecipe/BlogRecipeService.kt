@@ -3,15 +3,12 @@ package com.recipe.android.recipeapp.src.search.blogRecipe
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.search.blogRecipe.`interface`.BlogRecipeInterface
-import com.recipe.android.recipeapp.src.search.blogRecipe.`interface`.BlogRecipeView
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeResponse
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeScrapResponse
-import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.create
 
 class BlogRecipeService(val view: BlogRecipeView?) {
 

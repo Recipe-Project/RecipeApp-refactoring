@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapPublicRecipeBinding
-import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.`interface`.PublicScrapFragmentView
+import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.PublicScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.viewHolder.PublicScrapViewHolder
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity

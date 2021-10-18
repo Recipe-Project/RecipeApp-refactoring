@@ -32,8 +32,12 @@ import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPre
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivitySignInBinding
 import com.recipe.android.recipeapp.src.MainActivity
-import com.recipe.android.recipeapp.src.signIn.`interface`.SignInActivityView
 import com.recipe.android.recipeapp.src.signIn.models.SignInResponse
+
+interface SignInActivityView {
+    fun onPostSignInSuccess(response: SignInResponse)
+    fun onPostSignInFailure(message: String)
+}
 
 // 로그인 액티비티
 class SignInActivity : BaseActivity<ActivitySignInBinding>(ActivitySignInBinding::inflate),

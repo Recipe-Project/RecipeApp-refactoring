@@ -7,9 +7,8 @@ import com.bumptech.glide.Glide
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.IC_DEFAULT
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sSharedPreferences
-import com.recipe.android.recipeapp.databinding.ItemPickIngredientBinding
 import com.recipe.android.recipeapp.databinding.ItemPickIngredientMyRecipeBinding
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
 
 class PickItemRecyclerViewAdapter(val view: MyRecipeCreateActivityView) :

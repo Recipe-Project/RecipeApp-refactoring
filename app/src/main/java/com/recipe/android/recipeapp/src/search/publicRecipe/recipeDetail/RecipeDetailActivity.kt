@@ -1,13 +1,9 @@
 package com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -19,16 +15,23 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityRecipeDetailBinding
-import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeScrapService
 import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeDetailService
-import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeDetailView
-import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeScrapView
+import com.recipe.android.recipeapp.src.search.publicRecipe.PublicRecipeScrapService
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeDetailResponse
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeDetailResult
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapResponse
 import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.adapter.RecipeDetailViewPagerAdapter
-import java.lang.Math.abs
+
+interface PublicRecipeDetailView {
+    fun onGetPublicRecipeDetailSuccess(response: PublicRecipeDetailResponse)
+    fun onGetPublicRecipeDetailFailure(message: String)
+}
+
+interface PublicRecipeScrapView {
+    fun onPostPublicRecipeScrapSuccess(response: PublicRecipeScrapResponse)
+    fun onPostPublicRecipeScrapFailure(message: String)
+}
 
 class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(ActivityRecipeDetailBinding::inflate), PublicRecipeDetailView, PublicRecipeScrapView {
 

@@ -2,12 +2,7 @@ package com.recipe.android.recipeapp.src.search.youtubeRecipe
 
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.myPage.models.UserInfoResponse
-import com.recipe.android.recipeapp.src.search.blogRecipe.`interface`.BlogRecipeInterface
-import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeScrapRequest
-import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeScrapResponse
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.`interface`.YoutubeRecipeInterface
-import com.recipe.android.recipeapp.src.search.youtubeRecipe.`interface`.YoutubeRecipeView
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResponse
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapResponse

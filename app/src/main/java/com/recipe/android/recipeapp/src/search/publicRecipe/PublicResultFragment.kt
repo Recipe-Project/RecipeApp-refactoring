@@ -7,14 +7,16 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentPublicResultBinding
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
-import com.recipe.android.recipeapp.src.search.publicRecipe.adapter.PublicResultRecyclerviewAdapter
-import com.recipe.android.recipeapp.src.search.models.PublicRecipeResult
 import com.recipe.android.recipeapp.src.search.publicRe.presentation.PublicRecipeDetailActivity
-import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeScrapView
-import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeView
+import com.recipe.android.recipeapp.src.search.publicRecipe.adapter.PublicResultRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapResponse
-import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
+import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.PublicRecipeScrapView
+
+interface PublicRecipeView {
+    fun onGetPublicRecipeSuccess(response: PublicRecipeResponse)
+    fun onGetPublicRecipeFailure(message: String)
+}
 
 class PublicResultFragment(private val keyword : String)
     : BaseFragment<FragmentPublicResultBinding>(FragmentPublicResultBinding::bind, R.layout.fragment_public_result), PublicRecipeView,

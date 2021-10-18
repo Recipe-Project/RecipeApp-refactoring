@@ -3,18 +3,22 @@ package com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentYoutubeScrapBinding
-import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.`interface`.YoutubeScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.adapter.YoutubeScrapRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.PostYoutubeScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrapResponse
+
+interface YoutubeScrapFragmentView {
+    fun onGetYoutubeScrapSuccess(response: YoutubeScrapResponse)
+    fun onGetYoutubeScrapFailure(message: String)
+
+    fun onPostYoutubeScrapSuccess(response: PostYoutubeScrapResponse)
+}
 
 class YoutubeScrapFragment: BaseFragment<FragmentYoutubeScrapBinding>(FragmentYoutubeScrapBinding::bind, R.layout.fragment_youtube_scrap),
 YoutubeScrapFragmentView{

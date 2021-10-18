@@ -3,10 +3,8 @@ package com.recipe.android.recipeapp.src.search
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordInterface
-import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordView
 import com.recipe.android.recipeapp.src.search.models.PopularKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
-import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

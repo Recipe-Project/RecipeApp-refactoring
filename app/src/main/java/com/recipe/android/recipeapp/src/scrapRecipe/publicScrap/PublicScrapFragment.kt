@@ -8,11 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentPublicScrapBinding
-import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.`interface`.PublicScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.adapter.PublicScrapRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PostPublicScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrapResponse
+
+interface PublicScrapFragmentView {
+    fun onGetPublicScrapSuccess(response: PublicScrapResponse)
+    fun onGetPublicScrapFailure(message: String)
+
+    fun onPostPublicScrapSuccess(postPublicScrapResponse: PostPublicScrapResponse)
+}
 
 class PublicScrapFragment : BaseFragment<FragmentPublicScrapBinding>(
     FragmentPublicScrapBinding::bind,

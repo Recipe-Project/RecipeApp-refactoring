@@ -2,7 +2,6 @@ package com.recipe.android.recipeapp.src.fridge.pickIngredient
 
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientRetrofitInterface
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.GetBasketCntResponse
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse

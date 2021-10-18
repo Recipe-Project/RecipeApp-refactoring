@@ -1,8 +1,6 @@
 package com.recipe.android.recipeapp.src.search.youtubeRecipe
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,21 +10,25 @@ import com.recipe.android.recipeapp.BuildConfig
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentYoutubeResultBinding
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.YoutubeScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.YoutubeScrapService
-import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.`interface`.YoutubeScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.PostYoutubeScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrapResponse
-import com.recipe.android.recipeapp.src.search.blogRecipe.BlogRecipeService
-import com.recipe.android.recipeapp.src.search.blogRecipe.adapter.BlogRecipeRecyclerviewAdapter
-import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeListItem
-import com.recipe.android.recipeapp.src.search.youtubeRecipe.`interface`.YoutubeRecipeView
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.adapter.YoutubeRecipeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResponse
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResult
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapResponse
 import java.text.SimpleDateFormat
+
+interface YoutubeRecipeView {
+    fun onGetYoutubeRecipeSuccess(response: YoutubeRecipeResponse)
+    fun onGetYoutubeRecipeFailure(message: String)
+
+    fun onPostYoutubeRecipeScrapSuccess(response: YoutubeRecipeScrapResponse)
+    fun onPostYoutubeRecipeScrapFailure(message: String)
+}
 
 class YoutubeResultFragment(private val keyword : String) : BaseFragment<FragmentYoutubeResultBinding>(FragmentYoutubeResultBinding::bind, R.layout.fragment_youtube_result),
     YoutubeRecipeView, YoutubeScrapFragmentView {

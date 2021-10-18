@@ -2,7 +2,6 @@ package com.recipe.android.recipeapp.src.scrapRecipe.publicScrap
 
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.`interface`.PublicScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.`interface`.PublicScrapRetrofitInterface
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PostPublicScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrapResponse

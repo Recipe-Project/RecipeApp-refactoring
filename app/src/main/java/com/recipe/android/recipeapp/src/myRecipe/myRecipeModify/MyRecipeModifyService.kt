@@ -4,7 +4,6 @@ import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreate
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeModify.`interface`.MyRecipeModifyActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeModify.`interface`.MyRecipeModifyRetrofitInterface
 import retrofit2.Call
 import retrofit2.Callback

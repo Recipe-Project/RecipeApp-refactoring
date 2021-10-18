@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentMyFridgeAllCategoryBinding
-import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
+import com.recipe.android.recipeapp.src.fridge.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeAllIngredientRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 

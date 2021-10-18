@@ -2,7 +2,6 @@ package com.recipe.android.recipeapp.src.myPage
 
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.myPage.`interface`.MyPageFragmentView
 import com.recipe.android.recipeapp.src.myPage.`interface`.MyPageRetrofitInterface
 import com.recipe.android.recipeapp.src.myPage.models.ModifyUserInfoResponse
 import com.recipe.android.recipeapp.src.myPage.models.UserInfoResponse

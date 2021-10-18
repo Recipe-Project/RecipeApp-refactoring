@@ -12,8 +12,10 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMainBinding
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
 import com.recipe.android.recipeapp.src.search.SearchFragment
-import com.recipe.android.recipeapp.src.search.SearchResultFragment
-import com.recipe.android.recipeapp.src.search.`interface`.KeywordListener
+
+interface KeywordListener {
+    fun setKeyword(keyword: String)
+}
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),
     KeywordListener {
