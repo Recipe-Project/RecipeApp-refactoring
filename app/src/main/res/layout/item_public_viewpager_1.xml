@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ingredientItem"
+            type="com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeIngredient" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_ingredient"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:ingredientIcon="@{ingredientItem.recipeIngredientIcon}" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_ingredient_name"
+            style="@style/CaptionStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{ingredientItem.recipeIngredientName}"
+            tools:text="닭고기" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_ingredient_volume"
+            style="@style/Caption2Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{ingredientItem.recipeIngredientCpcty}"
+            android:textColor="@color/gray_300"
+            tools:text="120ml" />
+    </LinearLayout>
+</layout>

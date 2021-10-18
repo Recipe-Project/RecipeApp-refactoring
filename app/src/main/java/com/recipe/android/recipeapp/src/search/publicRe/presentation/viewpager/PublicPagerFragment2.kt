@@ -5,7 +5,6 @@ import android.view.View
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentPublicViewpager2Binding
-import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeProcess
 
 class PublicPagerFragment2() :
     BaseFragment<FragmentPublicViewpager2Binding>(
