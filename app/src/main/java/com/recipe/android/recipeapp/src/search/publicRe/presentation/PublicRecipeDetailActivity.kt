@@ -2,7 +2,11 @@ package com.recipe.android.recipeapp.src.search.publicRe.presentation
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import com.google.android.material.appbar.AppBarLayout
+import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityPublicRecipeDetailBinding
 import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
@@ -37,6 +41,8 @@ class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding
             getDetailInfo(it)
             listenToObservables()
         }
+
+        setToolbar()
     }
 
     private fun getDetailInfo(idx: Int){
@@ -60,5 +66,18 @@ class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding
             data
         )
         binding.viewPager.adapter = adapter
+    }
+
+    private fun setToolbar(){
+        setSupportActionBar(binding.toolbar)
+        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if(kotlin.math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
+                binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
+                binding.toolbarAfter.visibility = View.VISIBLE
+            } else {
+                binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent))
+                binding.toolbarAfter.visibility = View.GONE
+            }
+        })
     }
 }
