@@ -12,6 +12,10 @@
         <variable
             name="recipeInfo"
             type="com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResult" />
+
+        <variable
+            name="activity"
+            type="com.recipe.android.recipeapp.src.search.publicRe.presentation.PublicRecipeDetailActivity" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -23,56 +27,20 @@
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fitsSystemWindows="false"
             android:theme="@style/Theme.RecipeApp.AppBarOverlay">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_collapsing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fitsSystemWindows="false"
                 app:collapsedTitleTextAppearance="@style/Head2Style"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleTextAppearance="@style/Head2Style"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title=" "
                 app:toolbarId="@+id/toolbar">
-
-                <LinearLayout
-                    android:id="@+id/before_scroll"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="24dp">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/btn_back_before"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:padding="16dp"
-                        android:src="@drawable/ic_arrow_back" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_title_beforel"
-                        style="@style/Head2Style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:text="@{recipeInfo.recipeName}"
-                        android:textColor="@color/black"
-                        tools:text="스팸김치볶음밥" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_cnt_scrap_before"
-                        style="@style/Body2Style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="17dp"
-                        android:drawableStart="@drawable/ic_after_scroll_scrap"
-                        android:drawablePadding="8dp"
-                        android:text="@{Integer.toString(recipeInfo.userScrapCnt)}"
-                        tools:text="222" />
-                </LinearLayout>
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -92,6 +60,7 @@
                             android:id="@+id/btn_back_after"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:onClick="@{() -> activity.onBackPressed()}"
                             android:padding="16dp"
                             android:paddingStart="4dp"
                             android:src="@drawable/ic_arrow_back" />
@@ -118,6 +87,47 @@
                             tools:text="222" />
                     </LinearLayout>
                 </androidx.appcompat.widget.Toolbar>
+
+                <LinearLayout
+                    android:id="@+id/before_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="24dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_back_before"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:onClick="@{() -> activity.onBackPressed()}"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_arrow_back" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_title_beforel"
+                        style="@style/Head2Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="@{recipeInfo.recipeName}"
+                        android:textColor="@color/black"
+                        tools:text="스팸김치볶음밥" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cnt_scrap_before"
+                        style="@style/Body2Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="17dp"
+                        android:drawableStart="@drawable/ic_after_scroll_scrap"
+                        android:drawablePadding="8dp"
+                        android:text="@{Integer.toString(recipeInfo.userScrapCnt)}"
+                        tools:text="222" />
+                </LinearLayout>
+
+
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -141,6 +151,7 @@
                     android:scaleType="fitXY"
                     app:setImage="@{recipeInfo.thumbnail}"
                     tools:src="@drawable/ic_launcher_background" />
+
 
                 <LinearLayout
                     android:id="@+id/layout_scrap"

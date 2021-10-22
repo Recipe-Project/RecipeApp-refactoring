@@ -36,6 +36,7 @@ class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding
 
         binding.run {
             viewModel = PublicRecipeDetailViewModel(this@PublicRecipeDetailActivity)
+            activity = this@PublicRecipeDetailActivity
         }
 
         recipeIndex?.let {
@@ -87,9 +88,11 @@ class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding
             if(kotlin.math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
                 binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
                 binding.toolbarAfter.visibility = View.VISIBLE
+                binding.beforeScroll.visibility = View.INVISIBLE
             } else {
                 binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent))
                 binding.toolbarAfter.visibility = View.GONE
+                binding.beforeScroll.visibility = View.VISIBLE
             }
         })
     }
