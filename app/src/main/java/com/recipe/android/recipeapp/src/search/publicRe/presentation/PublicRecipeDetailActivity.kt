@@ -52,6 +52,8 @@ class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding
     private fun listenToObservables(){
         model.getDetailResponse().observe(this, Observer {
             setPagerAdapter(it)
+            binding.recipeInfo = it.result
+            Log.d(TAG, "PublicRecipeDetailActivity - listenToObservables() : ${it.result}")
         })
     }
 

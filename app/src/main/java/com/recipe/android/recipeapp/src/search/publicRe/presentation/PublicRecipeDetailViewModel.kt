@@ -30,6 +30,4 @@ class PublicRecipeDetailViewModel(private val fa: FragmentActivity) {
 
             })
     }
-
-
 }

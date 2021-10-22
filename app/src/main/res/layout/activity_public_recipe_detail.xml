@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.recipe.android.recipeapp.src.search.publicRe.presentation.PublicRecipeDetailViewModel" />
+
+        <variable
+            name="recipeInfo"
+            type="com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResult" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -53,6 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
+                        android:text="@{recipeInfo.recipeName}"
                         android:textColor="@color/black"
                         tools:text="스팸김치볶음밥" />
 
@@ -65,6 +70,7 @@
                         android:layout_marginTop="17dp"
                         android:drawableStart="@drawable/ic_after_scroll_scrap"
                         android:drawablePadding="8dp"
+                        android:text="@{Integer.toString(recipeInfo.userScrapCnt)}"
                         tools:text="222" />
                 </LinearLayout>
 
@@ -96,6 +102,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="@{recipeInfo.recipeName}"
                             android:textColor="@color/black"
                             tools:text="스팸김치볶음밥" />
 
@@ -107,6 +114,7 @@
                             android:layout_marginEnd="20dp"
                             android:drawableStart="@drawable/ic_after_scroll_scrap"
                             android:drawablePadding="8dp"
+                            android:text="@{Integer.toString(recipeInfo.userScrapCnt)}"
                             tools:text="222" />
                     </LinearLayout>
                 </androidx.appcompat.widget.Toolbar>
@@ -131,6 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="233dp"
                     android:scaleType="fitXY"
+                    app:setImage="@{recipeInfo.thumbnail}"
                     tools:src="@drawable/ic_launcher_background" />
 
                 <LinearLayout
@@ -180,6 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:text="@{recipeInfo.cookingTime}"
                             tools:text="10분" />
                     </LinearLayout>
 
@@ -202,6 +212,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:text="@{recipeInfo.level}"
                             tools:text="초보환영" />
                     </LinearLayout>
 
@@ -219,6 +230,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    android:text="@{recipeInfo.summary}"
                     tools:text="냉장고에 있는 김치로 얼큰한 김치찌개를 끓여보세요. 요리설명요리설명요리설명요리설명. 요리설명요리설" />
 
                 <com.google.android.material.tabs.TabLayout
