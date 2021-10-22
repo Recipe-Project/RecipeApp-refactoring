@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityPublicRecipeDetailBinding
@@ -45,6 +46,15 @@ class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding
         setToolbar()
     }
 
+    private fun bindingTab(){
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) {tab, position ->
+            when (position) {
+                0 -> tab.text = "재료"
+                1 -> tab.text = "레시피"
+            }
+        }.attach()
+    }
+
     private fun getDetailInfo(idx: Int){
         model.getPublicRecipeDetailInfo(idx)
     }
@@ -52,6 +62,7 @@ class PublicRecipeDetailActivity: BaseActivity<ActivityPublicRecipeDetailBinding
     private fun listenToObservables(){
         model.getDetailResponse().observe(this, Observer {
             setPagerAdapter(it)
+            bindingTab()
             binding.recipeInfo = it.result
             Log.d(TAG, "PublicRecipeDetailActivity - listenToObservables() : ${it.result}")
         })
