@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.search.publicRe.repository
 
+import com.recipe.android.recipeapp.common.SimpleRetrofitResponse
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
 import retrofit2.Call
@@ -24,6 +25,26 @@ object PublicRecipeDetailDataSource {
             override fun onFailure(call: Call<PublicRecipeDetailResponse>, t: Throwable) {
                 callback.onFailure(t)
             }
+        })
+    }
+
+    fun scrapRecipe(index: Int, callback: PublicRecipeDetailRepository.GetDataCallback<SimpleRetrofitResponse>) {
+        val param = HashMap<String, Any>()
+        param["recipeId"] = index
+        publicRecipeDetailService.scrapRecipe(param).enqueue(object : Callback<SimpleRetrofitResponse>{
+            override fun onResponse(
+                call: Call<SimpleRetrofitResponse>,
+                response: Response<SimpleRetrofitResponse>
+            ) {
+                if (response.isSuccessful) {
+                    callback.onSuccess(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<SimpleRetrofitResponse>, t: Throwable) {
+                callback.onFailure(t)
+            }
+
         })
     }
 }

@@ -1,5 +1,6 @@
 package com.recipe.android.recipeapp.src.search.publicRe.repository
 
+import com.recipe.android.recipeapp.common.SimpleRetrofitResponse
 import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
 
 object PublicRecipeDetailRepository {
@@ -7,6 +8,10 @@ object PublicRecipeDetailRepository {
 
     fun getPublicRecipeDetail(idx: Int, callback: GetDataCallback<PublicRecipeDetailResponse>){
         publicRecipeDetailDataSource.getPublicRecipeDetail(idx, callback)
+    }
+
+    fun scrapRecipe(idx: Int, callback: GetDataCallback<SimpleRetrofitResponse>){
+        publicRecipeDetailDataSource.scrapRecipe(idx, callback)
     }
 
     interface GetDataCallback<T> {
