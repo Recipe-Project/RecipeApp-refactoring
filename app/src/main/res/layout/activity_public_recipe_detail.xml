@@ -163,13 +163,16 @@
                     android:weightSum="3">
 
                     <LinearLayout
+                        android:id="@+id/btn_scrap"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:onClick="@{activity::clickScrap}"
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ic_scrap"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_favorite_for_public_scrap" />
@@ -205,7 +208,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/btn_scrap"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

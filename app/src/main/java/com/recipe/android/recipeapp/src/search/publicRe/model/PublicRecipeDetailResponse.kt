@@ -37,7 +37,7 @@ data class PublicRecipeDetailResult(
     @SerializedName("userScrapYN")
     var userScrapYN: String,
     @SerializedName("userScrapCnt")
-    val userScrapCnt: Int
+    var userScrapCnt: Int
 ): Parcelable
 
 @Parcelize
