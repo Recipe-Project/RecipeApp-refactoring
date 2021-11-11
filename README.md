@@ -10,4 +10,9 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat&logo=Kotlin&logoColor=white"> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat&logo=Android Studio&logoColor=white"> <img width="12%" src="https://img.shields.io/endpoint?color=green&logo=google-play&logoColor=green&url=https%3A%2F%2Fplayshields.herokuapp.com%2Fplay%3Fi%3Dcom.recipe.android.recipeapp%26l%3DAndroid%26m%3D%24version"/>
-  
+
+## Environment
+  - Android Studio 4.1.1
+  - Kotlin 100%
+  - minSdkVersion : 24
+  - targetSdkVersion : 30
