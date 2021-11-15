@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.publicRe.repository
+package com.recipe.android.recipeapp.src.search.publicReDetail.repository
 
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter

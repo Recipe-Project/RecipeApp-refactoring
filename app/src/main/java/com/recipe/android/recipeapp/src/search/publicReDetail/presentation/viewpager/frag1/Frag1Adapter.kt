@@ -1,11 +1,11 @@
-package com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager.frag1
+package com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager.frag1
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.ItemPublicViewpager1Binding
-import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeIngredient
+import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeIngredient
 
 class Frag1Adapter(val context: Context) : RecyclerView.Adapter<Frag1Adapter.Frag1ViewHolder>() {
 

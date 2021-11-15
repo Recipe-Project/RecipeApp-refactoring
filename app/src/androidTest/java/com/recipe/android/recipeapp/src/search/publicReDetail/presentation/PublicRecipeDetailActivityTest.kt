@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.publicRe.presentation
+package com.recipe.android.recipeapp.src.search.publicReDetail.presentation
 
 import android.content.Context
 import android.content.Intent

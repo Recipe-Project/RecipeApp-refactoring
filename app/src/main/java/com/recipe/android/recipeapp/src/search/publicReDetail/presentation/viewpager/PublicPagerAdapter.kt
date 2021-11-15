@@ -1,10 +1,10 @@
-package com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager
+package com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
+import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResponse
 
 private const val NUM_PAGES = 2
 

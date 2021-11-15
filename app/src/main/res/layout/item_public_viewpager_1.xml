@@ -7,7 +7,7 @@
 
         <variable
             name="ingredientItem"
-            type="com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeIngredient" />
+            type="com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeIngredient" />
     </data>
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.publicRe.presentation
+package com.recipe.android.recipeapp.src.search.publicReDetail.presentation
 
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +10,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityPublicRecipeDetailBinding
-import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
-import com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager.PublicPagerAdapter
-import com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager.PublicPagerFragment1
-import com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager.PublicPagerFragment2
+import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResponse
+import com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager.PublicPagerAdapter
+import com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager.PublicPagerFragment1
+import com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager.PublicPagerFragment2
 
 class PublicRecipeDetailActivity : BaseActivity<ActivityPublicRecipeDetailBinding>(
     ActivityPublicRecipeDetailBinding::inflate

@@ -1,13 +1,13 @@
-package com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager
+package com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager
 
 import android.os.Bundle
 import android.view.View
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentPublicViewpager2Binding
-import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
-import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeProcess
-import com.recipe.android.recipeapp.src.search.publicRe.presentation.viewpager.frag2.Frag2Adapter
+import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResponse
+import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeProcess
+import com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager.frag2.Frag2Adapter
 
 class PublicPagerFragment2() :
     BaseFragment<FragmentPublicViewpager2Binding>(

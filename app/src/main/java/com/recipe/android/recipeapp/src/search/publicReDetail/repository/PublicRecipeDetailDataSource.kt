@@ -1,8 +1,8 @@
-package com.recipe.android.recipeapp.src.search.publicRe.repository
+package com.recipe.android.recipeapp.src.search.publicReDetail.repository
 
 import com.recipe.android.recipeapp.common.SimpleRetrofitResponse
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
+import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

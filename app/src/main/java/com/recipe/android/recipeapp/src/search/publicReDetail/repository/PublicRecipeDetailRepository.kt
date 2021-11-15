@@ -1,7 +1,7 @@
-package com.recipe.android.recipeapp.src.search.publicRe.repository
+package com.recipe.android.recipeapp.src.search.publicReDetail.repository
 
 import com.recipe.android.recipeapp.common.SimpleRetrofitResponse
-import com.recipe.android.recipeapp.src.search.publicRe.model.PublicRecipeDetailResponse
+import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResponse
 
 object PublicRecipeDetailRepository {
     private val publicRecipeDetailDataSource = PublicRecipeDetailDataSource
