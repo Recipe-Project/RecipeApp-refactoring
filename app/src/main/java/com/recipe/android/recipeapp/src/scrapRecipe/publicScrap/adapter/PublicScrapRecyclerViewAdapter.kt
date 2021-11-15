@@ -9,15 +9,20 @@ import com.recipe.android.recipeapp.databinding.ItemScrapPublicRecipeBinding
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.PublicScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.viewHolder.PublicScrapViewHolder
-import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity
 
-class PublicScrapRecyclerViewAdapter(val view: PublicScrapFragmentView) : RecyclerView.Adapter<PublicScrapViewHolder>() {
+class PublicScrapRecyclerViewAdapter(val view: PublicScrapFragmentView) :
+    RecyclerView.Adapter<PublicScrapViewHolder>() {
 
     private var publicRecipeItemList = ArrayList<PublicScrap>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicScrapViewHolder {
         return PublicScrapViewHolder(
-            ItemScrapPublicRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            ItemScrapPublicRecipeBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ),
             this,
             publicRecipeItemList,
             view
@@ -29,7 +34,7 @@ class PublicScrapRecyclerViewAdapter(val view: PublicScrapFragmentView) : Recycl
 
         holder.itemView.setOnClickListener {
             val index = publicRecipeItemList[position].recipeId
-            val intent = Intent(ApplicationClass.instance, RecipeDetailActivity::class.java)
+            val intent = Intent(ApplicationClass.instance, PublicRecipeDetailActivity::class.java)
             intent.putExtra("index", index)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             ApplicationClass.instance.startActivity(intent)
