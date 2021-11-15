@@ -29,6 +29,8 @@ class PublicRecipeDetailActivity : BaseActivity<ActivityPublicRecipeDetailBindin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        showLoadingDialog()
+
         model = PublicRecipeDetailViewModel()
 
         intent?.hasExtra("index").apply {
@@ -70,6 +72,7 @@ class PublicRecipeDetailActivity : BaseActivity<ActivityPublicRecipeDetailBindin
                 binding.recipeInfo = it.result
                 scrapListenToObservables()
             }
+            dismissLoadingDialog()
         })
     }
 

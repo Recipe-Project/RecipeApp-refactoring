@@ -141,13 +141,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="233dp"
+                    android:layout_marginHorizontal="20dp"
                     android:scaleType="fitXY"
                     app:setImage="@{recipeInfo.thumbnail}"
                     tools:src="@drawable/ic_launcher_background" />
@@ -157,6 +157,7 @@
                     android:id="@+id/layout_scrap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
                     android:layout_marginVertical="20dp"
                     android:gravity="center"
                     android:orientation="horizontal"
@@ -235,6 +236,7 @@
                     android:id="@+id/top_line"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginHorizontal="20dp"
                     android:background="@color/gray_100" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -242,6 +244,7 @@
                     style="@style/Body1Style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="32dp"
                     android:text="@{recipeInfo.summary}"
                     tools:text="냉장고에 있는 김치로 얼큰한 김치찌개를 끓여보세요. 요리설명요리설명요리설명요리설명. 요리설명요리설" />
@@ -260,7 +263,7 @@
                     app:tabIndicatorFullWidth="false"
                     app:tabIndicatorHeight="3dp"
                     app:tabMode="fixed"
-                    app:tabTextAppearance="@style/Body1Style" />
+                    app:tabTextAppearance="@style/Body2Style" />
 
                 <View
                     android:id="@+id/middle_line"
@@ -272,9 +275,10 @@
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
-                    android:paddingTop="40dp"
+                    android:paddingTop="33dp"
                     android:paddingBottom="47dp" />
             </LinearLayout>
 
