@@ -1,14 +1,14 @@
-package com.recipe.android.recipeapp.src.search.publicReDetail.presentation
+package com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.recipe.android.recipeapp.common.SimpleRetrofitResponse
-import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResponse
-import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResult
-import com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager.PublicPagerAdapter
-import com.recipe.android.recipeapp.src.search.publicReDetail.repository.PublicRecipeDetailRepository
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model.PublicRecipeDetailResponse
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model.PublicRecipeDetailResult
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.viewpager.PublicPagerAdapter
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.repository.PublicRecipeDetailRepository
 
 class PublicRecipeDetailViewModel : ViewModel() {
 

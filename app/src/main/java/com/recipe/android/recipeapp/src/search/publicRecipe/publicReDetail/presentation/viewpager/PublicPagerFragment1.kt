@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager
+package com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.viewpager
 
 import android.os.Bundle
 import android.view.View
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentPublicViewpager1Binding
-import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResponse
-import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeIngredient
-import com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager.frag1.Frag1Adapter
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model.PublicRecipeDetailResponse
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model.PublicRecipeIngredient
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.viewpager.frag1.Frag1Adapter
 
 class PublicPagerFragment1() :
     BaseFragment<FragmentPublicViewpager1Binding>(

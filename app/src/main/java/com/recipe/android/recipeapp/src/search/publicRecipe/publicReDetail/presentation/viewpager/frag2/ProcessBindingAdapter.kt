@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.publicReDetail.presentation.viewpager.frag2
+package com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.viewpager.frag2
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView

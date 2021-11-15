@@ -1,7 +1,7 @@
-package com.recipe.android.recipeapp.src.search.publicReDetail.repository
+package com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.repository
 
 import com.recipe.android.recipeapp.common.SimpleRetrofitResponse
-import com.recipe.android.recipeapp.src.search.publicReDetail.model.PublicRecipeDetailResponse
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model.PublicRecipeDetailResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

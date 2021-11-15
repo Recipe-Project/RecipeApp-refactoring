@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.publicReDetail.model
+package com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
