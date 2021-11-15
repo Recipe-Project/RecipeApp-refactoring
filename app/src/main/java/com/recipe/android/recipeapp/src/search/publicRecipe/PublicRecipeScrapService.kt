@@ -5,7 +5,6 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeScrapInterface
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.publicRecipe.models.PublicRecipeScrapResponse
-import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.PublicRecipeScrapView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
