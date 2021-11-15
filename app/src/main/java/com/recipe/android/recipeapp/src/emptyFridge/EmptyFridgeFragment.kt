@@ -16,7 +16,7 @@ import com.recipe.android.recipeapp.databinding.FragmentEmptyFridgeBinding
 import com.recipe.android.recipeapp.src.emptyFridge.adapter.EmptyFridgeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResponse
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResult
-import com.recipe.android.recipeapp.src.search.publicRecipe.recipeDetail.RecipeDetailActivity
+import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity
 
 interface EmptyFridgeView {
     fun onGetEmptyFridgeSuccess(response : EmptyFridgeResponse)
@@ -141,7 +141,7 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(
     }
 
     override fun getPublicRecipeDetail(id: Int) {
-        val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
+        val intent = Intent(requireContext(), PublicRecipeDetailActivity::class.java)
         intent.putExtra("index", id)
         requireActivity().startActivity(intent)
     }
