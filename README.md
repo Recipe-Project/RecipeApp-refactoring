@@ -16,3 +16,10 @@
   - Kotlin 100%
   - minSdkVersion : 24
   - targetSdkVersion : 30
+
+  
+## Update
+<img width="12%" src="https://img.shields.io/endpoint?color=green&logo=google-play&logoColor=green&url=https%3A%2F%2Fplayshields.herokuapp.com%2Fplay%3Fi%3Dcom.recipe.android.recipeapp%26l%3DAndroid%26m%3D1.5.1"/>  
+
+- 일부 추천 레시피 뷰 잘림 현상 해결
+- 레시피 뷰 로딩에 dataBinding, ViewModel, LiveData 이용
