@@ -8,6 +8,7 @@ import com.recipe.android.recipeapp.databinding.FragmentSearchResultBinding
 import com.recipe.android.recipeapp.src.search.adapter.SearchResultViewPagerAdapter
 import com.recipe.android.recipeapp.src.search.blogRecipe.BlogResultFragment
 import com.recipe.android.recipeapp.src.search.publicRecipe.PublicResultFragment
+import com.recipe.android.recipeapp.src.search.searchBlog.ui.SearchBlogFragment
 import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeResultFragment
 
 
@@ -27,7 +28,7 @@ class SearchResultFragment(private val keyword: String) : BaseFragment<FragmentS
         val searchKeyword = arguments?.getString("searchKeyword")
 
         val pagerAdapter = SearchResultViewPagerAdapter(this)
-        pagerAdapter.addFragment(BlogResultFragment(keyword))
+        pagerAdapter.addFragment(SearchBlogFragment(keyword))
         pagerAdapter.addFragment(YoutubeResultFragment(keyword))
         pagerAdapter.addFragment(PublicResultFragment(keyword))
 
