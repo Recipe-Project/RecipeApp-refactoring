@@ -22,6 +22,6 @@ class SearchBlogViewModel(val repository: SearchBlogRepository, val keyword: Str
     }
 
     companion object {
-        const val PAGE_SIZE = 30
+        const val PAGE_SIZE = 10
     }
 }
