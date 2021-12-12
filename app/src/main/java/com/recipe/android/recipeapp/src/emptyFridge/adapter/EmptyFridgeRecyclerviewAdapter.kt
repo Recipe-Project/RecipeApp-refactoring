@@ -9,8 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemEmptyFridgeRecyclerviewBinding
-import com.recipe.android.recipeapp.src.MainActivity
-import com.recipe.android.recipeapp.src.emptyFridge.`interface`.EmptyFridgeView
+import com.recipe.android.recipeapp.src.emptyFridge.EmptyFridgeView
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResult
 
 class EmptyFridgeRecyclerviewAdapter(val view : EmptyFridgeView) : RecyclerView.Adapter<EmptyFridgeRecyclerviewAdapter.CustomViewholder>() {

@@ -20,10 +20,19 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityPickIngredientBinding
 import com.recipe.android.recipeapp.src.fridge.addDirect.AddDirectActivity
 import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientViewPagerAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.PickIngredientRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
+
+interface PickIngredientActivityView {
+    fun onGetIngredientSuccess(response: IngredientResponse)
+    fun onPostIngredientSuccess(response: PostIngredientsResponse)
+    fun pickItem(ingredient: Ingredient)
+    fun removePickItem(ingredient: Int)
+    fun addDirectFailure(message: String)
+    fun removePickMyIngredients(ingredient: Ingredient)
+    fun getBasketCntSuccess(response: GetBasketCntResponse)
+}
 
 class PickIngredientActivity :
     BaseActivity<ActivityPickIngredientBinding>(ActivityPickIngredientBinding::inflate),

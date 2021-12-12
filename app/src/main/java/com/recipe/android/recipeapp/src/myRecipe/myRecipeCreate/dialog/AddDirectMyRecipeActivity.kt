@@ -14,20 +14,15 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.recipe.android.recipeapp.R
-import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.config.ApplicationClass.Companion.IC_DEFAULT
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityAddDirectMyRecipeBinding
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.PostIngredientsResponse
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateActivity
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
-import java.util.ArrayList
+import java.util.*
 
 interface AddDirectActivityView {
     fun onAddDirectSuccess(postIngredientsResponse: PostIngredientsResponse)

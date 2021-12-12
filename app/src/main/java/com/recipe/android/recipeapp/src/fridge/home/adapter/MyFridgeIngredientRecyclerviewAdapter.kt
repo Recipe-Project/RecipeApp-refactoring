@@ -13,7 +13,7 @@ import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemMyFridgeIngredientRecyclerviewBinding
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment.Companion.checkboxList
-import com.recipe.android.recipeapp.src.fridge.basket.`interface`.DateDialogInterface
+import com.recipe.android.recipeapp.src.fridge.basket.adapter.DateDialogInterface
 import com.recipe.android.recipeapp.src.fridge.dialog.DateDialog
 import com.recipe.android.recipeapp.src.fridge.home.models.FridgeItem
 import java.text.SimpleDateFormat

@@ -8,13 +8,16 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemBasketIngredientBinding
 import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
-import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
-import com.recipe.android.recipeapp.src.fridge.basket.`interface`.DateDialogInterface
+import com.recipe.android.recipeapp.src.fridge.basket.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.models.BasketIngredient
 import com.recipe.android.recipeapp.src.fridge.dialog.DateDialog
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
+interface DateDialogInterface {
+    fun clickDate(year: Int, month: Int, dayOfMonth: Int, position: Int)
+}
 
 class BasketRecyclerViewAdapter(val view: BasketActivityView, val activity: BasketActivity):
 RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder>(){

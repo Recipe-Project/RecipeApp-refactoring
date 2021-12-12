@@ -4,7 +4,6 @@ import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.PostReceiptIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientInterface
-import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientView
 import com.recipe.android.recipeapp.src.fridge.receipt.models.PostReceiptIngredientResponse
 import retrofit2.Call
 import retrofit2.Callback

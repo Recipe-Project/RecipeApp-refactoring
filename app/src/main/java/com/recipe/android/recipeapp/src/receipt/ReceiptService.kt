@@ -3,7 +3,6 @@ package com.recipe.android.recipeapp.src.receipt
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.receipt.`interface`.ReceiptInterface
-import com.recipe.android.recipeapp.src.receipt.`interface`.ReceiptView
 import com.recipe.android.recipeapp.src.receipt.models.GetAllReceiptResponse
 import com.recipe.android.recipeapp.src.receipt.models.PostNewReceiptRequest
 import com.recipe.android.recipeapp.src.receipt.models.PostNewReceiptResponse

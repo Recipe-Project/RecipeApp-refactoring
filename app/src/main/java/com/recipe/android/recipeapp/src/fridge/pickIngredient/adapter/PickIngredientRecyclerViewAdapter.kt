@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemPickIngredientBinding
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 
 class PickIngredientRecyclerViewAdapter(val view: PickIngredientActivityView) :

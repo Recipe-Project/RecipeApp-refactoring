@@ -2,10 +2,9 @@ package com.recipe.android.recipeapp.src.fridge.receipt.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.ItemReceiptIngredientRecyclerviewBinding
-import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientDialogView
+import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialogView
 import com.recipe.android.recipeapp.src.fridge.receipt.models.PostReceiptIngredientResult
 
 class ReceiptIngredientRecyclerviewAdapter(val view : ReceiptIngredientDialogView) : RecyclerView.Adapter<ReceiptIngredientRecyclerviewAdapter.CustomViewholder>() {

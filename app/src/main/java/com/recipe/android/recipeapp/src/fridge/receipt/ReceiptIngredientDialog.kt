@@ -16,22 +16,28 @@ import com.google.firebase.functions.FirebaseFunctions
 import com.google.gson.*
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
-import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.DialogReceiptIngredientBinding
-import com.recipe.android.recipeapp.src.fridge.addDirect.AddDirectActivity
 import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
 import com.recipe.android.recipeapp.src.fridge.dialog.PickIngredientIconDialog
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.PostReceiptIngredientRequest
-import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientDialogView
-import com.recipe.android.recipeapp.src.fridge.receipt.`interface`.ReceiptIngredientView
 import com.recipe.android.recipeapp.src.fridge.receipt.adapter.ReceiptIngredientRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.fridge.receipt.models.PostReceiptIngredientResponse
 import com.recipe.android.recipeapp.src.fridge.receipt.models.PostReceiptIngredientResult
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+
+interface ReceiptIngredientDialogView {
+    fun clearIngredient(position : Int)
+    fun pickIngredient()
+}
+
+interface ReceiptIngredientView {
+    fun onPostReceiptIngredientSuccess(response : PostReceiptIngredientResponse)
+    fun onPostReceiptIngredientFailure(message : String)
+}
 
 class ReceiptIngredientDialog : BaseActivity<DialogReceiptIngredientBinding>(DialogReceiptIngredientBinding::inflate), ReceiptIngredientView, ReceiptIngredientDialogView,
     PickIngredientActivityView, PickIngredientIconDialog.PickIcon {

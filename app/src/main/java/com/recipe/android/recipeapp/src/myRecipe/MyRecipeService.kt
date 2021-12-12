@@ -2,7 +2,6 @@ package com.recipe.android.recipeapp.src.myRecipe
 
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.myRecipe.`interface`.MyRecipeActivityView
 import com.recipe.android.recipeapp.src.myRecipe.`interface`.MyRecipeRetrofitInterface
 import com.recipe.android.recipeapp.src.myRecipe.models.MyRecipeResponse
 import retrofit2.Call

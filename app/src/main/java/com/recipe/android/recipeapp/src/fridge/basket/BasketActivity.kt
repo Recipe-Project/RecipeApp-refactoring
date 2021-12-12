@@ -10,9 +10,22 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityBasketBinding
 import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment
-import com.recipe.android.recipeapp.src.fridge.basket.`interface`.BasketActivityView
 import com.recipe.android.recipeapp.src.fridge.basket.adapter.BasketRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.basket.models.*
+
+interface BasketActivityView {
+    fun onGetBasketSuccess(response: BasketResponse)
+    fun onPostFridgeSuccess(response: PostFridgeResponse)
+    fun onClickStorageMethod(string: String, position: Int)
+    fun onClickCount(cnt: Int, position: Int)
+    fun onSetExpiredAt(date: String, position: Int)
+    fun onClickExpiredAt(position: Int, expiredAt: String?)
+    fun onClickPickRemove(position: Int)
+    fun onDeleteBasketSuccess(deleteBasketResponse: DeleteBasketResponse, ingredient: String)
+    fun onBasketServiceFailure(message: String)
+    fun onUpCnt(position: Int, cnt: Int)
+    fun onDownCnt(position: Int, cnt: Int)
+}
 
 class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding::inflate),
     BasketActivityView {
@@ -55,7 +68,7 @@ class BasketActivity : BaseActivity<ActivityBasketBinding>(ActivityBasketBinding
         }
     }
 
-    private fun saveBasket(){
+    private fun saveBasket() {
         Log.d(TAG, "BasketActivity - onCreate() : $basketItemList")
 
         fridgeBasketList.clear()

@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
@@ -13,11 +12,9 @@ import android.util.Log
 import android.view.View
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
-import com.google.firebase.ktx.Firebase
 import com.google.gson.*
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityReceiptBinding
-import com.recipe.android.recipeapp.src.receipt.`interface`.ReceiptView
 import com.recipe.android.recipeapp.src.receipt.adapter.ReceiptRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.receipt.dialog.ReceiptDialog
 import com.recipe.android.recipeapp.src.receipt.models.BuyItem
@@ -29,6 +26,13 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
+interface ReceiptView {
+    fun onPostNewReceiptSuccess(response : PostNewReceiptResponse)
+    fun onPostNewReceiptFailure(message : String)
+
+    fun onGetAllReceiptSuccess(response : GetAllReceiptResponse)
+    fun onGetAllReceiptFailure(message : String)
+}
 
 class ReceiptActivity : BaseActivity<ActivityReceiptBinding>(ActivityReceiptBinding::inflate), ReceiptView {
 

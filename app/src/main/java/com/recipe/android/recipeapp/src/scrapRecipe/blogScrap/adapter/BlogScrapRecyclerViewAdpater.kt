@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapRecipeBinding
-import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.`interface`.BlogScrapFragmnetView
+import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.BlogScrapFragmnetView
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.models.BlogScrapResult
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.viewHolder.BlogScrapViewHolder
 

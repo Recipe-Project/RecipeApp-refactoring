@@ -3,11 +3,9 @@ package com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.recipe.android.recipeapp.databinding.FragmentCategoryBinding
 import com.recipe.android.recipeapp.databinding.ItemAllIngredientsBinding
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.viewHolder.IngredientAllViewHolder
 
 class IngredientAllRecyclerViewAdapter(val view: PickIngredientActivityView) :

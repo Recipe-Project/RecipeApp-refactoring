@@ -146,6 +146,8 @@
     <string name="offApp">레시피 저장소 종료하기</string>
 
     <!-- 스크랩 레시피 -->
+    <string name="scrapCancel">스크랩이 취소되었습니다.</string>
+    <string name="scrapComplete">스크랩 레시피에 담겼습니다.</string>
 
     <!-- 영수증 입력 -->
     <string name="inputRecipe">영수증 입력</string>

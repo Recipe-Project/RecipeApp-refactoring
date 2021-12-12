@@ -9,10 +9,16 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.common.SimpleResponse
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentBlogScrapBinding
-import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.`interface`.BlogScrapFragmnetView
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.adapter.BlogScrapRecyclerViewAdpater
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.models.BlogScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.models.BlogScrapResult
+
+interface BlogScrapFragmnetView {
+    fun onGetBlogScrapSuccess(response: BlogScrapResponse)
+    fun onBlogScrapFailure(message: String)
+
+    fun onPostBlogScrapSuccess(response: SimpleResponse)
+}
 
 class BlogScrapFragment: BaseFragment<FragmentBlogScrapBinding>(FragmentBlogScrapBinding::bind, R.layout.fragment_blog_scrap),
 BlogScrapFragmnetView{

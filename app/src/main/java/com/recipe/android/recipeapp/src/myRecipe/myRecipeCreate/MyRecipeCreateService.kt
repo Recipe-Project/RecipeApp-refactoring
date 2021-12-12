@@ -3,10 +3,9 @@ package com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateRetrofitInterface
+import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeModify.`interface`.MyRecipeModifyRetrofitInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

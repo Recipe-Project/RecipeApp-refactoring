@@ -23,12 +23,10 @@ import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMyRecipeCreateBinding
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResponse
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.adapter.PickItemRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.dialog.*
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.DirectIngredientList
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
-import com.recipe.android.recipeapp.src.setting.deleteId.DeleteIdDialog
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat

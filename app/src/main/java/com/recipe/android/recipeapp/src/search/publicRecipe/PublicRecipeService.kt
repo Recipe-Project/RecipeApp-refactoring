@@ -2,10 +2,8 @@ package com.recipe.android.recipeapp.src.search.publicRecipe
 
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordInterface
 import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
 import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeInterface
-import com.recipe.android.recipeapp.src.search.publicRecipe.`interface`.PublicRecipeView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
