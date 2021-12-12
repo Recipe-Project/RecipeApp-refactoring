@@ -73,30 +73,33 @@ class BlogRecipeRecyclerviewAdapter(val context: Context) :
         holder.cnt.text = blogRecipeList[position].userScrapCnt.toString()
         holder.postDate.text = blogRecipeList[position].postDate
 
-        if (blogRecipeScrapItemClick != null) {
-            holder.scrapBtn.setOnClickListener {
-                if (blogRecipeList[position].userScrapYN == "Y") {
-                    blogRecipeList[position].userScrapYN = "N"
-                    holder.scrapBtn.setImageResource(R.drawable.ic_favorite_empty_white)
-                    Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
-                } else {
-                    blogRecipeList[position].userScrapYN = "Y"
-                    holder.scrapBtn.setImageResource(R.drawable.ic_favorite_full_white)
-                    Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
-                }
-                //blogRecipeScrapItemClick?.onClick(it, position)
-                BlogRecipeService(null).tryPostAddingScrap(
-                    BlogRecipeScrapRequest(
-                        blogRecipeList[position].title,
-                        blogRecipeList[position].blogUrl,
-                        blogRecipeList[position].description,
-                        blogRecipeList[position].blogName,
-                        blogRecipeList[position].postDate,
-                        blogRecipeList[position].thumbnail
-                    )
-                )
+
+        holder.scrapBtn.setOnClickListener {
+            if (blogRecipeList[position].userScrapYN == "Y") {
+                blogRecipeList[position].userScrapYN = "N"
+                holder.scrapBtn.setImageResource(R.drawable.ic_favorite_empty_white)
+                Toast.makeText(context, "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                blogRecipeList[position].userScrapYN = "Y"
+                holder.scrapBtn.setImageResource(R.drawable.ic_favorite_full_white)
+                Toast.makeText(context, "스크랩 레시피에 담겼습니다.", Toast.LENGTH_SHORT).show()
             }
+            //blogRecipeScrapItemClick?.onClick(it, position)
+            BlogRecipeService(null).tryPostAddingScrap(
+                BlogRecipeScrapRequest(
+                    blogRecipeList[position].title,
+                    blogRecipeList[position].blogUrl,
+                    blogRecipeList[position].description,
+                    blogRecipeList[position].blogName,
+                    blogRecipeList[position].postDate,
+                    blogRecipeList[position].thumbnail
+                )
+            )
         }
+        holder.itemView.setOnClickListener {
+            context.startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(blogRecipeList[position].blogUrl)))
+        }
+
 
 // 첫화면 말고 2페이지, 3페이지로 스크롤 후 클릭한 경우, IndexOutOfBoundsException 에러가 나면서 앱이 꺼져서 클릭함수를 수정했습니다. - 레이나
 //        if(blogRecipeItemClick != null) {
@@ -105,9 +108,7 @@ class BlogRecipeRecyclerviewAdapter(val context: Context) :
 //            }
 //        }
 
-        holder.itemView.setOnClickListener {
-            context.startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(blogRecipeList[position].blogUrl)))
-        }
+
     }
 
     override fun getItemCount(): Int = blogRecipeList.size
