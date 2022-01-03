@@ -4,22 +4,16 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.NavHostFragment
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentKeywordBinding
-import com.recipe.android.recipeapp.src.search.`interface`.KeywordListener
-import com.recipe.android.recipeapp.src.search.`interface`.SearchKeywordView
+import com.recipe.android.recipeapp.src.KeywordListener
 import com.recipe.android.recipeapp.src.search.adapter.PopularKeywordRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter.Companion.list
 import com.recipe.android.recipeapp.src.search.models.PopularKeywordResponse
 import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
-import com.recipe.android.recipeapp.src.search.models.PublicRecipeResponse
-import okhttp3.internal.notifyAll
 
 class KeywordFragment :
     BaseFragment<FragmentKeywordBinding>(FragmentKeywordBinding::bind, R.layout.fragment_keyword),

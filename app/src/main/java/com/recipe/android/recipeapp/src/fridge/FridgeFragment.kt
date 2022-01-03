@@ -19,8 +19,6 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentFridgeNewBinding
 import com.recipe.android.recipeapp.src.fridge.basket.BasketActivity
-import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeView
-import com.recipe.android.recipeapp.src.fridge.home.`interface`.IngredientUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.adapter.MyFridgeCategoryAdapter
 import com.recipe.android.recipeapp.src.fridge.home.dialog.DeleteDialog
 import com.recipe.android.recipeapp.src.fridge.home.models.*
@@ -28,6 +26,19 @@ import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActi
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
+interface IngredientUpdateView {
+    fun onClickStorageMethod(string: String, position: Int)
+    fun onClickCount(cnt: Int, position: Int)
+    fun onSetExpiredAt(date: String, position: Int)
+}
+
+interface FridgeView {
+    fun onGetFridgeSuccess(response : GetFridgeResponse)
+    fun onGetFridgeFailure(message : String)
+    fun onPatchFridgeSuccess(response : PatchFridgeResponse)
+    fun onPatchFridgeFailure(message : String)
+}
 
 class FridgeFragment :
     BaseFragment<FragmentFridgeNewBinding>(FragmentFridgeNewBinding::bind, R.layout.fragment_fridge_new),

@@ -3,7 +3,6 @@ package com.recipe.android.recipeapp.src.scrapRecipe.blogScrap
 import android.util.Log
 import com.recipe.android.recipeapp.common.SimpleResponse
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.`interface`.BlogScrapFragmnetView
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.`interface`.BlogScrapRetrofitInterface
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.models.BlogScrapResponse
 import retrofit2.Call

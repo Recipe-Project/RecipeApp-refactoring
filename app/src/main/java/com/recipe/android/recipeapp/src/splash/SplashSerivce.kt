@@ -2,8 +2,6 @@ package com.recipe.android.recipeapp.src.splash
 
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.signIn.models.SignInResponse
-import com.recipe.android.recipeapp.src.splash.`interface`.SplashActivityView
 import com.recipe.android.recipeapp.src.splash.`interface`.SplashRetrofitInterface
 import com.recipe.android.recipeapp.src.splash.models.AutoLoginResponse
 import retrofit2.Call

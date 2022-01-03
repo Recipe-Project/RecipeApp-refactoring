@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.DialogPickIngredientIconBinding
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientService
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.adapter.MultiplePickAllAdapter
 
-class MultiplePickIngredientsDialog(context: Context, val view: MyRecipeCreateActivityView): Dialog(context), PickIngredientActivityView {
+class MultiplePickIngredientsDialog(context: Context, val view: MyRecipeCreateActivityView): Dialog(context),
+    PickIngredientActivityView {
 
     val TAG = "MultiplePickIngredientsDialog"
     private lateinit var binding: DialogPickIngredientIconBinding

@@ -5,11 +5,10 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment.AllCategoryFragment
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment.CategoryFragment
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 
 class IngredientViewPagerAdapter(fa: FragmentActivity, val view: PickIngredientActivityView) :
     FragmentStateAdapter(fa) {

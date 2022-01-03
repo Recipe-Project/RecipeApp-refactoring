@@ -9,9 +9,13 @@ import com.recipe.android.recipeapp.databinding.DialogSignOutBinding
 import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.fridge.FridgeFragment
 import com.recipe.android.recipeapp.src.fridge.home.FridgeUpdateService
-import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
+
+interface FridgeUpdateView {
+    fun onDeleteIngredientSuccess(response : DeleteIngredientResponse)
+    fun onDeleteIngredientFailure(message : String)
+}
 
 class DeleteDialog : BaseActivity<DialogSignOutBinding>(DialogSignOutBinding::inflate), FridgeUpdateView {
 

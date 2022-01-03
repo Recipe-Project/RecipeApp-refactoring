@@ -14,12 +14,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.DialogPickIngredientIconBinding
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.*
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateService
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.models.MyRecipeCreateResponse
+
+interface MyRecipeCreateActivityView {
+    fun onPostMyRecipeCreateSuccess(response: MyRecipeCreateResponse)
+    fun onMyRecipeCreateFailure(message: String)
+
+    fun onPatchMyRecipeSuccess(response: MyRecipeCreateResponse)
+    fun onPatchMyRecipeFailure(message: String)
+
+    fun onGetIngredientMyRecipeSuccess(response: IngredientResponse)
+
+    fun selectAddDirect()
+    fun selectPickDirect()
+
+    fun pickItem(ingredient: Ingredient)
+    fun removePickItem(ingredient: Int)
+
+    fun cancelCreateRecipe()
+
+    fun pickBtnSaveClick(pickIngredientsMyRecipe: ArrayList<Ingredient>?)
+}
 
 class PickIconDialog(
     context: Context,

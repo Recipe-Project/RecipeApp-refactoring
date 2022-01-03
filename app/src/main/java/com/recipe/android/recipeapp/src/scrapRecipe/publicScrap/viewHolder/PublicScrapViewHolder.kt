@@ -8,8 +8,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapPublicRecipeBinding
+import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.PublicScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.PublicScrapService
-import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.`interface`.PublicScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.adapter.PublicScrapRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PostPublicScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrap

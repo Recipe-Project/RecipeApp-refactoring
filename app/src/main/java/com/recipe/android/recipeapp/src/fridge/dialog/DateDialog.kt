@@ -9,8 +9,7 @@ import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import com.recipe.android.recipeapp.databinding.DialogDatePickerBinding
-import com.recipe.android.recipeapp.src.fridge.basket.`interface`.DateDialogInterface
-import java.util.*
+import com.recipe.android.recipeapp.src.fridge.basket.adapter.DateDialogInterface
 
 class DateDialog(context: Context, val dateSave: DateDialogInterface, val position: Int): Dialog(context) {
 

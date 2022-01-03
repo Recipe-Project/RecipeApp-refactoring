@@ -9,8 +9,8 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.common.SimpleResponse
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapRecipeBinding
+import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.BlogScrapFragmnetView
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.BlogScrapService
-import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.`interface`.BlogScrapFragmnetView
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.adapter.BlogScrapRecyclerViewAdpater
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.models.BlogScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.blogScrap.models.BlogScrapResult

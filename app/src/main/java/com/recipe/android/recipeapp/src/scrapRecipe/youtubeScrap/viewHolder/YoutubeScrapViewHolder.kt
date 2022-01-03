@@ -8,8 +8,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.ItemScrapRecipeBinding
+import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.YoutubeScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.YoutubeScrapService
-import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.`interface`.YoutubeScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.adapter.YoutubeScrapRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.PostYoutubeScrapResponse
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrap

@@ -3,7 +3,7 @@ package com.recipe.android.recipeapp.src.fridge.home
 import android.util.Log
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeInterface
-import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeUpdateView
+import com.recipe.android.recipeapp.src.fridge.home.dialog.FridgeUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientRequest
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
 import retrofit2.Call

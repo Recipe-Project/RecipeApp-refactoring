@@ -9,11 +9,15 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMyRecipeBinding
 import com.recipe.android.recipeapp.src.myPage.adapter.MyRecipeGridViewAdapter
-import com.recipe.android.recipeapp.src.myRecipe.`interface`.MyRecipeActivityView
 import com.recipe.android.recipeapp.src.myRecipe.adpater.MyRecipeRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.myRecipe.models.MyRecipeResponse
 import com.recipe.android.recipeapp.src.myRecipe.models.MyRecipeResult
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.MyRecipeCreateActivity
+
+interface MyRecipeActivityView {
+    fun onGetMyRecipeSuccess(response: MyRecipeResponse)
+    fun onGetMyRecipeFailure(message: String)
+}
 
 class MyRecipeActivity: BaseActivity<ActivityMyRecipeBinding>(ActivityMyRecipeBinding::inflate), MyRecipeActivityView {
 

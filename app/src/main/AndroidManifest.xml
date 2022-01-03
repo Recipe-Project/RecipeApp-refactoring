@@ -35,6 +35,7 @@
         <activity
             android:name=".src.search.publicRecipe.recipeDetail.RecipeDetailActivity"
             android:theme="@style/Theme.RecipeApp.NoActionBar" />
+        <activity android:name=".src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity"/>
 
         <!-- 스플래시 -->
         <activity android:name=".src.splash.SplashActivity">

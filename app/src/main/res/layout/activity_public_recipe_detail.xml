@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailViewModel" />
+
+        <variable
+            name="recipeInfo"
+            type="com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model.PublicRecipeDetailResult" />
+
+        <variable
+            name="activity"
+            type="com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="false"
+            android:theme="@style/Theme.RecipeApp.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_collapsing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="false"
+                app:collapsedTitleTextAppearance="@style/Head2Style"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleTextAppearance="@style/Head2Style"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title=" "
+                app:toolbarId="@+id/toolbar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/Theme.RecipeApp.PopupOverlay">
+
+                    <LinearLayout
+                        android:id="@+id/toolbar_after"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btn_back_after"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{() -> activity.onBackPressed()}"
+                            android:padding="16dp"
+                            android:paddingStart="4dp"
+                            android:src="@drawable/ic_arrow_back" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_title_after"
+                            style="@style/Head2Style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@{recipeInfo.recipeName}"
+                            android:textColor="@color/black"
+                            tools:text="스팸김치볶음밥" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_cnt_scrap_after"
+                            style="@style/Body2Style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:drawableStart="@drawable/ic_after_scroll_scrap"
+                            android:drawablePadding="8dp"
+                            android:text="@{Integer.toString(recipeInfo.userScrapCnt)}"
+                            tools:text="222" />
+                    </LinearLayout>
+                </androidx.appcompat.widget.Toolbar>
+
+                <LinearLayout
+                    android:id="@+id/before_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="24dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_back_before"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:onClick="@{() -> activity.onBackPressed()}"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_arrow_back" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_title_beforel"
+                        style="@style/Head2Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="@{recipeInfo.recipeName}"
+                        android:textColor="@color/black"
+                        tools:text="스팸김치볶음밥" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cnt_scrap_before"
+                        style="@style/Body2Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="17dp"
+                        android:drawableStart="@drawable/ic_after_scroll_scrap"
+                        android:drawablePadding="8dp"
+                        android:text="@{Integer.toString(recipeInfo.userScrapCnt)}"
+                        tools:text="222" />
+                </LinearLayout>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_recipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="233dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:scaleType="fitXY"
+                    app:setImage="@{recipeInfo.thumbnail}"
+                    tools:src="@drawable/ic_launcher_background" />
+
+
+                <LinearLayout
+                    android:id="@+id/layout_scrap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:id="@+id/btn_scrap"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:onClick="@{activity::clickScrap}"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ic_scrap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_favorite_for_public_scrap" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/recipe_detail_activity_favorite_tv"
+                            style="@style/CaptionStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/save_btn" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_schedule" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/CaptionStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@{recipeInfo.cookingTime}"
+                            tools:text="10분" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_dining" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/recipe_detail_activity_level_tv"
+                            style="@style/CaptionStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@{recipeInfo.level}"
+                            tools:text="초보환영" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/top_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@color/gray_100" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_detail_summary"
+                    style="@style/Body1Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@{recipeInfo.summary}"
+                    tools:text="냉장고에 있는 김치로 얼큰한 김치찌개를 끓여보세요. 요리설명요리설명요리설명요리설명. 요리설명요리설" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="48dp"
+                    android:theme="@style/TabTheme"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tabGravity="start"
+                    app:tabIndicatorColor="@color/green"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabIndicatorHeight="3dp"
+                    app:tabMode="fixed"
+                    app:tabTextAppearance="@style/Body2Style" />
+
+                <View
+                    android:id="@+id/middle_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_000" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingTop="33dp"
+                    android:paddingBottom="47dp" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -10,9 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.ActionBar
 import com.recipe.android.recipeapp.R
-import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.DialogAddIngredientBinding
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeCreate.`interface`.MyRecipeCreateActivityView
 
 class AddIngredientDialog(context: Context, private var activity: Activity, val view: MyRecipeCreateActivityView) : Dialog(context) {
 

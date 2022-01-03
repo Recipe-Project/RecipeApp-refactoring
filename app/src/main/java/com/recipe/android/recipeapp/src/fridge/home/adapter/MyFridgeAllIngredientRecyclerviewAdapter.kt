@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.ItemAllIngredientsBinding
-import com.recipe.android.recipeapp.src.fridge.home.`interface`.FridgeUpdateView
+import com.recipe.android.recipeapp.src.fridge.home.dialog.FridgeUpdateView
 import com.recipe.android.recipeapp.src.fridge.home.models.DeleteIngredientResponse
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 

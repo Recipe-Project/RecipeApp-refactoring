@@ -1,9 +1,7 @@
 package com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail
 
 import android.util.Log
-import com.google.gson.JsonElement
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.`interface`.MyRecipeDetailActivityView
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.`interface`.MyRecipeDetailRetrofitInterface
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.models.MyRecipeDeleteResponse
 import com.recipe.android.recipeapp.src.myRecipe.myRecipeDetail.models.MyRecipeDetailResponse

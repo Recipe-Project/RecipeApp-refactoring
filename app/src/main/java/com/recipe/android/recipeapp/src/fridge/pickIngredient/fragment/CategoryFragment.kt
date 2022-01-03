@@ -2,18 +2,15 @@ package com.recipe.android.recipeapp.src.fridge.pickIngredient.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentCategoryBinding
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.`interface`.PickIngredientActivityView
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientAllRecyclerViewAdapter
+import com.recipe.android.recipeapp.src.fridge.pickIngredient.PickIngredientActivityView
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.adapter.IngredientRecyclerViewAdapter
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.CategoryIngrediets
 import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.Ingredient
-import com.recipe.android.recipeapp.src.fridge.pickIngredient.models.IngredientResult
 
 class CategoryFragment :
     BaseFragment<FragmentCategoryBinding>(

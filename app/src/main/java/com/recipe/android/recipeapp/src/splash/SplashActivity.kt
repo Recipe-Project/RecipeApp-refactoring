@@ -3,7 +3,6 @@ package com.recipe.android.recipeapp.src.splash
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.recipe.android.recipeapp.R
@@ -14,8 +13,12 @@ import com.recipe.android.recipeapp.databinding.ActivitySplashBinding
 import com.recipe.android.recipeapp.src.MainActivity
 import com.recipe.android.recipeapp.src.fcm.FcmService
 import com.recipe.android.recipeapp.src.signIn.SignInActivity
-import com.recipe.android.recipeapp.src.splash.`interface`.SplashActivityView
 import com.recipe.android.recipeapp.src.splash.models.AutoLoginResponse
+
+interface SplashActivityView {
+    fun onPostAutoLoginSuccess(response: AutoLoginResponse)
+    fun onPostAutoLoginFailure(message: String)
+}
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate),
     SplashActivityView {

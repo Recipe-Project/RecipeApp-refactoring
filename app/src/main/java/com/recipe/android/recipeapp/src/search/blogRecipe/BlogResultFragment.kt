@@ -1,8 +1,6 @@
 package com.recipe.android.recipeapp.src.search.blogRecipe
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,12 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentBlogResultBinding
-import com.recipe.android.recipeapp.src.search.blogRecipe.`interface`.BlogRecipeView
 import com.recipe.android.recipeapp.src.search.blogRecipe.adapter.BlogRecipeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeListItem
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeResponse
-import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.blogRecipe.models.BlogRecipeScrapResponse
+
+interface BlogRecipeView {
+    fun onGetBlogRecipeSuccess(response: BlogRecipeResponse)
+    fun onGetBlogRecipeFailure(message: String)
+    fun onPostBlogRecipeScrapSuccess(response: BlogRecipeScrapResponse)
+    fun onPostBlogRecipeScrapFailure(message: String)
+}
 
 class BlogResultFragment(private val keyword : String)
     : BaseFragment<FragmentBlogResultBinding>(FragmentBlogResultBinding::bind, R.layout.fragment_blog_result), BlogRecipeView {
