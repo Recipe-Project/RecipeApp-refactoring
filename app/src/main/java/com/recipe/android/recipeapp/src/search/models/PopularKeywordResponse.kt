@@ -10,10 +10,10 @@ data class PopularKeywordResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("result")
-    val result : ArrayList<PopularKeywordResult>
+    val result : List<PopularKeyword>
 )
 
-data class PopularKeywordResult(
+data class PopularKeyword(
     @SerializedName("bestKeyword")
     val bestKeyword : String
 )
