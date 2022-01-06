@@ -6,7 +6,7 @@
     <data>
         <variable
             name="processItem"
-            type="com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model.PublicRecipeProcess" />
+            type="com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.publicReDetail.model.PublicRecipeProcess" />
         <variable
             name="processNo"
             type="String" />

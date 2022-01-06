@@ -15,7 +15,7 @@ import com.recipe.android.recipeapp.databinding.FragmentEmptyFridgeBinding
 import com.recipe.android.recipeapp.src.emptyFridge.adapter.EmptyFridgeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResponse
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResult
-import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity
+import com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity
 
 interface EmptyFridgeView {
     fun onGetEmptyFridgeSuccess(response : EmptyFridgeResponse)
