@@ -8,12 +8,14 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.kakao.sdk.common.KakaoSdk
 import com.recipe.android.recipeapp.BuildConfig
+import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+@HiltAndroidApp
 class ApplicationClass: Application() {
 
     // 실 서버
@@ -45,7 +47,7 @@ class ApplicationClass: Application() {
         val NAVER_LOGIN = "NAVER_LOGIN"
         val GOOGLE_LOGIN = "GOOGLE_LOGIN"
         val KAKAO_LOGIN = "KAKAO_LOGIN"
-
+        const val RECENT_SEARCH_KEYWORD = "RECENT_SEARCH_KEYWORD"
     }
 
     override fun onCreate() {
@@ -74,6 +76,8 @@ class ApplicationClass: Application() {
             sSharedPreferences.edit().putString(IC_DEFAULT, it.toString()).apply()
             Log.d(TAG, "ApplicationClass - onCreate() : ${sSharedPreferences.getString(IC_DEFAULT, "")}")
         }
+
+        sSharedPreferences.edit().putString(RECENT_SEARCH_KEYWORD, "").apply()
     }
 
 
