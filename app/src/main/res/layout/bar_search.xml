@@ -8,7 +8,7 @@
             type="com.recipe.android.recipeapp.src.search.SearchFragment" />
         <variable
             name="searchResultFragment"
-            type="com.recipe.android.recipeapp.src.search.SearchResultFragment" />
+            type="com.recipe.android.recipeapp.src.search.searchResult.SearchResultFragment" />
         <variable
             name="keyword"
             type="String" />
