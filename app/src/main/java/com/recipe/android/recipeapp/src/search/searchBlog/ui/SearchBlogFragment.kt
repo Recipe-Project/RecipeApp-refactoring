@@ -1,14 +1,18 @@
 package com.recipe.android.recipeapp.src.search.searchBlog.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchBlogBinding
+import com.recipe.android.recipeapp.src.search.searchBlog.adapter.LoadStateAdapter
 import com.recipe.android.recipeapp.src.search.searchBlog.adapter.SearchAdapter
 import com.recipe.android.recipeapp.src.search.searchBlog.repository.SearchBlogRepository
 import com.recipe.android.recipeapp.src.search.searchBlog.repository.ViewModelFactory
@@ -30,11 +34,7 @@ class SearchBlogFragment(private val keyword: String) : BaseFragment<FragmentSea
         super.onViewCreated(view, savedInstanceState)
 
         repository = SearchBlogRepository()
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(repository, keyword)
-        )
-            .get(SearchBlogViewModel::class.java)
+        setupViewModel()
 
         setRecyclerView()
     }
@@ -44,7 +44,28 @@ class SearchBlogFragment(private val keyword: String) : BaseFragment<FragmentSea
 
         binding.rvSearch.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        binding.rvSearch.adapter = adapter
+        binding.rvSearch.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = LoadStateAdapter { adapter.retry() },
+            footer = LoadStateAdapter { adapter.retry() }
+        )
+
+        adapter.addLoadStateListener { loadState ->
+            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            binding.btnRetry.isVisible = loadState.source.refresh is LoadState.Error
+
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+            errorState?.let {
+                Log.d(
+                    "SearchBlogFragment", "SearchBlogFragment - setRecyclerView() : " +
+                            "\uD83D\uDE28 Wooops ${it.error}"
+                )
+            }
+        }
+
+        binding.btnRetry.setOnClickListener { adapter.retry() }
 
         searchRecipeJob?.cancel()
         searchRecipeJob = lifecycleScope.launch {
@@ -52,5 +73,13 @@ class SearchBlogFragment(private val keyword: String) : BaseFragment<FragmentSea
                 adapter.submitData(it)
             }
         }
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(repository, keyword)
+        )
+            .get(SearchBlogViewModel::class.java)
     }
 }
