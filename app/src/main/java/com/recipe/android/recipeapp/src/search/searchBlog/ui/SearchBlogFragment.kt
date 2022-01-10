@@ -1,9 +1,7 @@
 package com.recipe.android.recipeapp.src.search.searchBlog.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +10,6 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchBlogBinding
 import com.recipe.android.recipeapp.src.search.searchBlog.adapter.SearchAdapter
-import com.recipe.android.recipeapp.src.search.searchBlog.adapter.SearchHeaderAdapter
 import com.recipe.android.recipeapp.src.search.searchBlog.repository.SearchBlogRepository
 import com.recipe.android.recipeapp.src.search.searchBlog.repository.ViewModelFactory
 import kotlinx.coroutines.Job
@@ -43,7 +40,7 @@ class SearchBlogFragment(private val keyword: String) : BaseFragment<FragmentSea
     }
 
     private fun setRecyclerView() {
-        adapter = SearchAdapter(viewModel)
+        adapter = SearchAdapter(repository)
 
         binding.rvSearch.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)

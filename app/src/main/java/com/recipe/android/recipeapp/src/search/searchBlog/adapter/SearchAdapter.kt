@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.databinding.HeaderSearchBlogBinding
 import com.recipe.android.recipeapp.databinding.ItemBlogResultFragRecyclerviewBinding
 import com.recipe.android.recipeapp.src.search.searchBlog.model.BlogRecipe
-import com.recipe.android.recipeapp.src.search.searchBlog.ui.SearchBlogViewModel
+import com.recipe.android.recipeapp.src.search.searchBlog.repository.SearchBlogRepository
 
-class SearchAdapter(private val viewModel: SearchBlogViewModel) :
+class SearchAdapter(private val repository: SearchBlogRepository) :
     PagingDataAdapter<BlogRecipe, RecyclerView.ViewHolder>(PostComparator()) {
 
     private val TYPE_HEADER = 0
@@ -19,7 +19,7 @@ class SearchAdapter(private val viewModel: SearchBlogViewModel) :
 
     inner class SearchViewHolder(val binding: ItemBlogResultFragRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindWithView(viewModel: SearchBlogViewModel, item: BlogRecipe) {
+        fun bindWithView(item: BlogRecipe) {
             binding.item = item
         }
     }
@@ -27,7 +27,11 @@ class SearchAdapter(private val viewModel: SearchBlogViewModel) :
     inner class HeaderViewHolder(val binding: HeaderSearchBlogBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindWithView() {
-            binding.tvCntAll.text
+            binding.tvCntAll.text =
+                repository.totalCnt.let {
+                    if (it > 100) "100+"
+                    else it.toString()
+                }
         }
     }
 
@@ -44,7 +48,7 @@ class SearchAdapter(private val viewModel: SearchBlogViewModel) :
         if (item != null) {
             when (returnViewType) {
                 TYPE_HEADER -> (holder as HeaderViewHolder).bindWithView()
-                else -> (holder as SearchViewHolder).bindWithView(this.viewModel, item)
+                else -> (holder as SearchViewHolder).bindWithView(item)
             }
         }
     }

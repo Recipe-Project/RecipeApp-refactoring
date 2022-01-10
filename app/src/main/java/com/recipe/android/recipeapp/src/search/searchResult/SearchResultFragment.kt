@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchResultBinding
+import com.recipe.android.recipeapp.src.search.searchBlog.ui.SearchBlogFragment
 import com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.BlogResultFragment
 import com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.PublicResultFragment
 import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.YoutubeResultFragment
@@ -34,7 +35,7 @@ class SearchResultFragment() : BaseFragment<FragmentSearchResultBinding>(
         binding.keyword = searchKeyword
 
         val pagerAdapter = SearchResultViewPagerAdapter(this)
-        pagerAdapter.addFragment(BlogResultFragment(searchKeyword))
+        pagerAdapter.addFragment(SearchBlogFragment(searchKeyword))
         pagerAdapter.addFragment(YoutubeResultFragment(searchKeyword))
         pagerAdapter.addFragment(PublicResultFragment(searchKeyword))
 
@@ -43,11 +44,11 @@ class SearchResultFragment() : BaseFragment<FragmentSearchResultBinding>(
         if (!searchType.isNullOrEmpty() && !searchKeyword.isNullOrEmpty()) {
             when (searchType) {
                 "blog" -> {
-                    pagerAdapter.addFragment(BlogResultFragment(searchKeyword))
+                    pagerAdapter.addFragment(SearchBlogFragment(searchKeyword))
                     binding.searchResultFragViewpager.setCurrentItem(0, false)
                 }
                 "youtube" -> {
-                    pagerAdapter.addFragment(BlogResultFragment(searchKeyword))
+                    pagerAdapter.addFragment(SearchBlogFragment(searchKeyword))
                     binding.searchResultFragViewpager.setCurrentItem(1, false)
                 }
             }

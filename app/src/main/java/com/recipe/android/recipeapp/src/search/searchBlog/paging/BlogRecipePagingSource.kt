@@ -25,14 +25,15 @@ class BlogRecipePagingSource(
         return try {
             val position = params.key ?: STARTING_PAGE_INDEX
 
-            val response =
-                repository.getBlogRecipe(keyword, SearchBlogViewModel.PAGE_SIZE, position)
+            val response = repository.getBlogRecipe(keyword, SearchBlogViewModel.PAGE_SIZE, position)
             checkNotNull(response)
 
+            repository.totalCnt = response.total
+
             val prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1
-            val nextKey = if (response.isEmpty()) null else position + SearchBlogViewModel.PAGE_SIZE
+            val nextKey = if (response.blogList.isEmpty()) null else position + SearchBlogViewModel.PAGE_SIZE
             LoadResult.Page(
-                data = response,
+                data = response.blogList,
                 prevKey = prevKey,
                 nextKey = nextKey
             )
