@@ -1,10 +1,10 @@
-package com.recipe.android.recipeapp.src.search.searchBlog.paging
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.recipe.android.recipeapp.src.search.searchBlog.model.BlogRecipe
-import com.recipe.android.recipeapp.src.search.searchBlog.repository.SearchBlogRepository
-import com.recipe.android.recipeapp.src.search.searchBlog.ui.SearchBlogViewModel
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model.BlogRecipe
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.repository.SearchBlogRepository
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.ui.SearchBlogViewModel
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,8 +1,5 @@
  package com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.`interface`
 
-import com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.models.BlogRecipeResponse
-import com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.models.BlogRecipeScrapRequest
-import com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.models.BlogRecipeScrapResponse
 import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.models.YoutubeRecipeResponse
 import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.models.YoutubeRecipeScrapRequest
 import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.models.YoutubeRecipeScrapResponse

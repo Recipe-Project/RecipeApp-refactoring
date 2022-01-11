@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.searchBlog.adapter
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

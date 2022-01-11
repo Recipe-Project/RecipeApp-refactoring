@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.searchBlog.ui
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchBlogBinding
-import com.recipe.android.recipeapp.src.search.searchBlog.adapter.LoadStateAdapter
-import com.recipe.android.recipeapp.src.search.searchBlog.adapter.SearchAdapter
-import com.recipe.android.recipeapp.src.search.searchBlog.repository.SearchBlogRepository
-import com.recipe.android.recipeapp.src.search.searchBlog.repository.ViewModelFactory
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.adapter.LoadStateAdapter
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.adapter.SearchAdapter
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.repository.SearchBlogRepository
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.repository.ViewModelFactory
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

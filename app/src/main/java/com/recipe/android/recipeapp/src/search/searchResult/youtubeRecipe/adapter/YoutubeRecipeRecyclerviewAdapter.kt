@@ -4,13 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -20,12 +18,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
-import com.recipe.android.recipeapp.databinding.ItemRecipeListLoadingBinding
 import com.recipe.android.recipeapp.databinding.ItemYoutubeResultFragRecyclerviewBinding
-import com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.adapter.BlogRecipeRecyclerviewAdapter
-import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.YoutubeRecipeService
 import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.models.YoutubeRecipeResult
-import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.models.YoutubeRecipeScrapRequest
 import java.text.SimpleDateFormat
 
 class YoutubeRecipeRecyclerviewAdapter(val context : Context) : RecyclerView.Adapter<YoutubeRecipeRecyclerviewAdapter.CustomViewHolder>(){

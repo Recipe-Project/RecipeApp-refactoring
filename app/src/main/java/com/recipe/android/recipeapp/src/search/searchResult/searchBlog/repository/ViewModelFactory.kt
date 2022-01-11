@@ -1,8 +1,8 @@
-package com.recipe.android.recipeapp.src.search.searchBlog.repository
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.repository
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.recipe.android.recipeapp.src.search.searchBlog.ui.SearchBlogViewModel
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.ui.SearchBlogViewModel
 
 class ViewModelFactory(private val repository: SearchBlogRepository, private val keyword: String) : ViewModelProvider.Factory {
 

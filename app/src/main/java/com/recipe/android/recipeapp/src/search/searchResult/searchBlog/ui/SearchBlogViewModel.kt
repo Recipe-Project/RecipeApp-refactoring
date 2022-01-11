@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.searchBlog.ui
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.ui
 
 import androidx.lifecycle.*
 import androidx.paging.Pager
@@ -6,10 +6,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.recipe.android.recipeapp.common.SimpleResponse
-import com.recipe.android.recipeapp.src.search.searchBlog.model.BlogRecipe
-import com.recipe.android.recipeapp.src.search.searchBlog.paging.BlogRecipePagingSource
-import com.recipe.android.recipeapp.src.search.searchBlog.repository.SearchBlogRepository
-import com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.models.BlogRecipeScrapRequest
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model.BlogRecipe
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.paging.BlogRecipePagingSource
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.repository.SearchBlogRepository
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model.BlogRecipeScrapRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect

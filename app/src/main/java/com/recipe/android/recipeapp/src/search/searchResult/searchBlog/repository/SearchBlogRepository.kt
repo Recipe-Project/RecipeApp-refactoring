@@ -1,11 +1,11 @@
-package com.recipe.android.recipeapp.src.search.searchBlog.repository
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.repository
 
 import com.recipe.android.recipeapp.common.SimpleResponse
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.config.ApplicationClass.Companion.sRetrofit
-import com.recipe.android.recipeapp.src.search.searchBlog.api.SearchBlogService
-import com.recipe.android.recipeapp.src.search.searchBlog.model.BlogRecipeResult
-import com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.models.BlogRecipeScrapRequest
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.api.SearchBlogService
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model.BlogRecipeResult
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model.BlogRecipeScrapRequest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow

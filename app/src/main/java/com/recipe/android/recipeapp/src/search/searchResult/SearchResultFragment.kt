@@ -8,8 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchResultBinding
-import com.recipe.android.recipeapp.src.search.searchBlog.ui.SearchBlogFragment
-import com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.BlogResultFragment
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.ui.SearchBlogFragment
 import com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.PublicResultFragment
 import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.YoutubeResultFragment
 

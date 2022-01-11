@@ -7,11 +7,11 @@
 
         <variable
             name="model"
-            type="com.recipe.android.recipeapp.src.search.searchBlog.ui.SearchBlogViewModel" />
+            type="com.recipe.android.recipeapp.src.search.searchResult.searchBlog.ui.SearchBlogViewModel" />
 
         <variable
             name="item"
-            type="com.recipe.android.recipeapp.src.search.searchBlog.model.BlogRecipe" />
+            type="com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model.BlogRecipe" />
 
         <variable
             name="title"

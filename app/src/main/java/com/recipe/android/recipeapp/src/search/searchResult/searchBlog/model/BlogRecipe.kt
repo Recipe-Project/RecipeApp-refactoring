@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.models
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -17,10 +17,10 @@ data class BlogRecipeResult(
     @SerializedName("total")
     val total : Int,
     @SerializedName("blogList")
-    val blogList : ArrayList<BlogRecipeListItem>
+    val blogList : List<BlogRecipe>
 )
 
-data class BlogRecipeListItem(
+data class BlogRecipe(
     @SerializedName("title")
     val title : String,
     @SerializedName("blogUrl")

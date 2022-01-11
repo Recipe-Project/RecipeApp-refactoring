@@ -1,4 +1,4 @@
-package com.recipe.android.recipeapp.src.search.searchResult.blogRecipe.models
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model
 
 import com.google.gson.annotations.SerializedName
 import java.util.*

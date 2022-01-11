@@ -1,17 +1,20 @@
-package com.recipe.android.recipeapp.src.search.searchBlog.adapter
+package com.recipe.android.recipeapp.src.search.searchResult.searchBlog.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.ApplicationClass
 import com.recipe.android.recipeapp.databinding.HeaderSearchBlogBinding
 import com.recipe.android.recipeapp.databinding.ItemBlogResultFragRecyclerviewBinding
-import com.recipe.android.recipeapp.src.search.searchBlog.model.BlogRecipe
-import com.recipe.android.recipeapp.src.search.searchBlog.repository.SearchBlogRepository
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model.BlogRecipe
+import com.recipe.android.recipeapp.src.search.searchResult.searchBlog.repository.SearchBlogRepository
 import com.recipe.android.recipeapp.utils.StringEscapeUtils
 
 class SearchAdapter(private val repository: SearchBlogRepository, private val clickListener: (BlogRecipe) -> Unit) :
@@ -32,6 +35,10 @@ class SearchAdapter(private val repository: SearchBlogRepository, private val cl
             binding.title = StringEscapeUtils.escapeHtml(item.title)
             binding.item = item
             setScrapIcon(item.userScrapYN == "Y")
+
+            itemView.setOnClickListener {
+                context.startActivity(Intent(Intent.ACTION_VIEW).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setData(Uri.parse(item.blogUrl)))
+            }
 
             binding.blogThumbnailImg.setOnClickListener {
                 clickListener(item)
