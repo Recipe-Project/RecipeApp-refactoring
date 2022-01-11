@@ -112,7 +112,7 @@
             tools:text="블로그이름" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/blog_scrap_btn"
+            android:id="@+id/btn_scrap"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="6dp"

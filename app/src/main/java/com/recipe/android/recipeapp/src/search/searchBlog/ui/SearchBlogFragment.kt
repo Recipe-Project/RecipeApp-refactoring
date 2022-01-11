@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -37,10 +38,16 @@ class SearchBlogFragment(private val keyword: String) : BaseFragment<FragmentSea
         setupViewModel()
 
         setRecyclerView()
+
+        viewModel.isScrapComplete.observe(this as LifecycleOwner, {
+            if (!it.isSuccess) showCustomToast(getString(R.string.scrapRetry))
+        })
     }
 
     private fun setRecyclerView() {
-        adapter = SearchAdapter(repository)
+        adapter = SearchAdapter(repository) {item ->
+            viewModel.postScrap(item)
+        }
 
         binding.rvSearch.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
