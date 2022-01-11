@@ -9,6 +9,7 @@ import com.recipe.android.recipeapp.databinding.HeaderSearchBlogBinding
 import com.recipe.android.recipeapp.databinding.ItemBlogResultFragRecyclerviewBinding
 import com.recipe.android.recipeapp.src.search.searchBlog.model.BlogRecipe
 import com.recipe.android.recipeapp.src.search.searchBlog.repository.SearchBlogRepository
+import com.recipe.android.recipeapp.utils.StringEscapeUtils
 
 class SearchAdapter(private val repository: SearchBlogRepository) :
     PagingDataAdapter<BlogRecipe, RecyclerView.ViewHolder>(PostComparator()) {
@@ -20,6 +21,7 @@ class SearchAdapter(private val repository: SearchBlogRepository) :
     inner class SearchViewHolder(val binding: ItemBlogResultFragRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindWithView(item: BlogRecipe) {
+            binding.title = StringEscapeUtils.escapeHtml(item.title)
             binding.item = item
         }
     }
