@@ -11,9 +11,9 @@ import com.recipe.android.recipeapp.databinding.ItemScrapRecipeBinding
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.YoutubeScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.models.YoutubeScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.youtubeScrap.viewHolder.YoutubeScrapViewHolder
-import com.recipe.android.recipeapp.src.search.youtubeRecipe.YoutubeRecipeView
-import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeResponse
-import com.recipe.android.recipeapp.src.search.youtubeRecipe.models.YoutubeRecipeScrapResponse
+import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.YoutubeRecipeView
+import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.models.YoutubeRecipeResponse
+import com.recipe.android.recipeapp.src.search.searchResult.youtubeRecipe.models.YoutubeRecipeScrapResponse
 
 class YoutubeScrapRecyclerViewAdapter(val view: YoutubeScrapFragmentView) : RecyclerView.Adapter<YoutubeScrapViewHolder>(),
     YoutubeRecipeView {

@@ -43,6 +43,16 @@ abstract class BaseFragment<B : ViewBinding>(
 
     fun showLoadingDialog(){
         loadingDialog.show()
+        Thread {
+            try {
+                Thread.sleep(6000)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            if (loadingDialog.isShowing) {
+                loadingDialog.dismiss()
+            }
+        }.start()
     }
 
     fun dismissLoadingDialog(){

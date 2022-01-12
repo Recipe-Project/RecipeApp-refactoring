@@ -7,15 +7,15 @@
 
         <variable
             name="viewModel"
-            type="com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailViewModel" />
+            type="com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.publicReDetail.presentation.PublicRecipeDetailViewModel" />
 
         <variable
             name="recipeInfo"
-            type="com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.model.PublicRecipeDetailResult" />
+            type="com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.publicReDetail.model.PublicRecipeDetailResult" />
 
         <variable
             name="activity"
-            type="com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity" />
+            type="com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

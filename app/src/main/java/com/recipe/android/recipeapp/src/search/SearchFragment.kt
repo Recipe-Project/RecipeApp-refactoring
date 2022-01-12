@@ -1,133 +1,132 @@
 package com.recipe.android.recipeapp.src.search
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseFragment
 import com.recipe.android.recipeapp.databinding.FragmentSearchBinding
+import com.recipe.android.recipeapp.src.search.adapter.PopularKeywordRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter
-import com.recipe.android.recipeapp.src.search.models.PopularKeywordResponse
-import com.recipe.android.recipeapp.src.search.models.PostKeywordResponse
+import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter.Companion.DELETE_KEYWORD
+import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter.Companion.DELETE_LAST_ONE_KEYWORD
+import com.recipe.android.recipeapp.src.search.adapter.RecentKeywordRecyclerviewAdapter.Companion.SEARCH_KEYWORD
+import com.recipe.android.recipeapp.src.search.models.PopularKeyword
+import com.recipe.android.recipeapp.utils.SharedPreferencesManager
+import com.recipe.android.recipeapp.utils.gone
+import com.recipe.android.recipeapp.utils.visible
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-interface SearchKeywordView {
-    fun onGetPopularKeywordSuccess(response: PopularKeywordResponse)
-    fun onGetPopularKeywordFailure(message: String)
-
-    fun onPostKeywordSuccess(response: PostKeywordResponse)
-    fun onPostKeywordFailure(message: String)
-}
-
-class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search), SearchKeywordView{
+@AndroidEntryPoint
+class SearchFragment :
+    BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search) {
 
     val TAG = "SearchFragment"
-    private lateinit var keyword : String
-    lateinit var inputMethodManager : InputMethodManager
-    var popularKeyword: String? = null
+
+    lateinit var viewModel: SearchViewModel
+
+    @Inject
+    lateinit var viewModelFactory: SearchViewModelFactory
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragment = this
+        setupViewModel()
 
-        // 입력받는 방법을 관리하는 Manager 객체를  요청하여 InputMethodmanager에 반환한다.
-        inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        viewModel.popularKeywordList.observe(this as LifecycleOwner, { list ->
+            if (list.getOrNull() != null)
+                setupPopularKeywordRecyclerView(list.getOrNull()!!)
+        })
+        setupRecentKeywordRecyclerView()
 
-        val searchType = arguments?.getString("searchType")
-        val searchKeyword = arguments?.getString("searchKeyword")
+        setSearchBar()
+        clearSearchBar()
+    }
 
-        if (!searchType.isNullOrEmpty() && !searchKeyword.isNullOrEmpty()){
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                R.id.search_frag_frame_layout,
-                SearchResultFragment(searchKeyword).apply {
-                    arguments = Bundle().apply {
-                        putString("searchType", searchType)
-                        putString("searchKeyword", searchKeyword)
-                    }
-                }
-            ).commit()
-            setKeyword(searchKeyword)
-        } else {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, KeywordFragment()).commitAllowingStateLoss()
+    private fun searchKeyword(keyword: String) {
+        SharedPreferencesManager.storeRecentSearchKeywordList(keyword)
+        postKeywordToServer(keyword)
+        val action = SearchFragmentDirections.nextAction("blog", keyword)
+        findNavController().navigate(action)
+    }
+
+    private fun setSearchBar() {
+        binding.barSearch.searchFragEt.setOnEditorActionListener { v, actionId, event ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                searchKeyword(v.text.toString())
+                handled = true
+            }
+            handled
         }
+    }
 
-        // IME 키패드에서 검색 버튼 클릭 이벤트
-        binding.searchFragEt.setOnEditorActionListener { v, actionId, event ->
-            return@setOnEditorActionListener when (actionId) {
-                EditorInfo.IME_ACTION_SEARCH -> {
-                    keyword = binding.searchFragEt.text.toString()
-                    if (RecentKeywordRecyclerviewAdapter.list.contains(keyword)) RecentKeywordRecyclerviewAdapter.list.remove(keyword)
-                    RecentKeywordRecyclerviewAdapter.list.add(keyword) // 최근 검색어 리스트에 검색어 추가
-                    SearchService(this).postKeyword(keyword) // 검색어 서버로 전송
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
-                    setKeyword(keyword)
-
-                    inputMethodManager.hideSoftInputFromWindow(binding.searchFragEt.windowToken, 0) // 검색 버튼 클릭 후 키보드 내리기 ( 점검 필요 )
-                    true
-                }
-                else -> false
+    private fun setupPopularKeywordRecyclerView(keywordList: List<PopularKeyword>) {
+        binding.rvPopular.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = PopularKeywordRecyclerviewAdapter(keywordList) { keyword ->
+                searchKeyword(keyword)
             }
         }
+    }
 
-        // Edittext의 X버튼 클릭 시 초기화
-        binding.searchFragEtCancelBtn.setOnClickListener {
-            binding.searchFragEt.text = null
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
+    }
+
+    private fun setupRecentKeywordRecyclerView() {
+        val recentKeywordList = SharedPreferencesManager.getRecentSearchKeywordList()
+
+        if (!recentKeywordList.isNullOrEmpty()) {
+            setVisibleRecentKeyword()
+
+            binding.rvRecent.apply {
+                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
+                adapter = RecentKeywordRecyclerviewAdapter(recentKeywordList) { keyword, type ->
+                    when (type) {
+                        SEARCH_KEYWORD -> {
+                            searchKeyword(keyword)
+                        }
+                        DELETE_KEYWORD -> {
+                            SharedPreferencesManager.deleteRecentKeyword(keyword)
+                        }
+                        DELETE_LAST_ONE_KEYWORD -> {
+                            allClearRecentKeyword()
+                        }
+                    }
+                }
+            }
+        } else {
+            setGoneRecentKeyword()
         }
+    }
 
-        // 취소 버튼 클릭시 KeywordFragment로 전환
-        binding.searchFragCancelBtn.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, KeywordFragment()).commitAllowingStateLoss()
-            binding.searchFragEt.text = null
+    fun allClearRecentKeyword() {
+        SharedPreferencesManager.clearAllRecentKeyword()
+        setGoneRecentKeyword()
+    }
+
+    private fun postKeywordToServer(keyword: String) {
+        viewModel.postKeyword(keyword)
+    }
+
+    private fun clearSearchBar() {
+        binding.barSearch.btnCancelSearchBar.setOnClickListener {
+            binding.barSearch.searchFragEt.setText("")
         }
     }
 
-    fun setKeyword(keyword: String){
-        binding.searchFragEt.setText(keyword, TextView.BufferType.EDITABLE)
+    private fun setVisibleRecentKeyword() {
+        binding.layoutRecent.visible()
     }
 
-    fun refreshFragment(
-        fragment: Fragment,
-        fragmentManager: FragmentManager,
-        popularKeyword: String?
-    ) {
-        val ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
-        Log.d(TAG, "SearchFragment - refreshFragment() : $popularKeyword")
-        binding.searchFragEt.setText(popularKeyword, TextView.BufferType.EDITABLE)
-        if (this.popularKeyword != null) {
-            Log.d(TAG, "SearchFragment - onViewCreated() : ${this.popularKeyword}")
-            binding.searchFragEt.setText(this.popularKeyword, TextView.BufferType.EDITABLE)
-        }
-    }
-
-    //    // 해당 키워드로 공공레시피 검색하기
-//    private fun searchKeyword() {
-//
-//        SearchService(this).getPublicRecipe(keyword)
-//
-//
-//
-//    }
-
-
-    override fun onGetPopularKeywordSuccess(response: PopularKeywordResponse) {
-        // Nothing
-    }
-
-    override fun onGetPopularKeywordFailure(message: String) {
-        // Nothing
-    }
-
-    override fun onPostKeywordSuccess(response: PostKeywordResponse) {
-
-    }
-
-    override fun onPostKeywordFailure(message: String) {
-
+    private fun setGoneRecentKeyword() {
+        binding.layoutRecent.gone()
     }
 }

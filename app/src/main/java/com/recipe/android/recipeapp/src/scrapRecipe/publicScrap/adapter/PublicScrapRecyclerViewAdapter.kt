@@ -9,7 +9,7 @@ import com.recipe.android.recipeapp.databinding.ItemScrapPublicRecipeBinding
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.PublicScrapFragmentView
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.models.PublicScrap
 import com.recipe.android.recipeapp.src.scrapRecipe.publicScrap.viewHolder.PublicScrapViewHolder
-import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity
+import com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity
 
 class PublicScrapRecyclerViewAdapter(val view: PublicScrapFragmentView) :
     RecyclerView.Adapter<PublicScrapViewHolder>() {

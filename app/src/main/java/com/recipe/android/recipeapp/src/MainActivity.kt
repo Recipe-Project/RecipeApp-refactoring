@@ -11,14 +11,10 @@ import com.recipe.android.recipeapp.R
 import com.recipe.android.recipeapp.config.BaseActivity
 import com.recipe.android.recipeapp.databinding.ActivityMainBinding
 import com.recipe.android.recipeapp.src.fridge.receipt.ReceiptIngredientDialog
-import com.recipe.android.recipeapp.src.search.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-interface KeywordListener {
-    fun setKeyword(keyword: String)
-}
-
-class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),
-    KeywordListener {
+@AndroidEntryPoint
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     val TAG = "MainActivity"
 
@@ -29,15 +25,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 네비게이션 호스트
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-
-        // 네비게이션 컨트롤러
         val navController = navHostFragment.navController
-
-        // 바인딩
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -62,20 +52,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
     }
-
-    override fun setKeyword(keyword: String) {
-        val frag = navHostFragment.childFragmentManager.fragments.get(0) as SearchFragment
-        frag.setKeyword(keyword)
-    }
-
-    var time: Long = 0
-    override fun onBackPressed() {
-        if (System.currentTimeMillis() - time >= 2000) {
-            time = System.currentTimeMillis()
-            showCustomToast("뒤로 가기 버튼을 한번 더 누르면 종료합니다.")
-        } else if (System.currentTimeMillis() - time < 2000) {
-            finish()
-        }
-    }
-
 }

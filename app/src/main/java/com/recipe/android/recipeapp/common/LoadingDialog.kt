@@ -16,8 +16,8 @@ class LoadingDialog (context: Context): Dialog(context) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         binding = DialogLoadingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setCanceledOnTouchOutside(true)
-        setCancelable(true)
+        setCanceledOnTouchOutside(false)
+        setCancelable(false)
         window!!.setBackgroundDrawable(ColorDrawable())
         window!!.setDimAmount(0.3f)
 

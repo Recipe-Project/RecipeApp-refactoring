@@ -1,107 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/blog_result_frag_recyclerview_layout">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/blog_title_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="16dp"
-        style="@style/Subtitle2Style"
-        app:layout_constraintEnd_toStartOf="@id/blog_thumbnail_img"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="[고매요리 디저트] 최고의 이탈리안 디저트! 티라미수!"
-        android:ellipsize="end"
-        android:maxLines="2"/>
+    <data>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:scaleType="fitXY"
-        android:id="@+id/blog_thumbnail_img"
-        android:layout_width="125dp"
-        android:layout_height="91dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:src="@color/gray_100"
-        />
+        <variable
+            name="model"
+            type="com.recipe.android.recipeapp.src.search.searchResult.searchBlog.ui.SearchBlogViewModel" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/favorite_blog_recipe_cnt_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_favorite_small"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/blog_title_tv"
-        android:layout_marginTop="10dp"/>
+        <variable
+            name="item"
+            type="com.recipe.android.recipeapp.src.search.searchResult.searchBlog.model.BlogRecipe" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/favorite_blog_recipe_cnt_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="12"
-        style="@style/Caption2Style"
-        android:textColor="@color/gray_200"
-        app:layout_constraintTop_toBottomOf="@id/blog_title_tv"
-        app:layout_constraintStart_toEndOf="@id/favorite_blog_recipe_cnt_iv"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="8dp"/>
+        <variable
+            name="title"
+            type="String" />
+    </data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/middle_dot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="@string/middle_dot"
-        android:textColor="@color/gray_100"
-        app:layout_constraintTop_toTopOf="@id/favorite_blog_recipe_cnt_tv"
-        app:layout_constraintBottom_toBottomOf="@id/favorite_blog_recipe_cnt_tv"
-        app:layout_constraintStart_toEndOf="@id/favorite_blog_recipe_cnt_tv"
-        android:layout_marginStart="3dp"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/blog_post_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/favorite_blog_recipe_cnt_tv"
-        app:layout_constraintBottom_toBottomOf="@id/favorite_blog_recipe_cnt_tv"
-        app:layout_constraintStart_toEndOf="@id/favorite_blog_recipe_cnt_tv"
-        android:layout_marginStart="10dp"
-        tools:text="2021.3.1"
-        style="@style/Caption2Style"
-        android:textColor="@color/gray_200"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/blog_name_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/blog_thumbnail_img"
-        app:layout_constraintTop_toBottomOf="@id/favorite_blog_recipe_cnt_iv"
-        tools:text="블로그이름"
-        style="@style/CaptionStyle"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="12dp"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/blog_scrap_btn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_favorite_empty_white"
-        app:layout_constraintTop_toTopOf="@id/blog_thumbnail_img"
-        app:layout_constraintEnd_toEndOf="@id/blog_thumbnail_img"
-        android:layout_margin="6dp"/>
-
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/blog_result_frag_recyclerview_layout"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray_000"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/blog_title_tv"
+            style="@style/Subtitle2Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{title}"
+            app:layout_constraintEnd_toStartOf="@id/blog_thumbnail_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="[고매요리 디저트] 최고의 이탈리안 디저트! 티라미수!" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/blog_thumbnail_img"
+            setImage="@{item.thumbnail}"
+            android:layout_width="125dp"
+            android:layout_height="91dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/gray_100" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/favorite_blog_recipe_cnt_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_favorite_small"
+            app:layout_constraintBottom_toBottomOf="@+id/favorite_blog_recipe_cnt_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/favorite_blog_recipe_cnt_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/favorite_blog_recipe_cnt_tv"
+            style="@style/Caption2Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:text="@{Integer.toString(item.userScrapCnt)}"
+            android:textColor="@color/gray_200"
+            app:layout_constraintStart_toEndOf="@id/favorite_blog_recipe_cnt_iv"
+            app:layout_constraintTop_toBottomOf="@id/blog_title_tv"
+            tools:text="12" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/middle_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="3dp"
+            android:text="@string/middle_dot"
+            android:textColor="@color/gray_100"
+            app:layout_constraintBottom_toBottomOf="@id/favorite_blog_recipe_cnt_tv"
+            app:layout_constraintStart_toEndOf="@id/favorite_blog_recipe_cnt_tv"
+            app:layout_constraintTop_toTopOf="@id/favorite_blog_recipe_cnt_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/blog_post_date"
+            style="@style/Caption2Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{item.postDate}"
+            android:textColor="@color/gray_200"
+            app:layout_constraintBottom_toBottomOf="@id/favorite_blog_recipe_cnt_tv"
+            app:layout_constraintStart_toEndOf="@id/favorite_blog_recipe_cnt_tv"
+            app:layout_constraintTop_toTopOf="@id/favorite_blog_recipe_cnt_tv"
+            tools:text="2021.3.1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/blog_name_tv"
+            style="@style/CaptionStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="12dp"
+            android:text="@{item.blogName}"
+            app:layout_constraintEnd_toStartOf="@id/blog_thumbnail_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/favorite_blog_recipe_cnt_iv"
+            tools:text="블로그이름" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_scrap"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_favorite_empty_white"
+            app:layout_constraintEnd_toEndOf="@id/blog_thumbnail_img"
+            app:layout_constraintTop_toTopOf="@id/blog_thumbnail_img" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_000"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

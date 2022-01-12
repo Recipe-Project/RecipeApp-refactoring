@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.recipe.android.recipeapp.R
@@ -16,7 +15,7 @@ import com.recipe.android.recipeapp.databinding.FragmentEmptyFridgeBinding
 import com.recipe.android.recipeapp.src.emptyFridge.adapter.EmptyFridgeRecyclerviewAdapter
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResponse
 import com.recipe.android.recipeapp.src.emptyFridge.models.EmptyFridgeResult
-import com.recipe.android.recipeapp.src.search.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity
+import com.recipe.android.recipeapp.src.search.searchResult.publicRecipe.publicReDetail.presentation.PublicRecipeDetailActivity
 
 interface EmptyFridgeView {
     fun onGetEmptyFridgeSuccess(response : EmptyFridgeResponse)
@@ -147,25 +146,16 @@ class EmptyFridgeFragment : BaseFragment<FragmentEmptyFridgeBinding>(
     }
 
     override fun getBlogRecipe(keyword: String) {
-        // 네비게이션 호스트
-        val navHostFragment =
-            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-        // 네비게이션 컨트롤러
-        val navController = navHostFragment.navController
-        val bundle = bundleOf("searchType" to "blog", "searchKeyword" to keyword)
-        navController.navigate(R.id.searchFragment, bundle)
-//        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
+        moveToSearch(keyword, "blog")
     }
 
     override fun getYoutubeRecipe(keyword: String) {
-        // 네비게이션 호스트
-        val navHostFragment =
-            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-        // 네비게이션 컨트롤러
-        val navController = navHostFragment.navController
-        val bundle = bundleOf("searchType" to "youtube", "searchKeyword" to keyword)
-        navController.navigate(R.id.searchFragment, bundle)
-//        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.search_frag_frame_layout, SearchResultFragment(keyword)).commitAllowingStateLoss()
+        moveToSearch(keyword, "youtube")
+    }
+
+    private fun moveToSearch(keyword: String, searchType: String) {
+        val action = EmptyFridgeFragmentDirections.nextAction(searchType, keyword)
+        findNavController().navigate(action)
     }
 }
 
