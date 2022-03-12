@@ -17,18 +17,26 @@ class YoutubeRecipeService(val view : YoutubeRecipeView) {
     fun getYoutubeRecipe(part : String, type : String, maxResults : Int, key : String, q : String, pageToken : String?) {
         val youtubeRecipeInterface = ApplicationClass.yRetrofit.create(YoutubeRecipeInterface::class.java)
         if (pageToken != null) {
-            youtubeRecipeInterface.getYoutubeRecipe(part, type, maxResults, key, q, pageToken).enqueue(object : Callback<YoutubeRecipeResponse> {
-                override fun onResponse(call: Call<YoutubeRecipeResponse>, response: Response<YoutubeRecipeResponse>) {
-                    if(response.isSuccessful) {
-                        Log.d(TAG, "YoutubeRecipeService - onResponse() : 유투브레시피 조회 성공")
-                        view.onGetYoutubeRecipeSuccess(response.body() as YoutubeRecipeResponse)
+            youtubeRecipeInterface.getYoutubeRecipe(part, type, maxResults, key, q, pageToken).enqueue(
+                object : Callback<YoutubeRecipeResponse> {
+                    override fun onResponse(
+                        call: Call<YoutubeRecipeResponse>,
+                        response: Response<YoutubeRecipeResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            Log.d(TAG, "YoutubeRecipeService - onResponse() : 유투브레시피 조회 성공")
+                            view.onGetYoutubeRecipeSuccess(response.body() as YoutubeRecipeResponse)
+                        } else Log.d(
+                            TAG,
+                            "YoutubeRecipeService - onResponse() : ${response.body().toString()}"
+                        )
                     }
-                }
 
-                override fun onFailure(call: Call<YoutubeRecipeResponse>, t: Throwable) {
-                    view.onGetYoutubeRecipeFailure(t.message ?: "통신오류")
-                }
-            })
+                    override fun onFailure(call: Call<YoutubeRecipeResponse>, t: Throwable) {
+                        Log.d(TAG, "YoutubeRecipeService - onFailure() : ${t.message}")
+                        view.onGetYoutubeRecipeFailure(t.message ?: "통신오류")
+                    }
+                })
         }
     }
 

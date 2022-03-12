@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 class ApplicationClass: Application() {
 
     // 실 서버
-    var BASE_URL = "https://recipeproject.shop"
+    var BASE_URL = "https://recipestorage.shop"
 
     // 테스트 서버
     // var BASE_URL = "https://juna052.shop:9000"

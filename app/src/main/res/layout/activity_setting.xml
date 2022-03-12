@@ -26,73 +26,74 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView11"
-        style="@style/Subtitle2Style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="39dp"
-        android:text="@string/help"
-        android:textColor="@color/gray_200"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView10" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/appCompatTextView11"-->
+<!--        style="@style/Subtitle2Style"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="39dp"-->
+<!--        android:text="@string/help"-->
+<!--        android:textColor="@color/gray_200"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView10" />-->
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView12"
-        style="@style/Body1Style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/versionInfo"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView11"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/appCompatTextView12"-->
+<!--        style="@style/Body1Style"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:text="@string/versionInfo"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/appCompatTextView11"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11" />-->
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView17"
-        style="@style/Body1Style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="@string/newVersionValue"
-        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appCompatTextView12" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/appCompatTextView17"-->
+<!--        style="@style/Body1Style"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:text="@string/newVersionValue"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView12"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/appCompatTextView12" />-->
 
-    <androidx.appcompat.widget.AppCompatTextView
-        style="@style/Subtitle2Style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/newVersion"
-        android:textColor="@color/gray_200"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView17"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView17"
-        app:layout_constraintTop_toTopOf="@+id/appCompatTextView17" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        style="@style/Subtitle2Style"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:text="@string/newVersion"-->
+<!--        android:textColor="@color/gray_200"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView17"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView17"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/appCompatTextView17" />-->
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/gray_000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView12" />
+<!--    <View-->
+<!--        android:id="@+id/view3"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:background="@color/gray_000"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView12" />-->
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView14"
         style="@style/Subtitle2Style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="@string/serviceSetting"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="39dp"
         android:textColor="@color/gray_200"
-        app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView10" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_push"

@@ -10,7 +10,7 @@ import com.recipe.android.recipeapp.src.fridge.home.fragment.MyFridgeAllCategory
 import com.recipe.android.recipeapp.src.fridge.home.fragment.MyFridgeCategoryFragment
 import com.recipe.android.recipeapp.src.fridge.home.models.GetFridgeResult
 
-private const val NUM_PAGES = 7
+private const val NUM_PAGES = 8
 
 
 class MyFridgeCategoryAdapter(fa: FragmentActivity, val view : IngredientUpdateView) : FragmentStateAdapter(fa) {

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Public/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_my_recipe.xml" value="0.27314814814814814" />
+        <entry key="..\:/Users/Public/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_my_recipe_detail.xml" value="0.27314814814814814" />
+        <entry key="..\:/Users/Public/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/item_my_page_recipe.xml" value="0.27314814814814814" />
+        <entry key="..\:/Users/Public/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/item_my_recipe_list.xml" value="0.27314814814814814" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
